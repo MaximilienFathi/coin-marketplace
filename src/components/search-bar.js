@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
-function SearchBar() {
+function SearchBar({ handleChange }) {
   return (
     <div className="search-container">
       <form className="search-form">
-        <input className="search-bar" placeholder="Search" />;
+        <input
+          className="search-bar"
+          onChange={handleChange}
+          placeholder="Search"
+        />
       </form>
     </div>
   );
