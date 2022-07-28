@@ -1,8 +1,10 @@
 import React, { useEffect, useInsertionEffect, useState } from "react";
 import axios from "axios";
+import SearchBar from "./search-bar";
 import Row from "./row";
 
 function Table(props) {
+  const [search, setSearch] = useState("");
   const [coins, setCoins] = useState([]);
 
   useEffect(() => {
@@ -19,9 +21,20 @@ function Table(props) {
       });
   }, []);
 
+  const handleChange = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const filteredCoins = coins.filter((coin) =>
+    coin.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div className="table">
-      {coins.map((coin) => {
+      {/* SearchBar was moved from Header to Table as I could not have data be
+         shared between sibling components - Anti-pattern (solution = Redux) */}
+      <SearchBar handleChange={handleChange}></SearchBar>
+      {filteredCoins.map((coin) => {
         return (
           <Row
             key={coin.id}
