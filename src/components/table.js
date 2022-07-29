@@ -1,7 +1,8 @@
 import React, { useEffect, useInsertionEffect, useState } from "react";
 import axios from "axios";
 import SearchBar from "./search-bar";
-import Row from "./row";
+import TableHeader from "./table-header";
+import TableData from "./table-data";
 
 function Table(props) {
   const [search, setSearch] = useState("");
@@ -34,9 +35,10 @@ function Table(props) {
       {/* SearchBar was moved from Header to Table as I could not have data be
          shared between sibling components - Anti-pattern (solution = Redux) */}
       <SearchBar handleChange={handleChange}></SearchBar>
+      <TableHeader></TableHeader>
       {filteredCoins.map((coin) => {
         return (
-          <Row
+          <TableData
             key={coin.id}
             image={coin.image}
             name={coin.name}
@@ -45,7 +47,7 @@ function Table(props) {
             price_change_percentage_24h={coin.price_change_percentage_24h}
             total_volume={coin.total_volume}
             market_cap={coin.market_cap}
-          ></Row>
+          ></TableData>
         );
       })}
     </div>

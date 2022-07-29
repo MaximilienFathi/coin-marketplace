@@ -1,6 +1,6 @@
 import React from "react";
 
-function Row({
+function TableData({
   image,
   name,
   symbol,
@@ -37,4 +37,4 @@ function Row({
   );
 }
 
-export default Row;
+export default TableData;
