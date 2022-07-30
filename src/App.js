@@ -1,6 +1,6 @@
 import Header from "./components/header";
 import Hero from "./components/hero";
-import Table from "./components/table";
+import TableBox from "./components/table-box";
 import "./App.css";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <Header></Header>
       <Hero></Hero>
-      <Table></Table>
+      <TableBox></TableBox>
     </div>
   );
 }
