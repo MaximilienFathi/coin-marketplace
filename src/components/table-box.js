@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SearchBox from "./search-box";
 import TableDisplay from "./table-display";
+import Pagination from "./pagination";
 
 function TableBox(props) {
   const [search, setSearch] = useState("");
@@ -27,7 +28,7 @@ function TableBox(props) {
          shared between sibling components - Anti-pattern (solution = Redux) */}
       <SearchBox setSearch={setSearch}></SearchBox>
       <TableDisplay coins={coins} search={search}></TableDisplay>
-      {/*<Pagination></Pagination>*/}
+      <Pagination></Pagination>
     </div>
   );
 }
