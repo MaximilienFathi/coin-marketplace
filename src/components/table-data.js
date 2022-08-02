@@ -13,7 +13,8 @@ function TableData({
 
   const transformData = function (data, fractionDigits = 0) {
     const numberFormatter = Intl.NumberFormat("en-US");
-    return numberFormatter.format(data.toFixed(fractionDigits));
+    return numberFormatter.format(Number(data).toFixed(fractionDigits));
+    // Added Number() else issue with scientific notation
   };
 
   return (
