@@ -2,7 +2,7 @@ import * as React from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-function PaginationRounded({ page, setPage }) {
+function PaginationRounded({ page, setPage, pageCount }) {
   const handleChange = (page) => {
     setPage(page);
     window.scroll(0, 0);
@@ -10,7 +10,7 @@ function PaginationRounded({ page, setPage }) {
   return (
     <Stack spacing={2}>
       <Pagination
-        count={133}
+        count={pageCount}
         variant="outlined"
         shape="rounded"
         onChange={(e) => handleChange(Number(e.target.textContent))}
