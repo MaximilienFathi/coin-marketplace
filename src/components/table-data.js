@@ -1,11 +1,14 @@
 import React from "react";
 
 function TableData({
+  rank,
   image,
   name,
   symbol,
   current_price,
-  price_change_percentage_24h,
+  price_change_percentage_1h_in_currency,
+  price_change_percentage_24h_in_currency,
+  price_change_percentage_7d_in_currency,
   total_volume,
   market_cap,
 }) {
@@ -17,8 +20,10 @@ function TableData({
     // Added Number() else issue with scientific notation
   };
 
+  // Maybe change number of decimal places for each value
   return (
     <div className="table-row">
+      <p className={`coin-rank`}>{rank}</p>
       <div>
         <img
           className="coin-logo"
@@ -30,7 +35,13 @@ function TableData({
       </div>
       <p className="coin-price">${transformData(current_price, 2)}</p>
       <p className={`coin-price-change ${color}`}>
-        {transformData(price_change_percentage_24h, 2)}%
+        {transformData(price_change_percentage_1h_in_currency, 2)}%
+      </p>
+      <p className={`coin-price-change ${color}`}>
+        {transformData(price_change_percentage_24h_in_currency, 2)}%
+      </p>
+      <p className={`coin-price-change ${color}`}>
+        {transformData(price_change_percentage_7d_in_currency, 2)}%
       </p>
       <p className="coin-volume">${transformData(total_volume)}</p>
       <p className="coin-market-cap">${transformData(market_cap)}</p>
