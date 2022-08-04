@@ -3,6 +3,7 @@ import React from "react";
 function TableHeader() {
   return (
     <div className="table-row">
+      <p></p>
       <p>#</p>
       <p>Name</p>
       <p>Price</p>

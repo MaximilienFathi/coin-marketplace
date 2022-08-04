@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import Favorite from "./favorite";
 
 function TableData({
   rank,
@@ -12,6 +13,10 @@ function TableData({
   total_volume,
   market_cap,
 }) {
+  const [favorite, setFavorite] = useState(
+    localStorage.getItem(`coin ${rank}`) ? true : false
+  );
+
   const color = current_price > 0 ? "green" : "red";
 
   const transformData = function (data, fractionDigits = 0) {
@@ -23,6 +28,11 @@ function TableData({
   // Maybe change number of decimal places for each value
   return (
     <div className="table-row">
+      <Favorite
+        favorite={favorite}
+        setFavorite={setFavorite}
+        rank={rank}
+      ></Favorite>
       <p className={`coin-rank`}>{rank}</p>
       <div>
         <img
