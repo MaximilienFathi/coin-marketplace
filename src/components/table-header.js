@@ -12,6 +12,7 @@ function TableHeader() {
       <p>Change (7d)</p>
       <p>Volume (24h)</p>
       <p>Market Cap</p>
+      <p>Price Graph (7d)</p>
     </div>
   );
 }

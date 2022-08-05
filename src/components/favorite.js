@@ -4,12 +4,16 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 function Favorite({ favorite, setFavorite, rank }) {
   const handleClick = () => {
-    setFavorite(!favorite);
-    // WEIRD ISSUE
-    // Reversed order of conditions below as not doing so gave wrong result
     favorite
       ? localStorage.removeItem(`coin ${rank}`)
       : localStorage.setItem(`coin ${rank}`, "true");
+    // WEIRD ISSUE
+    // Putting following before conditional does not change anything!
+    // UPDATE - Actually this is normal!
+    // "State updates using this.setState or useState do not immediately
+    // mutate the state but create a pending state transition.
+    // Accessing state immediately after calling the updater method can potentially return the old value."
+    setFavorite(!favorite);
   };
 
   return (

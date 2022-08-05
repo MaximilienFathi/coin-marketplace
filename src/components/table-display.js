@@ -17,6 +17,7 @@ function TableDisplay({ search, coins, pageSize, page }) {
         return (
           <TableData
             key={coin.id}
+            id={coin.id}
             rank={findCoinRank(coin)}
             image={coin.image}
             name={coin.name}

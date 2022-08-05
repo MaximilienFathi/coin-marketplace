@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Favorite from "./favorite";
+import LineChart from "./line-chart";
+import axios from "axios";
 
 function TableData({
+  id,
   rank,
   image,
   name,
@@ -16,6 +19,18 @@ function TableData({
   const [favorite, setFavorite] = useState(
     localStorage.getItem(`coin ${rank}`) ? true : false
   );
+  const [historicData, setHistoricData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=7`
+      )
+      .then((res) => {
+        setHistoricData(res.data.prices);
+      })
+      .catch((err) => console.log(err));
+  }, [id]); // not sure if I must include id
 
   const color = current_price > 0 ? "green" : "red";
 
@@ -55,6 +70,7 @@ function TableData({
       </p>
       <p className="coin-volume">${transformData(total_volume)}</p>
       <p className="coin-market-cap">${transformData(market_cap)}</p>
+      <LineChart historicData={historicData}></LineChart>
     </div>
   );
 }
