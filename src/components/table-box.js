@@ -44,6 +44,7 @@ function TableBox(props) {
       <TableDisplay
         search={search}
         coins={coins}
+        setCoins={setCoins}
         pageSize={pageSize}
         page={page}
       ></TableDisplay>

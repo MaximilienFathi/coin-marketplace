@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
-function TableHeader() {
+function TableHeader({ coins, setCoins, dataKey, header }) {
+  const [ascendingSort, setAscendingSort] = useState(true);
+
+  const compareBy = (key) => {
+    if (ascendingSort)
+      return function (a, b) {
+        if (a[key] < b[key]) return -1;
+        if (a[key] > b[key]) return 1;
+        return 0;
+      };
+    if (!ascendingSort)
+      return function (a, b) {
+        if (a[key] < b[key]) return 1;
+        if (a[key] > b[key]) return -1;
+        return 0;
+      };
+  };
+
+  const sortBy = (key) => {
+    const arrayCopy = [...coins];
+    arrayCopy.sort(compareBy(key));
+    setCoins(arrayCopy);
+    setAscendingSort(!ascendingSort);
+  };
+
   return (
-    <div className="table-row">
-      <p></p>
-      <p>#</p>
-      <p>Name</p>
-      <p>Price</p>
-      <p>Change (1h)</p>
-      <p>Change (24h)</p>
-      <p>Change (7d)</p>
-      <p>Volume (24h)</p>
-      <p>Market Cap</p>
-      <p>Price Graph (7d)</p>
+    <div className="table-header">
+      <p onClick={() => sortBy(dataKey)}>{header}</p>
     </div>
   );
 }
