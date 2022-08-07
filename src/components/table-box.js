@@ -4,15 +4,22 @@ import SearchBox from "./search-box";
 import TableDisplay from "./table-display";
 import Pagination from "./pagination";
 
-function TableBox(props) {
+function TableBox() {
   const [search, setSearch] = useState("");
   const [coins, setCoins] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [pageSize, setPageSize] = useState(100);
   const [page, setPage] = useState(1);
 
-  // const pageSize = 100;
   const findPageCount = (data) => setPageCount(Math.ceil(data / pageSize));
+
+  // ISSUE - Cannot update coins and then use it as it always gives []
+  // So passing coins straight from res.data via "data" parameter
+  const findCoinRank = (data, coin) =>
+    (page - 1) * pageSize + data.indexOf(coin) + 1;
+
+  const addRanksToCoins = (data) =>
+    data.map((coin) => ({ ...coin, rank: findCoinRank(data, coin) }));
 
   useEffect(() => {
     axios
@@ -30,8 +37,7 @@ function TableBox(props) {
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${pageSize}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
       )
       .then((res) => {
-        setCoins(res.data);
-        console.log(res.data);
+        setCoins(addRanksToCoins(res.data));
       })
       .catch((err) => console.error(err));
   }, [page]);

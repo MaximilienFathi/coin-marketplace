@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import TableHeader from "./table-header";
 import TableData from "./table-data";
 
-function TableDisplay({ search, coins, setCoins, pageSize, page }) {
+function TableDisplay({ search, coins, setCoins }) {
+  const [sortedData, setSortedData] = useState("rank");
+
   const dataHeaders = {
-    // "",
-    // "#",
-    // Check how to rank by id (rank can be found using index of id in array)
+    // favorite: "",
+    rank: "#",
     name: "Name",
     current_price: "Price",
     price_change_percentage_1h_in_currency: "Change (1h)",
@@ -21,9 +22,6 @@ function TableDisplay({ search, coins, setCoins, pageSize, page }) {
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const findCoinRank = (coin) =>
-    (page - 1) * pageSize + coins.indexOf(coin) + 1;
-
   return (
     <div>
       {Object.entries(dataHeaders).map(([dataKey, header]) => {
@@ -35,6 +33,8 @@ function TableDisplay({ search, coins, setCoins, pageSize, page }) {
             setCoins={setCoins}
             dataKey={dataKey}
             header={header}
+            sortedData={sortedData}
+            setSortedData={setSortedData}
           ></TableHeader>
         );
       })}
@@ -43,7 +43,7 @@ function TableDisplay({ search, coins, setCoins, pageSize, page }) {
           <TableData
             key={coin.id}
             id={coin.id}
-            rank={findCoinRank(coin)}
+            rank={coin.rank}
             image={coin.image}
             name={coin.name}
             symbol={coin.symbol}
