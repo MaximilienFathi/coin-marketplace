@@ -29,7 +29,7 @@ function TableBox() {
         console.log(res.data.data.active_cryptocurrencies);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, []); // findPageCount - if included, runs too many times (remove []?)
 
   useEffect(() => {
     axios
@@ -40,7 +40,7 @@ function TableBox() {
         setCoins(addRanksToCoins(res.data));
       })
       .catch((err) => console.error(err));
-  }, [page]);
+  }, [page]); // This will run everytime page changes.
 
   return (
     <div className="table">
@@ -51,14 +51,9 @@ function TableBox() {
         search={search}
         coins={coins}
         setCoins={setCoins}
-        pageSize={pageSize}
         page={page}
       ></TableDisplay>
-      <Pagination
-        page={page}
-        setPage={setPage}
-        pageCount={pageCount}
-      ></Pagination>
+      <Pagination setPage={setPage} pageCount={pageCount}></Pagination>
     </div>
   );
 }

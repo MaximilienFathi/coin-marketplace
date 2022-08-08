@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableHeader from "./table-header";
 import TableData from "./table-data";
 
-function TableDisplay({ search, coins, setCoins }) {
-  const [sortedData, setSortedData] = useState("rank");
+function TableDisplay({ search, coins, setCoins, page }) {
+  const [sortedData, setSortedData] = useState("");
+
+  // Make sure to reset position of sort arrows when changing page
+  useEffect(() => setSortedData(""), [page]);
 
   const dataHeaders = {
     // favorite: "",
