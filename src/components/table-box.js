@@ -7,10 +7,11 @@ import Pagination from "./pagination";
 function TableBox() {
   const [search, setSearch] = useState("");
   const [coins, setCoins] = useState([]);
+  const [favorites, setFavorites] = useState({});
   const [pageCount, setPageCount] = useState(0);
-  const [pageSize, setPageSize] = useState(100);
   const [page, setPage] = useState(1);
 
+  const pageSize = 100;
   const findPageCount = (data) => setPageCount(Math.ceil(data / pageSize));
 
   // ISSUE - Cannot update coins and then use it as it always gives []
@@ -18,7 +19,7 @@ function TableBox() {
   const findCoinRank = (data, coin) =>
     (page - 1) * pageSize + data.indexOf(coin) + 1;
 
-  const addRanksToCoins = (data) =>
+  const addRankToCoins = (data) =>
     data.map((coin) => ({ ...coin, rank: findCoinRank(data, coin) }));
 
   useEffect(() => {
@@ -37,7 +38,7 @@ function TableBox() {
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${pageSize}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
       )
       .then((res) => {
-        setCoins(addRanksToCoins(res.data));
+        setCoins(addRankToCoins(res.data));
       })
       .catch((err) => console.error(err));
   }, [page]); // This will run everytime page changes.
@@ -46,10 +47,11 @@ function TableBox() {
     <div className="table">
       {/* SearchBar was moved from Header to TableBox as I could not have data be
          shared between sibling components - Anti-pattern (solution = Redux) */}
-      <SearchBox setSearch={setSearch}></SearchBox>
+      <SearchBox setSearch={setSearch} setFavorites={setFavorites}></SearchBox>
       <TableDisplay
         search={search}
         coins={coins}
+        favorites={favorites}
         setCoins={setCoins}
         page={page}
       ></TableDisplay>

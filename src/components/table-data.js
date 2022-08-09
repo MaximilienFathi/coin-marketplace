@@ -17,7 +17,7 @@ function TableData({
   market_cap,
 }) {
   const [favorite, setFavorite] = useState(
-    localStorage.getItem(`coin ${rank}`) ? true : false
+    localStorage.getItem(id) ? rank : null
   );
   // const [historicData, setHistoricData] = useState([]);
 
@@ -46,6 +46,7 @@ function TableData({
       <Favorite
         favorite={favorite}
         setFavorite={setFavorite}
+        id={id}
         rank={rank}
       ></Favorite>
       <p className={`coin-rank`}>{rank}</p>

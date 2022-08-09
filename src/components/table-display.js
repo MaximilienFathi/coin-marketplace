@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TableHeader from "./table-header";
 import TableData from "./table-data";
 
-function TableDisplay({ search, coins, setCoins, page }) {
+function TableDisplay({ search, coins, favorites, setCoins, page }) {
   const [sortedData, setSortedData] = useState("");
 
   // Make sure to reset position of sort arrows when changing page
@@ -21,9 +21,12 @@ function TableDisplay({ search, coins, setCoins, page }) {
     // <p>Price Graph (7d)</p>,
   };
 
-  const filteredCoins = coins.filter((coin) =>
+  const searchedCoins = coins.filter((coin) =>
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  const favoriteCoins = coins.filter((coin) => coin.id in favorites);
+  console.log(favorites);
 
   return (
     <div>
@@ -41,7 +44,7 @@ function TableDisplay({ search, coins, setCoins, page }) {
           ></TableHeader>
         );
       })}
-      {filteredCoins.map((coin) => {
+      {searchedCoins.map((coin) => {
         return (
           <TableData
             key={coin.id}

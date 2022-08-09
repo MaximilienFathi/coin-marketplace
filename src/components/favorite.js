@@ -2,11 +2,9 @@ import React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-function Favorite({ favorite, setFavorite, rank }) {
+function Favorite({ favorite, setFavorite, id, rank }) {
   const handleClick = () => {
-    favorite
-      ? localStorage.removeItem(`coin ${rank}`)
-      : localStorage.setItem(`coin ${rank}`, "true");
+    favorite ? localStorage.removeItem(rank) : localStorage.setItem(id, rank);
     // WEIRD ISSUE
     // Putting following before conditional does not change anything!
     // UPDATE - Actually this is normal!
