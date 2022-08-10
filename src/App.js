@@ -1,15 +1,23 @@
-import Header from "./components/header";
-import Hero from "./components/hero";
-import TableBox from "./components/table-box";
 import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CoinsPage from "./pages/coins-page";
+import SearchBox from "./components/search-box";
 
 function App() {
   return (
-    <div className="App">
-      <Header></Header>
-      <Hero></Hero>
-      <TableBox></TableBox>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          {/*<Route index element={<CoinsPage/>}/>*/}
+          {/*<Route page="coins" element={<CoinsPage/>}/>*/}
+          <Route index element={<CoinsPage />} />
+          <Route path="coins" element={<CoinsPage />} />
+          {/*<Route path="exchanges" element={<ExchangesPage/>}/>*/}
+          {/*<Route path="favorites" element={<FavoritesPage/>}/>*/}
+          {/*<Route path="*" element={<NoPage />}       />*/}
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
