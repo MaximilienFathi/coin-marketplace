@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CoinsPage from "./pages/coins-page";
+import FavoritesPage from "./pages/favorites-page";
 import SearchBox from "./components/search-box";
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
           <Route index element={<CoinsPage />} />
           <Route path="coins" element={<CoinsPage />} />
           {/*<Route path="exchanges" element={<ExchangesPage/>}/>*/}
-          {/*<Route path="favorites" element={<FavoritesPage/>}/>*/}
+          <Route path="favorites" element={<FavoritesPage />} />
           {/*<Route path="*" element={<NoPage />}       />*/}
         </Route>
       </Routes>

@@ -8,15 +8,12 @@ function SearchBox({ setSearch, setFavorites }) {
     setSearch(event.target.value);
   };
 
-  const handleClick = () => setFavorites(localStorage);
-
   return (
     <div className="searchBox">
       <div className="buttonGroup">
-        {/*<Button label="Cryptocurrencies"></Button>*/}
-        {/*<Button label="Exchanges"></Button>*/}
-        {/*<Button label="Favorites" handleClick={handleClick}></Button>*/}
         <Link to="/coins">Cryptocurrencies</Link>
+        {/*<Button label="Exchanges"></Button>*/}
+        <Link to="/Favorites">Favorites</Link>
         {/*<Button label="USD"></Button>*/}
       </div>
       <SearchBar handleChange={handleChange}></SearchBar>

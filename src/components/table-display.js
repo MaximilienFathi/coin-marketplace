@@ -25,8 +25,8 @@ function TableDisplay({ search, coins, favorites, setCoins, page }) {
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const favoriteCoins = coins.filter((coin) => coin.id in favorites);
-  console.log(favorites);
+  // const favoriteCoins = coins.filter((coin) => coin.id in favorites);
+  // console.log(favorites);
 
   return (
     <div>
