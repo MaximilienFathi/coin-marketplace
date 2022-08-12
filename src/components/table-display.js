@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TableHeader from "./table-header";
 import TableData from "./table-data";
 
-function TableDisplay({ search, coins, favorites, setCoins, page }) {
+function TableDisplay({ search, data, favorites, setData, page }) {
   const [sortedData, setSortedData] = useState("");
 
   // Make sure to reset position of sort arrows when changing page
@@ -21,7 +21,7 @@ function TableDisplay({ search, coins, favorites, setCoins, page }) {
     // <p>Price Graph (7d)</p>,
   };
 
-  const searchedCoins = coins.filter((coin) =>
+  const searchedCoins = data.filter((coin) =>
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -35,8 +35,8 @@ function TableDisplay({ search, coins, favorites, setCoins, page }) {
           <TableHeader
             // Check why key is needed
             key={dataKey}
-            coins={coins}
-            setCoins={setCoins}
+            coins={data}
+            setCoins={setData}
             dataKey={dataKey}
             header={header}
             sortedData={sortedData}

@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "./button";
 import SearchBar from "./search-bar";
 import { Link, Outlet } from "react-router-dom";
 
@@ -12,8 +11,8 @@ function SearchBox({ setSearch, setFavorites }) {
     <div className="searchBox">
       <div className="buttonGroup">
         <Link to="/coins">Cryptocurrencies</Link>
-        {/*<Button label="Exchanges"></Button>*/}
-        <Link to="/Favorites">Favorites</Link>
+        <Link to="/Exchanges">Exchanges</Link>
+        {/*<Link to="/Favorites">Favorites</Link>*/}
         {/*<Button label="USD"></Button>*/}
       </div>
       <SearchBar handleChange={handleChange}></SearchBar>
