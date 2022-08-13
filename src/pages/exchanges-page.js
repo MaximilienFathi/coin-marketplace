@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "../components/header";
-import Hero from "../components/hero";
-import TableBox from "../components/table-box";
+import Header from "../components/others/header";
+import Hero from "../components/others/hero";
+import TableBox from "../components/exchanges/table-box";
 
 function ExchangesPage() {
   const [data, setData] = useState([]);
-  const [totalExchanges, setTotalExchanges] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
 
+  // ISSUE - Cannot update totalExchanges and use it in findPageCount.
+  // Must send a variable with same value instead.
   const pageSize = 100;
-  const findPageCount = () =>
-    setPageCount(Math.ceil(totalExchanges / pageSize));
+  const findPageCount = (data) => setPageCount(Math.ceil(data / pageSize));
 
-  // ISSUE - Cannot update coins and then use it as it always gives []
-  // So passing coins straight from res.data via "data" parameter
   const findExchangeRank = (data, exchange) =>
     (page - 1) * pageSize + data.indexOf(exchange) + 1;
 
@@ -25,32 +23,38 @@ function ExchangesPage() {
       rank: findExchangeRank(data, exchange),
     }));
 
-  // Retrieve total number of exchanges
   // (Going from .then/.catch to async/await has been the solution!!)
+  async function fetchData() {
+    try {
+      let exchangeCount = 0;
+      let currentPage = 0;
+      let currentPageDataLength = 0;
+      let lastPage = false;
+      while (!lastPage) {
+        const response = await axios.get(
+          `https://api.coingecko.com/api/v3/exchanges?per_page=${pageSize}&page=${++currentPage}`
+        );
+        currentPageDataLength = response.data.length;
+        exchangeCount += currentPageDataLength;
+        lastPage = currentPageDataLength < pageSize ? true : false;
+      }
+      return exchangeCount;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // Retrieve total number of exchanges
   useEffect(() => {
-    async function fetchData() {
+    async function findExchangeCount() {
       try {
-        let totalExchanges = 0;
-        let currentPage = 0;
-        let currentPageDataLength = 0;
-        let lastPage = false;
-        while (!lastPage) {
-          const res = await axios.get(
-            `https://api.coingecko.com/api/v3/exchanges?per_page=${pageSize}&page=${++currentPage}`
-          );
-          currentPageDataLength = res.data.length;
-          totalExchanges += currentPageDataLength;
-          lastPage = currentPageDataLength < pageSize ? true : false;
-          console.log(res.data);
-          console.log(currentPageDataLength, totalExchanges, currentPage);
-        }
-        return totalExchanges;
+        const response = await fetchData();
+        findPageCount(response);
       } catch (err) {
         console.error(err);
       }
     }
-    setTotalExchanges(fetchData());
-    findPageCount();
+    findExchangeCount();
   }, []);
 
   // Retrieve data of 100 exchanges on specific page
@@ -59,9 +63,9 @@ function ExchangesPage() {
       .get(
         `https://api.coingecko.com/api/v3/exchanges?per_page=${pageSize}&page=${page}`
       )
-      .then((res) => {
-        setData(addRankToExchanges(res.data));
-        // console.log(res.data);
+      .then((response) => {
+        setData(addRankToExchanges(response.data));
+        // console.log(response.data);
       })
       .catch((err) => console.error(err));
   }, [page]); // This will run everytime page changes.

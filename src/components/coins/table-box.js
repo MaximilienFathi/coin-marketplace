@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import SearchBox from "./search-box";
+import SearchBox from "../others/search-box";
 import TableDisplay from "./table-display";
-import Pagination from "./pagination";
+import Pagination from "../others/pagination";
 
 function TableBox({ data, setData, page, setPage, pageCount }) {
   const [search, setSearch] = useState("");

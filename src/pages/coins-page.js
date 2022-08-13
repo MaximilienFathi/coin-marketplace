@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "../components/header";
-import Hero from "../components/hero";
-import TableBox from "../components/table-box";
+import Header from "../components/others/header";
+import Hero from "../components/others/hero";
+import TableBox from "../components/coins/table-box";
 
 function CoinsPage() {
   const [data, setData] = useState([]);
@@ -13,7 +13,7 @@ function CoinsPage() {
   const findPageCount = (data) => setPageCount(Math.ceil(data / pageSize));
 
   // ISSUE - Cannot update coins and then use it as it always gives []
-  // So passing coins straight from res.data via "data" parameter
+  // So passing coins straight from response.data via "data" parameter
   const findCoinRank = (data, coin) =>
     (page - 1) * pageSize + data.indexOf(coin) + 1;
 
@@ -24,9 +24,9 @@ function CoinsPage() {
   useEffect(() => {
     axios
       .get("https://api.coingecko.com/api/v3/global")
-      .then((res) => {
-        findPageCount(res.data.data.active_cryptocurrencies);
-        console.log(res.data.data.active_cryptocurrencies);
+      .then((response) => {
+        findPageCount(response.data.data.active_cryptocurrencies);
+        console.log(response.data.data.active_cryptocurrencies);
       })
       .catch((err) => console.log(err));
   }, []); // findPageCount - if included, runs too many times (remove []?)
@@ -37,8 +37,8 @@ function CoinsPage() {
       .get(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${pageSize}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
       )
-      .then((res) => {
-        setData(addRankToCoins(res.data));
+      .then((response) => {
+        setData(addRankToCoins(response.data));
       })
       .catch((err) => console.error(err));
   }, [page]); // This will run everytime page changes.

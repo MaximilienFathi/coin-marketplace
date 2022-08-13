@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Header from "../components/header";
-import Hero from "../components/hero";
-import TableBox from "../components/table-box";
+import Header from "../components/others/header";
+import Hero from "../components/others/hero";
+import TableBox from "../components/coins/table-box";
 
 function FavoritesPage() {
   const [data, setData] = useState({});

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Favorite from "./favorite";
-import LineChart from "./line-chart";
+import Favorite from "../others/favorite";
+import LineChart from "../others/line-chart";
 import axios from "axios";
 
 function TableData({

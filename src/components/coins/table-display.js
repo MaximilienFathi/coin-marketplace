@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import TableHeader from "./table-header";
+import TableHeader from "../others/table-header";
 import TableData from "./table-data";
 
 function TableDisplay({ search, data, favorites, setData, page }) {
@@ -30,15 +30,15 @@ function TableDisplay({ search, data, favorites, setData, page }) {
 
   return (
     <div>
-      {Object.entries(dataHeaders).map(([dataKey, header]) => {
+      {Object.entries(dataHeaders).map(([headerKey, headerName]) => {
         return (
           <TableHeader
             // Check why key is needed
-            key={dataKey}
+            key={headerKey}
             coins={data}
             setCoins={setData}
-            dataKey={dataKey}
-            header={header}
+            headerKey={headerKey}
+            headerName={headerName}
             sortedData={sortedData}
             setSortedData={setSortedData}
           ></TableHeader>

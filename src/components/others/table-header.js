@@ -3,10 +3,10 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
 function TableHeader({
-  coins,
-  setCoins,
-  dataKey,
-  header,
+  data,
+  setData,
+  headerKey,
+  headerName,
   sortedData,
   setSortedData,
 }) {
@@ -15,7 +15,7 @@ function TableHeader({
   // Make sure to reset position of THIS sort arrow if another header is clicked
   // This will run everytime sortedData changes.
   useEffect(() => {
-    sortedData === dataKey ? setAscendingSort(false) : setAscendingSort(true);
+    sortedData === headerKey ? setAscendingSort(false) : setAscendingSort(true);
   }, [sortedData]);
 
   // Not very pretty but best solution I could find
@@ -52,16 +52,16 @@ function TableHeader({
   };
 
   const sortBy = (key) => {
-    const arrayCopy = [...coins];
+    const arrayCopy = [...data];
     arrayCopy.sort(compareBy(key));
-    setCoins(arrayCopy);
+    setData(arrayCopy);
     setAscendingSort(!ascendingSort);
   };
 
   return (
     <div className="table-header">
-      <p onClick={() => sortBy(dataKey)}>
-        {header}
+      <p onClick={() => sortBy(headerKey)}>
+        {headerName}
         {ascendingSort ? (
           <ArrowDropUpIcon></ArrowDropUpIcon>
         ) : (
