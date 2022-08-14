@@ -12,7 +12,7 @@ function App() {
           <Route index element={<CoinsPage />} />
           <Route path="coins" element={<CoinsPage />} />
           <Route path="exchanges" element={<ExchangesPage />} />
-          {/*<Route path="favorites" element={<FavoritesPage />} />*/}
+          <Route path="favorites" element={<FavoritesPage />} />
           {/*<Route path="*" element={<NoPage />}       />*/}
         </Route>
       </Routes>

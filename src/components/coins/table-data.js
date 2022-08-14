@@ -16,9 +16,9 @@ function TableData({
   total_volume,
   market_cap,
 }) {
-  // const [favorite, setFavorite] = useState(
-  //   localStorage.getItem(id) ? rank : null
-  // );
+  const [favorite, setFavorite] = useState(
+    localStorage.getItem(id) ? rank : null
+  );
   // const [historicData, setHistoricData] = useState([]);
 
   // useEffect(() => {
@@ -43,12 +43,12 @@ function TableData({
   // Maybe change number of decimal places for each value
   return (
     <div className="table-row">
-      {/*<Favorite*/}
-      {/*  favorite={favorite}*/}
-      {/*  setFavorite={setFavorite}*/}
-      {/*  id={id}*/}
-      {/*  rank={rank}*/}
-      {/*></Favorite>*/}
+      <Favorite
+        favorite={favorite}
+        setFavorite={setFavorite}
+        id={id}
+        rank={rank}
+      ></Favorite>
       <p className={`coin-rank`}>{rank}</p>
       <div>
         <img

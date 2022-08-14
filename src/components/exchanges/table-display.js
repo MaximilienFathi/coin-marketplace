@@ -15,13 +15,17 @@ function TableDisplay({ search, data, setData, page }) {
   // exceeding the API call limit
   useEffect(() => {
     async function fetchData() {
-      const fromCurrency = "bitcoin";
-      const toCurrency = "usd";
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${fromCurrency}&vs_currencies=${toCurrency}`
-      );
-      setBtcValue(response.data[fromCurrency][toCurrency]);
-      console.log(btcValue);
+      try {
+        const fromCurrency = "bitcoin";
+        const toCurrency = "usd";
+        const response = await axios.get(
+          `https://api.coingecko.com/api/v3/simple/price?ids=${fromCurrency}&vs_currencies=${toCurrency}`
+        );
+        setBtcValue(response.data[fromCurrency][toCurrency]);
+        console.log(btcValue);
+      } catch (err) {
+        console.error(err);
+      }
     }
     fetchData();
   }, [btcValue]);

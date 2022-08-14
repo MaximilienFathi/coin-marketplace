@@ -9,7 +9,6 @@ function TableBox({ data, setData, page, setPage, pageCount }) {
   return (
     <div className="table">
       <SearchBox setSearch={setSearch}></SearchBox>
-      {/*(setFavorites = { setFavorites })*/}
       <TableDisplay
         search={search}
         data={data}
