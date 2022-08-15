@@ -25,8 +25,8 @@ function TableDisplay({ search, data, setData, favorites, page }) {
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const favoriteCoins = data.filter((coin) => coin.id in favorites);
-  console.log(favorites);
+  // const favoriteCoins = data.filter((coin) => coin.id in favorites);
+  // console.log(favorites);
 
   return (
     <div>
@@ -44,7 +44,7 @@ function TableDisplay({ search, data, setData, favorites, page }) {
           ></TableHeader>
         );
       })}
-      {favoriteCoins.map((coin) => {
+      {searchedCoins.map((coin) => {
         return (
           <TableData
             key={coin.id}
