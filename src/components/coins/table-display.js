@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TableHeader from "../others/table-header";
 import TableData from "./table-data";
 
-function TableDisplay({ search, data, setData, favorites, page }) {
+function TableDisplay({ search, data, setData, page }) {
   const [sortedData, setSortedData] = useState("");
 
   // Make sure to reset position of sort arrows when changing page
@@ -10,7 +10,7 @@ function TableDisplay({ search, data, setData, favorites, page }) {
 
   const dataHeaders = {
     // favorite: "",
-    rank: "#",
+    market_cap_rank: "#",
     name: "Name",
     current_price: "Price",
     price_change_percentage_1h_in_currency: "Change (1h)",
@@ -21,12 +21,9 @@ function TableDisplay({ search, data, setData, favorites, page }) {
     // <p>Price Graph (7d)</p>,
   };
 
-  const searchedCoins = data.filter((coin) =>
+  const filteredData = data.filter((coin) =>
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
-
-  // const favoriteCoins = data.filter((coin) => coin.id in favorites);
-  // console.log(favorites);
 
   return (
     <div>
@@ -35,8 +32,8 @@ function TableDisplay({ search, data, setData, favorites, page }) {
           <TableHeader
             // Check why key is needed
             key={headerKey}
-            coins={data}
-            setCoins={setData}
+            data={data}
+            setData={setData}
             headerKey={headerKey}
             headerName={headerName}
             sortedData={sortedData}
@@ -44,12 +41,12 @@ function TableDisplay({ search, data, setData, favorites, page }) {
           ></TableHeader>
         );
       })}
-      {searchedCoins.map((coin) => {
+      {filteredData.map((coin) => {
         return (
           <TableData
             key={coin.id}
             id={coin.id}
-            rank={coin.rank}
+            market_cap_rank={coin.market_cap_rank}
             image={coin.image}
             name={coin.name}
             symbol={coin.symbol}

@@ -5,7 +5,7 @@ import axios from "axios";
 
 function TableData({
   id,
-  rank,
+  market_cap_rank,
   image,
   name,
   symbol,
@@ -16,9 +16,7 @@ function TableData({
   total_volume,
   market_cap,
 }) {
-  const [favorite, setFavorite] = useState(
-    localStorage.getItem(id) ? rank : null
-  );
+  const [favorite, setFavorite] = useState(localStorage.getItem(id));
   // const [historicData, setHistoricData] = useState([]);
 
   // useEffect(() => {
@@ -47,9 +45,9 @@ function TableData({
         favorite={favorite}
         setFavorite={setFavorite}
         id={id}
-        rank={rank}
+        rank={market_cap_rank}
       ></Favorite>
-      <p className={`coin-rank`}>{rank}</p>
+      <p className={`coin-rank`}>{market_cap_rank || "N/A"}</p>
       <div>
         <img
           className="coin-logo"

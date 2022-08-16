@@ -14,18 +14,20 @@ function FavoritesPage() {
     setPageCount(Math.ceil(data.length / pageSize));
 
   const updateData = function (data) {
+    const marketData = data.market_data;
     return {
       ...data,
+      market_cap_rank: data.market_cap_rank,
       image: data.image.large,
-      current_price: data.current_price.usd,
+      current_price: marketData.current_price.usd,
       price_change_percentage_1h_in_currency:
-        data.price_change_percentage_1h_in_currency.usd,
+        marketData.price_change_percentage_1h_in_currency.usd,
       price_change_percentage_24h_in_currency:
-        data.price_change_percentage_24h_in_currency.usd,
+        marketData.price_change_percentage_24h_in_currency.usd,
       price_change_percentage_7d_in_currency:
-        data.price_change_percentage_7d_in_currency.usd,
-      total_volume: data.total_volume.usd,
-      market_cap: data.market_cap.usd,
+        marketData.price_change_percentage_7d_in_currency.usd,
+      total_volume: marketData.total_volume.usd,
+      market_cap: marketData.market_cap.usd,
     };
   };
 
@@ -48,7 +50,8 @@ function FavoritesPage() {
   useEffect(() => {
     async function consolidateData() {
       const favorites = localStorage;
-      const response = await fetchData(favorites);
+      let response = await fetchData(favorites);
+      response = response.sort((a, b) => (a.rank > b.rank ? 1 : -1));
       console.log(response);
       setData(response);
       findPageCount(data);

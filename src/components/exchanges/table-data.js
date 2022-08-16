@@ -18,7 +18,7 @@ function TableData({
 
   return (
     <div className="table-row">
-      <p className={`coin-rank`}>{rank}</p>
+      <p className={`exchange-rank`}>{rank}</p>
       <div>
         <img
           className="exchange-logo"
