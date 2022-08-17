@@ -32,10 +32,26 @@ function TableData({
 
   const color = current_price > 0 ? "green" : "red";
 
-  const transformData = function (data, fractionDigits = 0) {
-    const numberFormatter = Intl.NumberFormat("en-US");
-    return numberFormatter.format(Number(data).toFixed(fractionDigits));
-    // Added Number() else issue with scientific notation
+  const transformData = function (data, fractionDigits, type) {
+    // // const num1 = Number(data.toString().split(".")[0]);
+    // const num = data.toString().split(".")[1] || 0;
+    // if (type === "price") fractionDigits = num.length;
+    //
+    // const numberFormatter = Intl.NumberFormat("en-US");
+    // return numberFormatter.format(Number(data).toFixed(fractionDigits));
+    // // Added Number() else issue with scientific notation
+
+    const num1 = data.toString().split(".")[0];
+    const num2 = data.toString().split(".")[1] || 0;
+
+    if (type === "price") fractionDigits = num2.length;
+    if ((type === "volume" || type === "market_cap") && num1.length > 2) {
+      fractionDigits = 0;
+    }
+
+    return data.toLocaleString("en-US", {
+      maximumFractionDigits: fractionDigits,
+    });
   };
 
   // Maybe change number of decimal places for each value
@@ -47,7 +63,7 @@ function TableData({
         id={id}
         rank={market_cap_rank}
       ></Favorite>
-      <p className={`coin-rank`}>{market_cap_rank || "N/A"}</p>
+      <p className={`coin-rank`}>{market_cap_rank || "-"}</p>
       <div>
         <img
           className="coin-logo"
@@ -57,18 +73,33 @@ function TableData({
         <p className="coin-name">{name}</p>
         <p className="coin-symbol">{symbol}</p>
       </div>
-      <p className="coin-price">${transformData(current_price, 2)}</p>
-      <p className={`coin-price-change ${color}`}>
-        {transformData(price_change_percentage_1h_in_currency, 2)}%
+      <p className="coin-price">
+        ${current_price ? transformData(current_price, 2, "price") : 0}
       </p>
       <p className={`coin-price-change ${color}`}>
-        {transformData(price_change_percentage_24h_in_currency, 2)}%
+        {price_change_percentage_1h_in_currency
+          ? transformData(price_change_percentage_1h_in_currency, 2)
+          : 0}
+        %
       </p>
       <p className={`coin-price-change ${color}`}>
-        {transformData(price_change_percentage_7d_in_currency, 2)}%
+        {price_change_percentage_24h_in_currency
+          ? transformData(price_change_percentage_24h_in_currency, 2)
+          : 0}
+        %
       </p>
-      <p className="coin-volume">${transformData(total_volume)}</p>
-      <p className="coin-market-cap">${transformData(market_cap)}</p>
+      <p className={`coin-price-change ${color}`}>
+        {price_change_percentage_7d_in_currency
+          ? transformData(price_change_percentage_7d_in_currency, 2)
+          : 0}
+        %
+      </p>
+      <p className="coin-volume">
+        ${total_volume ? transformData(total_volume, 1, "volume") : 0.0}
+      </p>
+      <p className="coin-market-cap">
+        ${market_cap ? transformData(market_cap, 1, "market_cap") : 0.0}
+      </p>
       {/*<LineChart historicData={historicData}></LineChart>*/}
     </div>
   );
