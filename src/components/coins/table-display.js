@@ -9,7 +9,7 @@ function TableDisplay({ search, data, setData, page }) {
   useEffect(() => setSortedData(""), [page]);
 
   const dataHeaders = {
-    // favorite: "",
+    favorite: "?",
     market_cap_rank: "#",
     name: "Name",
     current_price: "Price",
@@ -21,26 +21,48 @@ function TableDisplay({ search, data, setData, page }) {
     // <p>Price Graph (7d)</p>,
   };
 
+  const transformData = function (coin) {
+    // Setting to Infinity to show its rank is too low
+    coin.market_cap_rank = coin.market_cap_rank || Infinity;
+    coin.current_price = coin.current_price || 0;
+    coin.price_change_percentage_1h_in_currency =
+      coin.price_change_percentage_1h_in_currency || 0;
+    coin.price_change_percentage_24h_in_currency =
+      coin.price_change_percentage_24h_in_currency || 0;
+    coin.price_change_percentage_7d_in_currency =
+      coin.price_change_percentage_7d_in_currency || 0;
+    coin.total_volume = coin.total_volume || 0;
+    coin.market_cap = coin.market_cap || 0;
+  };
+
+  data.map((coin) => transformData(coin));
+
+  // The above changes the original data array
+  // Using a duplicated data array and using setData(fixedData); caused issues
+
   const filteredData = data.filter((coin) =>
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div>
-      {Object.entries(dataHeaders).map(([headerKey, headerName]) => {
-        return (
-          <TableHeader
-            // Check why key is needed
-            key={headerKey}
-            data={data}
-            setData={setData}
-            headerKey={headerKey}
-            headerName={headerName}
-            sortedData={sortedData}
-            setSortedData={setSortedData}
-          ></TableHeader>
-        );
-      })}
+      <p>{dataHeaders.favorite}</p>
+      {Object.entries(dataHeaders)
+        .slice(1)
+        .map(([headerKey, headerName]) => {
+          return (
+            <TableHeader
+              // Check why key is needed
+              key={headerKey}
+              data={data}
+              setData={setData}
+              headerKey={headerKey}
+              headerName={headerName}
+              sortedData={sortedData}
+              setSortedData={setSortedData}
+            ></TableHeader>
+          );
+        })}
       {filteredData.map((coin) => {
         return (
           <TableData

@@ -17,7 +17,7 @@ function FavoritesPage() {
     const marketData = data.market_data;
     return {
       ...data,
-      market_cap_rank: data.market_cap_rank,
+      market_cap_rank: data.market_cap_rank || Infinity,
       image: data.image.large,
       current_price: marketData.current_price.usd,
       price_change_percentage_1h_in_currency:
@@ -51,8 +51,10 @@ function FavoritesPage() {
     async function consolidateData() {
       const favorites = localStorage;
       let response = await fetchData(favorites);
-      response = response.sort((a, b) => (a.rank > b.rank ? 1 : -1));
-      console.log(response);
+      response = response.sort((a, b) =>
+        a.market_cap_rank > b.market_cap_rank ? 1 : -1
+      );
+      console.log("testing", response);
       setData(response);
       findPageCount(data);
     }
@@ -76,11 +78,3 @@ function FavoritesPage() {
 }
 
 export default FavoritesPage;
-
-// const favoriteCoins = coins.filter((coin) => coin.id in favorites);
-// console.log(favorites);
-
-// Rename table-display to coins-table
-// Add an exchange-table
-// Use conditional operator in table-box to display coins-table or
-// exchange-table
