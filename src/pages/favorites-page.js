@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header";
 import Hero from "../components/others/hero";
 import TableBox from "../components/coins/table-box";
@@ -47,6 +48,7 @@ function FavoritesPage() {
     );
   };
 
+  // If want to check "favorites" page, show all favorites in order.
   useEffect(() => {
     async function consolidateData() {
       const favorites = localStorage;
@@ -63,17 +65,19 @@ function FavoritesPage() {
 
   return (
     // Replace className App with something else
-    <div className="App">
-      <Header></Header>
-      <Hero></Hero>
-      <TableBox
-        data={data}
-        setData={setData}
-        page={page}
-        setPage={setPage}
-        pageCount={pageCount}
-      ></TableBox>
-    </div>
+    <favoritesContext.Provider>
+      <div className="App">
+        <Header></Header>
+        <Hero></Hero>
+        <TableBox
+          data={data}
+          setData={setData}
+          page={page}
+          setPage={setPage}
+          pageCount={pageCount}
+        ></TableBox>
+      </div>
+    </favoritesContext.Provider>
   );
 }
 

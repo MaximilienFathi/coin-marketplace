@@ -22,7 +22,6 @@ function TableDisplay({ search, data, setData, page }) {
           `https://api.coingecko.com/api/v3/simple/price?ids=${fromCurrency}&vs_currencies=${toCurrency}`
         );
         setBtcValue(response.data[fromCurrency][toCurrency]);
-        console.log(btcValue);
       } catch (err) {
         console.error(err);
       }
@@ -34,11 +33,21 @@ function TableDisplay({ search, data, setData, page }) {
     rank: "#",
     name: "Name",
     trust_score: "Trust Score",
-    trade_volume_24h_normalized: "24h Volume (Normalized)",
-    trade_volume_24h: "24h Volume",
+    trade_volume_24h_btc_normalized: "24h Volume (Normalized)",
+    trade_volume_24h_btc: "24h Volume",
     year_established: "Year Established",
     country: "Country",
   };
+
+  // Using Infinity (for numbers) and ~ (for strings) as we want N/A data to
+  // come last when data is in ascending order.
+  const transformData = function (exchange) {
+    exchange.trust_score = exchange.trust_score || 0;
+    exchange.year_established = exchange.year_established || Infinity;
+    exchange.country = exchange.country || "~";
+  };
+
+  data.map((exchange) => transformData(exchange));
 
   const filteredData = data.filter((exchange) =>
     exchange.name.toLowerCase().includes(search.toLowerCase())

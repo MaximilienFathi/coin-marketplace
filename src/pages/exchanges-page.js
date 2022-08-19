@@ -12,8 +12,13 @@ function ExchangesPage() {
   // ISSUE - Cannot update totalExchanges and use it in findPageCount.
   // Must send a variable with same value instead.
   const pageSize = 100;
-  const findPageCount = (data) => setPageCount(Math.ceil(data / pageSize));
+  const findPageCount = (exchanges) =>
+    setPageCount(Math.ceil(exchanges / pageSize));
 
+  // Another way of finding the rank would have been to use trust score and
+  // normalized volume (normalized). The following is just easier.
+  // Did not use their trust_score_rank property since it is missing some
+  // ranks
   const findExchangeRank = (data, exchange) =>
     (page - 1) * pageSize + data.indexOf(exchange) + 1;
 
@@ -65,7 +70,7 @@ function ExchangesPage() {
       )
       .then((response) => {
         setData(addRankToExchanges(response.data));
-        // console.log(response.data);
+        console.log(response.data);
       })
       .catch((err) => console.error(err));
   }, [page]); // This will run everytime page changes.

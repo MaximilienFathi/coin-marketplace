@@ -22,7 +22,8 @@ function TableDisplay({ search, data, setData, page }) {
   };
 
   const transformData = function (coin) {
-    // Setting to Infinity to show its rank is too low
+    // Setting to Infinity to deal with ranks that are too low, i.e. have
+    // market cap of 0
     coin.market_cap_rank = coin.market_cap_rank || Infinity;
     coin.current_price = coin.current_price || 0;
     coin.price_change_percentage_1h_in_currency =

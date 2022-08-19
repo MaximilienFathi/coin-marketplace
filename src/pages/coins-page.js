@@ -10,7 +10,7 @@ function CoinsPage() {
   const [page, setPage] = useState(1);
 
   const pageSize = 100;
-  const findPageCount = (data) => setPageCount(Math.ceil(data / pageSize));
+  const findPageCount = (coins) => setPageCount(Math.ceil(coins / pageSize));
 
   /*
   // ISSUE - Cannot update coins and then use it as it always gives []

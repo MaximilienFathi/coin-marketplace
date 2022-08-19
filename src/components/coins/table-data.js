@@ -66,11 +66,7 @@ function TableData({
         {market_cap_rank < Infinity ? market_cap_rank : "-"}
       </p>
       <div>
-        <img
-          className="coin-logo"
-          src={image}
-          alt="logo of the cryptocurrency"
-        ></img>
+        <img className="coin-logo" src={image} alt={`logo of ${name}`}></img>
         <p className="coin-name">{name}</p>
         <p className="coin-symbol">{symbol}</p>
       </div>

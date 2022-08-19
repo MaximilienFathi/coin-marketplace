@@ -10,10 +10,15 @@ function TableData({
   year_established,
   country,
 }) {
-  const transformData = function (data, fractionDigits = 0) {
-    const numberFormatter = Intl.NumberFormat("en-US");
-    return numberFormatter.format(Number(data).toFixed(fractionDigits));
-    // Added Number() else issue with scientific notation
+  const transformData = function (data, fractionDigits = 2) {
+    const num = data.toString().split(".")[0];
+
+    if (num.length >= 6) fractionDigits = 0;
+
+    return data.toLocaleString("en-US", {
+      minimumFractionDigits: fractionDigits,
+      maximumFractionDigits: fractionDigits,
+    });
   };
 
   return (
@@ -23,17 +28,19 @@ function TableData({
         <img
           className="exchange-logo"
           src={image}
-          alt="logo of the exchange platform"
+          alt={`logo of ${name}`}
         ></img>
         <p className="exchange-name">{name}</p>
       </div>
       <p className="exchange-trust-score">{trust_score || "N/A"}</p>
       <p className="exchange-volume-normalized">
-        ${transformData(trade_volume_24h_normalized, 2)}
+        ${transformData(trade_volume_24h_normalized)}
       </p>
-      <p className="exchange-volume">${transformData(trade_volume_24h, 2)}</p>
-      <p className="exchange-year">{year_established || "N/A"}</p>
-      <p className="exchange-country">{country || "N/A"}</p>
+      <p className="exchange-volume">${transformData(trade_volume_24h)}</p>
+      <p className="exchange-year">
+        {year_established < Infinity ? year_established : "N/A"}
+      </p>
+      <p className="exchange-country">{country !== "~" ? country : "N/A"}</p>
     </div>
   );
 }

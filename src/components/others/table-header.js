@@ -22,7 +22,7 @@ function TableHeader({
   const compareBy = (key) => {
     if (!ascendingSort && key !== "name")
       return function (a, b) {
-        console.log(a[key], b[key], a[key] > b[key]);
+        // console.log(a[key], b[key], a[key] > b[key]);
         if (a[key] < b[key]) return -1;
         if (a[key] > b[key]) return 1;
         return 0;
