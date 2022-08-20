@@ -1,6 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 
-const [favoritesChanged, setFavoritesChanged] = useState(false);
-const favoritesContext = createContext([favoritesChanged, setFavoritesChanged]);
+const favoritesContext = createContext();
 
 export default favoritesContext;

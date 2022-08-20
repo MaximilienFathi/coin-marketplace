@@ -9,6 +9,7 @@ function FavoritesPage() {
   const [data, setData] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
+  const [favoritesChanged, setFavoritesChanged] = useState(false);
 
   const pageSize = 100;
   const findPageCount = (data) =>
@@ -48,7 +49,7 @@ function FavoritesPage() {
     );
   };
 
-  // If want to check "favorites" page, show all favorites in order.
+  // When checking "favorites" page, show all favorites in order.
   useEffect(() => {
     async function consolidateData() {
       const favorites = localStorage;
@@ -61,11 +62,11 @@ function FavoritesPage() {
       findPageCount(data);
     }
     consolidateData();
-  }, []);
+  }, [favoritesChanged]);
 
   return (
     // Replace className App with something else
-    <favoritesContext.Provider>
+    <favoritesContext.Provider value={[favoritesChanged, setFavoritesChanged]}>
       <div className="App">
         <Header></Header>
         <Hero></Hero>

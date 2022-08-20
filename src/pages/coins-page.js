@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header";
 import Hero from "../components/others/hero";
 import TableBox from "../components/coins/table-box";
@@ -8,6 +9,10 @@ function CoinsPage() {
   const [data, setData] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
+  // Included the following + context provider in coins-page.js too because
+  // otherwise favorite.js will complain since it cannot consume anything
+  // without a provider first
+  const [favoritesChanged, setFavoritesChanged] = useState(false);
 
   const pageSize = 100;
   const findPageCount = (coins) => setPageCount(Math.ceil(coins / pageSize));
@@ -48,18 +53,22 @@ function CoinsPage() {
   }, [page]); // This will run everytime page changes.
 
   return (
-    // Replace className App with something else
-    <div className="App">
-      <Header></Header>
-      <Hero></Hero>
-      <TableBox
-        data={data}
-        setData={setData}
-        page={page}
-        setPage={setPage}
-        pageCount={pageCount}
-      ></TableBox>
-    </div>
+    // See explanation above for following. This does nothing but prevent
+    // a context error in favorite.js
+    <favoritesContext.Provider value={[favoritesChanged, setFavoritesChanged]}>
+      {/* Replace className App with something else*/}
+      <div className="App">
+        <Header></Header>
+        <Hero></Hero>
+        <TableBox
+          data={data}
+          setData={setData}
+          page={page}
+          setPage={setPage}
+          pageCount={pageCount}
+        ></TableBox>
+      </div>
+    </favoritesContext.Provider>
   );
 }
 

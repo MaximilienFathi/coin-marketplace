@@ -4,11 +4,11 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import favoritesContext from "../../contexts/favorites-context";
 
 function Favorite({ favorite, setFavorite, id, rank }) {
-  const [, setFavoritesChanged] = useContext(favoritesContext);
+  const [favoritesChanged, setFavoritesChanged] = useContext(favoritesContext);
 
   const handleClick = () => {
     favorite ? localStorage.removeItem(id) : localStorage.setItem(id, rank);
-    setFavoritesChanged(true);
+    setFavoritesChanged(!favoritesChanged);
     // WEIRD ISSUE
     // Putting following before conditional does not change anything!
     // UPDATE - Actually this is normal!
