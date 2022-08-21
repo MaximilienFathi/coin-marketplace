@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import TableHeader from "../others/table-header";
 import TableData from "./table-data";
-import axios from "axios";
 
 function TableDisplay({ search, data, setData, page }) {
   const [sortedData, setSortedData] = useState("");

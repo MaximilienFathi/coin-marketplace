@@ -1,12 +1,29 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import TableHeader from "../others/table-header";
 import TableData from "./table-data";
 
 function TableDisplay({ search, data, setData, page }) {
   const [sortedData, setSortedData] = useState("");
+  const [coinsList, setCoinsList] = useState([]);
 
   // Make sure to reset position of sort arrows when changing page
   useEffect(() => setSortedData(""), [page]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          "https://api.coingecko.com/api/v3/coins/list"
+        );
+        setCoinsList(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchData();
+  }, []);
+  // console.log(coinsList);
 
   const dataHeaders = {
     favorite: "?",
@@ -41,9 +58,51 @@ function TableDisplay({ search, data, setData, page }) {
   // The above changes the original data array
   // Using a duplicated data array and using setData(fixedData); caused issues
 
-  const filteredData = data.filter((coin) =>
-    coin.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const updateFilteredData = function (data) {
+    const marketData = data.market_data;
+    return {
+      ...data,
+      market_cap_rank: data.market_cap_rank || Infinity,
+      image: data.image.large,
+      current_price: marketData.current_price.usd,
+      price_change_percentage_1h_in_currency:
+        marketData.price_change_percentage_1h_in_currency.usd,
+      price_change_percentage_24h_in_currency:
+        marketData.price_change_percentage_24h_in_currency.usd,
+      price_change_percentage_7d_in_currency:
+        marketData.price_change_percentage_7d_in_currency.usd,
+      total_volume: marketData.total_volume.usd,
+      market_cap: marketData.market_cap.usd,
+    };
+  };
+
+  const fetchData = async function (id) {
+    try {
+      const response = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${id}`
+      );
+      return response.data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  let count = 0;
+  let result = [];
+  let filteredData = coinsList.filter((coin) => {
+    if (count < 5 && coin.name.toLowerCase().startsWith(search.toLowerCase())) {
+      count++;
+      return true;
+    }
+    return false;
+  });
+  (async () => {
+    filteredData = await Promise.all(
+      filteredData.map((coin) => fetchData(coin.id))
+    );
+    result = filteredData.map((coin) => updateFilteredData(coin));
+  })();
+  console.log("TESTING", result);
 
   return (
     <div>
@@ -64,7 +123,7 @@ function TableDisplay({ search, data, setData, page }) {
             ></TableHeader>
           );
         })}
-      {filteredData.map((coin) => {
+      {(search ? result : data).map((coin) => {
         return (
           <TableData
             key={coin.id}

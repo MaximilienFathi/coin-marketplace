@@ -33,6 +33,7 @@ function TableData({
   const color = current_price >= 0 ? "green" : "red";
 
   const transformData = function (data, fractionDigits, type) {
+    console.log(type, data);
     const num1 = data.toString().split(".")[0];
     const num2 = data.toString().split(".")[1] || 0;
 

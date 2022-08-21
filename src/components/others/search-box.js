@@ -14,8 +14,8 @@ function SearchBox({ setSearch, setFavorites }) {
         <Link to="/coins">Cryptocurrencies</Link>
         <Link to="/Exchanges">Exchanges</Link>
         <Link to="/Favorites">Favorites</Link>
-        {/*<Button label="USD"></Button>*/}
       </div>
+      {/*<Button label="USD"></Button>*/}
       <SearchBar handleChange={handleChange}></SearchBar>
       {/*<Outlet />*/}
     </div>
