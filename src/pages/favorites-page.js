@@ -49,6 +49,7 @@ function FavoritesPage() {
     );
   };
 
+  // Retrieve data of favorite coins
   // When checking "favorites" page, show all favorites in order.
   useEffect(() => {
     async function consolidateData() {
@@ -76,6 +77,7 @@ function FavoritesPage() {
           page={page}
           setPage={setPage}
           pageCount={pageCount}
+          setPageCount={setPageCount}
         ></TableBox>
       </div>
     </favoritesContext.Provider>

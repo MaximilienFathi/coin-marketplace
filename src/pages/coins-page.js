@@ -6,7 +6,8 @@ import Hero from "../components/others/hero";
 import TableBox from "../components/coins/table-box";
 
 function CoinsPage() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); // replace with "paginatedData"
+  const [fullDataList, setFullDataList] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
   // Included the following + context provider in coins-page.js too because
@@ -52,6 +53,21 @@ function CoinsPage() {
       .catch((err) => console.error(err));
   }, [page]); // This will run everytime page changes.
 
+  // Retrieve full list of coins (necessary for search mechanism)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          "https://api.coingecko.com/api/v3/coins/list"
+        );
+        setFullDataList(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchData();
+  }, []);
+
   return (
     // See explanation above for following. This does nothing but prevent
     // a context error in favorite.js
@@ -63,9 +79,11 @@ function CoinsPage() {
         <TableBox
           data={data}
           setData={setData}
+          fullDataList={fullDataList}
           page={page}
           setPage={setPage}
           pageCount={pageCount}
+          setPageCount={setPageCount}
         ></TableBox>
       </div>
     </favoritesContext.Provider>

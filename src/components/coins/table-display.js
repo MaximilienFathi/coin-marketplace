@@ -3,28 +3,17 @@ import axios from "axios";
 import TableHeader from "../others/table-header";
 import TableData from "./table-data";
 
-function TableDisplay({ search, data, setData, page }) {
+function TableDisplay({
+  search,
+  data,
+  setData,
+  fullDataList,
+  page,
+  pageCount,
+  setPageCount,
+}) {
   const [sortedData, setSortedData] = useState("");
-  const [coinsList, setCoinsList] = useState([]);
-
-  // Make sure to reset position of sort arrows when changing page
-  useEffect(() => setSortedData(""), [page]);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get(
-          "https://api.coingecko.com/api/v3/coins/list"
-        );
-        setCoinsList(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    fetchData();
-  }, []);
-  // console.log(coinsList);
-
+  const [searchResults, setSearchResults] = useState([]);
   const dataHeaders = {
     favorite: "?",
     market_cap_rank: "#",
@@ -38,25 +27,43 @@ function TableDisplay({ search, data, setData, page }) {
     // <p>Price Graph (7d)</p>,
   };
 
-  const transformData = function (coin) {
-    // Setting to Infinity to deal with ranks that are too low, i.e. have
-    // market cap of 0
-    coin.market_cap_rank = coin.market_cap_rank || Infinity;
-    coin.current_price = coin.current_price || 0;
-    coin.price_change_percentage_1h_in_currency =
-      coin.price_change_percentage_1h_in_currency || 0;
-    coin.price_change_percentage_24h_in_currency =
-      coin.price_change_percentage_24h_in_currency || 0;
-    coin.price_change_percentage_7d_in_currency =
-      coin.price_change_percentage_7d_in_currency || 0;
-    coin.total_volume = coin.total_volume || 0;
-    coin.market_cap = coin.market_cap || 0;
-  };
+  //=========================================================================
 
-  data.map((coin) => transformData(coin));
+  // Make sure to reset position of sort arrows when changing page
+  useEffect(() => setSortedData(""), [page]);
 
-  // The above changes the original data array
-  // Using a duplicated data array and using setData(fixedData); caused issues
+  // Display maximum of 5 search results for each character input
+  useEffect(() => {
+    let count = 0;
+    // Ternary conditional needed to distinguish coinsPage from favoritesPage
+    // Favorites page only deals with favorites not the full list of coins
+    let filteredData = (fullDataList ? fullDataList : data).filter((coin) => {
+      if (
+        count < 1 &&
+        coin.name.toLowerCase().startsWith(search.toLowerCase())
+      ) {
+        count++;
+        return true;
+      }
+      return false;
+    });
+    console.log("vfe", filteredData);
+    (async () => {
+      filteredData = await Promise.all(
+        filteredData.map((coin) => fetchData(coin.id))
+      );
+      setSearchResults(filteredData.map((coin) => updateFilteredData(coin)));
+      const pageSize = 100;
+      console.log(data.length);
+      search
+        ? setPageCount(0)
+        : setPageCount(
+            Math.ceil((fullDataList ? fullDataList : data).length / pageSize)
+          );
+    })();
+  }, [search]);
+
+  //=========================================================================
 
   const updateFilteredData = function (data) {
     const marketData = data.market_data;
@@ -87,22 +94,27 @@ function TableDisplay({ search, data, setData, page }) {
     }
   };
 
-  let count = 0;
-  let result = [];
-  let filteredData = coinsList.filter((coin) => {
-    if (count < 5 && coin.name.toLowerCase().startsWith(search.toLowerCase())) {
-      count++;
-      return true;
-    }
-    return false;
-  });
-  (async () => {
-    filteredData = await Promise.all(
-      filteredData.map((coin) => fetchData(coin.id))
-    );
-    result = filteredData.map((coin) => updateFilteredData(coin));
-  })();
-  console.log("TESTING", result);
+  const transformData = function (coin) {
+    // Setting to Infinity to deal with ranks that are too low, i.e. have
+    // market cap of 0
+    coin.market_cap_rank = coin.market_cap_rank || Infinity;
+    coin.current_price = coin.current_price || 0;
+    coin.price_change_percentage_1h_in_currency =
+      coin.price_change_percentage_1h_in_currency || 0;
+    coin.price_change_percentage_24h_in_currency =
+      coin.price_change_percentage_24h_in_currency || 0;
+    coin.price_change_percentage_7d_in_currency =
+      coin.price_change_percentage_7d_in_currency || 0;
+    coin.total_volume = coin.total_volume || 0;
+    coin.market_cap = coin.market_cap || 0;
+  };
+
+  data.map((coin) => transformData(coin));
+  searchResults.map((coin) => transformData(coin));
+  // The above changes the original data arrays
+  // Using a duplicated data array and using setData(fixedData); caused issues
+
+  //=========================================================================
 
   return (
     <div>
@@ -114,8 +126,8 @@ function TableDisplay({ search, data, setData, page }) {
             <TableHeader
               // Check why key is needed
               key={headerKey}
-              data={data}
-              setData={setData}
+              data={search ? searchResults : data}
+              setData={search ? setSearchResults : setData}
               headerKey={headerKey}
               headerName={headerName}
               sortedData={sortedData}
@@ -123,7 +135,7 @@ function TableDisplay({ search, data, setData, page }) {
             ></TableHeader>
           );
         })}
-      {(search ? result : data).map((coin) => {
+      {(search ? searchResults : data).map((coin) => {
         return (
           <TableData
             key={coin.id}
