@@ -9,7 +9,6 @@ function TableDisplay({
   setData,
   fullDataList,
   page,
-  pageCount,
   setPageCount,
 }) {
   const [sortedData, setSortedData] = useState("");
@@ -39,7 +38,7 @@ function TableDisplay({
     // Favorites page only deals with favorites not the full list of coins
     let filteredData = (fullDataList ? fullDataList : data).filter((coin) => {
       if (
-        count < 1 &&
+        count < 3 &&
         coin.name.toLowerCase().startsWith(search.toLowerCase())
       ) {
         count++;
@@ -54,7 +53,6 @@ function TableDisplay({
       );
       setSearchResults(filteredData.map((coin) => updateFilteredData(coin)));
       const pageSize = 100;
-      console.log(data.length);
       search
         ? setPageCount(0)
         : setPageCount(

@@ -12,8 +12,8 @@ function FavoritesPage() {
   const [favoritesChanged, setFavoritesChanged] = useState(false);
 
   const pageSize = 100;
-  const findPageCount = (data) =>
-    setPageCount(Math.ceil(data.length / pageSize));
+  const findPageCount = (coinsCount) =>
+    setPageCount(Math.ceil(coinsCount / pageSize));
 
   const updateData = function (data) {
     const marketData = data.market_data;
@@ -60,7 +60,7 @@ function FavoritesPage() {
       );
       console.log("testing", response);
       setData(response);
-      findPageCount(data);
+      findPageCount(response.length);
     }
     consolidateData();
   }, [favoritesChanged]);

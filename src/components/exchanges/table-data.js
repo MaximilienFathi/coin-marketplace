@@ -1,7 +1,7 @@
 import React from "react";
 
 function TableData({
-  rank,
+  trust_score_rank,
   image,
   name,
   trust_score,
@@ -23,7 +23,9 @@ function TableData({
 
   return (
     <div className="table-row">
-      <p className={`exchange-rank`}>{rank}</p>
+      <p className={`exchange-rank`}>
+        {trust_score_rank < Infinity ? trust_score_rank : "-"}
+      </p>
       <div>
         <img
           className="exchange-logo"

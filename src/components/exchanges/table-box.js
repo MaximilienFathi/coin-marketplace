@@ -3,7 +3,15 @@ import SearchBox from "../others/search-box";
 import TableDisplay from "./table-display";
 import Pagination from "../others/pagination";
 
-function TableBox({ data, setData, page, setPage, pageCount }) {
+function TableBox({
+  data,
+  setData,
+  fullDataList,
+  page,
+  setPage,
+  pageCount,
+  setPageCount,
+}) {
   const [search, setSearch] = useState("");
 
   return (
@@ -13,7 +21,9 @@ function TableBox({ data, setData, page, setPage, pageCount }) {
         search={search}
         data={data}
         setData={setData}
+        fullDataList={fullDataList}
         page={page}
+        setPageCount={setPageCount}
       ></TableDisplay>
       <Pagination setPage={setPage} pageCount={pageCount}></Pagination>
     </div>

@@ -25,7 +25,6 @@ function TableBox({
         setData={setData}
         fullDataList={fullDataList}
         page={page}
-        pageCount={pageCount}
         setPageCount={setPageCount}
       ></TableDisplay>
       <Pagination setPage={setPage} pageCount={pageCount}></Pagination>

@@ -16,17 +16,8 @@ function CoinsPage() {
   const [favoritesChanged, setFavoritesChanged] = useState(false);
 
   const pageSize = 100;
-  const findPageCount = (coins) => setPageCount(Math.ceil(coins / pageSize));
-
-  /*
-  // ISSUE - Cannot update coins and then use it as it always gives []
-  // So passing coins straight from response.data via "data" parameter
-  const findCoinRank = (data, coin) =>
-    (page - 1) * pageSize + data.indexOf(coin) + 1;
-
-  const addRankToCoins = (data) =>
-    data.map((coin) => ({ ...coin, rank: findCoinRank(data, coin) }));
-   */
+  const findPageCount = (coinsCount) =>
+    setPageCount(Math.ceil(coinsCount / pageSize));
 
   // Retrieve total number of coins
   useEffect(() => {

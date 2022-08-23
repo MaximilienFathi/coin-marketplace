@@ -3,9 +3,28 @@ import axios from "axios";
 import TableHeader from "../others/table-header";
 import TableData from "./table-data";
 
-function TableDisplay({ search, data, setData, page }) {
+function TableDisplay({
+  search,
+  data,
+  setData,
+  fullDataList,
+  page,
+  setPageCount,
+}) {
   const [sortedData, setSortedData] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const [btcValue, setBtcValue] = useState(0);
+  const dataHeaders = {
+    trust_score_rank: "#",
+    name: "Name",
+    trust_score: "Trust Score",
+    trade_volume_24h_btc_normalized: "24h Volume (Normalized)",
+    trade_volume_24h_btc: "24h Volume",
+    year_established: "Year Established",
+    country: "Country",
+  };
+
+  //=========================================================================
 
   // Make sure to reset position of sort arrows when changing page
   useEffect(() => setSortedData(""), [page]);
@@ -29,29 +48,62 @@ function TableDisplay({ search, data, setData, page }) {
     fetchData();
   }, [btcValue]);
 
-  const dataHeaders = {
-    rank: "#",
-    name: "Name",
-    trust_score: "Trust Score",
-    trade_volume_24h_btc_normalized: "24h Volume (Normalized)",
-    trade_volume_24h_btc: "24h Volume",
-    year_established: "Year Established",
-    country: "Country",
+  // Display maximum of 5 search results for each character input
+  useEffect(() => {
+    let count = 0;
+    let filteredData = fullDataList.filter((exchange) => {
+      if (
+        count < 3 &&
+        exchange.name.toLowerCase().startsWith(search.toLowerCase())
+      ) {
+        count++;
+        return true;
+      }
+      return false;
+    });
+    console.log("result_1", filteredData);
+    (async () => {
+      filteredData = await Promise.all(
+        filteredData.map((exchange) => fetchData(exchange.id))
+      );
+      setSearchResults(filteredData);
+      const pageSize = 100;
+      search
+        ? setPageCount(0)
+        : setPageCount(
+            Math.ceil((fullDataList ? fullDataList : data).length / pageSize)
+          );
+    })();
+  }, [search]);
+
+  //=========================================================================
+
+  const fetchData = async function (id) {
+    try {
+      const response = await axios.get(
+        `https://api.coingecko.com/api/v3/exchanges/${id}`
+      );
+      const updatedData = { ...response.data, id: id };
+      console.log("result_2", updatedData);
+      return updatedData;
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   // Using Infinity (for numbers) and ~ (for strings) as we want N/A data to
   // come last when data is in ascending order.
   const transformData = function (exchange) {
+    exchange.trust_score_rank = exchange.trust_score_rank || Infinity;
     exchange.trust_score = exchange.trust_score || 0;
     exchange.year_established = exchange.year_established || Infinity;
     exchange.country = exchange.country || "~";
   };
 
   data.map((exchange) => transformData(exchange));
+  searchResults.map((exchange) => transformData(exchange));
 
-  const filteredData = data.filter((exchange) =>
-    exchange.name.toLowerCase().includes(search.toLowerCase())
-  );
+  //=========================================================================
 
   return (
     <div>
@@ -59,8 +111,8 @@ function TableDisplay({ search, data, setData, page }) {
         return (
           <TableHeader
             key={headerKey}
-            data={data}
-            setData={setData}
+            data={search ? searchResults : data}
+            setData={search ? setSearchResults : setData}
             headerKey={headerKey}
             headerName={headerName}
             sortedData={sortedData}
@@ -68,12 +120,12 @@ function TableDisplay({ search, data, setData, page }) {
           ></TableHeader>
         );
       })}
-      {filteredData.map((exchange) => {
+      {(search ? searchResults : data).map((exchange) => {
         return (
           <TableData
             key={exchange.id}
             id={exchange.id}
-            rank={exchange.rank}
+            trust_score_rank={exchange.trust_score_rank}
             image={exchange.image}
             name={exchange.name}
             trust_score={exchange.trust_score}

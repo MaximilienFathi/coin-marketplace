@@ -6,27 +6,30 @@ import TableBox from "../components/exchanges/table-box";
 
 function ExchangesPage() {
   const [data, setData] = useState([]);
+  const [fullDataList, setFullDataList] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
 
   // ISSUE - Cannot update totalExchanges and use it in findPageCount.
   // Must send a variable with same value instead.
   const pageSize = 100;
-  const findPageCount = (exchanges) =>
-    setPageCount(Math.ceil(exchanges / pageSize));
+  const findPageCount = (exchangeCount) => {
+    console.log(exchangeCount, pageSize);
+    setPageCount(Math.ceil(exchangeCount / pageSize));
+  };
 
   // Another way of finding the rank would have been to use trust score and
   // normalized volume (normalized). The following is just easier.
   // Did not use their trust_score_rank property since it is missing some
   // ranks
-  const findExchangeRank = (data, exchange) =>
-    (page - 1) * pageSize + data.indexOf(exchange) + 1;
-
-  const addRankToExchanges = (data) =>
-    data.map((exchange) => ({
-      ...exchange,
-      rank: findExchangeRank(data, exchange),
-    }));
+  // const findExchangeRank = (data, exchange) =>
+  //   (page - 1) * pageSize + data.indexOf(exchange) + 1;
+  //
+  // const addRankToExchanges = (data) =>
+  //   data.map((exchange) => ({
+  //     ...exchange,
+  //     rank: findExchangeRank(data, exchange),
+  //   }));
 
   // (Going from .then/.catch to async/await has been the solution!!)
   async function fetchData() {
@@ -69,11 +72,27 @@ function ExchangesPage() {
         `https://api.coingecko.com/api/v3/exchanges?per_page=${pageSize}&page=${page}`
       )
       .then((response) => {
-        setData(addRankToExchanges(response.data));
+        // setData(addRankToExchanges(response.data));
+        setData(response.data);
         console.log(response.data);
       })
       .catch((err) => console.error(err));
   }, [page]); // This will run everytime page changes.
+
+  // Retrieve full list of exchanges (necessary for search mechanism)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          "https://api.coingecko.com/api/v3/exchanges/list"
+        );
+        setFullDataList(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     // Replace className App with something else
@@ -83,9 +102,11 @@ function ExchangesPage() {
       <TableBox
         data={data}
         setData={setData}
+        fullDataList={fullDataList}
         page={page}
         setPage={setPage}
         pageCount={pageCount}
+        setPageCount={setPageCount}
       ></TableBox>
     </div>
   );
