@@ -1,7 +1,7 @@
 import React from "react";
-import SearchBar from "./search-bar";
-import Button from "./button";
 import { Link, Outlet } from "react-router-dom";
+import SearchBar from "./search-bar";
+import Dropdown from "./dropdown";
 
 function SearchBox({ setSearch, setFavorites }) {
   const handleChange = (event) => {
@@ -15,7 +15,7 @@ function SearchBox({ setSearch, setFavorites }) {
         <Link to="/Exchanges">Exchanges</Link>
         <Link to="/Favorites">Favorites</Link>
       </div>
-      {/*<Button label="USD"></Button>*/}
+      <Dropdown></Dropdown>
       <SearchBar handleChange={handleChange}></SearchBar>
       {/*<Outlet />*/}
     </div>

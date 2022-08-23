@@ -13,6 +13,7 @@ function CoinsPage() {
   // Included the following + context provider in coins-page.js too because
   // otherwise favorite.js will complain since it cannot consume anything
   // without a provider first
+  const [currency, setCurrency] = React.useState("");
   const [favoritesChanged, setFavoritesChanged] = useState(false);
 
   const pageSize = 100;
@@ -34,7 +35,7 @@ function CoinsPage() {
   useEffect(() => {
     axios
       .get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${pageSize}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=${pageSize}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
       )
       .then((response) => {
         console.log(response.data);
@@ -71,6 +72,8 @@ function CoinsPage() {
           data={data}
           setData={setData}
           fullDataList={fullDataList}
+          currency={currency}
+          setCurrency={currency}
           page={page}
           setPage={setPage}
           pageCount={pageCount}

@@ -1,3 +1,12 @@
+/*
+IMPORTANT
+Table will only display data that has 24h Volume greater than 0.
+BUT, when searching for an exchange, exchanges with 24h Volume = 0 may appear.
+This is because fullDataList (used by search) is more complete than all
+paginatedData put together. I am just relying on what the API is giving me
+though.
+ */
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TableHeader from "../others/table-header";
@@ -53,7 +62,7 @@ function TableDisplay({
     let count = 0;
     let filteredData = fullDataList.filter((exchange) => {
       if (
-        count < 3 &&
+        count < 5 &&
         exchange.name.toLowerCase().startsWith(search.toLowerCase())
       ) {
         count++;

@@ -38,7 +38,7 @@ function TableDisplay({
     // Favorites page only deals with favorites not the full list of coins
     let filteredData = (fullDataList ? fullDataList : data).filter((coin) => {
       if (
-        count < 3 &&
+        count < 5 &&
         coin.name.toLowerCase().startsWith(search.toLowerCase())
       ) {
         count++;
