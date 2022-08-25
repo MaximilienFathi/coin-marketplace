@@ -3,11 +3,23 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import favoritesContext from "../../contexts/favorites-context";
 
-function Favorite({ favorite, setFavorite, id, rank }) {
+function Favorite({ favorite, setFavorite, id }) {
   const [favoritesChanged, setFavoritesChanged] = useContext(favoritesContext);
 
+  const addFavorite = (id) => {
+    let favorites = JSON.parse(localStorage.getItem("favorites"));
+    favorites = [...favorites, id];
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  };
+
+  const removeFavorite = (id) => {
+    let favorites = JSON.parse(localStorage.getItem("favorites"));
+    favorites.splice(favorites.indexOf(id), 1);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  };
+
   const handleClick = () => {
-    favorite ? localStorage.removeItem(id) : localStorage.setItem(id, rank);
+    favorite ? removeFavorite(id) : addFavorite(id);
     setFavoritesChanged(!favoritesChanged);
     // WEIRD ISSUE
     // Putting following before conditional does not change anything!

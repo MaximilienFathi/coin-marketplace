@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import currencyContext from "../contexts/currency-context";
 import Header from "../components/others/header";
 import Hero from "../components/others/hero";
 import TableBox from "../components/exchanges/table-box";
@@ -9,6 +10,8 @@ function ExchangesPage() {
   const [fullDataList, setFullDataList] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
+  const [currencyName, setCurrencyName] = useState("usd");
+  const [currencySymbol, setCurrencySymbol] = useState("$");
 
   // ISSUE - Cannot update totalExchanges and use it in findPageCount.
   // Must send a variable with same value instead.
@@ -30,6 +33,21 @@ function ExchangesPage() {
   //     ...exchange,
   //     rank: findExchangeRank(data, exchange),
   //   }));
+
+  // Initialize all data that will be retrieved from localStorage
+  useEffect(() => {
+    // Currency data
+    if (localStorage.getItem("currency")) {
+      setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);
+      setCurrencySymbol(JSON.parse(localStorage.getItem("currency"))["symbol"]);
+    }
+    if (!localStorage.getItem("currency")) {
+      localStorage.setItem(
+        "currency",
+        JSON.stringify({ name: currencyName, symbol: currencySymbol })
+      );
+    }
+  }, [currencyName]);
 
   // (Going from .then/.catch to async/await has been the solution!!)
   async function fetchData() {
@@ -95,20 +113,24 @@ function ExchangesPage() {
   }, []);
 
   return (
-    // Replace className App with something else
-    <div className="App">
-      <Header></Header>
-      <Hero></Hero>
-      <TableBox
-        data={data}
-        setData={setData}
-        fullDataList={fullDataList}
-        page={page}
-        setPage={setPage}
-        pageCount={pageCount}
-        setPageCount={setPageCount}
-      ></TableBox>
-    </div>
+    <currencyContext.Provider
+      value={[currencyName, setCurrencyName, currencySymbol, setCurrencySymbol]}
+    >
+      // Replace className App with something else
+      <div className="App">
+        <Header></Header>
+        <Hero></Hero>
+        <TableBox
+          data={data}
+          setData={setData}
+          fullDataList={fullDataList}
+          page={page}
+          setPage={setPage}
+          pageCount={pageCount}
+          setPageCount={setPageCount}
+        ></TableBox>
+      </div>
+    </currencyContext.Provider>
   );
 }
 

@@ -7,8 +7,9 @@ paginatedData put together. I am just relying on what the API is giving me
 though.
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import currencyContext from "../../contexts/currency-context";
 import TableHeader from "../others/table-header";
 import TableData from "./table-data";
 
@@ -23,6 +24,7 @@ function TableDisplay({
   const [sortedData, setSortedData] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [btcValue, setBtcValue] = useState(0);
+  const [currencyName, , ,] = useContext(currencyContext);
   const dataHeaders = {
     trust_score_rank: "#",
     name: "Name",
@@ -45,17 +47,16 @@ function TableDisplay({
     async function fetchData() {
       try {
         const fromCurrency = "bitcoin";
-        const toCurrency = "usd";
         const response = await axios.get(
-          `https://api.coingecko.com/api/v3/simple/price?ids=${fromCurrency}&vs_currencies=${toCurrency}`
+          `https://api.coingecko.com/api/v3/simple/price?ids=${fromCurrency}&vs_currencies=${currencyName}`
         );
-        setBtcValue(response.data[fromCurrency][toCurrency]);
+        setBtcValue(response.data[fromCurrency][currencyName]);
       } catch (err) {
         console.error(err);
       }
     }
     fetchData();
-  }, [btcValue]);
+  }, [currencyName]);
 
   // Display maximum of 5 search results for each character input
   useEffect(() => {

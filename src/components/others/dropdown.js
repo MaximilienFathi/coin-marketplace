@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useContext, useState } from "react";
+import currencyContext from "../../contexts/currency-context";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -6,11 +8,34 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 function BasicSelect() {
-  // use localStorage
-  // const [currency, setCurrency] = React.useState("");
+  const [currencyName, setCurrencyName, , setCurrencySymbol] =
+    useContext(currencyContext);
 
   const handleChange = (event) => {
-    setCurrency(event.target.value);
+    const chosenCurrencyName = event.target.value;
+    let chosenCurrencySymbol = "";
+    setCurrencyName(chosenCurrencyName);
+    switch (chosenCurrencyName) {
+      case "cad":
+        chosenCurrencySymbol = "$";
+        setCurrencySymbol(chosenCurrencySymbol);
+        break;
+      case "eur":
+        chosenCurrencySymbol = "€";
+        setCurrencySymbol(chosenCurrencySymbol);
+        break;
+      case "usd":
+        chosenCurrencySymbol = "$";
+        setCurrencySymbol(chosenCurrencySymbol);
+        break;
+    }
+    let currency = JSON.parse(localStorage.getItem("currency"));
+    currency = {
+      ...currency,
+      name: chosenCurrencyName,
+      symbol: chosenCurrencySymbol,
+    };
+    localStorage.setItem("currency", JSON.stringify(currency));
   };
 
   return (
@@ -20,7 +45,7 @@ function BasicSelect() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={currency}
+          value={currencyName}
           label="Currency"
           onChange={handleChange}
         >

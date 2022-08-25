@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import currencyContext from "../../contexts/currency-context";
 
 function TableData({
   trust_score_rank,
@@ -10,6 +11,8 @@ function TableData({
   year_established,
   country,
 }) {
+  const [, , currencySymbol] = useContext(currencyContext);
+
   const transformData = function (data, fractionDigits = 2) {
     const num = data.toString().split(".")[0];
 
@@ -36,9 +39,13 @@ function TableData({
       </div>
       <p className="exchange-trust-score">{trust_score || "N/A"}</p>
       <p className="exchange-volume-normalized">
-        ${transformData(trade_volume_24h_normalized)}
+        {currencySymbol}
+        {transformData(trade_volume_24h_normalized)}
       </p>
-      <p className="exchange-volume">${transformData(trade_volume_24h)}</p>
+      <p className="exchange-volume">
+        {currencySymbol}
+        {transformData(trade_volume_24h)}
+      </p>
       <p className="exchange-year">
         {year_established < Infinity ? year_established : "N/A"}
       </p>

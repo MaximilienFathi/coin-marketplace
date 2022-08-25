@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import currencyContext from "../../contexts/currency-context";
 import TableHeader from "../others/table-header";
 import TableData from "./table-data";
 
@@ -13,6 +14,7 @@ function TableDisplay({
 }) {
   const [sortedData, setSortedData] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [currencyName, , ,] = useContext(currencyContext);
   const dataHeaders = {
     favorite: "?",
     market_cap_rank: "#",
@@ -69,15 +71,15 @@ function TableDisplay({
       ...data,
       market_cap_rank: data.market_cap_rank || Infinity,
       image: data.image.large,
-      current_price: marketData.current_price.usd,
+      current_price: marketData.current_price[currencyName],
       price_change_percentage_1h_in_currency:
-        marketData.price_change_percentage_1h_in_currency.usd,
+        marketData.price_change_percentage_1h_in_currency[currencyName],
       price_change_percentage_24h_in_currency:
-        marketData.price_change_percentage_24h_in_currency.usd,
+        marketData.price_change_percentage_24h_in_currency[currencyName],
       price_change_percentage_7d_in_currency:
-        marketData.price_change_percentage_7d_in_currency.usd,
-      total_volume: marketData.total_volume.usd,
-      market_cap: marketData.market_cap.usd,
+        marketData.price_change_percentage_7d_in_currency[currencyName],
+      total_volume: marketData.total_volume[currencyName],
+      market_cap: marketData.market_cap[currencyName],
     };
   };
 
