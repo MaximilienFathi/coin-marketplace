@@ -1,0 +1,42 @@
+.header-nav {
+  height: 9.6rem;
+  padding: 0 4.8rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /*background: linear-gradient(113.49deg, #984d38 -30.3%, #181e41 58.12%);*/
+}
+
+.brand-logo {
+  color: #fff;
+  /*height: 2.2rem;*/
+  font-size: 2.4rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.header-nav-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.header-nav-link {
+  color: #fff;
+  /*height: 2.2rem;*/
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.header-nav-link:hover {
+  border-bottom: 3px solid red;
+}
+
+.btntest {
+  color: red;
+}

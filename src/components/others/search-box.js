@@ -11,6 +11,8 @@ function SearchBox({ setSearch, setFavorites }) {
   return (
     <div className="searchBox">
       <div className="buttonGroup">
+        {" "}
+        {"change to nav list"}
         <Link to="/coins">Cryptocurrencies</Link>
         <Link to="/Exchanges">Exchanges</Link>
         <Link to="/Favorites">Favorites</Link>
