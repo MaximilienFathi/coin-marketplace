@@ -25,19 +25,19 @@ html {
 }
 
 body {
-  color: #ded6d6; /* remove all duplicates of that style elsewhere */
+  color: black; /* replace with #ded6d6 and remove all duplicates of that style elsewhere */
   font-family: Rubik, sans-serif;
   font-weight: 400;
   line-height: 1;
   /*background-image: url(images/red-blue-background.jpg);*/
   /*background-size: cover;*/
-  background: linear-gradient(
-    45deg,
-    #060649,
-    #640348,
-    #060649,
-    #640348,
-    #060649,
-    #640348
-  );
+  /*background: linear-gradient(*/
+  /*  45deg,*/
+  /*  #060649,*/
+  /*  #640348,*/
+  /*  #060649,*/
+  /*  #640348,*/
+  /*  #060649,*/
+  /*  #640348*/
+  /*);*/
 }
