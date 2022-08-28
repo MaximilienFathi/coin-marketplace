@@ -1,0 +1,33 @@
+hero-stat-container {
+  display: flex;
+  flex-basis: 20rem;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #fff;
+  /*box-shadow: 0 0 0.4rem silver;*/
+  border-radius: 11px;
+  padding: 1.6rem;
+
+  color: rgba(256, 256, 256);
+  border: 2px double transparent;
+  background-image: linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)),
+    radial-gradient(circle at left top, rgb(1, 110, 218), rgb(217, 0, 192));
+  /*backdrop-filter: blur(1px);*/
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.hero-stat-label {
+  color: #b2abab;
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.hero-stat-data {
+  display: flex;
+  gap: 1.6rem;
+  margin-bottom: 1.2rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.2;
+}

@@ -25,19 +25,20 @@ html {
 }
 
 body {
-  color: black; /* replace with #ded6d6 and remove all duplicates of that style elsewhere */
+  color: #fff; /* replace with #ded6d6 and remove all duplicates of that style elsewhere */
   font-family: Rubik, sans-serif;
   font-weight: 400;
   line-height: 1;
-  /*background-image: url(images/red-blue-background.jpg);*/
-  /*background-size: cover;*/
-  /*background: linear-gradient(*/
-  /*  45deg,*/
-  /*  #060649,*/
-  /*  #640348,*/
-  /*  #060649,*/
-  /*  #640348,*/
-  /*  #060649,*/
-  /*  #640348*/
-  /*);*/
+  background: linear-gradient(90deg, #040434, #1a0c59, #040434, #1a0c59);
 }
+
+/*body::before {*/
+/*  content: "";*/
+/*  background-image: url(../public/images/universe-g8232de1b5_1920.jpg);*/
+/*  background-size: cover;*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+/*  position: absolute;*/
+/*  z-index: -1;*/
+/*  filter: blur(30px);*/
+/*}*/

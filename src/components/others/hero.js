@@ -52,7 +52,7 @@ function Hero() {
         ></Statistic>
         <Statistic
           label="Bitcoin Market Cap Dominance"
-          value={btcDominance}
+          change={btcDominance}
         ></Statistic>
         <Statistic label="Number of Coins" value={coinsTotal}></Statistic>
       </div>
