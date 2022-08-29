@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // check link
-import Button from "./button";
+import { Link } from "react-router-dom";
 import "./header.css";
 
 function Header() {
@@ -21,10 +20,10 @@ function Header() {
           </Link>
         </li>
         <li>
-          <Button label="Login"></Button>
-        </li>
-        <li>
-          <Button label="Sign Up"></Button>
+          <div className="header-btn-group">
+            <button className="loginBtn">Login</button>
+            <button className="SignUpBtn">Sign Up</button>
+          </div>
         </li>
       </ul>
     </nav>

@@ -1,36 +1,82 @@
 .header-nav {
   height: 9.6rem;
   padding: 0 4.8rem;
-  position: relative;
+  /*position: relative;*/
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /*background-color: #1919d0;*/
   /*background: linear-gradient(113.49deg, #984d38 -30.3%, #181e41 58.12%);*/
 }
 
 .brand-logo {
-  /*height: 2.2rem;*/
-  font-size: 2.4rem;
+  font-size: 3rem;
   font-weight: 500;
   text-decoration: none;
   transition: all 0.3s;
 }
 
 .header-nav-list {
+  font-size: 2rem;
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 2.4rem;
+  gap: 1.6rem;
 }
 
 .header-nav-link {
-  /*height: 2.2rem;*/
-  font-size: 1.8rem;
   font-weight: 400;
   text-decoration: none;
+  padding: 0rem;
+}
+
+.brand-logo:link,
+.brand-logo:visited,
+.header-nav-link:link,
+.header-nav-link:visited {
+  color: inherit;
   transition: all 0.3s;
 }
 
-.header-nav-link:hover {
-  border-bottom: 3px solid red;
+.header-nav-link:hover,
+.header-nav-link:active {
+  color: #cccccc;
+}
+
+.header-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.loginBtn,
+.SignUpBtn {
+  font-size: inherit;
+  color: inherit;
+  width: 10rem;
+  border-radius: 11px;
+  padding: 1.2rem;
+  border: 2px solid #fa58b6;
+  transition: all 0.3s;
+}
+
+.loginBtn {
+  margin-left: 2.4rem;
+  background-color: inherit;
+}
+
+.SignUpBtn {
+  background-color: #fa58b6;
+}
+
+.loginBtn:hover {
+  color: #c84692;
+  border: 2px solid #c84692;
+  cursor: pointer;
+}
+
+.SignUpBtn:hover {
+  background-color: #c84692;
+  border: 2px solid #c84692;
+  cursor: pointer;
 }
