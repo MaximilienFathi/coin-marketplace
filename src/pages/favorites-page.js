@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import currencyContext from "../contexts/currency-context";
 import favoritesContext from "../contexts/favorites-context";
-import Header from "../components/others/header";
-import Hero from "../components/others/hero";
+import Header from "../components/others/header/header";
+import Hero from "../components/others/hero/hero";
 import TableBox from "../components/coins/table-box";
 
 function FavoritesPage() {

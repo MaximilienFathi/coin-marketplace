@@ -1,0 +1,24 @@
+.search-form {
+  display: flex;
+  align-items: center;
+  border: 2px solid red;
+}
+
+.searchIcon {
+  border: 2px solid green;
+  height: 100%;
+  /*padding: 0.8rem;*/
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+.search-bar {
+  height: 100%;
+  font-size: 2rem;
+  width: 30rem;
+  color: white;
+}
+
+#outlined-basic {
+  color: white;
+}

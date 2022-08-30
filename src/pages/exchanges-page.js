@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import currencyContext from "../contexts/currency-context";
-import Header from "../components/others/header";
-import Hero from "../components/others/hero";
+import Header from "../components/others/header/header";
+import Hero from "../components/others/hero/hero";
 import TableBox from "../components/exchanges/table-box";
 
 function ExchangesPage() {

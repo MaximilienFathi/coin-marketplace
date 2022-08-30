@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchBox from "../others/search-box";
 import TableDisplay from "./table-display";
 import Pagination from "../others/pagination";
+import "./table-box.css";
 
 function TableBox({
   data,
@@ -15,7 +16,7 @@ function TableBox({
   const [search, setSearch] = useState("");
 
   return (
-    <div className="table">
+    <div className="table-container">
       {/* SearchBar was moved from Header to TableBox as I could not have data be
          shared between sibling components - Anti-pattern (solution = Redux) */}
       <SearchBox setSearch={setSearch}></SearchBox>

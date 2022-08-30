@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import SearchBar from "./search-bar";
 import Dropdown from "./dropdown";
+import "./search-box.css";
 
 function SearchBox({ setSearch, setFavorites }) {
   const handleChange = (event) => {
@@ -9,15 +10,30 @@ function SearchBox({ setSearch, setFavorites }) {
   };
 
   return (
-    <div className="searchBox">
-      <div className="buttonGroup">
-        {/*{change to nav list}*/}
-        <Link to="/coins">Cryptocurrencies</Link>
-        <Link to="/Exchanges">Exchanges</Link>
-        <Link to="/Favorites">Favorites</Link>
+    <div className="large-search-container">
+      <nav className="table-nav">
+        <ul className="table-nav-list">
+          <li>
+            <Link to="/coins" className="table-nav-link">
+              Cryptocurrencies
+            </Link>
+          </li>
+          <li>
+            <Link to="/Exchanges" className="header-nav-link">
+              Exchanges
+            </Link>
+          </li>
+          <li>
+            <Link to="/Favorites" className="header-nav-link">
+              Favorites
+            </Link>
+          </li>
+        </ul>
+      </nav>
+      <div className="small-search-container">
+        <Dropdown></Dropdown>
+        <SearchBar handleChange={handleChange}></SearchBar>
       </div>
-      <Dropdown></Dropdown>
-      <SearchBar handleChange={handleChange}></SearchBar>
       {/*<Outlet />*/}
     </div>
   );

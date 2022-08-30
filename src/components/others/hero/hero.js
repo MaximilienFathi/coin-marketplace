@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import Statistic from "./statistic";
+import currencyContext from "../../../contexts/currency-context";
+import StatisticCard from "../statistic-card/statistic-card";
 import "./hero.css";
 
 function Hero() {
+  const [currencyName] = useContext(currencyContext);
   const [marketCap, setMarketCap] = useState(0);
-  const [marketCapChange, setMarketCapChange] = useState(0);
+  // const [marketCapChange, setMarketCapChange] = useState(0);
   const [volume, setVolume] = useState(0);
   const [btcDominance, setBtcDominance] = useState(0);
   const [coinsTotal, setCoinsTotal] = useState(0);
@@ -17,9 +19,9 @@ function Hero() {
           "https://api.coingecko.com/api/v3/global"
         );
         const data = response.data.data;
-        setMarketCap(data.total_market_cap.usd);
-        setMarketCapChange(data.market_cap_change_percentage_24h_usd);
-        setVolume(data.total_volume.usd);
+        setMarketCap(data.total_market_cap[currencyName]);
+        // setMarketCapChange(data.market_cap_change_percentage_24h_usd);
+        setVolume(data.total_volume[currencyName]);
         setBtcDominance(data.market_cap_percentage.btc);
         setCoinsTotal(data.active_cryptocurrencies);
         console.log(data);
@@ -27,10 +29,10 @@ function Hero() {
         console.error(err);
       }
     })();
-  }, []);
+  }, [currencyName]);
 
   return (
-    <div>
+    <div className="hero-section">
       <h1 className="hero-heading">
         An easy way to track and trade cryptocurrencies
       </h1>
@@ -40,21 +42,28 @@ function Hero() {
         iusto obcaecati, odio optio possimus praesentium rerum tempore velit!
       </p>
       <div className="hero-stats">
-        <Statistic
+        <StatisticCard
           label="Market Capitalization"
           value={marketCap}
-          change={marketCapChange}
-        ></Statistic>
-        <Statistic
+          type={"monetary"}
+          // change={marketCapChange}
+        ></StatisticCard>
+        <StatisticCard
           label="24h Trading Volume"
           value={volume}
+          type={"monetary"}
           // change={}
-        ></Statistic>
-        <Statistic
+        ></StatisticCard>
+        <StatisticCard
           label="Bitcoin Market Cap Dominance"
-          change={btcDominance}
-        ></Statistic>
-        <Statistic label="Number of Coins" value={coinsTotal}></Statistic>
+          value={btcDominance}
+          type={"percentage"}
+        ></StatisticCard>
+        <StatisticCard
+          label="Number of Coins"
+          value={coinsTotal}
+          type={"other"}
+        ></StatisticCard>
       </div>
     </div>
   );

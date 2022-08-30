@@ -39,7 +39,7 @@ function BasicSelect() {
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 120, backgroundColor: "primary.dark" }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Currency</InputLabel>
         <Select
@@ -48,6 +48,7 @@ function BasicSelect() {
           value={currencyName}
           label="Currency"
           onChange={handleChange}
+          demo-simple-select-label
         >
           <MenuItem value={"cad"}>CAD</MenuItem>
           <MenuItem value={"eur"}>EUR</MenuItem>
