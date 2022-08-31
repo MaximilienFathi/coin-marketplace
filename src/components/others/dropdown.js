@@ -6,6 +6,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import "./dropdown.css";
 
 function BasicSelect() {
   const [currencyName, setCurrencyName, , setCurrencySymbol] =
@@ -39,16 +40,42 @@ function BasicSelect() {
   };
 
   return (
-    <Box sx={{ minWidth: 120, backgroundColor: "primary.dark" }}>
+    <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Currency</InputLabel>
+        {/*<InputLabel*/}
+        {/*  id="simple-select-label"*/}
+        {/*  sx={[("& label.Mui-focused": { color: "green" })]}*/}
+        {/*>*/}
+        {/*  Currency*/}
+        {/*</InputLabel>*/}
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          // labelId="simple-select-label"
+          // label="Currency"
+          id="simple-select"
           value={currencyName}
-          label="Currency"
           onChange={handleChange}
-          demo-simple-select-label
+          sx={[
+            {
+              // background: "linear-gradient(45deg, red, blue)",
+              color: "rgba(255, 255, 255, 0.8)",
+              fontFamily: ["Rubik", "sans-serif"],
+              // htmlFontSize: 10,
+              fontSize: "1.6rem",
+              fontWeight: 600,
+              border: "2px solid #fa58b6",
+              borderRadius: "11px",
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "red" },
+              },
+              "& .MuiSvgIcon-root": {
+                fontSize: "3rem",
+                color: "rgba(255," + " 255, 255, 0.8)",
+              },
+              "& label.Mui-focused": {
+                color: "green",
+              },
+            },
+          ]}
         >
           <MenuItem value={"cad"}>CAD</MenuItem>
           <MenuItem value={"eur"}>EUR</MenuItem>
