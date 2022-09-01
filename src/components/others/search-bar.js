@@ -1,66 +1,24 @@
-// import React from "react";
-// import SearchIcon from "@mui/icons-material/Search";
-// import "./search-bar.css";
-//
-// function SearchBar({ handleChange }) {
-//   return (
-//     // <div className="search-container">
-//     <form className="search-form">
-//       <SearchIcon className="searchIcon"></SearchIcon>
-//       <input
-//         className="search-bar"
-//         onChange={handleChange}
-//         placeholder=" Search"
-//       />
-//     </form>
-//     // </div>
-//   );
-// }
-//
-// export default SearchBar;
-
 import * as React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import { InputAdornment } from "@mui/material";
+import Box from "@mui/material/Box";
 import SearchIcon from "@mui/icons-material/Search";
+import TextField from "@mui/material/TextField";
 import "./search-bar.css";
 
-export default function BasicTextFields() {
-  // const TextField = styled(MuiTextField)(({ theme }) => ({
-  //   "& .MuiOutlinedInput-root": {
-  //     paddingLeft: 0,
-  //   },
-  //   "& .MuiInputAdornment-root": {
-  //     backgroundColor: theme.palette.divider,
-  //     padding: "28px 14px",
-  //     borderTopLeftRadius: theme.shape.borderRadius + "px",
-  //     borderBottomLeftRadius: theme.shape.borderRadius + "px",
-  //   },
-  // }));
+function BasicTextFields({ handleChange }) {
   return (
-    // <Box
-    //   className="search-form"
-    //   component="form"
-    //   sx={{
-    //     "& > :not(style)": { m: 1, width: "35ch" },
-    //   }}
-    //   noValidate
-    //   autoComplete="off"
-    // >
-    <Box>
+    <Box sx={{ minWidth: "30rem" }}>
       <TextField
-        // label="With normal TextField"
-        id="outlined-start-adornment"
-        size="normal"
+        onChange={handleChange}
+        fullWidth
+        size="large"
         InputProps={{
           startAdornment: (
             <InputAdornment
               position="start"
-              sx={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "2rem" }}
-              size="normal"
+              sx={{ color: "rgba(255, 255, 255, 0.8)" }}
             >
-              <SearchIcon />
+              <SearchIcon sx={{ height: "2rem", width: "auto" }} />
             </InputAdornment>
           ),
           style: {
@@ -81,10 +39,10 @@ export default function BasicTextFields() {
               backgroundColor: "rgba(255, 255, 255, 0.1)",
             },
           },
-          m: 1,
-          width: "25ch",
         }}
       />
     </Box>
   );
 }
+
+export default BasicTextFields;

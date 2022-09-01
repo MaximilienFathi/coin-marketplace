@@ -1,5 +1,5 @@
 .large-search-container {
-  padding: 0px 10rem;
+  padding: 0px 0rem;
   border: 3px solid red;
   display: flex;
   align-items: center;
@@ -39,5 +39,5 @@
 .small-search-container {
   display: flex;
   align-items: center;
-  gap: 2.4rem;
+  gap: 1.6rem;
 }

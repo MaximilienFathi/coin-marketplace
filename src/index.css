@@ -32,6 +32,8 @@ body {
   background: rgb(26, 26, 64);
 }
 
+/*Actually use background picture with glass effect but use something that has dark purple*/
+
 /*body::before {*/
 /*  content: "";*/
 /*  background-image: url(../public/images/universe-g8232de1b5_1920.jpg);*/

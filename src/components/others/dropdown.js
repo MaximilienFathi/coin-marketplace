@@ -1,8 +1,7 @@
 import * as React from "react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import currencyContext from "../../contexts/currency-context";
 import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -11,6 +10,20 @@ import "./dropdown.css";
 function BasicSelect() {
   const [currencyName, setCurrencyName, , setCurrencySymbol] =
     useContext(currencyContext);
+
+  // Try to see if better way of creating these styles using MUI
+  const selectStyles = {
+    border: "2px solid #fa58b6",
+    borderRadius: "11px",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+  };
+
+  const menuItemStyles = {
+    color: "rgba(255, 255, 255, 0.8)",
+    fontFamily: ["Rubik", "sans-serif"],
+    fontSize: "1.6rem",
+    fontWeight: 600,
+  };
 
   const handleChange = (event) => {
     const chosenCurrencyName = event.target.value;
@@ -40,46 +53,56 @@ function BasicSelect() {
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: "10rem" }}>
       <FormControl fullWidth>
-        {/*<InputLabel*/}
-        {/*  id="simple-select-label"*/}
-        {/*  sx={[("& label.Mui-focused": { color: "green" })]}*/}
-        {/*>*/}
-        {/*  Currency*/}
-        {/*</InputLabel>*/}
         <Select
-          // labelId="simple-select-label"
-          // label="Currency"
-          id="simple-select"
+          size="large"
           value={currencyName}
           onChange={handleChange}
-          sx={[
-            {
-              // background: "linear-gradient(45deg, red, blue)",
-              color: "rgba(255, 255, 255, 0.8)",
-              fontFamily: ["Rubik", "sans-serif"],
-              // htmlFontSize: 10,
-              fontSize: "1.6rem",
-              fontWeight: 600,
-              border: "2px solid #fa58b6",
-              borderRadius: "11px",
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": { borderColor: "red" },
-              },
-              "& .MuiSvgIcon-root": {
-                fontSize: "3rem",
-                color: "rgba(255," + " 255, 255, 0.8)",
-              },
-              "& label.Mui-focused": {
-                color: "green",
+          // focused
+          MenuProps={{
+            PaperProps: {
+              sx: {
+                borderRadius: "11px",
+                "& .MuiMenu-list": {
+                  backgroundColor: "rgb(72,72,112)",
+                },
+                "& .MuiMenuItem-root.Mui-selected": {
+                  backgroundColor: "rgba(250,88,182,0.5)",
+                },
+                "& .MuiMenuItem-root:hover": {
+                  backgroundColor: "rgba(250,88,182,0.1)",
+                },
+                "& .MuiMenuItem-root.Mui-selected:hover": {
+                  backgroundColor: "rgba(250,88,182,0.8)",
+                },
               },
             },
-          ]}
+          }}
+          sx={{
+            color: "rgba(255, 255, 255, 0.8)",
+            fontFamily: ["Rubik", "sans-serif"],
+            // htmlFontSize: 10,
+            fontSize: "1.6rem",
+            fontWeight: 600,
+            "& .MuiSvgIcon-root": {
+              fontSize: "3rem",
+              color: "rgba(255, 255, 255, 0.8)",
+            },
+            "& .MuiOutlinedInput-notchedOutline": selectStyles,
+            "&:hover .MuiOutlinedInput-notchedOutline": selectStyles,
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": selectStyles,
+          }}
         >
-          <MenuItem value={"cad"}>CAD</MenuItem>
-          <MenuItem value={"eur"}>EUR</MenuItem>
-          <MenuItem value={"usd"}>USD</MenuItem>
+          <MenuItem value={"cad"} sx={menuItemStyles}>
+            CAD
+          </MenuItem>
+          <MenuItem value={"eur"} sx={menuItemStyles}>
+            EUR
+          </MenuItem>
+          <MenuItem value={"usd"} sx={menuItemStyles}>
+            USD
+          </MenuItem>
         </Select>
       </FormControl>
     </Box>
