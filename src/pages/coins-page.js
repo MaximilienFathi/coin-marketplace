@@ -27,6 +27,9 @@ function CoinsPage() {
     // Favorites data
     localStorage.getItem("favorites") ||
       localStorage.setItem("favorites", "[]");
+    // Current displayed data
+    localStorage.getItem("displayedData") ||
+      localStorage.setItem("displayedData", "0");
     // Currency data
     if (localStorage.getItem("currency")) {
       setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);
@@ -46,7 +49,7 @@ function CoinsPage() {
       .get("https://api.coingecko.com/api/v3/global")
       .then((response) => {
         findPageCount(response.data.data.active_cryptocurrencies);
-        console.log(response.data.data.active_cryptocurrencies);
+        // console.log(response.data.data.active_cryptocurrencies);
       })
       .catch((err) => console.log(err));
   }, []); // findPageCount - if included, runs too many times (remove []?)
@@ -58,7 +61,7 @@ function CoinsPage() {
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currencyName}&order=market_cap_desc&per_page=${pageSize}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
       )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         // setData(addRankToCoins(response.data));
         setData(response.data);
       })

@@ -57,6 +57,9 @@ function FavoritesPage() {
     // Favorites data
     localStorage.getItem("favorites") ||
       localStorage.setItem("favorites", "[]");
+    // Current displayed data
+    localStorage.getItem("displayedData") ||
+      localStorage.setItem("displayedData", "2");
     // Currency data
     if (localStorage.getItem("currency")) {
       setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);
@@ -79,7 +82,7 @@ function FavoritesPage() {
       response = response.sort((a, b) =>
         a.market_cap_rank > b.market_cap_rank ? 1 : -1
       );
-      console.log("testing", response);
+      // console.log("testing", response);
       setData(response);
       findPageCount(response.length);
     }

@@ -25,6 +25,13 @@ function BasicSelect() {
     fontWeight: 600,
   };
 
+  // const CustomSelect = styled(Select)({
+  //   "& .MuiOutlinedInput-notchedOutline": {
+  //     "&:hover, &.Mui-focusVisible": selectStyles,
+  //     "&.Mui-active": selectStyles,
+  //   },
+  // });
+
   const handleChange = (event) => {
     const chosenCurrencyName = event.target.value;
     let chosenCurrencySymbol = "";

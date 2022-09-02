@@ -71,7 +71,7 @@ function TableDisplay({
       }
       return false;
     });
-    console.log("result_1", filteredData);
+    // console.log("result_1", filteredData);
     (async () => {
       filteredData = await Promise.all(
         filteredData.map((exchange) => fetchData(exchange.id))
@@ -94,7 +94,7 @@ function TableDisplay({
         `https://api.coingecko.com/api/v3/exchanges/${id}`
       );
       const updatedData = { ...response.data, id: id };
-      console.log("result_2", updatedData);
+      // console.log("result_2", updatedData);
       return updatedData;
     } catch (err) {
       console.error(err);

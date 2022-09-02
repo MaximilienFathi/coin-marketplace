@@ -24,7 +24,7 @@ function Hero() {
         setVolume(data.total_volume[currencyName]);
         setBtcDominance(data.market_cap_percentage.btc);
         setCoinsTotal(data.active_cryptocurrencies);
-        console.log(data);
+        // console.log(data);
       } catch (err) {
         console.error(err);
       }

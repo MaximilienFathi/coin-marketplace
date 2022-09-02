@@ -48,7 +48,7 @@ function TableDisplay({
       }
       return false;
     });
-    console.log("vfe", filteredData);
+    // console.log("vfe", filteredData);
     (async () => {
       filteredData = await Promise.all(
         filteredData.map((coin) => fetchData(coin.id))
