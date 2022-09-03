@@ -57,9 +57,6 @@ function FavoritesPage() {
     // Favorites data
     localStorage.getItem("favorites") ||
       localStorage.setItem("favorites", "[]");
-    // Current displayed data
-    localStorage.getItem("displayedData") ||
-      localStorage.setItem("displayedData", "2");
     // Currency data
     if (localStorage.getItem("currency")) {
       setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);

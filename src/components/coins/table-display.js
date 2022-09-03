@@ -3,6 +3,7 @@ import axios from "axios";
 import currencyContext from "../../contexts/currency-context";
 import TableHeader from "../others/table-header";
 import TableData from "./table-data";
+import "./table-display.css";
 
 function TableDisplay({
   search,
@@ -117,49 +118,55 @@ function TableDisplay({
   //=========================================================================
 
   return (
-    <div>
-      <p>{dataHeaders.favorite}</p>
-      {Object.entries(dataHeaders)
-        .slice(1)
-        .map(([headerKey, headerName]) => {
+    <table>
+      <thead>
+        <tr>
+          <th>{dataHeaders.favorite}</th>
+          {Object.entries(dataHeaders)
+            .slice(1)
+            .map(([headerKey, headerName]) => {
+              return (
+                <TableHeader
+                  // Check why key is needed
+                  key={headerKey}
+                  data={search ? searchResults : data}
+                  setData={search ? setSearchResults : setData}
+                  headerKey={headerKey}
+                  headerName={headerName}
+                  sortedData={sortedData}
+                  setSortedData={setSortedData}
+                ></TableHeader>
+              );
+            })}
+        </tr>
+      </thead>
+      <tbody>
+        {(search ? searchResults : data).map((coin) => {
           return (
-            <TableHeader
-              // Check why key is needed
-              key={headerKey}
-              data={search ? searchResults : data}
-              setData={search ? setSearchResults : setData}
-              headerKey={headerKey}
-              headerName={headerName}
-              sortedData={sortedData}
-              setSortedData={setSortedData}
-            ></TableHeader>
+            <TableData
+              key={coin.id}
+              id={coin.id}
+              market_cap_rank={coin.market_cap_rank}
+              image={coin.image}
+              name={coin.name}
+              symbol={coin.symbol}
+              current_price={coin.current_price}
+              price_change_percentage_1h_in_currency={
+                coin.price_change_percentage_1h_in_currency
+              }
+              price_change_percentage_24h_in_currency={
+                coin.price_change_percentage_24h_in_currency
+              }
+              price_change_percentage_7d_in_currency={
+                coin.price_change_percentage_7d_in_currency
+              }
+              total_volume={coin.total_volume}
+              market_cap={coin.market_cap}
+            ></TableData>
           );
         })}
-      {(search ? searchResults : data).map((coin) => {
-        return (
-          <TableData
-            key={coin.id}
-            id={coin.id}
-            market_cap_rank={coin.market_cap_rank}
-            image={coin.image}
-            name={coin.name}
-            symbol={coin.symbol}
-            current_price={coin.current_price}
-            price_change_percentage_1h_in_currency={
-              coin.price_change_percentage_1h_in_currency
-            }
-            price_change_percentage_24h_in_currency={
-              coin.price_change_percentage_24h_in_currency
-            }
-            price_change_percentage_7d_in_currency={
-              coin.price_change_percentage_7d_in_currency
-            }
-            total_volume={coin.total_volume}
-            market_cap={coin.market_cap}
-          ></TableData>
-        );
-      })}
-    </div>
+      </tbody>
+    </table>
   );
 }
 

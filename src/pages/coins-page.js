@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import currencyContext from "../contexts/currency-context";
 import favoritesContext from "../contexts/favorites-context";
@@ -27,9 +27,6 @@ function CoinsPage() {
     // Favorites data
     localStorage.getItem("favorites") ||
       localStorage.setItem("favorites", "[]");
-    // Current displayed data
-    localStorage.getItem("displayedData") ||
-      localStorage.setItem("displayedData", "0");
     // Currency data
     if (localStorage.getItem("currency")) {
       setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);

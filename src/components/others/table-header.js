@@ -60,7 +60,7 @@ function TableHeader({
   };
 
   return (
-    <div className="table-header">
+    <th className="table-header">
       <p onClick={() => sortBy(headerKey)}>
         {headerName}
         {ascendingSort ? (
@@ -69,7 +69,7 @@ function TableHeader({
           <ArrowDropDownIcon></ArrowDropDownIcon>
         )}
       </p>
-    </div>
+    </th>
   );
 }
 

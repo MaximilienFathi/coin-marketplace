@@ -31,7 +31,7 @@ function Favorite({ favorite, setFavorite, id }) {
   };
 
   return (
-    <div>
+    <td>
       {favorite ? (
         <FavoriteIcon
           // className="red"
@@ -40,7 +40,7 @@ function Favorite({ favorite, setFavorite, id }) {
       ) : (
         <FavoriteBorderIcon onClick={() => handleClick()}></FavoriteBorderIcon>
       )}
-    </div>
+    </td>
   );
 }
 

@@ -16,6 +16,7 @@ function BasicSelect() {
     border: "2px solid #fa58b6",
     borderRadius: "11px",
     backgroundColor: "rgba(255, 255, 255, 0.1)",
+    height: 48,
   };
 
   const menuItemStyles = {
@@ -63,7 +64,7 @@ function BasicSelect() {
     <Box sx={{ minWidth: "10rem" }}>
       <FormControl fullWidth>
         <Select
-          size="large"
+          size="small"
           value={currencyName}
           onChange={handleChange}
           // focused
@@ -87,6 +88,7 @@ function BasicSelect() {
             },
           }}
           sx={{
+            // height: "10%",
             color: "rgba(255, 255, 255, 0.8)",
             fontFamily: ["Rubik", "sans-serif"],
             // htmlFontSize: 10,

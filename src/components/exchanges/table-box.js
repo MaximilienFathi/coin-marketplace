@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchBox from "../others/search-box";
 import TableDisplay from "./table-display";
 import Pagination from "../others/pagination";
+import "../coins/table-box.css"; // change location of that css file?
 
 function TableBox({
   data,
@@ -15,7 +16,7 @@ function TableBox({
   const [search, setSearch] = useState("");
 
   return (
-    <div className="table">
+    <div className="table-container">
       <SearchBox setSearch={setSearch}></SearchBox>
       <TableDisplay
         search={search}

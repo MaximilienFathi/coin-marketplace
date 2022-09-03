@@ -1,0 +1,17 @@
+th,
+td {
+  border: 2px solid #7a0bc0;
+  height: 5rem;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(39, 0, 130, 0.4);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: rgba(122, 11, 192, 0.4);
+}
+
+tbody tr:hover {
+  background-color: rgba(68, 64, 106, 0.4);
+}

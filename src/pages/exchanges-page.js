@@ -36,9 +36,6 @@ function ExchangesPage() {
 
   // Initialize all data that will be retrieved from localStorage
   useEffect(() => {
-    // Current displayed data
-    // localStorage.getItem("displayedData") ||
-    //   localStorage.setItem("displayedData", "1");
     // Currency data
     if (localStorage.getItem("currency")) {
       setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);
@@ -119,7 +116,7 @@ function ExchangesPage() {
     <currencyContext.Provider
       value={[currencyName, setCurrencyName, currencySymbol, setCurrencySymbol]}
     >
-      // Replace className App with something else
+      {/*Replace className App with something else*/}
       <div className="App">
         <Header></Header>
         <Hero></Hero>
