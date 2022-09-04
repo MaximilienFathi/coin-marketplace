@@ -1,7 +1,29 @@
 import React, { useContext } from "react";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 import favoritesContext from "../../contexts/favorites-context";
+import { styled } from "@mui/material";
+
+//========================================================
+// CUSTOM STYLES
+const StyledStarIcon = styled(StarIcon)({
+  color: "gold",
+  height: "1.6rem",
+  width: "auto",
+  "&:hover": {
+    cursor: "pointer",
+  },
+});
+
+const StyledStarBorderIcon = styled(StarBorderIcon)({
+  height: "1.6rem",
+  width: "auto",
+  "&:hover": {
+    color: "gold",
+    cursor: "pointer",
+  },
+});
+//========================================================
 
 function Favorite({ favorite, setFavorite, id }) {
   const [favoritesChanged, setFavoritesChanged] = useContext(favoritesContext);
@@ -33,12 +55,11 @@ function Favorite({ favorite, setFavorite, id }) {
   return (
     <td>
       {favorite ? (
-        <FavoriteIcon
-          // className="red"
-          onClick={() => handleClick()}
-        ></FavoriteIcon>
+        <StyledStarIcon onClick={() => handleClick()}></StyledStarIcon>
       ) : (
-        <FavoriteBorderIcon onClick={() => handleClick()}></FavoriteBorderIcon>
+        <StyledStarBorderIcon
+          onClick={() => handleClick()}
+        ></StyledStarBorderIcon>
       )}
     </td>
   );

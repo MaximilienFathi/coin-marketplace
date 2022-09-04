@@ -1,17 +1,53 @@
+table {
+  background-color: rgba(184, 184, 184, 0.2);
+  box-shadow: 0 0 0.5rem 0.01rem #b8b8b8;
+  /*border-collapse: collapse;*/
+  border-spacing: 0;
+
+  padding: 0rem 0rem;
+  border-radius: 11px;
+  padding: 2.4rem;
+}
+
 th,
 td {
-  border: 2px solid #7a0bc0;
-  height: 5rem;
+  height: 7rem;
+  /*border: 1px solid grey;*/
+  font-size: 1.5rem;
+  text-align: right;
+  padding-right: 2rem;
 }
 
-tbody tr:nth-child(even) {
-  background-color: rgba(39, 0, 130, 0.4);
+/*th {*/
+/*  color: #b8b8b8;*/
+/*}*/
+
+td {
+  border-top: 1px solid #8f8f8f;
 }
 
-tbody tr:nth-child(odd) {
-  background-color: rgba(122, 11, 192, 0.4);
+/* Ranks and names should be displayed differently from other stats */
+th:nth-child(2),
+th:nth-child(3),
+tr td:nth-child(2),
+tr td:nth-child(3) {
+  text-align: left;
+  padding-left: 2rem;
+  padding-right: 0rem;
 }
 
 tbody tr:hover {
-  background-color: rgba(68, 64, 106, 0.4);
+  background-color: rgba(184, 184, 184, 0.05);
 }
+
+/*tbody tr:nth-child(even) {*/
+/*  background-color: #44406a;*/
+/*}*/
+
+/*tbody tr:nth-child(odd) {*/
+/*  background-color: #1a1a3f;*/
+/*}*/
+
+/*tr {*/
+/*  outline: thin solid grey;*/
+/*}*/

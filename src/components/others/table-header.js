@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import "./table-header.css";
+import { styled } from "@mui/material";
+
+const StyledArrowDropUpIcon = styled(ArrowDropUpIcon)({ color: "#b8b8b8" });
+const StyledArrowDropDrownIcon = styled(ArrowDropUpIcon)({ color: "#b8b8b8" });
 
 function TableHeader({
   data,
@@ -60,15 +65,26 @@ function TableHeader({
   };
 
   return (
-    <th className="table-header">
-      <p onClick={() => sortBy(headerKey)}>
-        {headerName}
-        {ascendingSort ? (
-          <ArrowDropUpIcon></ArrowDropUpIcon>
-        ) : (
-          <ArrowDropDownIcon></ArrowDropDownIcon>
-        )}
-      </p>
+    <th>
+      {headerKey === "market_cap_rank" || headerKey === "name" ? (
+        <div className="table-header-start" onClick={() => sortBy(headerKey)}>
+          {headerName}
+          {ascendingSort ? (
+            <StyledArrowDropUpIcon></StyledArrowDropUpIcon>
+          ) : (
+            <StyledArrowDropDrownIcon></StyledArrowDropDrownIcon>
+          )}
+        </div>
+      ) : (
+        <div className="table-header-end" onClick={() => sortBy(headerKey)}>
+          {ascendingSort ? (
+            <StyledArrowDropUpIcon></StyledArrowDropUpIcon>
+          ) : (
+            <StyledArrowDropDrownIcon></StyledArrowDropDrownIcon>
+          )}
+          {headerName}
+        </div>
+      )}
     </th>
   );
 }

@@ -29,18 +29,22 @@ body {
   font-family: Rubik, sans-serif;
   font-weight: 400;
   line-height: 1;
-  background: rgb(26, 26, 64);
+  background: #112149;
+  position: relative;
 }
 
-/*Actually use background picture with glass effect but use something that has dark purple*/
-
-/*body::before {*/
-/*  content: "";*/
-/*  background-image: url(../public/images/universe-g8232de1b5_1920.jpg);*/
-/*  background-size: cover;*/
-/*  height: 100%;*/
-/*  width: 100%;*/
-/*  position: absolute;*/
-/*  z-index: -1;*/
-/*  filter: blur(30px);*/
-/*}*/
+body::before {
+  content: "";
+  background-image: url(../public/images/acrylic-paint-g0aeaea865_1920.jpg);
+  /*background-size: cover;*/
+  background-size: 500%; /* or 500% */
+  background-position: center;
+  z-index: -1;
+  border-radius: 11px;
+  filter: blur(50px) brightness(50%); /* from 30 to 50 also good*/
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

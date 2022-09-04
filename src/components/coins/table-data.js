@@ -35,7 +35,12 @@ function TableData({
   //     .catch((err) => console.log(err));
   // }, [id]); // not sure if I must include id
 
-  const color = current_price >= 0 ? "green" : "red";
+  const price_change_1h_color =
+    price_change_percentage_1h_in_currency >= 0 ? "green" : "red";
+  const price_change_24h_color =
+    price_change_percentage_24h_in_currency >= 0 ? "green" : "red";
+  const price_change_7d_color =
+    price_change_percentage_7d_in_currency >= 0 ? "green" : "red";
 
   const transformData = function (data, fractionDigits, type) {
     // if (type) console.log(type, data);
@@ -73,19 +78,19 @@ function TableData({
       <td className="coin-name-td">
         <img className="coin-logo" src={image} alt={`logo of ${name}`}></img>
         <p className="coin-name">{name}</p>
-        <p className="coin-symbol">{symbol}</p>
+        <p className="coin-symbol">{symbol.toUpperCase()}</p>
       </td>
       <td className="coin-price">
         {currencySymbol}
         {transformData(current_price, 2, "price")}
       </td>
-      <td className={`coin-price-change ${color}`}>
+      <td className={`coin-price-change ${price_change_1h_color}`}>
         {transformData(price_change_percentage_1h_in_currency, 1)}%
       </td>
-      <td className={`coin-price-change ${color}`}>
+      <td className={`coin-price-change ${price_change_24h_color}`}>
         {transformData(price_change_percentage_24h_in_currency, 1)}%
       </td>
-      <td className={`coin-price-change ${color}`}>
+      <td className={`coin-price-change ${price_change_7d_color}`}>
         {transformData(price_change_percentage_7d_in_currency, 1)}%
       </td>
       <td className="coin-volume">

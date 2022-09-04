@@ -17,7 +17,7 @@ function TableDisplay({
   const [searchResults, setSearchResults] = useState([]);
   const [currencyName, , ,] = useContext(currencyContext);
   const dataHeaders = {
-    favorite: "?",
+    favorite: "",
     market_cap_rank: "#",
     name: "Name",
     current_price: "Price",

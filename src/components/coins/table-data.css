@@ -1,6 +1,26 @@
 .coin-name-td {
   display: flex;
-  justify-content: space-between;
-  /*align-items: center;*/
-  /*gap: 0.8rem;*/
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.coin-logo {
+  height: 60%;
+}
+
+.coin-name {
+  font-weight: 500;
+}
+
+.coin-symbol {
+  color: #b8b8b8;
+}
+
+.green {
+  color: #00ff00;
+}
+
+.red {
+  color: #ff0000;
 }
