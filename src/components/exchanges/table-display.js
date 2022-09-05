@@ -12,6 +12,7 @@ import axios from "axios";
 import currencyContext from "../../contexts/currency-context";
 import TableHeader from "../others/table-header";
 import TableData from "./table-data";
+import "../coins/table-display.css";
 
 function TableDisplay({
   search,
@@ -116,39 +117,45 @@ function TableDisplay({
   //=========================================================================
 
   return (
-    <div>
-      {Object.entries(dataHeaders).map(([headerKey, headerName]) => {
-        return (
-          <TableHeader
-            key={headerKey}
-            data={search ? searchResults : data}
-            setData={search ? setSearchResults : setData}
-            headerKey={headerKey}
-            headerName={headerName}
-            sortedData={sortedData}
-            setSortedData={setSortedData}
-          ></TableHeader>
-        );
-      })}
-      {(search ? searchResults : data).map((exchange) => {
-        return (
-          <TableData
-            key={exchange.id}
-            id={exchange.id}
-            trust_score_rank={exchange.trust_score_rank}
-            image={exchange.image}
-            name={exchange.name}
-            trust_score={exchange.trust_score}
-            trade_volume_24h_normalized={
-              exchange.trade_volume_24h_btc_normalized * btcValue
-            }
-            trade_volume_24h={exchange.trade_volume_24h_btc * btcValue}
-            year_established={exchange.year_established}
-            country={exchange.country}
-          ></TableData>
-        );
-      })}
-    </div>
+    <table className="exchanges-table">
+      <thead className="exchanges-table-head">
+        <tr className="exchanges-table-row">
+          {Object.entries(dataHeaders).map(([headerKey, headerName]) => {
+            return (
+              <TableHeader
+                key={headerKey}
+                data={search ? searchResults : data}
+                setData={search ? setSearchResults : setData}
+                headerKey={headerKey}
+                headerName={headerName}
+                sortedData={sortedData}
+                setSortedData={setSortedData}
+              ></TableHeader>
+            );
+          })}
+        </tr>
+      </thead>
+      <tbody className="exchanges-table-body">
+        {(search ? searchResults : data).map((exchange) => {
+          return (
+            <TableData
+              key={exchange.id}
+              id={exchange.id}
+              trust_score_rank={exchange.trust_score_rank}
+              image={exchange.image}
+              name={exchange.name}
+              trust_score={exchange.trust_score}
+              trade_volume_24h_normalized={
+                exchange.trade_volume_24h_btc_normalized * btcValue
+              }
+              trade_volume_24h={exchange.trade_volume_24h_btc * btcValue}
+              year_established={exchange.year_established}
+              country={exchange.country}
+            ></TableData>
+          );
+        })}
+      </tbody>
+    </table>
   );
 }
 
