@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { styled } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import "./table-header.css";
-import { styled } from "@mui/material";
 
+const StyledArrowDropDrownIcon = styled(ArrowDropDownIcon)({
+  color: "#b8b8b8",
+});
 const StyledArrowDropUpIcon = styled(ArrowDropUpIcon)({ color: "#b8b8b8" });
-const StyledArrowDropDrownIcon = styled(ArrowDropUpIcon)({ color: "#b8b8b8" });
 
 function TableHeader({
   data,
@@ -66,7 +68,9 @@ function TableHeader({
 
   return (
     <th>
-      {headerKey === "market_cap_rank" || headerKey === "name" ? (
+      {headerKey === "market_cap_rank" ||
+      headerKey === "trust_score_rank" ||
+      headerKey === "name" ? (
         <div className="table-header-start" onClick={() => sortBy(headerKey)}>
           {headerName}
           {ascendingSort ? (

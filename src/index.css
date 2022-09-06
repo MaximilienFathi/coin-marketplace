@@ -22,6 +22,7 @@
 
 html {
   font-size: 62.5%;
+  /*scroll-behavior: smooth;*/
 }
 
 body {
@@ -35,9 +36,10 @@ body {
 
 body::before {
   content: "";
+  /* Blurring the image is resource intensive. Comment image and blur effect if needed*/
   background-image: url(../public/images/acrylic-paint-g0aeaea865_1920.jpg);
   /*background-size: cover;*/
-  background-size: 500%; /* or 500% */
+  background-size: 500%; /* or 100% */
   background-position: center;
   z-index: -1;
   border-radius: 11px;

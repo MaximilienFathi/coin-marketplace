@@ -15,12 +15,19 @@ import PersonPinIcon from "@mui/icons-material/PersonPin";
 //   indicatorColor: "pink",
 // });
 const StyledTab = styled(Tab)({
-  color: "rgba(255, 255, 255, 0.4)",
-  fontFamily: ["Rubik", "sans-serif"],
+  // color: "rgba(255, 255, 255, 0.4)",
+  color: "inherit",
+  fontFamily: "inherit",
   fontSize: "1.6rem",
   fontWeight: 600,
+  width: "14rem",
   "&.Mui-selected": {
-    color: "rgba(255, 255, 255, 0.8)",
+    // color: "rgba(255, 255, 255, 0.8)",
+    color: "inherit",
+    // backgroundColor: "#a361ab",
+    background: "linear-gradient(90deg, #b84dc3, #a620b4)",
+    boxShadow: "inset 0 0 3px #000",
+    borderRadius: 11,
     // transition: "all 1s",
   },
 
@@ -43,36 +50,37 @@ function SearchBox({ setSearch, setFavorites }) {
   };
 
   return (
-    <div className="large-search-container">
-      {/* className="large-search-container"*/}
-      <Tabs
-        value={value}
-        TabIndicatorProps={{
-          style: { background: "#fa58b6" },
-        }}
-        onChange={handleChange}
-        // aria-label="icon label tabs example"
-      >
-        <StyledTab
-          // icon={<PhoneIcon />}
-          label="CRYPTOCURRENCIES"
-          component={Link}
-          to={tabs.at(0)}
-        />
-        <StyledTab
-          // icon={<FavoriteIcon />}
-          label="EXCHANGES"
-          component={Link}
-          to={tabs.at(1)}
-        />
-        <StyledTab
-          // icon={<PersonPinIcon />}
-          label="FAVORITES"
-          component={Link}
-          to={tabs.at(2)}
-        />
-      </Tabs>
-      <div className="small-search-container">
+    <div className="search-container">
+      <div className="left-search-container">
+        <Tabs
+          value={value}
+          TabIndicatorProps={{
+            style: { display: "none" },
+          }}
+          onChange={handleChange}
+          // aria-label="icon label tabs example"
+        >
+          <StyledTab
+            // icon={<PhoneIcon />}
+            label="CURRENCIES"
+            component={Link}
+            to={tabs.at(0)}
+          />
+          <StyledTab
+            // icon={<FavoriteIcon />}
+            label="EXCHANGES"
+            component={Link}
+            to={tabs.at(1)}
+          />
+          <StyledTab
+            // icon={<PersonPinIcon />}
+            label="FAVORITES"
+            component={Link}
+            to={tabs.at(2)}
+          />
+        </Tabs>
+      </div>
+      <div className="right-search-container">
         <Dropdown></Dropdown>
         <SearchBar handleChange={handleChange}></SearchBar>
       </div>

@@ -3,19 +3,27 @@ table {
   box-shadow: 0 0 0.5rem 0.01rem #b8b8b8;
   /*border-collapse: collapse;*/
   border-spacing: 0;
-
-  padding: 0rem 0rem;
-  border-radius: 11px;
-  padding: 2.4rem;
+  border-bottom-left-radius: 11px;
+  border-bottom-right-radius: 11px;
+  /*padding: 2.4rem;*/
+  padding: 0 2.4rem;
+  /*padding: 2.4rem 2.4rem 0rem 2.4rem;*/
 }
+
+/* Sticky header when background is blurred is terrible */
+/*.exchanges-table-head {*/
+/*  !*background-color: rgba(184, 184, 184, 0.2);*!*/
+/*  box-shadow: 0 3rem 2rem 2rem #b8b8b8;*/
+/*  position: sticky;*/
+/*  top: 0px;*/
+/*  z-index: 1;*/
+/*}*/
 
 th,
 td {
   height: 7rem;
-  /*border: 1px solid grey;*/
   font-size: 1.5rem;
-  text-align: right;
-  padding-right: 2rem;
+  /*border: 1px solid grey;*/
 }
 
 /*th {*/
@@ -27,10 +35,27 @@ td {
 }
 
 /* Ranks and names should be displayed differently from other stats */
-th:nth-child(2),
-th:nth-child(3),
-tr td:nth-child(2),
-tr td:nth-child(3) {
+.coins-table-row th:not(:nth-child(2)),
+.coins-table-row th:not(:nth-child(3)),
+.coins-table-row td:not(:nth-child(2)),
+.coins-table-row td:not(:nth-child(3)),
+.exchanges-table-row th:not(:nth-child(1)),
+.exchanges-table-row th:not(:nth-child(2)),
+.exchanges-table-row td:not(:nth-child(2)),
+.exchanges-table-row td:not(:nth-child(3)) {
+  text-align: right;
+  /*padding-left: 0rem;*/
+  padding-right: 2rem;
+}
+
+.coins-table-row th:nth-child(2),
+.coins-table-row th:nth-child(3),
+.coins-table-row td:nth-child(2),
+.coins-table-row td:nth-child(3),
+.exchanges-table-row th:nth-child(1),
+.exchanges-table-row th:nth-child(2),
+.exchanges-table-row td:nth-child(1),
+.exchanges-table-row td:nth-child(2) {
   text-align: left;
   padding-left: 2rem;
   padding-right: 0rem;
@@ -39,15 +64,3 @@ tr td:nth-child(3) {
 tbody tr:hover {
   background-color: rgba(184, 184, 184, 0.05);
 }
-
-/*tbody tr:nth-child(even) {*/
-/*  background-color: #44406a;*/
-/*}*/
-
-/*tbody tr:nth-child(odd) {*/
-/*  background-color: #1a1a3f;*/
-/*}*/
-
-/*tr {*/
-/*  outline: thin solid grey;*/
-/*}*/

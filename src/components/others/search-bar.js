@@ -29,7 +29,7 @@ const StyledSearchIcon = styled(SearchIcon)({
 });
 
 const InputPropsStyles = {
-  fontFamily: ["Rubik", "sans-serif"],
+  fontFamily: "inherit",
   // htmlFontSize: 10,
   fontSize: "1.6rem",
   fontWeight: 600,

@@ -8,7 +8,7 @@ import { styled } from "@mui/material";
 // CUSTOM STYLES
 const StyledStarIcon = styled(StarIcon)({
   color: "gold",
-  height: "1.6rem",
+  height: "1.8rem",
   width: "auto",
   "&:hover": {
     cursor: "pointer",
@@ -16,7 +16,7 @@ const StyledStarIcon = styled(StarIcon)({
 });
 
 const StyledStarBorderIcon = styled(StarBorderIcon)({
-  height: "1.6rem",
+  height: "1.8rem",
   width: "auto",
   "&:hover": {
     color: "gold",

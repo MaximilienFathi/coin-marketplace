@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
+import currencyContext from "../../contexts/currency-context";
 import Favorite from "../others/favorite";
 import LineChart from "../others/line-chart";
 import axios from "axios";
-import currencyContext from "../../contexts/currency-context";
 import "./table-data.css";
 
 function TableData({
@@ -66,7 +66,7 @@ function TableData({
   };
 
   return (
-    <tr className="table-row">
+    <tr className="coins-table-row">
       <Favorite
         favorite={favorite}
         setFavorite={setFavorite}

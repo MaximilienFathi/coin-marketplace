@@ -118,9 +118,9 @@ function TableDisplay({
   //=========================================================================
 
   return (
-    <table>
-      <thead>
-        <tr>
+    <table className="coins-table">
+      <thead className="coins-table-head">
+        <tr className="coins-table-row">
           <th>{dataHeaders.favorite}</th>
           {Object.entries(dataHeaders)
             .slice(1)
@@ -140,7 +140,7 @@ function TableDisplay({
             })}
         </tr>
       </thead>
-      <tbody>
+      <tbody className="coins-table-body">
         {(search ? searchResults : data).map((coin) => {
           return (
             <TableData

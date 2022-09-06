@@ -1,15 +1,25 @@
-.coin-name-td {
+.coin-name-td,
+.exchange-name-td {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 1.2rem;
 }
 
+/* including .exchange-logo makes some logos huge for some reason */
 .coin-logo {
   height: 60%;
 }
 
-.coin-name {
+/*.coin-logo,*/
+/*.exchange-logo {*/
+/*  height: 4rem;*/
+/*  width: 4rem;*/
+/*  !*height: 60%;*!*/
+/*}*/
+
+.coin-name,
+.exchange-name {
   font-weight: 500;
 }
 
