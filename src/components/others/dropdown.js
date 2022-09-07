@@ -5,32 +5,53 @@ import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { styled } from "@mui/material";
 
 function BasicSelect() {
   const [currencyName, setCurrencyName, , setCurrencySymbol] =
     useContext(currencyContext);
 
-  // Try to see if better way of creating these styles using MUI
-  const selectStyles = {
-    border: "2px solid #fa58b6",
-    borderRadius: "11px",
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-    height: 48,
-  };
+  //========================================================
+  // CUSTOM STYLES
+  const StyledBox = styled(Box)({ minWidth: "10rem" });
 
-  const menuItemStyles = {
-    color: "rgba(255, 255, 255, 0.8)",
+  const StyledSelect = styled(Select)({
+    "& .MuiInputBase-input": {
+      // // htmlFontSize: 10,
+      zIndex: 1,
+      color: "#fff",
+      fontFamily: ["Rubik", "sans-serif"],
+      fontSize: "1.6rem",
+      fontWeight: 600,
+      height: 24,
+      paddingBottom: 12,
+      paddingTop: 12,
+      lineHeight: 1.5, // Not ideal solution to annoying bug
+    },
+    "& .MuiSvgIcon-root": {
+      zIndex: 1,
+      fontSize: "3rem",
+      color: "rgba(255, 255, 255, 0.8)", // color of other arrows: #b8b8b8
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      border: "none",
+      borderRadius: "11px",
+      background: "linear-gradient(90deg, #b84dc3, #a620b4)",
+      boxShadow: "inset 0 0 3px #000",
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      background: "linear-gradient(90deg, #c671cf, #b84dc3)",
+    },
+    // "&.Mui-focused .MuiOutlinedInput-notchedOutline": notchedOutlineStyles,
+  });
+
+  const StyledMenuItem = styled(MenuItem)({
+    color: "#fff",
     fontFamily: ["Rubik", "sans-serif"],
     fontSize: "1.6rem",
     fontWeight: 600,
-  };
-
-  // const CustomSelect = styled(Select)({
-  //   "& .MuiOutlinedInput-notchedOutline": {
-  //     "&:hover, &.Mui-focusVisible": selectStyles,
-  //     "&.Mui-active": selectStyles,
-  //   },
-  // });
+  });
+  //========================================================
 
   const handleChange = (event) => {
     const chosenCurrencyName = event.target.value;
@@ -60,60 +81,41 @@ function BasicSelect() {
   };
 
   return (
-    <Box sx={{ minWidth: "10rem" }}>
+    <StyledBox>
       <FormControl fullWidth>
-        <Select
-          size="small"
+        <StyledSelect
+          // size="small"
           value={currencyName}
           onChange={handleChange}
           // focused
           MenuProps={{
             PaperProps: {
               sx: {
+                border: "1px solid #b84dc3",
                 borderRadius: "11px",
                 "& .MuiMenu-list": {
-                  backgroundColor: "rgb(72,72,112)",
-                },
-                "& .MuiMenuItem-root.Mui-selected": {
-                  backgroundColor: "rgba(250,88,182,0.5)",
+                  backgroundColor: "#240c4c",
                 },
                 "& .MuiMenuItem-root:hover": {
-                  backgroundColor: "rgba(250,88,182,0.1)",
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                },
+                // bug where initially selected item color is blue
+                "& .MuiMenuItem-root.Mui-selected": {
+                  backgroundColor: "#a620b4",
                 },
                 "& .MuiMenuItem-root.Mui-selected:hover": {
-                  backgroundColor: "rgba(250,88,182,0.8)",
+                  backgroundColor: "#b84dc3",
                 },
               },
             },
           }}
-          sx={{
-            // height: "10%",
-            color: "rgba(255, 255, 255, 0.8)",
-            fontFamily: ["Rubik", "sans-serif"],
-            // htmlFontSize: 10,
-            fontSize: "1.6rem",
-            fontWeight: 600,
-            "& .MuiSvgIcon-root": {
-              fontSize: "3rem",
-              color: "rgba(255, 255, 255, 0.8)",
-            },
-            "& .MuiOutlinedInput-notchedOutline": selectStyles,
-            "&:hover .MuiOutlinedInput-notchedOutline": selectStyles,
-            "&.Mui-focused .MuiOutlinedInput-notchedOutline": selectStyles,
-          }}
         >
-          <MenuItem value={"cad"} sx={menuItemStyles}>
-            CAD
-          </MenuItem>
-          <MenuItem value={"eur"} sx={menuItemStyles}>
-            EUR
-          </MenuItem>
-          <MenuItem value={"usd"} sx={menuItemStyles}>
-            USD
-          </MenuItem>
-        </Select>
+          <StyledMenuItem value={"cad"}>CAD</StyledMenuItem>
+          <StyledMenuItem value={"eur"}>EUR</StyledMenuItem>
+          <StyledMenuItem value={"usd"}>USD</StyledMenuItem>
+        </StyledSelect>
       </FormControl>
-    </Box>
+    </StyledBox>
   );
 }
 

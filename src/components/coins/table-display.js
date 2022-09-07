@@ -41,7 +41,13 @@ function TableDisplay({
     // Favorites page only deals with favorites not the full list of coins
     let filteredData = (fullDataList ? fullDataList : data).filter((coin) => {
       if (
-        count < 5 &&
+        // ISSUE: The higher the counter limit, the sooner you will get
+        // error 429. This is because everytime search changes, an api call
+        // for each of the 5 (current limit) coins will be made.
+        // SOLUTION: Show the results inside a menu list under the search
+        // box. This way, we do not have to make an API call everytime to
+        // show all the data.
+        count < 3 &&
         coin.name.toLowerCase().startsWith(search.toLowerCase())
       ) {
         count++;
@@ -49,7 +55,7 @@ function TableDisplay({
       }
       return false;
     });
-    // console.log("vfe", filteredData);
+    // console.log("filtered data", filteredData);
     (async () => {
       filteredData = await Promise.all(
         filteredData.map((coin) => fetchData(coin.id))

@@ -2,9 +2,6 @@ import * as React from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import SearchIcon from "@mui/icons-material/Search";
 
 //========================================================
 // CUSTOM STYLES
@@ -14,6 +11,7 @@ const StyledPagination = styled(Pagination)({
     // width: "fit-content",
     paddingLeft: "1rem",
     paddingRight: "1rem",
+    // boxShadow: "0 0 0.5rem 0.01rem #b8b8b8",
     borderRadius: 11,
 
     alignSelf: "center",
@@ -26,8 +24,8 @@ const StyledPagination = styled(Pagination)({
     fontSize: "1.6rem",
     height: "3.6rem",
     width: "3.6rem",
-    // boxShadow: "0 0 0.2rem 0.01rem #b8b8b8",
-    backgroundColor: "rgba(255,255,255,0.2)", // bugged
+    // backgroundColor: "rgba(184, 184, 184, 0.2)",
+    backgroundColor: "rgba(255,255,255,0.2)",
     border: "none",
     borderRadius: "11px",
   },
@@ -40,17 +38,18 @@ const StyledPagination = styled(Pagination)({
     backgroundColor: "rgba(255,255,255,0.3)",
   },
   "& .Mui-selected": {
-    backgroundColor: "rgba(255,255,255,0.4)",
+    background: "linear-gradient(90deg, #b84dc3, #a620b4)",
+    boxShadow: "inset 0 0 3px #000",
   },
   "& .Mui-selected:hover": {
-    backgroundColor: "rgba(255,255,255,0.5)",
+    background: "linear-gradient(90deg, #c671cf, #b84dc3)",
   },
 });
 
 //========================================================
 
 function PaginationRounded({ setPage, pageCount }) {
-  const handleChange = (e, value) => {
+  const handleChange = (event, value) => {
     setPage(value);
     window.scroll(0, 0);
   };
@@ -60,7 +59,7 @@ function PaginationRounded({ setPage, pageCount }) {
         count={pageCount}
         variant="outlined"
         shape="rounded"
-        onChange={(e, value) => handleChange(e, value)}
+        onChange={(event, value) => handleChange(event, value)}
       />
     </Stack>
   );

@@ -4,16 +4,9 @@ import SearchBar from "./search-bar";
 import Dropdown from "./dropdown";
 import "./search-box.css";
 import { styled, Tab, Tabs } from "@mui/material";
-import PhoneIcon from "@mui/icons-material/Phone";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import PersonPinIcon from "@mui/icons-material/PersonPin";
 
 //========================================================
 // CUSTOM STYLES
-// const StyledTabs = styled(Tabs)({
-//   textColor: "red",
-//   indicatorColor: "pink",
-// });
 const StyledTab = styled(Tab)({
   // color: "rgba(255, 255, 255, 0.4)",
   color: "inherit",
@@ -28,15 +21,18 @@ const StyledTab = styled(Tab)({
     background: "linear-gradient(90deg, #b84dc3, #a620b4)",
     boxShadow: "inset 0 0 3px #000",
     borderRadius: 11,
-    // transition: "all 1s",
   },
-
-  // border: "2px solid #fa58b6",
-  // borderRadius: "11px",
-  // backgroundColor: "rgba(255, 255, 255, 0.1)",
-
-  /*color: inherit,*/
-  // transition: "all 1s",
+  "&.Mui-selected:hover": {
+    background: "linear-gradient(90deg, #c671cf, #b84dc3)",
+  },
+  "&:hover": {
+    // color: "rgba(255, 255, 255, 0.8)",
+    color: "inherit",
+    backgroundColor: "rgba(255,255,255,0.1)",
+    // boxShadow: "inset 0 0 3px #000",
+    borderRadius: 11,
+    // transition: "all 0.5s",
+  },
 });
 //========================================================
 
@@ -44,7 +40,7 @@ function SearchBox({ setSearch, setFavorites }) {
   const tabs = ["/coins", "/exchanges", "/favorites"];
   const [value, setValue] = useState(tabs.indexOf(window.location.pathname));
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event) => {
     setSearch(event.target.value);
     setValue(tabs.indexOf(window.location.pathname));
   };
@@ -80,39 +76,14 @@ function SearchBox({ setSearch, setFavorites }) {
           />
         </Tabs>
       </div>
+      {/*<div className="centre-search-container"></div>*/}
       <div className="right-search-container">
         <Dropdown></Dropdown>
         <SearchBar handleChange={handleChange}></SearchBar>
       </div>
+      {/*<Outlet />*/}
     </div>
   );
 }
 
 export default SearchBox;
-
-// <div className="large-search-container">
-//   <nav className="table-nav">
-//     <ul className="table-nav-list">
-//       <li>
-//         <Link to="/coins" className="table-nav-link">
-//           CRYPTOCURRENCIES
-//         </Link>
-//       </li>
-//       <li>
-//         <Link to="/Exchanges" className="table-nav-link">
-//           EXCHANGES
-//         </Link>
-//       </li>
-//       <li>
-//         <Link to="/Favorites" className="table-nav-link">
-//           FAVORITES
-//         </Link>
-//       </li>
-//     </ul>
-//   </nav>
-//   <div className="small-search-container">
-//     <Dropdown></Dropdown>
-//     <SearchBar handleChange={handleChange}></SearchBar>
-//   </div>
-//   {/*<Outlet />*/}
-// </div>

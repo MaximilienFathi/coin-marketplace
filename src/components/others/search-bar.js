@@ -3,37 +3,41 @@ import { InputAdornment, styled } from "@mui/material";
 import Box from "@mui/material/Box";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
-import "./search-bar.css";
 
 //========================================================
 // CUSTOM STYLES
 const StyledBox = styled(Box)({ minWidth: "30rem" });
 
 const StyledTextField = styled(TextField)({
-  "& .MuiOutlinedInput-root.Mui-focused": {
+  "& .MuiInputBase-root, .MuiInputBase-root:hover": {
+    backgroundColor: "#240c4c",
+    borderRadius: "11px",
     "& > fieldset": {
-      border: "2px solid #fa58b6",
-      borderRadius: "11px",
-      backgroundColor: "rgba(255, 255, 255, 0.1)",
+      border: "2px solid #b84dc3",
     },
   },
-  // "& .MuiFormControl-root": { height: "100%" },
-  // "& .MuiTextField-root": { height: "100%" },
-  "& .MuiInputBase-root": { height: 48 },
+  "& .MuiInputBase-root.Mui-focused": {
+    "& > fieldset": {
+      transition: "all 0.5s",
+      boxShadow: "0 0 0.5rem 0.2rem #b84dc3",
+      border: "2px solid #b84dc3",
+    },
+  },
+  "& .MuiInputBase-input": { height: 24, paddingBottom: 12, paddingTop: 12 },
 });
 
 const StyledSearchIcon = styled(SearchIcon)({
-  color: "rgba(255, 255, 255, 0.8)",
-  height: "2rem",
+  color: "#fff",
+  height: 24,
   width: "auto",
 });
 
 const InputPropsStyles = {
-  fontFamily: "inherit",
   // htmlFontSize: 10,
+  fontFamily: "inherit",
   fontSize: "1.6rem",
   fontWeight: 600,
-  color: "rgba(255, 255, 255, 0.8)",
+  color: "inherit", // rgba(255, 255, 255, 0.8)
 };
 //========================================================
 
@@ -42,9 +46,9 @@ function BasicTextFields({ handleChange }) {
     <StyledBox>
       <StyledTextField
         onChange={handleChange}
-        focused
+        // focused
         fullWidth
-        size="small"
+        // size="small"
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
