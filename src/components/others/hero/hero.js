@@ -3,6 +3,7 @@ import axios from "axios";
 import currencyContext from "../../../contexts/currency-context";
 import StatisticCard from "../statistic-card/statistic-card";
 import "./hero.css";
+import HandshakeTwoToneIcon from "@mui/icons-material/HandshakeTwoTone";
 
 function Hero() {
   const [currencyName] = useContext(currencyContext);
@@ -34,7 +35,8 @@ function Hero() {
   return (
     <div className="hero-section">
       <h1 className="hero-heading">
-        An easy way to track and trade cryptocurrencies
+        An easy way to <span>track</span> and <span>trade</span>{" "}
+        cryptocurrencies
       </h1>
       <p className="hero-description">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam
@@ -52,6 +54,7 @@ function Hero() {
           label="24h Trading Volume"
           value={volume}
           type={"monetary"}
+          icon={HandshakeTwoToneIcon}
           // change={}
         ></StatisticCard>
         <StatisticCard

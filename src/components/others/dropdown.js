@@ -99,7 +99,7 @@ function BasicSelect() {
                 "& .MuiMenuItem-root:hover": {
                   backgroundColor: "rgba(255,255,255,0.1)",
                 },
-                // bug where initially selected item color is blue
+                // BUG where initially selected item color is blue
                 "& .MuiMenuItem-root.Mui-selected": {
                   backgroundColor: "#a620b4",
                 },

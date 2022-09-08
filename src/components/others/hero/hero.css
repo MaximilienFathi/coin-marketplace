@@ -1,5 +1,5 @@
 .hero-section {
-  padding: 4.8rem 10rem 9.6rem;
+  padding: 4.8rem 10rem;
 }
 
 .hero-heading {
@@ -8,6 +8,12 @@
   /*line-height: 1.05;*/
   letter-spacing: -0.5px;
   margin-bottom: 3.2rem;
+}
+
+.hero-heading span {
+  background: -webkit-linear-gradient(0deg, #e4bce9, #a620b4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero-description {
@@ -21,5 +27,6 @@
   display: flex;
   justify-content: center;
   gap: 3.2rem;
+  height: 15rem;
   /*margin-bottom: 6.4rem;*/
 }

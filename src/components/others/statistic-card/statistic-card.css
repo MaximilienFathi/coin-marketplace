@@ -4,24 +4,23 @@
   flex-direction: column;
   gap: 1.6rem;
   align-items: flex-start;
-  /*border: 1px solid rgba(250, 88, 182, 0.3);*/
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.8);
-  /*box-shadow: 0 0 1rem rgba(122, 11, 192);*/
+  /*border: 1px solid rgba(255, 255, 255, 0.3);*/
+  box-shadow: 0 0 0.5rem 0.2rem #b8b8b8;
   border-radius: 11px;
   padding: 1.6rem;
   position: relative;
+
+  /*overflow: hidden;*/
 }
 
 /* (was tricky) Necessary in order to have the image inserted before */
 .hero-stat-container::before {
   content: "";
-  background-image: url(../../../../public/images/acrylic-paint-g0aeaea865_1920.jpg);
-  background-size: 100%;
-  background-position: center;
-  z-index: -1;
+  background-image: url(../../../../public/images/abstract-7186364_1280.png);
+  background-size: 700%;
+  z-index: 1;
   border-radius: 11px;
-  filter: blur(30px);
+  filter: brightness(70%) opacity(50%);
   height: 100%;
   width: 100%;
   position: absolute;
@@ -29,9 +28,27 @@
   left: 0;
 }
 
-.hero-stat-label {
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 1.4rem;
+.hero-stat-container:hover::before {
+  filter: brightness(70%);
+  /*border: 1px solid rgba(255, 255, 255, 0.3);*/
+  box-shadow: 0 0 0.5rem 0.2rem #ffffff, 0 0 0.5rem 1rem #b84dc3;
+  transition: all 0.4s;
+}
+
+.hero-stat-container:nth-child(1)::before {
+  background-position: 0%;
+}
+
+.hero-stat-container:nth-child(2)::before {
+  background-position: 20%;
+}
+
+.hero-stat-container:nth-child(3)::before {
+  background-position: 40%;
+}
+
+.hero-stat-container:nth-child(4)::before {
+  background-position: 60%;
 }
 
 .hero-stat-data {
@@ -39,4 +56,11 @@
   gap: 1.6rem;
   font-size: 2.2rem;
   font-weight: 500;
+  z-index: 1;
+}
+
+.hero-stat-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.4rem;
+  z-index: 1;
 }

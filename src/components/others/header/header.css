@@ -5,8 +5,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /*background-color: #1919d0;*/
-  /*background: linear-gradient(113.49deg, #984d38 -30.3%, #181e41 58.12%);*/
 }
 
 .brand-logo {
@@ -14,6 +12,9 @@
   font-weight: 500;
   text-decoration: none;
   transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 }
 
 .header-nav-list {
@@ -40,7 +41,7 @@
 
 .header-nav-link:hover,
 .header-nav-link:active {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .header-btn-group {
@@ -56,6 +57,8 @@
   width: 10rem;
   border-radius: 11px;
   padding: 1.2rem;
+  /*background: linear-gradient(90deg, #b84dc3, #a620b4);*/
+  /*box-shadow: inset 0 0 3px #000;*/
   border: 2px solid #fa58b6;
   transition: all 0.3s;
 }
@@ -70,13 +73,13 @@
 }
 
 .loginBtn:hover {
-  color: #c84692;
-  border: 2px solid #c84692;
+  color: #fb79c5;
+  border: 2px solid #fb79c5;
   cursor: pointer;
 }
 
 .SignUpBtn:hover {
-  background-color: #c84692;
-  border: 2px solid #c84692;
+  background-color: #fb79c5;
+  border: 2px solid #fb79c5;
   cursor: pointer;
 }
