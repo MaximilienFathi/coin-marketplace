@@ -95,8 +95,8 @@ function FavoritesPage() {
         value={[favoritesChanged, setFavoritesChanged]}
       >
         <div className="App">
-          <Header></Header>
-          <Hero></Hero>
+          <Header />
+          <Hero />
           <TableBox
             data={data}
             setData={setData}

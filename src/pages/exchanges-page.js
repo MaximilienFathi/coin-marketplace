@@ -118,8 +118,8 @@ function ExchangesPage() {
     >
       {/*Replace className App with something else*/}
       <div className="App">
-        <Header></Header>
-        <Hero></Hero>
+        <Header />
+        <Hero />
         <TableBox
           data={data}
           setData={setData}

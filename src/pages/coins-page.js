@@ -5,6 +5,7 @@ import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header/header";
 import Hero from "../components/others/hero/hero";
 import TableBox from "../components/coins/table-box";
+import ScrollButton from "../components/others/scroll-button";
 
 function CoinsPage() {
   const [data, setData] = useState([]); // replace with "paginatedData"
@@ -91,8 +92,8 @@ function CoinsPage() {
       >
         {/* Replace className App with something else*/}
         <div className="App">
-          <Header></Header>
-          <Hero></Hero>
+          <Header />
+          <Hero />
           <TableBox
             data={data}
             setData={setData}
@@ -102,6 +103,7 @@ function CoinsPage() {
             pageCount={pageCount}
             setPageCount={setPageCount}
           ></TableBox>
+          <ScrollButton></ScrollButton>
         </div>
       </favoritesContext.Provider>
     </currencyContext.Provider>

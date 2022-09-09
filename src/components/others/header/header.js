@@ -6,9 +6,9 @@ import "./header.css";
 //========================================================
 // CUSTOM STYLES
 const IconStyles = {
-  border: "2px solid #fb79c5",
+  border: "2px solid #fc9bd3",
   borderRadius: "11px",
-  color: "#fb79c5",
+  color: "#fc9bd3",
   // boxShadow: "0 0 1rem 0.05rem #b8b8b8",
   width: "4rem",
   height: "auto",

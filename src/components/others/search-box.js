@@ -78,7 +78,7 @@ function SearchBox({ setSearch, setFavorites }) {
       </div>
       {/*<div className="centre-search-container"></div>*/}
       <div className="right-search-container">
-        <Dropdown></Dropdown>
+        <Dropdown />
         <SearchBar handleChange={handleChange}></SearchBar>
       </div>
       {/*<Outlet />*/}
