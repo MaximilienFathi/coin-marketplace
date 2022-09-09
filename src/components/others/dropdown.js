@@ -37,7 +37,7 @@ function BasicSelect() {
       border: "none",
       borderRadius: "11px",
       background: "linear-gradient(90deg, #b84dc3, #a620b4)",
-      boxShadow: "inset 0 0 3px #000",
+      boxShadow: "inset 0 0 2px #000",
     },
     "&:hover .MuiOutlinedInput-notchedOutline": {
       background: "linear-gradient(90deg, #c671cf, #b84dc3)",

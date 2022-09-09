@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import currencyContext from "../../contexts/currency-context";
-import TableHeader from "../others/table-header";
+import TableHeader from "../others/table-header/table-header";
 import TableData from "./table-data";
 import "./table-display.css";
 

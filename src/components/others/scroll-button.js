@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IconButton, styled } from "@mui/material";
+import { Fade, IconButton, styled } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 function ScrollButton() {
@@ -14,16 +14,17 @@ function ScrollButton() {
     "& .MuiTouchRipple-root": {
       border: "3px solid #fa58b6",
       borderRadius: "11px",
-      backgroundColor: "#4b1a37",
+      backgroundColor: "#112149",
       transition: "all 0.3s",
       display: visible ? "block" : "none",
+      // BUG: sometimes comes slightly after arrow icon on 1st render
     },
     "&:hover .MuiSvgIcon-root": {
       color: "#fb79c5",
     },
     "&:hover .MuiTouchRipple-root": {
       border: "3px solid #fb79c5",
-      backgroundColor: "#7d2c5b",
+      backgroundColor: "#414d6d",
     },
   });
 
@@ -56,7 +57,10 @@ function ScrollButton() {
 
   return (
     <StyledIconButton onClick={scrollToTop}>
+      {/*BUG: Fade only works on arrow not IconButton*/}
+      {/*<Fade in={true} timeout={1000}>*/}
       <StyledKeyboardArrowUpIcon />
+      {/*</Fade>*/}
     </StyledIconButton>
   );
 }

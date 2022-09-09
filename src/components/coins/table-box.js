@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SearchBox from "../others/search-box";
+import SearchBox from "../others/search-box/search-box";
 import TableDisplay from "./table-display";
 import Pagination from "../others/pagination";
 import "./table-box.css";

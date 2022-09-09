@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import SearchBar from "./search-bar";
-import Dropdown from "./dropdown";
+import SearchBar from "../search-bar";
+import Dropdown from "../dropdown";
 import "./search-box.css";
 import { styled, Tab, Tabs } from "@mui/material";
 
@@ -19,7 +19,7 @@ const StyledTab = styled(Tab)({
     color: "inherit",
     // backgroundColor: "#a361ab",
     background: "linear-gradient(90deg, #b84dc3, #a620b4)",
-    boxShadow: "inset 0 0 3px #000",
+    boxShadow: "inset 0 0 2px #000",
     borderRadius: 11,
   },
   "&.Mui-selected:hover": {
