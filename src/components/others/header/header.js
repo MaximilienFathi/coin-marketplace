@@ -35,8 +35,8 @@ function Header() {
         </li>
         <li>
           <div className="header-btn-group">
-            <button className="loginBtn">Login</button>
-            <button className="SignUpBtn">Sign Up</button>
+            <button className="login-btn">Login</button>
+            <button className="SignUp-btn">Sign Up</button>
           </div>
         </li>
       </ul>

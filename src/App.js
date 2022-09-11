@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CoinsPage from "./pages/coins-page";
 import FavoritesPage from "./pages/favorites-page";
 import ExchangesPage from "./pages/exchanges-page";
+import ErrorPage from "./pages/error-page";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
           <Route path="coins" element={<CoinsPage />} />
           <Route path="exchanges" element={<ExchangesPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
-          {/*<Route path="*" element={<NoPage />}       />*/}
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

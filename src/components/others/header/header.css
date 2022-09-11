@@ -50,8 +50,8 @@
   gap: 1.6rem;
 }
 
-.loginBtn,
-.SignUpBtn {
+.login-btn,
+.SignUp-btn {
   font-size: inherit;
   color: inherit;
   width: 10rem;
@@ -63,22 +63,22 @@
   transition: all 0.3s;
 }
 
-.loginBtn {
+.login-btn {
   margin-left: 2.4rem;
   background-color: inherit;
 }
 
-.SignUpBtn {
+.SignUp-btn {
   background-color: #fa58b6;
 }
 
-.loginBtn:hover {
+.login-btn:hover {
   color: #fb79c5;
   border: 2px solid #fb79c5;
   cursor: pointer;
 }
 
-.SignUpBtn:hover {
+.SignUp-btn:hover {
   background-color: #fb79c5;
   border: 2px solid #fb79c5;
   cursor: pointer;

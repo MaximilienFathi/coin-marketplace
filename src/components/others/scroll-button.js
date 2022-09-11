@@ -9,8 +9,8 @@ function ScrollButton() {
   // CUSTOM STYLES
   const StyledIconButton = styled(IconButton)({
     position: "fixed",
-    bottom: "2.7rem",
-    right: "2.7rem",
+    bottom: "4.2rem",
+    right: "2.1rem",
     "& .MuiTouchRipple-root": {
       border: "3px solid #fa58b6",
       borderRadius: "11px",
