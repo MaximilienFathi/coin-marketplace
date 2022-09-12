@@ -5,6 +5,7 @@ import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header/header";
 import Hero from "../components/others/hero/hero";
 import TableBox from "../components/coins/table-box";
+import Footer from "../components/others/footer/footer";
 import ScrollButton from "../components/others/scroll-button";
 
 function FavoritesPage() {
@@ -106,6 +107,7 @@ function FavoritesPage() {
             pageCount={pageCount}
             setPageCount={setPageCount}
           ></TableBox>
+          <Footer />
           <ScrollButton></ScrollButton>
         </div>
       </favoritesContext.Provider>

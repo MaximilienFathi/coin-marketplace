@@ -4,6 +4,7 @@ import currencyContext from "../contexts/currency-context";
 import Header from "../components/others/header/header";
 import Hero from "../components/others/hero/hero";
 import TableBox from "../components/exchanges/table-box";
+import Footer from "../components/others/footer/footer";
 import ScrollButton from "../components/others/scroll-button";
 
 function ExchangesPage() {
@@ -130,6 +131,7 @@ function ExchangesPage() {
           pageCount={pageCount}
           setPageCount={setPageCount}
         ></TableBox>
+        <Footer />
         <ScrollButton></ScrollButton>
       </div>
     </currencyContext.Provider>

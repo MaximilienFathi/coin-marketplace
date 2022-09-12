@@ -1,0 +1,20 @@
+.footer-outer-container {
+  margin-top: 2.4rem;
+
+  /*padding: 4.8rem 10rem 9.6rem;*/
+  padding: 2.4rem 10rem;
+}
+
+.footer-inner-container {
+  padding-top: 2.4rem;
+  border-top: 1px solid #8f8f8f;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.4rem;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: #fc9bd3;
+}
