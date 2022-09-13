@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import currencyContext from "../contexts/currency-context";
 import Header from "../components/others/header/header";
-import Hero from "../components/others/hero/hero";
+import GlobalStats from "../components/others/global-stats/global-stats";
 import TableBox from "../components/exchanges/table-box";
 import Footer from "../components/others/footer/footer";
 import ScrollButton from "../components/others/scroll-button";
+import "./page.css";
 
 function ExchangesPage() {
   const [data, setData] = useState([]);
@@ -118,10 +119,9 @@ function ExchangesPage() {
     <currencyContext.Provider
       value={[currencyName, setCurrencyName, currencySymbol, setCurrencySymbol]}
     >
-      {/*Replace className App with something else*/}
-      <div className="App">
+      <div className="page-container">
         <Header />
-        <Hero />
+        <GlobalStats />
         <TableBox
           data={data}
           setData={setData}

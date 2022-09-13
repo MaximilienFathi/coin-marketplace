@@ -3,10 +3,11 @@ import axios from "axios";
 import currencyContext from "../contexts/currency-context";
 import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header/header";
-import Hero from "../components/others/hero/hero";
+import GlobalStats from "../components/others/global-stats/global-stats";
 import TableBox from "../components/coins/table-box";
 import Footer from "../components/others/footer/footer";
 import ScrollButton from "../components/others/scroll-button";
+import "./page.css";
 
 function FavoritesPage() {
   const [data, setData] = useState([]);
@@ -89,24 +90,25 @@ function FavoritesPage() {
   }, [favoritesChanged, currencyName]);
 
   return (
-    // Replace className App with something else
     <currencyContext.Provider
       value={[currencyName, setCurrencyName, currencySymbol, setCurrencySymbol]}
     >
       <favoritesContext.Provider
         value={[favoritesChanged, setFavoritesChanged]}
       >
-        <div className="App">
-          <Header />
-          <Hero />
-          <TableBox
-            data={data}
-            setData={setData}
-            page={page}
-            setPage={setPage}
-            pageCount={pageCount}
-            setPageCount={setPageCount}
-          ></TableBox>
+        <div className="page-container">
+          <div className="content-wrap">
+            <Header />
+            <GlobalStats />
+            <TableBox
+              data={data}
+              setData={setData}
+              page={page}
+              setPage={setPage}
+              pageCount={pageCount}
+              setPageCount={setPageCount}
+            ></TableBox>
+          </div>
           <Footer />
           <ScrollButton></ScrollButton>
         </div>

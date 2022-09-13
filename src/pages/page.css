@@ -1,0 +1,16 @@
+.page-container {
+  /*box-sizing: border-box;*/
+  /*min-height: 100%;*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
+
+  /*position: relative;*/
+  /*min-height: 100vh;*/
+
+  /*min-height: 100%;*/
+  /*position: relative;*/
+}
+
+.content-wrap {
+  min-height: calc(100vh - 4rem);
+}
