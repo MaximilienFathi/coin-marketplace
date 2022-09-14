@@ -4,7 +4,7 @@ import "./hero.css";
 function Hero() {
   return (
     <div className="hero-container">
-      <div className="hero-text">
+      <div className="hero-text-container">
         <h1 className="hero-heading">
           An easy way to <span>track</span> and <span>trade</span>{" "}
           cryptocurrencies
@@ -12,19 +12,20 @@ function Hero() {
         <p className="hero-description">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam
           assumenda atque culpa cum delectus earum enim facere fugit impedit
-          iure iusto obcaecati, odio optio possimus praesentium rerum tempore
-          velit!
+          iure iusto obcaecati!
         </p>
-        {/*<div className="global-stats-btn-box">*/}
-        {/*<a className="btn btn-full btn-explore" href="#nfts">*/}
-        {/*  Explore now*/}
-        {/*</a>*/}
-        {/*<a className="btn btn-outline" href="#procedure">*/}
-        {/*  Learn more*/}
-        {/*</a>*/}
-        {/*</div>*/}
+        <form className="hero-form" action="#">
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Your email address"
+            required
+          />
+          <button className="GetStarted-btn">Get Started</button>
+        </form>
       </div>
-      <div className="hero-img">
+      <div className="hero-img-container">
         {/*<picture>*/}
         {/*  <source srcSet="" type="" />*/}
         {/*  <source srcSet="" type="" />*/}
