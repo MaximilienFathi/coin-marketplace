@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import CoinCard from "./coin-card";
+import CoinCard from "../coin-card/coin-card";
 import "./trending-coins.css";
 
 function TrendingCoins() {
@@ -14,8 +14,9 @@ function TrendingCoins() {
         const response = await axios.get(
           "https://api.coingecko.com/api/v3/search/trending"
         );
-        setTrendingData(response.data.coins);
-        console.log(response.data.coins);
+        const fullData = response.data.coins;
+        setTrendingData(fullData.slice(0, 4));
+        console.log(fullData.slice(0, 4));
       } catch (err) {
         console.error(err);
       }
@@ -29,13 +30,19 @@ function TrendingCoins() {
 
   return (
     <div className="trending-coins-container">
-      {trendingData.map((data) => (
-        <div key={data.item.id}>{data.item.name}</div>
-      ))}
-      {/*<CoinCard data={trendingData[0]}></CoinCard>*/}
-      {/*<CoinCard data={trendingData[1]}></CoinCard>*/}
-      {/*<CoinCard data={trendingData[2]}></CoinCard>*/}
-      {/*<CoinCard data={trendingData[3]}></CoinCard>*/}
+      {trendingData.map((data) => {
+        return (
+          <CoinCard
+            key={data.item.id}
+            name={data.item.name}
+            price_btc={data.item.price_btc}
+            symbol={data.item.symbol}
+            logo={data.item.small}
+            // logo={data.item.thumb}
+            // logo={data.item.large}
+          ></CoinCard>
+        );
+      })}
     </div>
   );
 }

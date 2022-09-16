@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/others/header/header";
-import Hero from "../components/others/hero/hero";
-import TrendingCoins from "../components/others/trending-coins";
+import Hero from "../components/home/hero/hero";
+import TrendingCoins from "../components/home/trending-coins/trending-coins";
 import Footer from "../components/others/footer/footer";
 import "./page.css";
 

@@ -14,7 +14,7 @@ function Hero() {
           assumenda atque culpa cum delectus earum enim facere fugit impedit
           iure iusto obcaecati!
         </p>
-        <form className="hero-form" action="#">
+        <form className="hero-form" action="src/components/home/hero/hero#">
           <input
             id="email"
             name="email"
