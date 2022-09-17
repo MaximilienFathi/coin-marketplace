@@ -1,12 +1,13 @@
 import React from "react";
 
-function CoinCard({ name, price_btc, symbol, logo }) {
+function CoinCard({ name, symbol, logo, current_price, price_change }) {
   return (
     <div>
       <img className="coin-logo" src={logo} alt={`logo of ${name}`}></img>
       <p>{name}</p>
       <p>{symbol}</p>
-      <p>{price_btc}</p>
+      <p>{current_price}</p>
+      <p>{price_change}</p>
     </div>
   );
 }

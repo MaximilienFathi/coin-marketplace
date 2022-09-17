@@ -7,39 +7,66 @@ function TrendingCoins() {
   const [trendingData, setTrendingData] = useState([]);
   // const [loading, setLoading] = useState(false);
 
+  // Update each coin by adding new properties
+  const addCoinData = function (oldCoinData, newCoinData) {
+    const marketData = newCoinData.market_data;
+    return {
+      ...oldCoinData,
+      current_price: marketData.current_price["usd"], // current_price[currencyName],
+      price_change_percentage_24h_in_currency:
+        marketData.price_change_percentage_24h_in_currency["usd"], // [currencyName]
+    };
+  };
+
+  // Update all coins all together by fetching new data
+  const updateAllCoinData = async function (slicedData) {
+    return await Promise.all(
+      slicedData.map(async (coin) => {
+        try {
+          const response = await axios.get(
+            `https://api.coingecko.com/api/v3/coins/${coin.item.id}`
+          );
+          const updatedData = addCoinData(coin.item, response.data);
+          // console.log("result 1", response);
+          return updatedData;
+        } catch (err) {
+          console.error(err);
+        }
+      })
+    );
+  };
+
+  // Fetch original data for first top 4 trending coins and update it
   useEffect(() => {
-    // setLoading(true);
     (async function fetchData() {
       try {
         const response = await axios.get(
           "https://api.coingecko.com/api/v3/search/trending"
         );
         const fullData = response.data.coins;
-        setTrendingData(fullData.slice(0, 4));
-        console.log(fullData.slice(0, 4));
+        const slicedData = fullData.slice(0, 4);
+        const updatedData = await updateAllCoinData(slicedData);
+        setTrendingData(updatedData);
+        console.log("result 2", updatedData);
       } catch (err) {
         console.error(err);
       }
     })();
-    // setLoading(false);
   }, []);
-
-  // if (loading) {
-  //   return <h1> Data is loading...</h1>;
-  // }
 
   return (
     <div className="trending-coins-container">
       {trendingData.map((data) => {
         return (
           <CoinCard
-            key={data.item.id}
-            name={data.item.name}
-            price_btc={data.item.price_btc}
-            symbol={data.item.symbol}
-            logo={data.item.small}
-            // logo={data.item.thumb}
-            // logo={data.item.large}
+            key={data.id}
+            name={data.name}
+            symbol={data.symbol}
+            logo={data.small}
+            // logo={data.thumb}
+            // logo={data.large}
+            current_price={data.current_price}
+            price_change={data.price_change_percentage_24h_in_currency}
           ></CoinCard>
         );
       })}
