@@ -8,13 +8,14 @@ function TrendingCoins() {
   // const [loading, setLoading] = useState(false);
 
   // Update each coin by adding new properties
-  const addCoinData = function (oldCoinData, newCoinData) {
+  const addCoinData = function (oldCoinData, newCoinData, historicData) {
     const marketData = newCoinData.market_data;
     return {
       ...oldCoinData,
       current_price: marketData.current_price["usd"], // current_price[currencyName],
       price_change_percentage_24h_in_currency:
         marketData.price_change_percentage_24h_in_currency["usd"], // [currencyName]
+      historicData: historicData,
     };
   };
 
@@ -23,11 +24,17 @@ function TrendingCoins() {
     return await Promise.all(
       slicedData.map(async (coin) => {
         try {
-          const response = await axios.get(
+          const coin_response = await axios.get(
             `https://api.coingecko.com/api/v3/coins/${coin.item.id}`
           );
-          const updatedData = addCoinData(coin.item, response.data);
-          // console.log("result 1", response);
+          const chart_response = await axios.get(
+            `https://api.coingecko.com/api/v3/coins/${coin.item.id}/market_chart?vs_currency=usd&days=1` // Must be last 24 hours data like API did
+          );
+          const updatedData = addCoinData(
+            coin.item,
+            coin_response.data,
+            chart_response.data.prices
+          );
           return updatedData;
         } catch (err) {
           console.error(err);
@@ -67,6 +74,7 @@ function TrendingCoins() {
             // logo={data.large}
             current_price={data.current_price}
             price_change={data.price_change_percentage_24h_in_currency}
+            historicData={data.historicData}
           ></CoinCard>
         );
       })}

@@ -1,6 +1,14 @@
 import React from "react";
+import LineChart from "../../others/line-chart";
 
-function CoinCard({ name, symbol, logo, current_price, price_change }) {
+function CoinCard({
+  name,
+  symbol,
+  logo,
+  current_price,
+  price_change,
+  historicData,
+}) {
   return (
     <div>
       <img className="coin-logo" src={logo} alt={`logo of ${name}`}></img>
@@ -8,6 +16,7 @@ function CoinCard({ name, symbol, logo, current_price, price_change }) {
       <p>{symbol}</p>
       <p>{current_price}</p>
       <p>{price_change}</p>
+      <LineChart historicData={historicData}></LineChart>
     </div>
   );
 }
