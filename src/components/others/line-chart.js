@@ -5,10 +5,11 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+  Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler);
 
 function LineChart({ historicData }) {
   const labels = new Array(historicData.length);
@@ -30,20 +31,24 @@ function LineChart({ historicData }) {
         data: historicData,
         pointRadius: 0,
         // tension: 0.4,
-          backgroundColor: (context: ScriptableContext<"line">) => {
-              const ctx = context.chart.ctx;
-              const gradient = ctx.createLinearGradient(0, 0, 0, 200);
-              gradient.addColorStop(0, "rgba(250,174,50,1)");
-              gradient.addColorStop(1, "rgba(250,174,50,0)");
-              return gradient;
-          }
-        // borderColor: gradient2, // Add custom color border (Line)
-        // backgroundColor: ["rgba(75, 192, 192, 0.2)"],
-        // borderColor: ["rgb(75, 192, 192)"],
+        fill: {
+          target: "origin", // 3. Set the fill options
+          // above: "rgba(75, 192, 192, 0.25)",
+        },
+        borderColor: ["rgb(75, 192, 192)"],
         borderWidth: 1,
+        // borderColor: gradient2, // Add custom color border (Line)
+        backgroundColor: (context) => {
+          const ctx = context.chart.ctx;
+          const gradient = ctx.createLinearGradient(0, 30, 0, 170);
+          gradient.addColorStop(1, "rgba(11, 20, 66, 1)");
+          gradient.addColorStop(0, "rgba(75, 192, 192, 0.2)");
+          return gradient;
+        },
       },
     ],
   };
+
   return <Line data={data} options={options} />;
 }
 
