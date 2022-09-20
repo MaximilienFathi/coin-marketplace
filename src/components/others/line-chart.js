@@ -22,6 +22,9 @@ function LineChart({ historicData }) {
         display: false,
       },
     },
+    responsive: true,
+    maintainAspectRatio: false,
+    borderRadius: "11px",
   };
   const data = {
     labels,
@@ -30,13 +33,13 @@ function LineChart({ historicData }) {
         label: "Historic Data",
         data: historicData,
         pointRadius: 0,
-        // tension: 0.4,
+        tension: 0.7,
         fill: {
           target: "origin", // 3. Set the fill options
           // above: "rgba(75, 192, 192, 0.25)",
         },
         borderColor: ["rgb(75, 192, 192)"],
-        borderWidth: 1,
+        borderWidth: 2,
         // borderColor: gradient2, // Add custom color border (Line)
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
