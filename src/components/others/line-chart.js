@@ -24,7 +24,6 @@ function LineChart({ historicData }) {
     },
     responsive: true,
     maintainAspectRatio: false,
-    borderRadius: "11px",
   };
   const data = {
     labels,

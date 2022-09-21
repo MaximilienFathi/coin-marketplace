@@ -7,7 +7,8 @@
 
 .coin-card {
   box-shadow: 0 0 0.5rem 0.01rem #b8b8b8;
-  border-radius: 11px;
+  border-top-left-radius: 11px;
+  border-top-right-radius: 11px;
 
   display: flex;
   flex-direction: column;
@@ -18,7 +19,8 @@
   background-image: url(../../../../public/images/abstract-7186364_1280.png);
   background-size: 700%;
   z-index: 1;
-  border-radius: 11px;
+  border-top-left-radius: 11px;
+  border-top-right-radius: 11px;
   filter: brightness(70%) opacity(30%);
   height: 100%;
   width: 100%;
