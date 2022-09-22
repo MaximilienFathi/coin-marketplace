@@ -7,10 +7,23 @@ function CoinCard({
   symbol,
   logo,
   current_price,
+  currencyName,
+  currencySymbol,
   price_change,
   historicData,
 }) {
   const price_change_color = price_change >= 0 ? "green" : "red";
+
+  // Contrary to table data, not transforming price as  it already fine
+  const transformData = function (data, fractionDigits, type) {
+    if (type === "percentage") {
+      fractionDigits = 2;
+    }
+    return data.toLocaleString("en-US", {
+      minimumFractionDigits: fractionDigits,
+      maximumFractionDigits: fractionDigits,
+    });
+  };
 
   return (
     <div className="coin-card">
@@ -24,11 +37,16 @@ function CoinCard({
               alt={`logo of ${name}`}
             ></img>
             <div>
-              <p className="coin-card-symbol">{symbol}/USD</p>
+              <p className="coin-card-symbol">
+                {symbol}/{currencyName.toUpperCase()}
+              </p>
               <div className="coin-card-price-data">
-                <p className="coin-card-price">${current_price}</p>
+                <p className="coin-card-price">
+                  {currencySymbol}
+                  {current_price}
+                </p>
                 <p className={`coin-card-change ${price_change_color}`}>
-                  {price_change}%
+                  {transformData(price_change, 0, "percentage")}%
                 </p>
               </div>
             </div>
@@ -43,5 +61,3 @@ function CoinCard({
 }
 
 export default CoinCard;
-
-// Must include price change (in past 24h?) (in USD or have it change?)

@@ -42,9 +42,9 @@ function LineChart({ historicData }) {
         // borderColor: gradient2, // Add custom color border (Line)
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 30, 0, 170);
-          gradient.addColorStop(1, "rgba(11, 20, 66, 1)");
-          gradient.addColorStop(0, "rgba(75, 192, 192, 0.2)");
+          const gradient = ctx.createLinearGradient(0, 40, 0, 80);
+          gradient.addColorStop(1, "rgba(75, 192, 192, 0)");
+          gradient.addColorStop(0, "rgba(75, 192, 192, 0.4)");
           return gradient;
         },
       },
