@@ -3,6 +3,7 @@ import Header from "../components/others/header/header";
 import Hero from "../components/home/hero/hero";
 import TrendingCoins from "../components/home/trending-coins/trending-coins";
 import Footer from "../components/others/footer/footer";
+import Features from "../components/home/features/features";
 import "./page.css";
 
 function HomePage() {
@@ -12,6 +13,7 @@ function HomePage() {
         <Header />
         <Hero />
         <TrendingCoins />
+        <Features />
       </div>
       <Footer />
     </div>
