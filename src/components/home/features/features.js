@@ -6,7 +6,11 @@ function Features() {
     <div className="features-outer-container">
       <h3 className="features-subheading">Features</h3>
       <h2 className="features-heading">What is it all about?</h2>
-      <div className="features-inner-container"></div>
+      <div className="features-inner-container">
+        <div className="feature-box"></div>
+        <div className="feature-box"></div>
+        <div className="feature-box"></div>
+      </div>
     </div>
   );
 }
