@@ -83,7 +83,7 @@ function TrendingCoins() {
     <div className="trending-coins-outer-container">
       <h3 className="trending-coins-subheading">Trending coins</h3>
       <h2 className="trending-coins-heading">
-        Most searched cryptocurrencies these past 24 hours
+        Most Searched Cryptocurrencies Today
       </h2>
       <div className="trending-coins-inner-container">
         {trendingData.map((data) => {

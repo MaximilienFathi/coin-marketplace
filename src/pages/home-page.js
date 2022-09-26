@@ -4,6 +4,7 @@ import Hero from "../components/home/hero/hero";
 import TrendingCoins from "../components/home/trending-coins/trending-coins";
 import Footer from "../components/others/footer/footer";
 import Features from "../components/home/features/features";
+import QuickGuide from "../components/home/quick-guide/quick-guide";
 import "./page.css";
 
 function HomePage() {
@@ -14,6 +15,7 @@ function HomePage() {
         <Hero />
         <TrendingCoins />
         <Features />
+        <QuickGuide />
       </div>
       <Footer />
     </div>
