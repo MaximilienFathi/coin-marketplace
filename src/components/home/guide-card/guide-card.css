@@ -1,0 +1,33 @@
+.quick-guide-step-box {
+  display: flex;
+  text-align: center;
+}
+
+.quick-guide-step-img {
+  display: flex;
+  justify-content: center;
+}
+
+.guide-step-picture {
+  width: 60%;
+  height: auto;
+  /*margin-bottom: 1.2rem;*/
+}
+
+.quick-guide-step-number {
+  font-size: 8.6rem;
+  font-weight: 600;
+  color: #ddd;
+  margin-bottom: 1.2rem;
+}
+
+.quick-guide-step-heading {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 3.2rem;
+}
+
+.quick-guide-step-description {
+  font-size: 1.8rem;
+  line-height: 1.8;
+}
