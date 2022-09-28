@@ -1,33 +1,46 @@
 .quick-guide-step-box {
   display: flex;
-  text-align: center;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4.8rem;
 }
 
 .quick-guide-step-img {
   display: flex;
   justify-content: center;
+  width: 50%;
 }
 
 .guide-step-picture {
-  width: 60%;
+  width: 70%;
   height: auto;
   /*margin-bottom: 1.2rem;*/
+}
+
+.quick-guide-step-text {
+  width: 50%;
+  text-align: center;
 }
 
 .quick-guide-step-number {
   font-size: 8.6rem;
   font-weight: 600;
-  color: #ddd;
+  color: #fa58b6;
   margin-bottom: 1.2rem;
 }
 
 .quick-guide-step-heading {
-  font-size: 3rem;
+  font-size: 2.4rem;
+  font-weight: 500;
   line-height: 1.2;
   margin-bottom: 3.2rem;
 }
 
 .quick-guide-step-description {
+  /*font-size: 1.8rem;*/
+  /*line-height: 1.8;*/
+
+  color: rgba(255, 255, 255, 0.8);
   font-size: 1.8rem;
-  line-height: 1.8;
+  line-height: 1.6;
 }
