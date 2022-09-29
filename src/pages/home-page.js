@@ -5,6 +5,7 @@ import TrendingCoins from "../components/home/trending-coins/trending-coins";
 import Footer from "../components/others/footer/footer";
 import Features from "../components/home/features/features";
 import QuickGuide from "../components/home/quick-guide/quick-guide";
+import CtaBanner from "../components/home/cta-banner/cta-banner";
 import "./page.css";
 
 function HomePage() {
@@ -16,6 +17,7 @@ function HomePage() {
         <TrendingCoins />
         <Features />
         <QuickGuide />
+        <CtaBanner />
       </div>
       <Footer />
     </div>

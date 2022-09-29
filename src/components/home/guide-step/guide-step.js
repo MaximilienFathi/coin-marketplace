@@ -8,10 +8,7 @@ function GuideStep({
   leftBorder,
   rightBorder,
   bottomBorder,
-  borderTopLeftRadius,
-  borderTopRightRadius,
-  borderBottomLeftRadius,
-  borderBottomRightRadius,
+  borderRadius,
   heading,
   description,
 }) {
@@ -22,10 +19,7 @@ function GuideStep({
         borderLeft: leftBorder,
         borderRight: rightBorder,
         borderBottom: bottomBorder,
-        // borderTopLeftRadius: borderTopLeftRadius,
-        // borderTopRightRadius: borderTopRightRadius,
-        // borderBottomLeftRadius: borderBottomLeftRadius,
-        // borderBottomRightRadius: borderBottomRightRadius,
+        // borderRadius: borderRadius,
       }}
     >
       <div className="quick-guide-step-text" style={{ order: order }}>

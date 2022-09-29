@@ -13,10 +13,7 @@ function QuickGuide() {
           leftBorder="5px solid #fb79c5"
           rightBorder="none"
           bottomBorder="5px solid #fb79c5"
-          borderTopLeftRadius="0"
-          borderTopRightRadius="0"
-          borderBottomLeftRadius="5px"
-          borderBottomRightRadius="0"
+          borderRadius="0px 0px 5px 0px"
           picture={require("../Plain credit card-amico.png")}
           number="01"
           heading="Create a wallet"
@@ -27,10 +24,7 @@ function QuickGuide() {
           leftBorder="none"
           rightBorder="5px solid #fb79c5"
           bottomBorder="5px solid #fb79c5"
-          borderTopLeftRadius="0"
-          borderTopRightRadius="5px"
-          borderBottomLeftRadius="0"
-          borderBottomRightRadius="5px"
+          borderRadius="0px 5px 0px 5px"
           picture={require("../Bitcoin-cuate.png")}
           number="02"
           heading="Send cryptos to your wallet"
@@ -45,10 +39,7 @@ function QuickGuide() {
           leftBorder="5px solid #fb79c5"
           rightBorder="none"
           bottomBorder="5px solid #fb79c5"
-          borderTopLeftRadius="5px"
-          borderTopRightRadius="0"
-          borderBottomLeftRadius="5px"
-          borderBottomRightRadius="0"
+          borderRadius="5px 0px 5px 0px"
           picture={require("../Bitcoin P2P-amico.png")}
           number="03"
           heading={"Connect wallet to coin marketplace"}
@@ -63,10 +54,7 @@ function QuickGuide() {
           leftBorder="none"
           rightBorder="5px solid #fb79c5"
           bottomBorder="none"
-          borderTopLeftRadius="0"
-          borderTopRightRadius="5px"
-          borderBottomLeftRadius="0"
-          borderBottomRightRadius="0"
+          borderRadius="0px 5px 0px 0px"
           picture={require("../Bitcoin P2P-pana.png")}
           number="04"
           heading={"Swap your cryptos for other cryptos"}

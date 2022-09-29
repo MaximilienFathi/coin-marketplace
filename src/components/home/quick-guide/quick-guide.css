@@ -1,5 +1,6 @@
 .quick-guide-outer-container {
   padding-top: 9.6rem;
+  position: relative;
 }
 
 .quick-guide-heading {
@@ -34,4 +35,34 @@
   align-items: flex-start;
   justify-content: center;
   /*gap: 2.4rem;*/
+}
+
+.quick-guide-inner-container::before {
+  width: 95%;
+  height: 100%;
+  /*padding-bottom: 60%;*/
+  background-color: rgba(131, 119, 154, 0.3);
+  z-index: -2;
+}
+
+.quick-guide-inner-container::after {
+  width: 95%;
+  height: 100%;
+  /*padding-bottom: 60%;*/
+  background-image: url(../19601032_v617batch2-bb-02-technology.jpg);
+  background-size: cover;
+  filter: brightness(70%) opacity(10%);
+  z-index: -1;
+}
+
+.quick-guide-inner-container::before,
+.quick-guide-inner-container::after {
+  content: "";
+  display: block;
+  /*border: 3px solid #fb79c5;*/
+  border-radius: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
