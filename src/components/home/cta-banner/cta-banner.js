@@ -4,13 +4,25 @@ import "./cta-banner.css";
 function CtaBanner() {
   return (
     <div className="cta-banner-outer-container">
-      <div className="cta-banner-inner-container">
-        <h2 className="cta-banner-heading">Stay in the loop</h2>
-        <p className="cta-banner-description">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias
-          blanditiis debitis est exercitationem fugiat inventore libero
-          molestias porro.
-        </p>
+      <div className="cta-banner-middle-container">
+        <div className="cta-banner-inner-container">
+          <h2 className="cta-banner-heading">
+            Stay in the loop and get the latest news in your inbox!
+          </h2>
+          <form
+            className="cta-banner-form"
+            action="src/components/home/hero/hero#"
+          >
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Your email address"
+              required
+            />
+            <button className="GetStarted-btn">Get Started</button>
+          </form>
+        </div>
       </div>
     </div>
   );
