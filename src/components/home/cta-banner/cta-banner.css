@@ -1,6 +1,7 @@
 .cta-banner-outer-container {
   /*margin-top: 4.8rem;*/
   padding-top: 4.8rem;
+  padding-bottom: 4.8rem;
   border-radius: 50%;
   /*border-top: 5px solid silver;*/
 }
@@ -29,10 +30,11 @@
 }
 
 .cta-banner-inner-container {
-  background-color: rgba(131, 119, 154, 0.3);
-  max-width: 100rem;
-  margin: 0 auto;
-  padding: 4.8rem;
+  background: rgba(17, 33, 73, 0.8);
+  /*border: 3px solid #fb79c5;*/
+  max-width: 130rem;
+  /*margin: 0 auto;*/
+  padding: 4.8rem 12.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,15 +45,15 @@
 
 .cta-banner-inner-container::before {
   content: "";
-  background-image: url(../14803753_Vector_2677.jpg);
-  background-size: contain;
+  background-image: url(../12067355_4884273.jpg);
+  background-size: cover;
   bottom: 0;
   left: 0;
   position: absolute;
   margin: 0 auto;
   height: 100%;
   width: 100%;
-  filter: brightness(50%) opacity(70%);
+  filter: brightness(90%) opacity(60%);
   border-radius: 11px;
   z-index: -1;
 }
