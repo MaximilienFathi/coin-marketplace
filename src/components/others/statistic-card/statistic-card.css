@@ -16,7 +16,7 @@
 /* (was tricky) Necessary in order to have the image inserted before */
 .hero-stat-container::before {
   content: "";
-  background-image: url(../../../../public/images/abstract-7186364_1280.png);
+  background-image: url(../../../../public/IMAGES/abstract-7186364_1280.png);
   background-size: 700%;
   z-index: 1;
   border-radius: 11px;

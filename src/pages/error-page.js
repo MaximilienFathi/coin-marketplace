@@ -19,7 +19,7 @@ function ErrorPage() {
               <br />
               How about we go home?
             </p>
-            <Link className="home-btn" to="/coins">
+            <Link className="home-btn" to="/">
               Go Home
             </Link>
           </div>
@@ -29,7 +29,7 @@ function ErrorPage() {
           {/*    <source srcSet="" type="" />*/}
           <img
             className="error-img"
-            src={require("./pictures/404 error lost in space-pana.png")}
+            src={require("./IMAGES/404 error lost in space-pana.png")}
             alt=""
           />
           {/*  </picture>*/}
