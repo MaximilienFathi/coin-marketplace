@@ -4,6 +4,7 @@ import Favorite from "../others/favorite";
 import LineChart from "../others/line-chart";
 import axios from "axios";
 import "./table-data.css";
+import { Link } from "react-router-dom";
 
 function TableData({
   id,
@@ -77,7 +78,9 @@ function TableData({
       </td>
       <td className="coin-name-td">
         <img className="coin-logo" src={image} alt={`logo of ${name}`}></img>
-        <p className="coin-name">{name}</p>
+        <Link to={`/coins/${id}`} className="header-nav-link">
+          <p className="coin-name">{name}</p>
+        </Link>
         <p className="coin-symbol">{symbol.toUpperCase()}</p>
       </td>
       <td className="coin-price">
