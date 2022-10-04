@@ -1,0 +1,34 @@
+.coin-charts-outer-container {
+  width: 50%;
+  /*height: 50%;*/
+  /*border: 3px solid red;*/
+  border-radius: 11px;
+  padding: 2.4rem;
+  background: #303e58;
+}
+
+.datatype-buttons-group {
+  border-radius: 50px;
+  padding: 1.2rem;
+  width: fit-content;
+  border: 3px solid red;
+  display: flex;
+  gap: 1.2rem;
+}
+
+.datatype-button {
+  border: none;
+  background: none;
+}
+
+.datatype-button:visited {
+  border: 3px solid red;
+}
+
+.coin-charts-inner-container {
+  /*width: 50%;*/
+  height: 30rem;
+  border-radius: 11px;
+  padding: 2.4rem;
+  background: #394968;
+}

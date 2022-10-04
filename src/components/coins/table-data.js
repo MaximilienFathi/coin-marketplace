@@ -78,7 +78,11 @@ function TableData({
       </td>
       <td className="coin-name-td">
         <img className="coin-logo" src={image} alt={`logo of ${name}`}></img>
-        <Link to={`/coins/${id}`} className="header-nav-link">
+        <Link
+          to={`/coins/${id}`}
+          state={{ coinID: id }}
+          className="header-nav-link"
+        >
           <p className="coin-name">{name}</p>
         </Link>
         <p className="coin-symbol">{symbol.toUpperCase()}</p>
