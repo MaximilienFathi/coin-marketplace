@@ -1,34 +1,58 @@
 .coin-charts-outer-container {
   width: 50%;
-  /*height: 50%;*/
+  height: fit-content;
   /*border: 3px solid red;*/
   border-radius: 11px;
   padding: 2.4rem;
   background: #303e58;
 }
 
-.datatype-buttons-group {
-  border-radius: 50px;
-  padding: 1.2rem;
-  width: fit-content;
-  border: 3px solid red;
+.coin-charts-inner-container {
+  /*width: 50%;*/
+  height: 40rem;
+  border-radius: 11px;
+  padding: 3.2rem 1.6rem 4.8rem 1.6rem;
+  background: #394968;
+}
+
+.coin-charts-price-data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.6rem;
+  /*border: 3px solid red;*/
+}
+
+.coin-charts-heading {
+  font-size: 2rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.timeframe-buttons-group {
+  /*border-radius: 50px;*/
+  /*padding: 1.2rem;*/
+  /*width: fit-content;*/
+  /*border: 3px solid red;*/
   display: flex;
   gap: 1.2rem;
 }
 
-.datatype-button {
+.timeframe-buttons-group button {
   border: none;
   background: none;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.datatype-button:visited {
-  border: 3px solid red;
+.timeframe-buttons-group button:hover {
+  cursor: pointer;
 }
 
-.coin-charts-inner-container {
-  /*width: 50%;*/
-  height: 30rem;
-  border-radius: 11px;
-  padding: 2.4rem;
-  background: #394968;
-}
+/*.timeframe-buttons-group button:selection {*/
+/*  color: red;*/
+/*}*/
+
+/*.timeframe-button:visited {*/
+/*  border: 3px solid red;*/
+/*}*/

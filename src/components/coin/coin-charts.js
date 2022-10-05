@@ -22,13 +22,19 @@ ChartJS.register(
   Tooltip
 );
 
-function CoinCharts({ coinID }) {
+function CoinCharts({ coinID, coinName }) {
   const [historicData, setHistoricData] = useState([]);
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
   const [datatype, setDatatype] = useState("prices");
   const [timeframe, setTimeframe] = useState(1);
   // const [loading, setLoading] = useState(false);
+
+  const labels = {
+    prices: "Prices",
+    market_caps: "Market Caps",
+    total_volumes: "Total Volumes",
+  };
   //****************************************************************************
   //****************************************************************************
   // Initialize all data that will be retrieved from localStorage
@@ -69,26 +75,55 @@ function CoinCharts({ coinID }) {
   }
   //****************************************************************************
   //****************************************************************************
-  const labels = new Array(historicData.length);
   const options = {
     scales: {
-      // x: {
-      //   display: false,
-      // },
-      // y: {
-      //   display: false,
-      // },
+      x: {
+        ticks: { padding: 10, color: "rgba(255,255,255,0.2)" },
+        grid: {
+          display: false,
+          drawBorder: true,
+          borderColor: "rgba(255, 255, 255, 0.5)",
+          borderWidth: 2,
+          tickBorderDashOffset: 50,
+        },
+      },
+      y: {
+        ticks: { padding: 10, color: "rgba(255,255,255,0.2)" },
+        grid: {
+          drawBorder: false,
+          borderDash: [3, 3],
+          // borderDashOffset: 2,
+          drawTicks: false,
+          color: "rgba(255,255,255,0.2)",
+        },
+      },
     },
+    // layout: { padding: { left: 100, bottom: 50 } },
     responsive: true,
-    maintainAspectRatio: false,
+    // maintainAspectRatio: false,
   };
   const data = {
-    labels,
+    labels: historicData.map((coin) => {
+      let date = new Date(coin[0]);
+      let time =
+        date.getHours() > 12
+          ? `${date.getHours() - 12}:${
+              date.getMinutes() < 10
+                ? "0" + date.getMinutes()
+                : date.getMinutes()
+            } PM`
+          : `${date.getHours()}:${
+              date.getMinutes() < 10
+                ? "0" + date.getMinutes()
+                : date.getMinutes()
+            } AM`;
+      return timeframe === 1 ? time : date.toLocaleDateString();
+    }),
     datasets: [
       {
-        label: "Historic Data",
-        data: historicData,
-        pointRadius: 0,
+        data: historicData.map((coin) => coin[1]),
+        label: `${currencyName.toUpperCase()}`,
+        pointRadius: 0.5,
         tension: 0.7,
         fill: {
           target: "origin", // 3. Set the fill options
@@ -99,7 +134,7 @@ function CoinCharts({ coinID }) {
         // borderColor: gradient2, // Add custom color border (Line)
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 170, 0, 300);
+          const gradient = ctx.createLinearGradient(0, 130, 0, 330);
           gradient.addColorStop(1, "rgba(52,151,149,0)");
           gradient.addColorStop(0, "rgba(52,151,149,100)");
           return gradient;
@@ -136,20 +171,53 @@ function CoinCharts({ coinID }) {
       {/*    Total Volume*/}
       {/*  </button>*/}
       {/*</div>*/}
-      <div className="timeframe-buttons-group">
-        <button onClick={() => fetchData(datatype, 1)}>1D</button>
-        <button onClick={() => fetchData(datatype, 7)}>7D</button>
-        <button onClick={() => fetchData(datatype, 30)}>1M</button>
-        <button onClick={() => fetchData(datatype, 90)}>3M</button>
-        <button onClick={() => fetchData(datatype, 365)}>1Y</button>
-        <button onClick={() => fetchData(datatype, "max")}>All</button>
-      </div>
       <div className="coin-charts-inner-container">
         <div className="coin-charts-price-data">
-          <p className="coin-charts-price-value">
-            {/*{currencySymbol}*/}
-            {/*{current_price}*/}
+          <p className="coin-charts-heading">
+            {coinName} {labels[datatype]} Chart ({currencyName.toUpperCase()})
           </p>
+          <div className="timeframe-buttons-group">
+            <button
+              className="timeframe-button"
+              onClick={() => fetchData(datatype, 1)}
+            >
+              1D
+            </button>
+            <button
+              className="timeframe-button"
+              onClick={() => fetchData(datatype, 7)}
+            >
+              7D
+            </button>
+            <button
+              className="timeframe-button"
+              onClick={() => fetchData(datatype, 30)}
+            >
+              1M
+            </button>
+            <button
+              className="timeframe-button"
+              onClick={() => fetchData(datatype, 90)}
+            >
+              3M
+            </button>
+            <button
+              className="timeframe-button"
+              onClick={() => fetchData(datatype, 365)}
+            >
+              1Y
+            </button>
+            <button
+              className="timeframe-button"
+              onClick={() => fetchData(datatype, "max")}
+            >
+              All
+            </button>
+          </div>
+          {/*<p className="coin-charts-price-value">*/}
+          {/*{currencySymbol}*/}
+          {/*{current_price}*/}
+          {/*</p>*/}
           {/*<p className={`chart-area-price-change ${price_change_color}`}>*/}
           {/*  {transformData(price_change, 0, "percentage")}%*/}
           {/*</p>*/}

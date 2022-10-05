@@ -80,7 +80,7 @@ function TableData({
         <img className="coin-logo" src={image} alt={`logo of ${name}`}></img>
         <Link
           to={`/coins/${id}`}
-          state={{ coinID: id }}
+          state={{ coinID: id, coinName: name }}
           className="header-nav-link"
         >
           <p className="coin-name">{name}</p>

@@ -6,15 +6,15 @@ import Footer from "../components/others/footer/footer";
 
 function CoinPage(props) {
   const location = useLocation();
-  const { coinID } = location.state;
+  const { coinID, coinName } = location.state;
 
-  console.log(coinID);
+  console.log(coinID, coinName);
 
   return (
     <div className="page-container">
       <div className="content-wrap">
         <Header />
-        <CoinCharts coinID={coinID} />
+        <CoinCharts coinID={coinID} coinName={coinName} />
       </div>
       <Footer />
     </div>
