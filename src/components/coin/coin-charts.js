@@ -10,8 +10,9 @@ import {
   Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import "./coin-charts.css";
 import CoinDataTabs from "./coin-data-tabs";
+import TimeframeTabs from "./timeframe-tabs";
+import "./coin-charts.css";
 
 ChartJS.register(
   CategoryScale,
@@ -55,7 +56,7 @@ function CoinCharts({ coinID, coinName }) {
   // Fetch historical data for a specific coin
   useEffect(() => {
     fetchData("prices", 1);
-  }, []);
+  }, [currencyName]);
 
   // Fetch historic data based on chosen data type (prices, market cap,
   // total volume)
@@ -78,17 +79,17 @@ function CoinCharts({ coinID, coinName }) {
   const options = {
     scales: {
       x: {
-        ticks: { padding: 10, color: "rgba(255,255,255,0.2)" },
+        ticks: { padding: 10, color: "rgba(255,255,255,0.4)" },
         grid: {
           display: false,
           drawBorder: true,
-          borderColor: "rgba(255, 255, 255, 0.5)",
+          borderColor: "rgba(255, 255, 255, 0.6)",
           borderWidth: 2,
           tickBorderDashOffset: 50,
         },
       },
       y: {
-        ticks: { padding: 10, color: "rgba(255,255,255,0.2)" },
+        ticks: { padding: 10, color: "rgba(255,255,255,0.4)" },
         grid: {
           drawBorder: false,
           borderDash: [3, 3],
@@ -117,7 +118,7 @@ function CoinCharts({ coinID, coinName }) {
                 ? "0" + date.getMinutes()
                 : date.getMinutes()
             } AM`;
-      return timeframe === 1 ? time : date.toLocaleDateString();
+      return timeframe == 1 ? time : date.toLocaleDateString();
     }),
     datasets: [
       {
@@ -146,74 +147,13 @@ function CoinCharts({ coinID, coinName }) {
   //****************************************************************************
   return (
     <div className="coin-charts-outer-container">
-      <CoinDataTabs
-        fetchData={fetchData}
-        datatype={datatype}
-        timeframe={timeframe}
-      />
-      {/*<div className="datatype-buttons-group">*/}
-      {/*  <button*/}
-      {/*    className="datatype-button"*/}
-      {/*    onClick={() => fetchData("prices", timeframe)}*/}
-      {/*  >*/}
-      {/*    Price*/}
-      {/*  </button>*/}
-      {/*  <button*/}
-      {/*    className="datatype-button"*/}
-      {/*    onClick={() => fetchData("market_caps", timeframe)}*/}
-      {/*  >*/}
-      {/*    Market Cap*/}
-      {/*  </button>*/}
-      {/*  <button*/}
-      {/*    className="datatype-button"*/}
-      {/*    onClick={() => fetchData("total_volumes", timeframe)}*/}
-      {/*  >*/}
-      {/*    Total Volume*/}
-      {/*  </button>*/}
-      {/*</div>*/}
+      <CoinDataTabs fetchData={fetchData} timeframe={timeframe} />
       <div className="coin-charts-inner-container">
         <div className="coin-charts-price-data">
           <p className="coin-charts-heading">
             {coinName} {labels[datatype]} Chart ({currencyName.toUpperCase()})
           </p>
-          <div className="timeframe-buttons-group">
-            <button
-              className="timeframe-button"
-              onClick={() => fetchData(datatype, 1)}
-            >
-              1D
-            </button>
-            <button
-              className="timeframe-button"
-              onClick={() => fetchData(datatype, 7)}
-            >
-              7D
-            </button>
-            <button
-              className="timeframe-button"
-              onClick={() => fetchData(datatype, 30)}
-            >
-              1M
-            </button>
-            <button
-              className="timeframe-button"
-              onClick={() => fetchData(datatype, 90)}
-            >
-              3M
-            </button>
-            <button
-              className="timeframe-button"
-              onClick={() => fetchData(datatype, 365)}
-            >
-              1Y
-            </button>
-            <button
-              className="timeframe-button"
-              onClick={() => fetchData(datatype, "max")}
-            >
-              All
-            </button>
-          </div>
+          <TimeframeTabs fetchData={fetchData} datatype={datatype} />
           {/*<p className="coin-charts-price-value">*/}
           {/*{currencySymbol}*/}
           {/*{current_price}*/}

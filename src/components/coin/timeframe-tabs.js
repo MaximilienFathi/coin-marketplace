@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { styled, Tab, Tabs } from "@mui/material";
-import "./coin-data-tabs.css";
+import "./timeframe-tabs.css";
 
 //========================================================
 // CUSTOM STYLES
@@ -9,7 +9,7 @@ const StyledTab = styled(Tab)({
   fontFamily: "inherit",
   fontSize: "1.2rem",
   fontWeight: 500,
-  minWidth: "13rem",
+  minWidth: "5rem",
   "&.MuiButtonBase-root": { padding: 10, minHeight: 30 },
   "&.Mui-selected": {
     color: "inherit",
@@ -21,7 +21,6 @@ const StyledTab = styled(Tab)({
     background: "linear-gradient(90deg, #c671cf, #b84dc3)",
   },
   "&:hover": {
-    // color: "rgba(255, 255, 255, 0.8)",
     color: "inherit",
     backgroundColor: "rgba(255,255,255,0.1)",
     borderRadius: 11,
@@ -30,16 +29,16 @@ const StyledTab = styled(Tab)({
 });
 //========================================================
 
-function CoinDataTabs({ fetchData, timeframe }) {
-  const [value, setValue] = useState("prices");
+function TimeframeTabs({ fetchData, datatype }) {
+  const [value, setValue] = useState("1");
 
-  const handleClick = (newDatatype) => {
-    setValue(newDatatype);
-    fetchData(newDatatype, timeframe);
+  const handleClick = (newTimeframe) => {
+    setValue(newTimeframe);
+    fetchData(datatype, newTimeframe);
   };
 
   return (
-    <div className="coin-data-tabs-container">
+    <div className="timeframe-tabs-container">
       <Tabs
         value={value}
         TabIndicatorProps={{
@@ -47,25 +46,16 @@ function CoinDataTabs({ fetchData, timeframe }) {
         }}
         sx={{ "&.MuiTabs-root": { minHeight: "fit-content" } }}
       >
-        <StyledTab
-          label="Price"
-          value="prices"
-          onClick={() => handleClick("prices")}
-        />
-        <StyledTab
-          label="Market Cap"
-          value="market_caps"
-          onClick={() => handleClick("market_caps")}
-        />
-        <StyledTab
-          label="Total Volume"
-          value="total_volumes"
-          onClick={() => handleClick("total_volumes")}
-        />
+        <StyledTab label="1D" value="1" onClick={() => handleClick("1")} />
+        <StyledTab label="7D" value="7" onClick={() => handleClick("7")} />
+        <StyledTab label="1M" value="30" onClick={() => handleClick("30")} />
+        <StyledTab label="3M" value="90" onClick={() => handleClick("90")} />
+        <StyledTab label="1Y" value="365" onClick={() => handleClick("365")} />
+        <StyledTab label="All" value="max" onClick={() => handleClick("max")} />
       </Tabs>
       {/*<Outlet />*/}
     </div>
   );
 }
 
-export default CoinDataTabs;
+export default TimeframeTabs;
