@@ -30,12 +30,12 @@ const StyledTab = styled(Tab)({
 });
 //========================================================
 
-function CoinDataTabs({ fetchData, timeframe }) {
+function CoinDataTabs({ fetchChartData, timeframe }) {
   const [value, setValue] = useState("prices");
 
   const handleClick = (newDatatype) => {
     setValue(newDatatype);
-    fetchData(newDatatype, timeframe);
+    fetchChartData(newDatatype, timeframe);
   };
 
   return (

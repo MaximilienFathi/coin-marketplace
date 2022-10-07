@@ -1,0 +1,19 @@
+.price_changes_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /*border: 3px solid red;*/
+}
+
+.price_change_box {
+  min-width: 8.5rem;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 1.2rem;
+  border-radius: 11px;
+  background: #394968;
+  /*border: 3px solid green;*/
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}

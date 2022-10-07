@@ -29,12 +29,12 @@ const StyledTab = styled(Tab)({
 });
 //========================================================
 
-function TimeframeTabs({ fetchData, datatype }) {
+function TimeframeTabs({ fetchChartData, datatype }) {
   const [value, setValue] = useState("1");
 
   const handleClick = (newTimeframe) => {
     setValue(newTimeframe);
-    fetchData(datatype, newTimeframe);
+    fetchChartData(datatype, newTimeframe);
   };
 
   return (

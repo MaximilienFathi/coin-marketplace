@@ -12,6 +12,7 @@ import {
 import { Line } from "react-chartjs-2";
 import CoinDataTabs from "./coin-data-tabs";
 import TimeframeTabs from "./timeframe-tabs";
+import PriceChanges from "./price-changes";
 import "./coin-charts.css";
 
 ChartJS.register(
@@ -23,10 +24,14 @@ ChartJS.register(
   Tooltip
 );
 
-function CoinCharts({ coinID, coinName }) {
+function CoinCharts({
+  coinID,
+  coinName,
+  currencyName,
+  currencySymbol,
+  priceChangesData,
+}) {
   const [historicData, setHistoricData] = useState([]);
-  const [currencyName, setCurrencyName] = useState("usd");
-  const [currencySymbol, setCurrencySymbol] = useState("$");
   const [datatype, setDatatype] = useState("prices");
   const [timeframe, setTimeframe] = useState(1);
   // const [loading, setLoading] = useState(false);
@@ -38,29 +43,13 @@ function CoinCharts({ coinID, coinName }) {
   };
   //****************************************************************************
   //****************************************************************************
-  // Initialize all data that will be retrieved from localStorage
+  // Fetch chart data for a specific coin
   useEffect(() => {
-    // Currency data
-    if (localStorage.getItem("currency")) {
-      setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);
-      setCurrencySymbol(JSON.parse(localStorage.getItem("currency"))["symbol"]);
-    }
-    if (!localStorage.getItem("currency")) {
-      localStorage.setItem(
-        "currency",
-        JSON.stringify({ name: currencyName, symbol: currencySymbol })
-      );
-    }
+    fetchChartData("prices", 1);
   }, [currencyName]);
 
-  // Fetch historical data for a specific coin
-  useEffect(() => {
-    fetchData("prices", 1);
-  }, [currencyName]);
-
-  // Fetch historic data based on chosen data type (prices, market cap,
-  // total volume)
-  async function fetchData(newDataType, newTimeframe) {
+  // Fetch chart data based on chosen data type (prices, market cap, volume)
+  async function fetchChartData(newDataType, newTimeframe) {
     try {
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coinID}/market_chart?vs_currency=${currencyName}&days=${newTimeframe}`
@@ -77,6 +66,12 @@ function CoinCharts({ coinID, coinName }) {
   //****************************************************************************
   //****************************************************************************
   const options = {
+    locale: "en-US",
+    interaction: {
+      mode: "nearest",
+      axis: "x",
+      intersect: false,
+    },
     scales: {
       x: {
         ticks: { padding: 10, color: "rgba(255,255,255,0.4)" },
@@ -89,7 +84,16 @@ function CoinCharts({ coinID, coinName }) {
         },
       },
       y: {
-        ticks: { padding: 10, color: "rgba(255,255,255,0.4)" },
+        ticks: {
+          padding: 10,
+          color: "rgba(255,255,255,0.4)",
+          // callback: function (value, index, ticks) {
+          //   return new Intl.NumberFormat("en-US", {
+          //     style: "currency",
+          //     currency: "usd",
+          //   }).format(value);
+          // },
+        },
         grid: {
           drawBorder: false,
           borderDash: [3, 3],
@@ -103,6 +107,27 @@ function CoinCharts({ coinID, coinName }) {
     responsive: true,
     // maintainAspectRatio: false,
   };
+  // https://stackoverflow.com/questions/72998998/how-to-make-vertical-line-when-hovering-cursor-chart-js
+  const plugins = [
+    {
+      afterDraw: (chart) => {
+        if (chart.tooltip?._active?.length) {
+          let x = chart.tooltip._active[0].element.x;
+          let yAxis = chart.scales.y;
+          let ctx = chart.ctx;
+          ctx.save();
+          ctx.beginPath();
+          ctx.setLineDash([3, 3]);
+          ctx.moveTo(x, yAxis.top);
+          ctx.lineTo(x, yAxis.bottom);
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = "rgba(255,255,255,0.4)";
+          ctx.stroke();
+          ctx.restore();
+        }
+      },
+    },
+  ];
   const data = {
     labels: historicData.map((coin) => {
       let date = new Date(coin[0]);
@@ -147,13 +172,13 @@ function CoinCharts({ coinID, coinName }) {
   //****************************************************************************
   return (
     <div className="coin-charts-outer-container">
-      <CoinDataTabs fetchData={fetchData} timeframe={timeframe} />
+      <CoinDataTabs fetchChartData={fetchChartData} timeframe={timeframe} />
       <div className="coin-charts-inner-container">
         <div className="coin-charts-price-data">
           <p className="coin-charts-heading">
             {coinName} {labels[datatype]} Chart ({currencyName.toUpperCase()})
           </p>
-          <TimeframeTabs fetchData={fetchData} datatype={datatype} />
+          <TimeframeTabs fetchChartData={fetchChartData} datatype={datatype} />
           {/*<p className="coin-charts-price-value">*/}
           {/*{currencySymbol}*/}
           {/*{current_price}*/}
@@ -162,8 +187,9 @@ function CoinCharts({ coinID, coinName }) {
           {/*  {transformData(price_change, 0, "percentage")}%*/}
           {/*</p>*/}
         </div>
-        <Line data={data} options={options} />
+        <Line data={data} plugins={plugins} options={options} />
       </div>
+      <PriceChanges priceChangesData={priceChangesData}></PriceChanges>
     </div>
   );
 }
