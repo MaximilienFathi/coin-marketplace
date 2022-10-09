@@ -4,6 +4,7 @@ import Header from "../components/others/header/header";
 import CoinCharts from "../components/coin/coin-charts";
 import Footer from "../components/others/footer/footer";
 import axios from "axios";
+import Calculator from "../components/coin/calculator";
 
 function CoinPage(props) {
   const [priceChangesData, setPriceChangesData] = useState({});
@@ -69,6 +70,7 @@ function CoinPage(props) {
           currencySymbol={currencySymbol}
           priceChangesData={priceChangesData}
         />
+        <Calculator></Calculator>
       </div>
       <Footer />
     </div>
