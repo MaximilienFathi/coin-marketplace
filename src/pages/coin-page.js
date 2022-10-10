@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 import Header from "../components/others/header/header";
 import CoinCharts from "../components/coin/coin-charts";
 import Footer from "../components/others/footer/footer";
-import axios from "axios";
 import Calculator from "../components/coin/calculator";
+import "./coin-page.css";
 
-function CoinPage(props) {
+function CoinPage() {
   const [priceChangesData, setPriceChangesData] = useState({});
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
   const location = useLocation();
-  const { coinID, coinName } = location.state;
+  const { coinID, coinName, coinSymbol } = location.state;
 
   // Initialize all data that will be retrieved from localStorage
   useEffect(() => {
@@ -61,8 +62,8 @@ function CoinPage(props) {
 
   return (
     <div className="page-container">
+      <Header />
       <div className="content-wrap">
-        <Header />
         <CoinCharts
           coinID={coinID}
           coinName={coinName}
@@ -70,7 +71,10 @@ function CoinPage(props) {
           currencySymbol={currencySymbol}
           priceChangesData={priceChangesData}
         />
-        <Calculator></Calculator>
+        <Calculator
+          coinSymbol={coinSymbol}
+          currencyName={currencyName}
+        ></Calculator>
       </div>
       <Footer />
     </div>

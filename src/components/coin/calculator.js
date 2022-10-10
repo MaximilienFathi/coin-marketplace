@@ -1,20 +1,79 @@
 import React, { useState } from "react";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
+import CalculatorInput from "./calculator-input";
+import "./calculator.css";
 
-function Calculator(props) {
-  const [value, setValue] = useState("");
-  const handleChange = (event) => {
-    setValue(event.target.value);
-    console.log(event.target.value);
+//========================================================
+// CUSTOM STYLES
+const IconStyles = {
+  width: "2.4rem",
+  height: "auto",
+  padding: "0.8rem",
+  borderRadius: "50%",
+  zIndex: 1,
+  position: "absolute",
+  left: "50%",
+  top: "50%",
+  transform: "translate(-50%, -50%)",
+  background: "linear-gradient(90deg, #b84dc3, #a620b4)",
+  boxShadow: "inset 0 0 2px #000",
+};
+//========================================================
+
+function Calculator({ coinSymbol, currencyName }) {
+  const [input1, setInput1] = useState("");
+  const [input2, setInput2] = useState("");
+  const [currency1, setCurrency1] = useState(coinSymbol);
+  const [currency2, setCurrency2] = useState(currencyName);
+
+  const handleInput1Change = (event) => {
+    setInput1(event.target.value);
+    if (event.target.value !== "") setInput2(event.target.value * 2);
+    if (event.target.value === "") setInput2("");
+  };
+
+  const handleInput2Change = (event) => {
+    setInput1(event.target.value * 2);
+    setInput2(event.target.value);
+  };
+
+  const handleClick = () => {
+    const temp1 = input1;
+    setInput1(input2);
+    setInput2(temp1);
+
+    const temp2 = currency1;
+    setCurrency1(currency2);
+    setCurrency2(temp2);
   };
 
   return (
     <div className="calculator-outer-container">
-      <p>Crypto Calculator</p>
+      <p className="calculator-heading">Crypto Calculator</p>
       <div className="calculator-inner-container">
-        <input type="number" value={value} onChange={handleChange} />
-        <button></button>
-        <input type="number" value={value} onChange={handleChange} />
+        <CalculatorInput
+          currency1={currency1}
+          currency2={currency2}
+          input1={input1}
+          input2={input2}
+          inputOrder={1}
+          handleChange={handleInput1Change}
+        />
+        {/*<div className="switchButton" onClick={handleClick}>*/}
+        <SwapVertIcon sx={IconStyles} onClick={handleClick}></SwapVertIcon>
+        {/*</div>*/}
+        <CalculatorInput
+          currency1={currency1}
+          currency2={currency2}
+          input1={input1}
+          input2={input2}
+          inputOrder={2}
+          handleChange={handleInput2Change}
+        />
       </div>
+      <p>
+        1 {coinSymbol.toUpperCase()} = {currencyName.toUpperCase()} {}
+      </p>
     </div>
   );
 }
