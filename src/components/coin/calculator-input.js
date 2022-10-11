@@ -1,9 +1,7 @@
 import * as React from "react";
 import { InputAdornment, styled } from "@mui/material";
 import Box from "@mui/material/Box";
-import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
-import { useEffect } from "react";
 
 //========================================================
 // CUSTOM STYLES
@@ -53,6 +51,7 @@ const InputAdornmentStyles = {
   width: "6rem",
   height: "auto",
   padding: "0.8rem 1.4rem",
+  marginRight: "1.2rem",
   borderRadius: "11px",
   background: "linear-gradient(90deg, #b84dc3, #a620b4)",
   boxShadow: "inset 0 0 2px #000",

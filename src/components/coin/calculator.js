@@ -8,19 +8,24 @@ import "./calculator.css";
 const IconStyles = {
   width: "2.4rem",
   height: "auto",
-  padding: "0.8rem",
-  borderRadius: "50%",
-  zIndex: 1,
-  position: "absolute",
-  left: "50%",
-  top: "50%",
-  transform: "translate(-50%, -50%)",
-  background: "linear-gradient(90deg, #b84dc3, #a620b4)",
-  boxShadow: "inset 0 0 2px #000",
+  // padding: "0.8rem",
+  // borderRadius: "50%",
+  // zIndex: 1,
+  // position: "absolute",
+  // left: "50%",
+  // top: "50%",
+  // transform: "translate(-50%, -50%)",
+  // background: "linear-gradient(90deg, #b84dc3, #a620b4)",
+  // boxShadow: "inset 0 0 2px #000",
 };
 //========================================================
 
-function Calculator({ coinSymbol, currencyName }) {
+function Calculator({
+  coinSymbol,
+  currencySymbol,
+  currencyName,
+  currencyRates,
+}) {
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
   const [currency1, setCurrency1] = useState(coinSymbol);
@@ -28,12 +33,13 @@ function Calculator({ coinSymbol, currencyName }) {
 
   const handleInput1Change = (event) => {
     setInput1(event.target.value);
-    if (event.target.value !== "") setInput2(event.target.value * 2);
+    if (event.target.value !== "")
+      setInput2(event.target.value * currencyRates[currencyName]);
     if (event.target.value === "") setInput2("");
   };
 
   const handleInput2Change = (event) => {
-    setInput1(event.target.value * 2);
+    setInput1(event.target.value * currencyRates[currencyName]);
     setInput2(event.target.value);
   };
 
@@ -59,9 +65,9 @@ function Calculator({ coinSymbol, currencyName }) {
           inputOrder={1}
           handleChange={handleInput1Change}
         />
-        {/*<div className="switchButton" onClick={handleClick}>*/}
-        <SwapVertIcon sx={IconStyles} onClick={handleClick}></SwapVertIcon>
-        {/*</div>*/}
+        <button className="switchButton" onClick={handleClick}>
+          <SwapVertIcon sx={IconStyles}></SwapVertIcon>
+        </button>
         <CalculatorInput
           currency1={currency1}
           currency2={currency2}
@@ -71,8 +77,9 @@ function Calculator({ coinSymbol, currencyName }) {
           handleChange={handleInput2Change}
         />
       </div>
-      <p>
-        1 {coinSymbol.toUpperCase()} = {currencyName.toUpperCase()} {}
+      <p className="currency-rate">
+        1 {coinSymbol.toUpperCase()} = {currencySymbol}
+        {currencyRates[currencyName]}
       </p>
     </div>
   );

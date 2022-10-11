@@ -8,6 +8,7 @@ import Calculator from "../components/coin/calculator";
 import "./coin-page.css";
 
 function CoinPage() {
+  const [currencyRates, setCurrencyRates] = useState({});
   const [priceChangesData, setPriceChangesData] = useState({});
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
@@ -39,21 +40,22 @@ function CoinPage() {
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coinID}`
       );
-      const data = response.data.market_data;
+      const market_data = response.data.market_data;
       const price_data = {};
       price_data.price_change_1h =
-        data.price_change_percentage_1h_in_currency[currencyName];
+        market_data.price_change_percentage_1h_in_currency[currencyName];
       price_data.price_change_24h =
-        data.price_change_percentage_24h_in_currency[currencyName];
+        market_data.price_change_percentage_24h_in_currency[currencyName];
       price_data.price_change_7d =
-        data.price_change_percentage_7d_in_currency[currencyName];
+        market_data.price_change_percentage_7d_in_currency[currencyName];
       price_data.price_change_14d =
-        data.price_change_percentage_14d_in_currency[currencyName];
+        market_data.price_change_percentage_14d_in_currency[currencyName];
       price_data.price_change_30d =
-        data.price_change_percentage_30d_in_currency[currencyName];
+        market_data.price_change_percentage_30d_in_currency[currencyName];
       price_data.price_change_1y =
-        data.price_change_percentage_1y_in_currency[currencyName];
+        market_data.price_change_percentage_1y_in_currency[currencyName];
       setPriceChangesData(price_data);
+      setCurrencyRates(market_data.current_price);
       console.log("result 2", response.data.market_data);
     } catch (err) {
       console.error(err);
@@ -61,9 +63,9 @@ function CoinPage() {
   }
 
   return (
-    <div className="page-container">
+    <div className="coin-page-container">
       <Header />
-      <div className="content-wrap">
+      <div className="coin-page-content-wrap content-wrap">
         <CoinCharts
           coinID={coinID}
           coinName={coinName}
@@ -74,6 +76,8 @@ function CoinPage() {
         <Calculator
           coinSymbol={coinSymbol}
           currencyName={currencyName}
+          currencySymbol={currencySymbol}
+          currencyRates={currencyRates}
         ></Calculator>
       </div>
       <Footer />
