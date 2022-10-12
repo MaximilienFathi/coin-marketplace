@@ -1,0 +1,9 @@
+.main-info-outer-container {
+  height: auto;
+  /*border: 3px solid red;*/
+  border-radius: 11px;
+  padding: 2.4rem;
+  background: #303e58;
+  grid-column: 1;
+  grid-row: 1 / 2;
+}

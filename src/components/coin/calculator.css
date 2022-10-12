@@ -4,6 +4,8 @@
   border-radius: 11px;
   padding: 2.4rem;
   background: #303e58;
+  grid-column: 2;
+  grid-row: 3 / 4;
 }
 
 .calculator-heading {

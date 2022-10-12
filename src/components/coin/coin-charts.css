@@ -5,6 +5,8 @@
   border-radius: 11px;
   padding: 2.4rem;
   background: #303e58;
+  grid-column: 1 / 2;
+  grid-row: 2 / -1;
 }
 
 .coin-charts-inner-container {

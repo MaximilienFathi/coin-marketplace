@@ -1,0 +1,10 @@
+.swapper-outer-container {
+  height: fit-content;
+  /*border: 3px solid red;*/
+  border-radius: 11px;
+  padding: 2.4rem;
+  background: #303e58;
+
+  grid-column: 2;
+  grid-row: 2 / 3;
+}

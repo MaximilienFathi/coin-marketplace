@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/others/header/header";
+import MainInfo from "../components/coin/main-info";
 import CoinCharts from "../components/coin/coin-charts";
 import Footer from "../components/others/footer/footer";
 import Calculator from "../components/coin/calculator";
+import Swapper from "../components/coin/swapper";
 import "./coin-page.css";
 
 function CoinPage() {
+  const [mainInfoData, setMainInfoData] = useState({});
   const [currencyRates, setCurrencyRates] = useState({});
   const [priceChangesData, setPriceChangesData] = useState({});
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
   const location = useLocation();
   const { coinID, coinName, coinSymbol } = location.state;
+
+  //############################################################################
 
   // Initialize all data that will be retrieved from localStorage
   useEffect(() => {
@@ -30,42 +35,53 @@ function CoinPage() {
     }
   }, [currencyName]);
 
+  //############################################################################
+
   // Fetch data for a specific coin
   useEffect(() => {
-    fetchPriceChanges();
+    fetchCoinData();
   }, [currencyName]);
 
-  async function fetchPriceChanges() {
+  async function fetchCoinData() {
     try {
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coinID}`
       );
       const market_data = response.data.market_data;
-      const price_data = {};
-      price_data.price_change_1h =
+
+      const temp1 = {};
+      temp1.image = response.data.image.small;
+      temp1.name = response.data.name;
+      setMainInfoData(temp1);
+
+      const temp2 = {};
+      temp2.price_change_1h =
         market_data.price_change_percentage_1h_in_currency[currencyName];
-      price_data.price_change_24h =
+      temp2.price_change_24h =
         market_data.price_change_percentage_24h_in_currency[currencyName];
-      price_data.price_change_7d =
+      temp2.price_change_7d =
         market_data.price_change_percentage_7d_in_currency[currencyName];
-      price_data.price_change_14d =
+      temp2.price_change_14d =
         market_data.price_change_percentage_14d_in_currency[currencyName];
-      price_data.price_change_30d =
+      temp2.price_change_30d =
         market_data.price_change_percentage_30d_in_currency[currencyName];
-      price_data.price_change_1y =
+      temp2.price_change_1y =
         market_data.price_change_percentage_1y_in_currency[currencyName];
-      setPriceChangesData(price_data);
+      setPriceChangesData(temp2);
       setCurrencyRates(market_data.current_price);
-      console.log("result 2", response.data.market_data);
+      console.log("result 2", response.data);
     } catch (err) {
       console.error(err);
     }
   }
 
+  //############################################################################
+
   return (
     <div className="coin-page-container">
       <Header />
       <div className="coin-page-content-wrap content-wrap">
+        <MainInfo mainInfoData={mainInfoData}></MainInfo>
         <CoinCharts
           coinID={coinID}
           coinName={coinName}
@@ -79,6 +95,7 @@ function CoinPage() {
           currencySymbol={currencySymbol}
           currencyRates={currencyRates}
         ></Calculator>
+        <Swapper></Swapper>
       </div>
       <Footer />
     </div>
