@@ -8,6 +8,7 @@ import Footer from "../components/others/footer/footer";
 import Calculator from "../components/coin/calculator";
 import Swapper from "../components/coin/swapper";
 import "./coin-page.css";
+import favoritesContext from "../contexts/favorites-context";
 
 function CoinPage() {
   const [mainInfoData, setMainInfoData] = useState({});
@@ -17,11 +18,15 @@ function CoinPage() {
   const [currencySymbol, setCurrencySymbol] = useState("$");
   const location = useLocation();
   const { coinID, coinName, coinSymbol } = location.state;
+  const [favoritesChanged, setFavoritesChanged] = useState(false);
 
   //############################################################################
 
   // Initialize all data that will be retrieved from localStorage
   useEffect(() => {
+    // Favorites data
+    localStorage.getItem("favorites") ||
+      localStorage.setItem("favorites", "[]");
     // Currency data
     if (localStorage.getItem("currency")) {
       setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);
@@ -48,10 +53,12 @@ function CoinPage() {
         `https://api.coingecko.com/api/v3/coins/${coinID}`
       );
       const market_data = response.data.market_data;
+      console.log("result 2", response.data);
 
       const temp1 = {};
       temp1.image = response.data.image.small;
       temp1.name = response.data.name;
+      temp1.symbol = response.data.symbol;
       setMainInfoData(temp1);
 
       const temp2 = {};
@@ -68,8 +75,8 @@ function CoinPage() {
       temp2.price_change_1y =
         market_data.price_change_percentage_1y_in_currency[currencyName];
       setPriceChangesData(temp2);
+
       setCurrencyRates(market_data.current_price);
-      console.log("result 2", response.data);
     } catch (err) {
       console.error(err);
     }
@@ -78,27 +85,29 @@ function CoinPage() {
   //############################################################################
 
   return (
-    <div className="coin-page-container">
-      <Header />
-      <div className="coin-page-content-wrap content-wrap">
-        <MainInfo mainInfoData={mainInfoData}></MainInfo>
-        <CoinCharts
-          coinID={coinID}
-          coinName={coinName}
-          currencyName={currencyName}
-          currencySymbol={currencySymbol}
-          priceChangesData={priceChangesData}
-        />
-        <Calculator
-          coinSymbol={coinSymbol}
-          currencyName={currencyName}
-          currencySymbol={currencySymbol}
-          currencyRates={currencyRates}
-        ></Calculator>
-        <Swapper></Swapper>
+    <favoritesContext.Provider value={[favoritesChanged, setFavoritesChanged]}>
+      <div className="coin-page-container">
+        <Header />
+        <div className="coin-page-content-wrap content-wrap">
+          <MainInfo mainInfoData={mainInfoData} coinID={coinID}></MainInfo>
+          <CoinCharts
+            coinID={coinID}
+            coinName={coinName}
+            currencyName={currencyName}
+            currencySymbol={currencySymbol}
+            priceChangesData={priceChangesData}
+          />
+          <Calculator
+            coinSymbol={coinSymbol}
+            currencyName={currencyName}
+            currencySymbol={currencySymbol}
+            currencyRates={currencyRates}
+          ></Calculator>
+          <Swapper></Swapper>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </favoritesContext.Provider>
   );
 }
 

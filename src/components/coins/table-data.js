@@ -68,11 +68,13 @@ function TableData({
 
   return (
     <tr className="coins-table-row">
-      <Favorite
-        favorite={favorite}
-        setFavorite={setFavorite}
-        id={id}
-      ></Favorite>
+      <td>
+        <Favorite
+          favorite={favorite}
+          setFavorite={setFavorite}
+          id={id}
+        ></Favorite>
+      </td>
       <td className="coin-rank">
         {market_cap_rank < Infinity ? market_cap_rank : "-"}
       </td>

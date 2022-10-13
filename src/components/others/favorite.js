@@ -8,7 +8,7 @@ import { styled } from "@mui/material";
 // CUSTOM STYLES
 const StyledStarIcon = styled(StarIcon)({
   color: "gold",
-  height: "1.8rem",
+  height: "2.0rem",
   width: "auto",
   "&:hover": {
     cursor: "pointer",
@@ -16,7 +16,7 @@ const StyledStarIcon = styled(StarIcon)({
 });
 
 const StyledStarBorderIcon = styled(StarBorderIcon)({
-  height: "1.8rem",
+  height: "2.0rem",
   width: "auto",
   "&:hover": {
     color: "gold",
@@ -53,7 +53,7 @@ function Favorite({ favorite, setFavorite, id }) {
   };
 
   return (
-    <td>
+    <>
       {favorite ? (
         <StyledStarIcon onClick={() => handleClick()}></StyledStarIcon>
       ) : (
@@ -61,7 +61,7 @@ function Favorite({ favorite, setFavorite, id }) {
           onClick={() => handleClick()}
         ></StyledStarBorderIcon>
       )}
-    </td>
+    </>
   );
 }
 

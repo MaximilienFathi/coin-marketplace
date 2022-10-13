@@ -7,3 +7,20 @@
   grid-column: 1;
   grid-row: 1 / 2;
 }
+
+.main-info-heading {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.main-info-name {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.main-info-symbol {
+  font-size: 2rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
