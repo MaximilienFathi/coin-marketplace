@@ -59,6 +59,12 @@ function CoinPage() {
       temp1.image = response.data.image.small;
       temp1.name = response.data.name;
       temp1.symbol = response.data.symbol;
+      temp1.rank = response.data.market_cap_rank;
+      temp1.homepage = response.data.links.homepage;
+      temp1.community = {};
+      temp1.community.Reddit = response.data.links.subreddit_url;
+      temp1.community.Twitter =
+        "https://twitter.com/" + response.data.links.twitter_screen_name;
       setMainInfoData(temp1);
 
       const temp2 = {};
