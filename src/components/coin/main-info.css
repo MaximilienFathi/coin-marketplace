@@ -1,5 +1,6 @@
 .main-info-outer-container {
   height: auto;
+  min-width: 100rem;
   /*border: 3px solid red;*/
   border-radius: 11px;
   padding: 2.4rem;
@@ -77,33 +78,58 @@
   font-size: 1.4rem;
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 0.8rem;
+  margin-bottom: 2.4rem;
 }
 
 .main-info-links-container {
   display: flex;
+  align-items: center;
   gap: 1.2rem;
+  /*height: 3.1rem;*/
 }
 
 .main-info-link-type {
   margin-right: 3.2rem;
-  width: 6.4rem;
+  min-width: 11.5rem;
 }
 
 .main-info-links-list {
   display: flex;
   gap: 0.8rem;
   list-style: none;
+  flex-wrap: wrap;
 }
 
+.main-info-address,
 .main-info-link:link,
 .main-info-link:visited {
   text-decoration: none;
   color: inherit;
   background: #495e74;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6rem;
 }
 
 .main-info-link:hover,
 .main-info-link:active {
   color: inherit;
+}
+
+.main-info-description {
+  font-size: 1.4rem;
+  /*letter-spacing: 0.5px;*/
+  line-height: 2rem;
+}
+
+.main-info-description a:link,
+.main-info-description a:visited {
+  text-decoration: none;
+  color: #fc9bd3;
+}
+
+.main-info-description a:hover,
+.main-info-description a:active {
+  color: #fa58b6;
 }

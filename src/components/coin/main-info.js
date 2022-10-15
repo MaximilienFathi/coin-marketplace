@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import Favorite from "../others/favorite";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import RedditIcon from "@mui/icons-material/Reddit";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import TwitterIcon from "@mui/icons-material/Twitter";
 import "./main-info.css";
 
 function MainInfo({ mainInfoData, coinID }) {
@@ -7,16 +12,31 @@ function MainInfo({ mainInfoData, coinID }) {
     JSON.parse(localStorage.getItem("favorites")).includes(coinID)
   );
 
+  const addNetworkLogo = (name) => {
+    if (name === "Facebook") return <FacebookIcon></FacebookIcon>;
+    if (name === "GitHub") return <GitHubIcon></GitHubIcon>;
+    if (name === "Reddit") return <RedditIcon></RedditIcon>;
+    if (name === "Telegram") return <TelegramIcon></TelegramIcon>;
+    if (name === "Twitter") return <TwitterIcon></TwitterIcon>;
+  };
+
   const extractDomain = (url) => {
-    url = url.endsWith("/") ? url.slice(0, -1) : url;
-    return url.replace("http://", "").replace("https://", "");
+    url = url
+      .replace("http://", "")
+      .replace("https://", "")
+      .replace("www.", "");
+    return url.split("/")[0];
+  };
+
+  const createSimpleContainer = (data) => {
+    return <div className="main-info-address small-box">{data}</div>;
   };
 
   const createLinkContainer = (url, name) => {
-    console.log("testing", name);
     const domain = extractDomain(url);
     return (
       <a className="main-info-link small-box" href={url}>
+        {name ? addNetworkLogo(name) : ""}
         {name || domain}
       </a>
     );
@@ -39,6 +59,14 @@ function MainInfo({ mainInfoData, coinID }) {
       })
     );
   };
+
+  const ConvertStringToHTML = (str) => {
+    let parser = new DOMParser();
+    let doc = parser.parseFromString(str, "text/html");
+    return doc.body;
+  };
+
+  console.log(ConvertStringToHTML(mainInfoData.description));
 
   return (
     <div className="main-info-outer-container">
@@ -72,12 +100,39 @@ function MainInfo({ mainInfoData, coinID }) {
           </ul>
         </div>
         <div className="main-info-links-container">
+          <span className="main-info-link-type">Explorers</span>
+          <ul className="main-info-links-list">
+            {goArrayToLinksList("explorers")}
+          </ul>
+        </div>
+        <div className="main-info-links-container">
           <span className="main-info-link-type">Community</span>
           <ul className="main-info-links-list">
             {goObjectToLinksList("community")}
           </ul>
         </div>
+        <div className="main-info-links-container">
+          <span className="main-info-link-type">Source Code</span>
+          <ul className="main-info-links-list">
+            {mainInfoData.code &&
+              createLinkContainer(mainInfoData.code, "GitHub")}
+          </ul>
+        </div>
+        <div className="main-info-links-container">
+          <span className="main-info-link-type">Contract Address</span>
+          <ul className="main-info-links-list">
+            {mainInfoData.contractAddress &&
+              createSimpleContainer(mainInfoData.contractAddress)}
+          </ul>
+        </div>
       </div>
+      {/*<div className="main-info-description">*/}
+      {/*  {ConvertStringToHTML(mainInfoData.description)}*/}
+      {/*</div>*/}
+      <div
+        className="main-info-description"
+        dangerouslySetInnerHTML={{ __html: mainInfoData.description }}
+      />
     </div>
   );
 }
