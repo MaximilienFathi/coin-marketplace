@@ -1,0 +1,34 @@
+.coin-description-outer-container {
+  height: auto;
+  min-width: 100rem;
+  border-radius: 11px;
+  padding: 2.4rem;
+  background: #303e58;
+  grid-column: 1;
+  grid-row: 4 / -1;
+
+  background-color: rgba(184, 184, 184, 0.25);
+  box-shadow: 0 0 0.5rem 0.01rem #b8b8b8;
+}
+
+.coin-description-heading {
+  font-size: 2.4rem;
+  margin-bottom: 2.4rem;
+}
+
+.coin-description-text {
+  font-size: 1.6rem;
+  /*letter-spacing: 0.5px;*/
+  line-height: 2.6rem;
+}
+
+.coin-description-text a:link,
+.coin-description-text a:visited {
+  text-decoration: none;
+  color: #fc9bd3;
+}
+
+.coin-description-text a:hover,
+.coin-description-text a:active {
+  color: #fa58b6;
+}

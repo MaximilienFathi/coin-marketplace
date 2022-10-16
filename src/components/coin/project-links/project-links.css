@@ -1,0 +1,62 @@
+.project-links-outer-container {
+  height: fit-content;
+  border-radius: 11px;
+  padding: 2.4rem;
+  background: #303e58;
+  grid-column: 2;
+  grid-row: 4 / -1;
+  /*min-width: ;*/
+
+  background-color: rgba(184, 184, 184, 0.25);
+  box-shadow: 0 0 0.5rem 0.01rem #b8b8b8;
+}
+
+.project-links-heading {
+  font-size: 2.4rem;
+  margin-bottom: 2.4rem;
+}
+
+.project-links-inner-container {
+  font-size: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  /*gap: 0.8rem;*/
+}
+
+.categorized-container {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  /*height: 3.1rem;*/
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+  padding: 1.2rem 0;
+}
+
+.project-links-type {
+  /*margin-right: 1.6rem;*/
+  min-width: 9rem;
+}
+
+.project-links-list {
+  display: flex;
+  gap: 0.8rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.contract-address,
+.project-link:link,
+.project-link:visited {
+  text-decoration: none;
+  color: inherit;
+  background: #495e74;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6rem;
+}
+
+.project-link:hover,
+.project-link:active {
+  color: inherit;
+  background: #5b6e82;
+}

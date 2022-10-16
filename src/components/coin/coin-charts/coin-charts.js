@@ -10,9 +10,9 @@ import {
   Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import CoinDataTabs from "./coin-data-tabs";
-import TimeframeTabs from "./timeframe-tabs";
-import PriceChanges from "./price-changes";
+import CoinDataTabs from "../coin-data-tabs/coin-data-tabs";
+import TimeframeTabs from "../timeframe-tabs/timeframe-tabs";
+import PriceChanges from "../price-changes/price-changes";
 import "./coin-charts.css";
 
 ChartJS.register(

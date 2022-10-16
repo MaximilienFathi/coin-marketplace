@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
-import CalculatorInput from "./calculator-input";
+import CalculatorInput from "../calculator-input/calculator-input";
 import "./calculator.css";
 
 //========================================================
