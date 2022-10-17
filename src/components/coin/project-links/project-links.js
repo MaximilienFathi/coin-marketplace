@@ -6,7 +6,7 @@ import RedditIcon from "@mui/icons-material/Reddit";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
-function ProjectLinks({ mainInfoData }) {
+function ProjectLinks({ coinData }) {
   const addNetworkLogo = (name) => {
     if (name === "Facebook") return <FacebookIcon></FacebookIcon>;
     if (name === "GitHub") return <GitHubIcon></GitHubIcon>;
@@ -39,8 +39,8 @@ function ProjectLinks({ mainInfoData }) {
 
   const goArrayToLinksList = (data) => {
     return (
-      mainInfoData[data] &&
-      mainInfoData[data].map(
+      coinData[data] &&
+      coinData[data].map(
         (link) => link && <li key={link}>{createLinkContainer(link)}</li>
       )
     );
@@ -48,8 +48,8 @@ function ProjectLinks({ mainInfoData }) {
 
   const goObjectToLinksList = (data) => {
     return (
-      mainInfoData[data] &&
-      Object.entries(mainInfoData[data]).map(([name, url]) => {
+      coinData[data] &&
+      Object.entries(coinData[data]).map(([name, url]) => {
         return <li key={url}>{createLinkContainer(url, name)}</li>;
       })
     );
@@ -80,15 +80,14 @@ function ProjectLinks({ mainInfoData }) {
         <div className="categorized-container">
           <span className="project-links-type">Source Code</span>
           <ul className="project-links-list">
-            {mainInfoData.code &&
-              createLinkContainer(mainInfoData.code, "GitHub")}
+            {coinData.code && createLinkContainer(coinData.code, "GitHub")}
           </ul>
         </div>
         <div className="categorized-container">
           <span className="project-links-type">Contract</span>
           <ul className="project-links-list">
-            {mainInfoData.contractAddress &&
-              createSimpleContainer(mainInfoData.contractAddress)}
+            {coinData.contractAddress &&
+              createSimpleContainer(coinData.contractAddress)}
           </ul>
         </div>
       </div>

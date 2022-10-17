@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/others/header/header";
-import MainInfo from "../components/coin/main-info/main-info";
+import MarketInfo from "../components/coin/market-info/market-info";
 import CoinCharts from "../components/coin/coin-charts/coin-charts";
 import Footer from "../components/others/footer/footer";
 import Calculator from "../components/coin/calculator/calculator";
@@ -13,14 +13,17 @@ import "./coin-page.css";
 import favoritesContext from "../contexts/favorites-context";
 
 function CoinPage() {
-  const [mainInfoData, setMainInfoData] = useState({});
+  const [coinData, setCoinData] = useState({});
+  const [marketData, setMarketData] = useState({});
   const [currencyRates, setCurrencyRates] = useState({});
   const [priceChangesData, setPriceChangesData] = useState({});
+
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
+  const [favoritesChanged, setFavoritesChanged] = useState(false);
+
   const location = useLocation();
   const { coinID, coinName, coinSymbol } = location.state;
-  const [favoritesChanged, setFavoritesChanged] = useState(false);
 
   //############################################################################
 
@@ -57,6 +60,7 @@ function CoinPage() {
         `https://api.coingecko.com/api/v3/coins/${coinID}`
       );
       const market_data = response.data.market_data;
+      setMarketData(market_data);
       console.log("result 2", response.data);
 
       const temp1 = {};
@@ -101,7 +105,7 @@ function CoinPage() {
       temp1.code = response.data.links.repos_url.github[0];
       temp1.contractAddress = response.data.contract_address;
       temp1.description = response.data.description.en;
-      setMainInfoData(temp1);
+      setCoinData(temp1);
 
       const temp2 = {};
       temp2.price_change_1h =
@@ -138,7 +142,13 @@ function CoinPage() {
       <div className="coin-page-container">
         <Header />
         <div className="coin-page-content-wrap content-wrap">
-          <MainInfo mainInfoData={mainInfoData} coinID={coinID}></MainInfo>
+          <MarketInfo
+            coinData={coinData}
+            coinID={coinID}
+            marketData={marketData}
+            currencyName={currencyName}
+            currencySymbol={currencySymbol}
+          ></MarketInfo>
           <CoinCharts
             coinID={coinID}
             coinName={coinName}
@@ -153,8 +163,8 @@ function CoinPage() {
             currencyRates={currencyRates}
           ></Calculator>
           <Swapper></Swapper>
-          <CoinDescription mainInfoData={mainInfoData}></CoinDescription>
-          <ProjectLinks mainInfoData={mainInfoData}></ProjectLinks>
+          <CoinDescription coinData={coinData}></CoinDescription>
+          <ProjectLinks coinData={coinData}></ProjectLinks>
         </div>
         <Footer />
       </div>

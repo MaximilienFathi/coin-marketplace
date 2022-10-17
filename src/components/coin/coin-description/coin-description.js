@@ -1,13 +1,13 @@
 import React from "react";
 import "./coin-description.css";
 
-function CoinDescription({ mainInfoData }) {
+function CoinDescription({ coinData }) {
   return (
     <div className="coin-description-outer-container">
-      <h2 className="coin-description-heading">About {mainInfoData.name}</h2>
+      <h2 className="coin-description-heading">About {coinData.name}</h2>
       <p
         className="coin-description-text"
-        dangerouslySetInnerHTML={{ __html: mainInfoData.description }}
+        dangerouslySetInnerHTML={{ __html: coinData.description }}
       />
     </div>
   );
