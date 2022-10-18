@@ -14,6 +14,33 @@ function MarketInfo({
   );
   // Using coinData.id instead of coinID does not work
 
+  const displayValue = (data) => {
+    if (
+      data === "circulating_supply" ||
+      data === "total_supply" ||
+      data === "max_supply"
+    )
+      return marketData[data] ? marketData[data].toLocaleString("en-US") : "-";
+
+    const value = marketData[data] && marketData[data][currencyName];
+    return value ? `${currencySymbol}${value.toLocaleString("en-US")}` : "-";
+  };
+
+  const displayPercentage = (data) => {
+    const value = marketData[data] && marketData[data][currencyName];
+    return value
+      ? `${value.toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}%`
+      : "";
+  };
+
+  const findColor = (data) => {
+    const value = marketData[data] && marketData[data][currencyName];
+    return value >= 0 ? "green-box" : "red-box";
+  };
+
   return (
     <div className="market-info-outer-container">
       <div className="market-info-top-section">
@@ -39,61 +66,85 @@ function MarketInfo({
         </div>
       </div>
       <div className="market-info-grid">
-        <div className="market-info-item grid-position-1">
-          <p className="market-info-label">Market Cap</p>
-          <p className="market-info-value">
-            {currencySymbol}
-            {marketData.market_cap && marketData.market_cap[currencyName]}
-          </p>
+        {/*##################################################################*/}
+        <div className="market-info-item">
+          <p className="market-info-label">All Time High</p>
+          <div className="market-info-value-container">
+            <p
+              className={`market-info-value-change ${findColor(
+                "ath_change_percentage"
+              )}`}
+            >
+              {displayPercentage("ath_change_percentage")}
+            </p>
+            <p className="market-info-value">{displayValue("ath")}</p>
+          </div>
         </div>
-        <div className="market-info-item grid-position-2">
+        {/*##################################################################*/}
+        <div className="market-info-item">
+          <p className="market-info-label">All Time Low</p>
+          <div className="market-info-value-container">
+            <p
+              className={`market-info-value-change ${findColor(
+                "atl_change_percentage"
+              )}`}
+            >
+              {displayPercentage("atl_change_percentage")}
+            </p>
+            <p className="market-info-value">{displayValue("atl")}</p>
+          </div>
+        </div>
+        {/*##################################################################*/}
+        <div className="market-info-item">
+          <p className="market-info-label">Total Volume</p>
+          <p className="market-info-value">{displayValue("total_volume")}</p>
+        </div>
+        {/*##################################################################*/}
+        <div className="market-info-item">
+          <p className="market-info-label">Market Cap</p>
+          <div className="market-info-value-container">
+            <p
+              className={`market-info-value-change ${findColor(
+                "market_cap_change_percentage_24h_in_currency"
+              )}`}
+            >
+              {displayPercentage(
+                "market_cap_change_percentage_24h_in_currency"
+              )}
+            </p>
+            <p className="market-info-value">{displayValue("market_cap")}</p>
+          </div>
+        </div>
+        {/*##################################################################*/}
+        <div className="market-info-item">
           <p className="market-info-label">Diluted Market Cap</p>
           <p className="market-info-value">
-            {currencySymbol}
-            {marketData.fully_diluted_valuation &&
-              marketData.fully_diluted_valuation[currencyName]}
+            {displayValue("fully_diluted_valuation")}
           </p>
         </div>
-        <div className="market-info-item grid-position-3">
+        {/*##################################################################*/}
+        <div className="market-info-item">
           <p className="market-info-label">Market Dominance</p>
           {/*<p className="market-info-value">{marketData.}</p>*/}
         </div>
-        <div className="market-info-item grid-position-4">
-          <p className="market-info-label">Market Rank</p>
-          <p className="market-info-value">{marketData.market_cap_rank}</p>
+        {/*##################################################################*/}
+        <div className="market-info-item">
+          <p className="market-info-label">Circulating Supply</p>
+          <p className="market-info-value">
+            {displayValue("circulating_supply")}
+          </p>
         </div>
-        {/*<div className="market-info-item grid-position-5">*/}
-        {/*  <p className="market-info-label">item 5</p>*/}
-        {/*  <p className="market-info-value">{marketData.market_cap_rank}</p>*/}
-        {/*</div>*/}
-        {/*<div className="market-info-item grid-position-6">*/}
-        {/*  <p className="market-info-label">item 6</p>*/}
-        {/*  <p className="market-info-value">{marketData.market_cap_rank}</p>*/}
-        {/*</div>*/}
-        {/*<div className="market-info-item grid-position-7">*/}
-        {/*  <p className="market-info-label">item 7</p>*/}
-        {/*  <p className="market-info-value">{marketData.market_cap_rank}</p>*/}
-        {/*</div>*/}
-        {/*<div className="market-info-item grid-position-8">*/}
-        {/*  <p className="market-info-label">item 8</p>*/}
-        {/*  <p className="market-info-value">{marketData.market_cap_rank}</p>*/}
-        {/*</div>*/}
-        {/*<div className="market-info-item grid-position-9">*/}
-        {/*  <p className="market-info-label">item 9</p>*/}
-        {/*  <p className="market-info-value">{marketData.market_cap_rank}</p>*/}
-        {/*</div>*/}
-        {/*<div className="market-info-item grid-position-10">*/}
-        {/*  <p className="market-info-label">item 10</p>*/}
-        {/*  <p className="market-info-value">{marketData.market_cap_rank}</p>*/}
-        {/*</div>*/}
-        {/*<div className="market-info-item grid-position-11">*/}
-        {/*  <p className="market-info-label">item 11</p>*/}
-        {/*  <p className="market-info-value">{marketData.market_cap_rank}</p>*/}
-        {/*</div>*/}
-        {/*<div className="market-info-item grid-position-12">*/}
-        {/*  <p className="market-info-label">item 12</p>*/}
-        {/*  <p className="market-info-value">{marketData.market_cap_rank}</p>*/}
-        {/*</div>*/}
+        {/*##################################################################*/}
+        <div className="market-info-item">
+          <p className="market-info-label">Total Supply</p>
+          <p className="market-info-value">{displayValue("total_supply")}</p>
+        </div>
+        {/*##################################################################*/}
+        <div className="market-info-item">
+          <p className="market-info-label">Max Supply</p>
+          <p className="market-info-value">{displayValue("max_supply")}</p>
+        </div>
+        {/*##################################################################*/}
       </div>
     </div>
   );
