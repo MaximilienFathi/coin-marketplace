@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Favorite from "../../others/favorite";
+import PriceProgressBar from "../price-progress-bar";
 import "./market-info.css";
 
 function MarketInfo({
@@ -23,7 +24,11 @@ function MarketInfo({
       return marketData[data] ? marketData[data].toLocaleString("en-US") : "-";
 
     const value = marketData[data] && marketData[data][currencyName];
-    return value ? `${currencySymbol}${value.toLocaleString("en-US")}` : "-";
+    return value
+      ? `${currencySymbol}${value.toLocaleString("en-US", {
+          maximumFractionDigits: 8,
+        })}`
+      : "-";
   };
 
   const displayPercentage = (data) => {
@@ -49,24 +54,41 @@ function MarketInfo({
           src={coinData.image}
           alt={`logo of ${coinData.name}`}
         ></img>
-        <div className="market-info-identity-1">
+        <div className="market-info-name-container">
           <p className="market-info-name">{coinData.name}</p>
+          <p className="market-info-symbol">({coinData.symbol})</p>
           <Favorite
             favorite={favorite}
             setFavorite={setFavorite}
             id={coinID}
           ></Favorite>
         </div>
-        <div className="market-info-identity-2">
+        <div className="market-info-rank-container">
           <p className="market-info-rank small-box">
             {coinData.rank ? `Rank #${coinData.rank}` : `Unranked`}
           </p>
-          <p className="market-info-symbol small-box">{coinData.symbol}</p>
-          <p className="market-info-type small-box">Coin</p>
+          {/*<p className="market-info-type small-box">Coin</p>*/}
         </div>
+        <div className="market-info-price-container">
+          <p className="market-info-price-value">
+            {displayValue("current_price")}
+          </p>
+          <p
+            className={`market-info-price-change ${findColor(
+              "price_change_percentage_24h_in_currency"
+            )}`}
+          >
+            {displayPercentage("price_change_percentage_24h_in_currency")}
+          </p>
+        </div>
+        <PriceProgressBar
+          marketData={marketData}
+          currencyName={currencyName}
+          currencySymbol={currencySymbol}
+        ></PriceProgressBar>
       </div>
+      {/*##################################################################*/}
       <div className="market-info-grid">
-        {/*##################################################################*/}
         <div className="market-info-item">
           <p className="market-info-label">All Time High</p>
           <div className="market-info-value-container">
