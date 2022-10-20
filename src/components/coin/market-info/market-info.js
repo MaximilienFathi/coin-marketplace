@@ -7,6 +7,7 @@ function MarketInfo({
   coinData,
   coinID,
   marketData,
+  totalMarketCap,
   currencyName,
   currencySymbol,
 }) {
@@ -39,6 +40,18 @@ function MarketInfo({
           maximumFractionDigits: 2,
         })}%`
       : "";
+  };
+
+  const findMarketDominance = () => {
+    const market_cap =
+      marketData["market_cap"] && marketData["market_cap"][currencyName];
+    const marketDominance = (market_cap / totalMarketCap) * 100;
+    return marketDominance
+      ? `${marketDominance.toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}%`
+      : "-";
   };
 
   const findColor = (data) => {
@@ -147,7 +160,7 @@ function MarketInfo({
         {/*##################################################################*/}
         <div className="market-info-item">
           <p className="market-info-label">Market Dominance</p>
-          {/*<p className="market-info-value">{marketData.}</p>*/}
+          <p className="market-info-value">{findMarketDominance()}</p>
         </div>
         {/*##################################################################*/}
         <div className="market-info-item">

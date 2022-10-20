@@ -17,6 +17,7 @@ function CoinPage() {
   const [marketData, setMarketData] = useState({});
   const [currencyRates, setCurrencyRates] = useState({});
   const [priceChangesData, setPriceChangesData] = useState({});
+  const [totalMarketCap, setTotalMarketCap] = useState({});
 
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
@@ -52,6 +53,7 @@ function CoinPage() {
   // Fetch data for a specific coin
   useEffect(() => {
     fetchCoinData();
+    fetchTotalMarketCap();
   }, [currencyName]);
 
   async function fetchCoinData() {
@@ -128,6 +130,17 @@ function CoinPage() {
     }
   }
 
+  async function fetchTotalMarketCap() {
+    try {
+      const response = await axios.get(
+        "https://api.coingecko.com/api/v3/global"
+      );
+      setTotalMarketCap(response.data.data.total_market_cap[currencyName]);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   // const addListOfLinks = (linkType) => {};
 
   const addCommunityLink = (communityLinks, siteName, domain, identifier) => {
@@ -146,6 +159,7 @@ function CoinPage() {
             coinData={coinData}
             coinID={coinID}
             marketData={marketData}
+            totalMarketCap={totalMarketCap}
             currencyName={currencyName}
             currencySymbol={currencySymbol}
           ></MarketInfo>
