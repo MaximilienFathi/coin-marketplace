@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { styled, Tab, Tabs } from "@mui/material";
+import CalculatorInput from "./calculator-input/calculator-input";
+import SwapOptionInput from "./swap-option-input";
 
 //========================================================
 // CUSTOM STYLES
@@ -28,29 +30,27 @@ const StyledTab = styled(Tab)({
 });
 //========================================================
 
-function SwapOptionTabs({ fetchChartData, datatype }) {
-  const [value, setValue] = useState("1");
+function SwapOptionTabs() {
+  const [slippage, setSlippage] = useState("0.1");
 
-  const handleClick = (newTimeframe) => {
-    setValue(newTimeframe);
-    fetchChartData(datatype, newTimeframe);
+  const handleClick = (newSlippage) => {
+    setSlippage(newSlippage);
   };
 
   return (
-    <div className="timeframe-tabs-container">
+    <div className="swap-option-tabs-container">
       <Tabs
-        value={value}
+        value={slippage}
         TabIndicatorProps={{
           style: { display: "none" },
         }}
         sx={{ "&.MuiTabs-root": { minHeight: "fit-content" } }}
       >
-        <StyledTab label="1D" value="1" onClick={() => handleClick("1")} />
-        <StyledTab label="7D" value="7" onClick={() => handleClick("7")} />
-        <StyledTab label="1M" value="30" onClick={() => handleClick("30")} />
-        <StyledTab label="3M" value="90" onClick={() => handleClick("90")} />
-        <StyledTab label="1Y" value="365" onClick={() => handleClick("365")} />
-        <StyledTab label="All" value="max" onClick={() => handleClick("max")} />
+        <StyledTab label="0.1" value="0.1" onClick={() => handleClick("0.1")} />
+        <StyledTab label="0.5" value="0.5" onClick={() => handleClick("0.5")} />
+        <StyledTab label="1.0" value="1.0" onClick={() => handleClick("1.0")} />
+        <StyledTab label="2.0" value="2.0" onClick={() => handleClick("2.0")} />
+        <SwapOptionInput></SwapOptionInput>
       </Tabs>
       {/*<Outlet />*/}
     </div>
