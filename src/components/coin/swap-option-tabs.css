@@ -1,0 +1,5 @@
+.swap-option-tabs-container {
+  display: flex;
+  align-items: center;
+  /*border: 2px solid red;*/
+}

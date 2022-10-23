@@ -31,7 +31,7 @@ const StyledTab = styled(Tab)({
 //========================================================
 
 function SwapOptionTabs() {
-  const [slippage, setSlippage] = useState("0.1");
+  const [slippage, setSlippage] = useState(0.1);
 
   const handleClick = (newSlippage) => {
     setSlippage(newSlippage);
@@ -44,14 +44,23 @@ function SwapOptionTabs() {
         TabIndicatorProps={{
           style: { display: "none" },
         }}
-        sx={{ "&.MuiTabs-root": { minHeight: "fit-content" } }}
+        sx={{
+          "&.MuiTabs-root": {
+            minHeight: "fit-content",
+            paddingRight: "1.2rem",
+            borderRight: "2px solid rgba(255, 255, 255, 0.3)",
+          },
+        }}
       >
-        <StyledTab label="0.1" value="0.1" onClick={() => handleClick("0.1")} />
-        <StyledTab label="0.5" value="0.5" onClick={() => handleClick("0.5")} />
-        <StyledTab label="1.0" value="1.0" onClick={() => handleClick("1.0")} />
-        <StyledTab label="2.0" value="2.0" onClick={() => handleClick("2.0")} />
-        <SwapOptionInput></SwapOptionInput>
+        <StyledTab label="0.1" value={0.1} onClick={() => handleClick(0.1)} />
+        <StyledTab label="0.5" value={0.5} onClick={() => handleClick(0.5)} />
+        <StyledTab label="1.0" value={1.0} onClick={() => handleClick(1.0)} />
+        <StyledTab label="2.0" value={2.0} onClick={() => handleClick(2.0)} />
       </Tabs>
+      <SwapOptionInput
+        slippage={slippage}
+        setSlippage={setSlippage}
+      ></SwapOptionInput>
       {/*<Outlet />*/}
     </div>
   );
