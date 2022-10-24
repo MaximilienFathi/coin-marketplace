@@ -74,28 +74,22 @@ function CalculatorInput({
   return (
     <StyledBox>
       <StyledTextField
-        // focused
-        // size="small"
         fullWidth
         value={String(inputOrder === 1 ? input1 : input2)}
         onChange={handleChange}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start" sx={InputAdornmentStyles}>
-              {/*<div className="">*/}
               {String(
                 inputOrder === 1
                   ? currency1.toUpperCase()
                   : currency2.toUpperCase()
               )}
-              {/*</div>*/}
             </InputAdornment>
           ),
           placeholder: "0",
           style: InputPropsStyles,
           type: "number",
-          // inputMode: "numeric",
-          // pattern: "[^0-9]*",
         }}
       />
     </StyledBox>

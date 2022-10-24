@@ -170,13 +170,12 @@ function CoinPage() {
             currencySymbol={currencySymbol}
             priceChangesData={priceChangesData}
           />
-          <Calculator
+          <Swapper
             coinSymbol={coinSymbol}
             currencyName={currencyName}
             currencySymbol={currencySymbol}
             currencyRates={currencyRates}
-          ></Calculator>
-          <Swapper></Swapper>
+          ></Swapper>
           <CoinDescription coinData={coinData}></CoinDescription>
           <ProjectLinks coinData={coinData}></ProjectLinks>
         </div>

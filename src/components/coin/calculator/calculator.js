@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CalculatorInput from "../calculator-input/calculator-input";
 import "./calculator.css";
 
@@ -54,9 +55,15 @@ function Calculator({
   };
 
   return (
-    <div className="calculator-outer-container">
-      <p className="calculator-heading">Crypto Calculator</p>
-      <div className="calculator-inner-container">
+    // <div className="calculator-outer-container">
+    <div className="calculator-container">
+      <div>
+        <div className="calculator-input-labels">
+          <p>Pay</p>
+          <div className="calculator-balance">
+            <AccountBalanceWalletIcon></AccountBalanceWalletIcon>Balance: 45.23
+          </div>
+        </div>
         <CalculatorInput
           currency1={currency1}
           currency2={currency2}
@@ -65,23 +72,30 @@ function Calculator({
           inputOrder={1}
           handleChange={handleInput1Change}
         />
-        <button className="switchButton" onClick={handleClick}>
-          <SwapVertIcon sx={IconStyles}></SwapVertIcon>
-        </button>
-        <CalculatorInput
-          currency1={currency1}
-          currency2={currency2}
-          input1={input1}
-          input2={input2}
-          inputOrder={2}
-          handleChange={handleInput2Change}
-        />
       </div>
-      <p className="currency-rate">
-        1 {coinSymbol.toUpperCase()} = {currencySymbol}
-        {currencyRates[currencyName]}
-      </p>
+      <button className="switchButton" onClick={handleClick}>
+        <SwapVertIcon sx={IconStyles}></SwapVertIcon>
+      </button>
+      <div className="calculator-input-labels">
+        <p>Pay</p>
+        <div className="calculator-balance">
+          <AccountBalanceWalletIcon></AccountBalanceWalletIcon>Balance: 45.23
+        </div>
+      </div>
+      <CalculatorInput
+        currency1={currency1}
+        currency2={currency2}
+        input1={input1}
+        input2={input2}
+        inputOrder={2}
+        handleChange={handleInput2Change}
+      />
     </div>
+    // {/*<p className="currency-rate">*/}
+    // {/*  1 {coinSymbol.toUpperCase()} = {currencySymbol}*/}
+    // {/*  {currencyRates[currencyName]}*/}
+    // {/*</p>*/}
+    // </div>
   );
 }
 

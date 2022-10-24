@@ -50,50 +50,51 @@ const InputPropsStyles = {
 
   // color: "rgba(255, 255, 255, 0.6)",
 };
-
-const InputAdornmentStyles = {
-  // width: "6rem",
-  // height: "auto",
-  // padding: "0.8rem 1.4rem",
-  // marginRight: "1.2rem",
-  // borderRadius: "11px",
-  // background: "linear-gradient(90deg, #b84dc3, #a620b4)",
-  // boxShadow: "inset 0 0 2px #000",
-  // justifyContent: "center",
-};
 //========================================================
 
-function SwapOptionInput({ slippage, setSlippage }) {
+// const displayPlaceholder = () => {
+//   if (!option) return "";
+//   if (unit === "%")
+//     return option.toLocaleString("en-US", {
+//       minimumFractionDigits: 1,
+//     });
+//   if (unit === "min") return String(option);
+// };
+
+function SwapOptionInput({ option, setOption, values, unit, setWarning }) {
   const handleChange = (event) => {
     const input = Number(event.target.value);
-    const definedValues = [0.1, 0.5, 1.0, 2.0];
-    if (definedValues.includes(input)) setSlippage(input);
-    if (!definedValues.includes(input)) setSlippage(false);
+    if (values.includes(input)) setOption(input);
+    if (!values.includes(input)) setOption(false);
+    if (unit === "%") {
+      if (input > 5) setWarning("Your transaction may be frontrun");
+      if (input <= 5) setWarning("");
+    }
+  };
+
+  const displayInput = () => {
+    if (!option) return "";
+    // if (unit === "%")
+    //   return option.toLocaleString("en-US", {
+    //     minimumFractionDigits: 1,
+    //   });
+    return option.toLocaleString("en-US", {
+      minimumFractionDigits: 1,
+    });
   };
 
   return (
     <StyledBox>
       <StyledTextField
-        // focused
-        // size="small"
-        // fullWidth
-        // value={String(inputOrder === 1 ? input1 : input2)}
         onChange={(event) => {
           handleChange(event);
         }}
+        value={displayInput()}
         InputProps={{
-          endAdornment: (
-            <InputAdornment position="end" sx={InputAdornmentStyles}>
-              %
-            </InputAdornment>
-          ),
-          placeholder: slippage.toLocaleString("en-US", {
-            minimumFractionDigits: 1,
-          }),
+          endAdornment: <InputAdornment position="end">{unit}</InputAdornment>,
+          // placeholder: displayPlaceholder(),
           style: InputPropsStyles,
           type: "number",
-          // inputMode: "numeric",
-          // pattern: "[^0-9]*",
         }}
       />
     </StyledBox>

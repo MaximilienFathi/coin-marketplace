@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { styled, Tab, Tabs } from "@mui/material";
-import CalculatorInput from "./calculator-input/calculator-input";
 import SwapOptionInput from "./swap-option-input";
 
 //========================================================
@@ -30,17 +29,17 @@ const StyledTab = styled(Tab)({
 });
 //========================================================
 
-function SwapOptionTabs() {
-  const [slippage, setSlippage] = useState(0.1);
+function SwapOptionTabs({ unit, values, setWarning }) {
+  const [option, setOption] = useState(values[0]);
 
-  const handleClick = (newSlippage) => {
-    setSlippage(newSlippage);
+  const handleClick = (newOption) => {
+    setOption(newOption);
   };
 
   return (
     <div className="swap-option-tabs-container">
       <Tabs
-        value={slippage}
+        value={option}
         TabIndicatorProps={{
           style: { display: "none" },
         }}
@@ -52,16 +51,46 @@ function SwapOptionTabs() {
           },
         }}
       >
-        <StyledTab label="0.1" value={0.1} onClick={() => handleClick(0.1)} />
-        <StyledTab label="0.5" value={0.5} onClick={() => handleClick(0.5)} />
-        <StyledTab label="1.0" value={1.0} onClick={() => handleClick(1.0)} />
-        <StyledTab label="2.0" value={2.0} onClick={() => handleClick(2.0)} />
+        <StyledTab
+          label={values[0]}
+          value={values[0]}
+          onClick={() => handleClick(values[0])}
+        />
+        <StyledTab
+          label={values[1]}
+          value={values[1]}
+          onClick={() => handleClick(values[1])}
+        />
+        <StyledTab
+          label={
+            unit === "%"
+              ? values[2].toLocaleString("en-US", {
+                  minimumFractionDigits: 1,
+                })
+              : values[2]
+          }
+          value={values[2]}
+          onClick={() => handleClick(values[2])}
+        />
+        <StyledTab
+          label={
+            unit === "%"
+              ? values[3].toLocaleString("en-US", {
+                  minimumFractionDigits: 1,
+                })
+              : values[3]
+          }
+          value={values[3]}
+          onClick={() => handleClick(values[3])}
+        />
       </Tabs>
       <SwapOptionInput
-        slippage={slippage}
-        setSlippage={setSlippage}
+        option={option}
+        setOption={setOption}
+        values={values}
+        unit={unit}
+        setWarning={setWarning}
       ></SwapOptionInput>
-      {/*<Outlet />*/}
     </div>
   );
 }

@@ -6,8 +6,38 @@
   background: #303e58;
 
   grid-column: 2;
-  grid-row: 2 / 3;
+  grid-row: 2;
 
   background-color: rgba(184, 184, 184, 0.25);
   box-shadow: 0 0 0.5rem 0.01rem #b8b8b8;
+}
+
+.swapper-heading {
+  font-size: 2rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2.4rem;
+}
+
+.swapper-options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  margin-bottom: 2.4rem;
+}
+
+.swapper-option-label {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.2rem;
+}
+
+.swapper-option-warning {
+  color: red;
+  font-size: 1.2rem;
+}
+
+.swapper-separator {
+  margin: 2.4rem 0;
 }
