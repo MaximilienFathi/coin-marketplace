@@ -21,6 +21,7 @@ function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
   return (
     <div className="swapper-outer-container">
       <p className="swapper-heading">Crypto Swapper</p>
+      <hr className="swapper-separator" />
       <Calculator
         coinSymbol={coinSymbol}
         currencyName={currencyName}
@@ -48,9 +49,27 @@ function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
           ></SwapOptionTabs>
         </div>
       </div>
+      {/*<hr className="swapper-separator" />*/}
       <Button className="swapper-submit-btn" sx={ButtonStyles}>
         Submit Swap
       </Button>
+      <div className="swapper-info-container">
+        <div className="swapper-info-line">
+          <p className="swapper-info-label">Rate</p>
+          <p>
+            1 {coinSymbol.toUpperCase()} = {currencySymbol}
+            {currencyRates[currencyName]}
+          </p>
+        </div>
+        <div className="swapper-info-line">
+          <p className="swapper-info-label">Minimum Received</p>
+          <p></p>
+        </div>
+        <div className="swapper-info-line">
+          <p className="swapper-info-label">Slippage Tolerance</p>
+          <p></p>
+        </div>
+      </div>
     </div>
   );
 }

@@ -13,9 +13,12 @@
   flex-direction: column;
   align-items: center;
   /*border: 3px solid red;*/
-  gap: 1.6rem;
+  gap: 2.4rem;
   position: relative;
   /*margin-bottom: 1.6rem;*/
+  border-radius: 11px;
+  background-color: rgba(35, 37, 56, 0.4);
+  padding: 1.4rem;
 }
 
 .calculator-input-labels {
@@ -23,7 +26,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.8rem;
   font-size: 1.4rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.8);

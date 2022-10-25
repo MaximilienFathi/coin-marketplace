@@ -14,7 +14,7 @@ const StyledTextField = styled(TextField)({
     },
   },
   "& .MuiInputBase-root, .MuiInputBase-root:hover": {
-    backgroundColor: "#495e74",
+    backgroundColor: "rgba(73,94,116,0.5)",
     borderRadius: "11px",
     width: "100%",
     "& > fieldset": {
