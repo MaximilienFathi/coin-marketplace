@@ -17,9 +17,17 @@
   position: relative;
   /*margin-bottom: 1.6rem;*/
   border-radius: 11px;
-  background-color: rgba(35, 37, 56, 0.4);
-  padding: 1.4rem;
+  /*background-color: rgba(35, 37, 56, 0.4);*/
+  /*padding: 1.4rem 0;*/
+
+  /*border: 3px solid rgba(255, 255, 255, 0.3);*/
+  /*background-color: rgba(35, 37, 56, 0.1);*/
+  /*padding: 1.8rem 1.4rem;*/
 }
+
+/*.calculator-input-container {*/
+/*  background-color: rgba(73, 94, 116, 0.5);*/
+/*}*/
 
 .calculator-input-labels {
   width: 100%;
@@ -29,7 +37,7 @@
   margin-bottom: 0.8rem;
   font-size: 1.4rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .calculator-balance {

@@ -5,14 +5,17 @@ import Calculator from "../calculator/calculator";
 import "./swapper.css";
 
 const ButtonStyles = {
-  width: "100%",
-  color: "white",
-  padding: "1.2rem",
+  width: "80%",
+  // color: "white",
+  padding: "0.8rem",
   fontSize: "1.8rem",
   fontWeight: "500",
   borderRadius: "11px",
   border: "none",
-  backgroundColor: "darkblue",
+  textTransform: "capitalize",
+  color: "inherit",
+  background: "linear-gradient(90deg, #b84dc3, #a620b4)",
+  boxShadow: "inset 0 0 2px #000",
 };
 
 function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
@@ -49,10 +52,7 @@ function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
           ></SwapOptionTabs>
         </div>
       </div>
-      {/*<hr className="swapper-separator" />*/}
-      <Button className="swapper-submit-btn" sx={ButtonStyles}>
-        Submit Swap
-      </Button>
+      <hr className="swapper-separator" />
       <div className="swapper-info-container">
         <div className="swapper-info-line">
           <p className="swapper-info-label">Rate</p>
@@ -66,9 +66,14 @@ function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
           <p></p>
         </div>
         <div className="swapper-info-line">
-          <p className="swapper-info-label">Slippage Tolerance</p>
+          <p className="swapper-info-label">Price Impact</p>
           <p></p>
         </div>
+      </div>
+      <div className="swapper-btn-container">
+        <Button className="swapper-submit-btn" sx={ButtonStyles}>
+          Submit Swap
+        </Button>
       </div>
     </div>
   );
