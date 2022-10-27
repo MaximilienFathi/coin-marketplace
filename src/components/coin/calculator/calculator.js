@@ -30,7 +30,6 @@ function Calculator({
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
   const [currency1, setCurrency1] = useState(coinSymbol);
-  const [currency2, setCurrency2] = useState(currencyName);
 
   const handleInput1Change = (event) => {
     setInput1(event.target.value);

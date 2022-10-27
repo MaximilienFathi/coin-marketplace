@@ -39,7 +39,7 @@ function SwapOptionTabs({ unit, values, setWarning }) {
   return (
     <div className="swap-option-tabs-container">
       <Tabs
-        value={option}
+        value={values.includes(option) ? option : false}
         TabIndicatorProps={{
           style: { display: "none" },
         }}
@@ -62,24 +62,12 @@ function SwapOptionTabs({ unit, values, setWarning }) {
           onClick={() => handleClick(values[1])}
         />
         <StyledTab
-          label={
-            unit === "%"
-              ? values[2].toLocaleString("en-US", {
-                  minimumFractionDigits: 1,
-                })
-              : values[2]
-          }
+          label={values[2]}
           value={values[2]}
           onClick={() => handleClick(values[2])}
         />
         <StyledTab
-          label={
-            unit === "%"
-              ? values[3].toLocaleString("en-US", {
-                  minimumFractionDigits: 1,
-                })
-              : values[3]
-          }
+          label={values[3]}
           value={values[3]}
           onClick={() => handleClick(values[3])}
         />

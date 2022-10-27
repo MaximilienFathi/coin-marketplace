@@ -3,6 +3,7 @@ import { InputAdornment, styled } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import "./swap-option-tabs.css";
+import { useEffect, useState } from "react";
 
 //========================================================
 // CUSTOM STYLES
@@ -63,24 +64,16 @@ const InputPropsStyles = {
 
 function SwapOptionInput({ option, setOption, values, unit, setWarning }) {
   const handleChange = (event) => {
+    if (event.target.value === "") {
+      setOption("");
+      return;
+    }
     const input = Number(event.target.value);
-    if (values.includes(input)) setOption(input);
-    if (!values.includes(input)) setOption(false);
+    setOption(input);
     if (unit === "%") {
       if (input > 5) setWarning("Your transaction may be frontrun");
       if (input <= 5) setWarning("");
     }
-  };
-
-  const displayInput = () => {
-    if (!option) return "";
-    // if (unit === "%")
-    //   return option.toLocaleString("en-US", {
-    //     minimumFractionDigits: 1,
-    //   });
-    return option.toLocaleString("en-US", {
-      minimumFractionDigits: 1,
-    });
   };
 
   return (
@@ -89,7 +82,7 @@ function SwapOptionInput({ option, setOption, values, unit, setWarning }) {
         onChange={(event) => {
           handleChange(event);
         }}
-        value={displayInput()}
+        value={option}
         InputProps={{
           endAdornment: <InputAdornment position="end">{unit}</InputAdornment>,
           // placeholder: displayPlaceholder(),

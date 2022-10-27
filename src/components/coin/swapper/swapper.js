@@ -20,6 +20,9 @@ const ButtonStyles = {
 
 function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
   const [warning, setWarning] = useState("");
+  const [currency2, setCurrency2] = useState(currencyName);
+
+  const findMinimumReceived = () => {};
 
   return (
     <div className="swapper-outer-container">
@@ -63,7 +66,7 @@ function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
         </div>
         <div className="swapper-info-line">
           <p className="swapper-info-label">Minimum Received</p>
-          <p></p>
+          <p>{findMinimumReceived()}</p>
         </div>
         <div className="swapper-info-line">
           <p className="swapper-info-label">Price Impact</p>
