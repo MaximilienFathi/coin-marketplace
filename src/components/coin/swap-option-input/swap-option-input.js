@@ -2,7 +2,7 @@ import * as React from "react";
 import { InputAdornment, styled } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import "./swap-option-tabs.css";
+import "../swap-option-tabs/swap-option-tabs.css";
 import { useEffect, useState } from "react";
 
 //========================================================
@@ -62,15 +62,17 @@ const InputPropsStyles = {
 //   if (unit === "min") return String(option);
 // };
 
-function SwapOptionInput({ option, setOption, values, unit, setWarning }) {
+function SwapOptionInput({ option, setOption, setSlippage, unit, setWarning }) {
   const handleChange = (event) => {
     if (event.target.value === "") {
       setOption("");
+      if (unit === "%") setSlippage("");
       return;
     }
     const input = Number(event.target.value);
     setOption(input);
     if (unit === "%") {
+      setSlippage(input);
       if (input > 5) setWarning("Your transaction may be frontrun");
       if (input <= 5) setWarning("");
     }

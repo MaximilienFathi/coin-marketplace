@@ -6,30 +6,32 @@ import "./calculator.css";
 
 //========================================================
 // CUSTOM STYLES
-const IconStyles = {
-  width: "2.4rem",
-  height: "auto",
-  // padding: "0.8rem",
-  // borderRadius: "50%",
-  // zIndex: 1,
-  // position: "absolute",
-  // left: "50%",
-  // top: "50%",
-  // transform: "translate(-50%, -50%)",
-  // background: "linear-gradient(90deg, #b84dc3, #a620b4)",
-  // boxShadow: "inset 0 0 2px #000",
-};
+// const IconStyles = {
+//   width: "2.4rem",
+//   height: "auto",
+//   // padding: "0.8rem",
+//   // borderRadius: "50%",
+//   // zIndex: 1,
+//   // position: "absolute",
+//   // left: "50%",
+//   // top: "50%",
+//   // transform: "translate(-50%, -50%)",
+//   // background: "linear-gradient(90deg, #b84dc3, #a620b4)",
+//   // boxShadow: "inset 0 0 2px #000",
+// };
 //========================================================
 
 function Calculator({
   coinSymbol,
-  currencySymbol,
   currencyName,
   currencyRates,
+  input2,
+  setInput2,
 }) {
   const [input1, setInput1] = useState("");
-  const [input2, setInput2] = useState("");
+  // const [input2, setInput2] = useState("");
   const [currency1, setCurrency1] = useState(coinSymbol);
+  const [currency2, setCurrency2] = useState(currencyName);
 
   const handleInput1Change = (event) => {
     setInput1(event.target.value);
@@ -43,15 +45,15 @@ function Calculator({
     setInput2(event.target.value);
   };
 
-  const handleClick = () => {
-    const temp1 = input1;
-    setInput1(input2);
-    setInput2(temp1);
-
-    const temp2 = currency1;
-    setCurrency1(currency2);
-    setCurrency2(temp2);
-  };
+  // const handleClick = () => {
+  //   const temp1 = input1;
+  //   setInput1(input2);
+  //   setInput2(temp1);
+  //
+  //   const temp2 = currency1;
+  //   setCurrency1(currency2);
+  //   setCurrency2(temp2);
+  // };
 
   return (
     // <div className="calculator-outer-container">
@@ -79,7 +81,7 @@ function Calculator({
         <div className="calculator-input-labels">
           <p>Receive</p>
           <div className="calculator-balance">
-            <AccountBalanceWalletIcon></AccountBalanceWalletIcon>Balance: 45.23
+            <AccountBalanceWalletIcon></AccountBalanceWalletIcon>Balance: 12.47
           </div>
         </div>
         <CalculatorInput

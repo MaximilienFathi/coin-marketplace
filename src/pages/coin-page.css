@@ -1,13 +1,13 @@
-/*.coin-page-container {*/
-/*  max-width: 130rem;*/
-/*}*/
-
 .coin-page-content-wrap {
+  max-width: 150rem;
+  margin: 0 auto;
   padding: 0 4.8rem;
+
   display: grid;
-  /*grid-template-columns: 2fr 1fr;*/
-  grid-template-columns: repeat(2, min-content);
-  grid-template-rows: repeat(3, min-content);
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: repeat(3, auto); /* min-content */
+  /*grid-template-columns: repeat(2, min-content);*/
+  /*grid-auto-flow: column;*/
   column-gap: 3.2rem;
   row-gap: 3.2rem;
   /*height: fit-content;*/

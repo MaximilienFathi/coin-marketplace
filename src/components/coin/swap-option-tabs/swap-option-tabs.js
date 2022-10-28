@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { styled, Tab, Tabs } from "@mui/material";
-import SwapOptionInput from "./swap-option-input";
+import SwapOptionInput from "../swap-option-input/swap-option-input";
 
 //========================================================
 // CUSTOM STYLES
@@ -29,11 +29,12 @@ const StyledTab = styled(Tab)({
 });
 //========================================================
 
-function SwapOptionTabs({ unit, values, setWarning }) {
+function SwapOptionTabs({ unit, values, setSlippage, setWarning }) {
   const [option, setOption] = useState(values[0]);
 
   const handleClick = (newOption) => {
     setOption(newOption);
+    if (unit === "%") setSlippage(newOption);
   };
 
   return (
@@ -75,6 +76,7 @@ function SwapOptionTabs({ unit, values, setWarning }) {
       <SwapOptionInput
         option={option}
         setOption={setOption}
+        setSlippage={setSlippage}
         values={values}
         unit={unit}
         setWarning={setWarning}

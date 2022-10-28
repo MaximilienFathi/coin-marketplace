@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Favorite from "../../others/favorite";
-import PriceProgressBar from "../price-progress-bar";
+import PriceProgressBar from "../price-progress-bar/price-progress-bar";
 import "./market-info.css";
 
 function MarketInfo({

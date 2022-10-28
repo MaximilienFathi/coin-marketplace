@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 
 //========================================================
 // CUSTOM STYLES
-const StyledBox = styled(Box)({ minWidth: "30rem" });
+const StyledBox = styled(Box)({ maxWidth: "30rem" });
 
 const StyledTextField = styled(TextField)({
   "& .MuiOutlinedInput-input": {
@@ -18,14 +18,12 @@ const StyledTextField = styled(TextField)({
     borderRadius: "11px",
     width: "100%",
     "& > fieldset": {
-      // border: "2px solid #b84dc3",
       border: "none",
     },
   },
   "& .MuiInputBase-root.Mui-focused": {
     "& > fieldset": {
       // transition: "all 0.3s",
-      // border: "none",
       // boxShadow: "0 0 0.5rem 0.2rem #b84dc3",
       border: "2px solid #b84dc3",
     },
@@ -36,11 +34,10 @@ const StyledTextField = styled(TextField)({
     fontWeight: 500,
     color: "rgb(255, 255, 255)", // rgba(255, 255, 255, 0.8)
   },
-  // "& .MuiInputBase-input": { height: 24, paddingBottom: 12, paddingTop: 12 },
+  "& .MuiInputBase-input": { height: 26, paddingBottom: 13, paddingTop: 13 },
 });
 
 const InputPropsStyles = {
-  // htmlFontSize: 10,
   fontFamily: "inherit",
   fontSize: "1.8rem",
   fontWeight: 600,
@@ -49,11 +46,11 @@ const InputPropsStyles = {
 
 const InputAdornmentStyles = {
   width: "6rem",
-  height: "auto",
-  padding: "0.8rem 1.4rem",
+  height: "1.5rem",
+  padding: "1rem",
   marginRight: "1.2rem",
   borderRadius: "11px",
-  background: "linear-gradient(90deg, #b84dc3, #a620b4)",
+  // background: "linear-gradient(90deg, #b84dc3, #a620b4)",
   boxShadow: "inset 0 0 2px #000",
   justifyContent: "center",
 };
@@ -67,10 +64,6 @@ function CalculatorInput({
   inputOrder,
   handleChange,
 }) {
-  // useEffect(() => {
-  //   handleChange(this);
-  // }, [input1]);
-
   return (
     <StyledBox>
       <StyledTextField
