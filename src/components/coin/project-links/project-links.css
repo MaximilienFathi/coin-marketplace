@@ -1,12 +1,12 @@
 .project-links-outer-container {
+  grid-column: 2;
+  grid-row: 3;
+  overflow: hidden;
+
   height: fit-content;
   border-radius: 11px;
   padding: 2.4rem;
   background: #303e58;
-  grid-column: 2;
-  grid-row: 3;
-  /*min-width: ;*/
-  overflow: hidden;
 
   background-color: rgba(184, 184, 184, 0.25);
   box-shadow: 0 0 0.5rem 0.01rem #b8b8b8;

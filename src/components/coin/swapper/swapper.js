@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
+import { styled } from "@mui/material";
 import SwapOptionTabs from "../swap-option-tabs/swap-option-tabs";
 import Calculator from "../calculator/calculator";
 import "./swapper.css";
 
+//========================================================
+// CUSTOM STYLES
+const StyledButton = styled(Button)({
+  "&.MuiButtonBase-root:hover": {
+    background: "linear-gradient(90deg, #c671cf, #b84dc3)",
+  },
+});
+
 const ButtonStyles = {
   width: "80%",
-  // color: "white",
   padding: "0.8rem",
   fontSize: "1.8rem",
   fontWeight: "500",
@@ -17,6 +25,7 @@ const ButtonStyles = {
   background: "linear-gradient(90deg, #b84dc3, #a620b4)",
   boxShadow: "inset 0 0 2px #000",
 };
+//========================================================
 
 function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
   const [warning, setWarning] = useState("");
@@ -30,7 +39,7 @@ function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
   return (
     <div className="swapper-outer-container">
       <h2 className="swapper-heading">Crypto Swapper</h2>
-      {/*<hr className="swapper-separator" />*/}
+
       <Calculator
         coinSymbol={coinSymbol}
         currencyName={currencyName}
@@ -38,8 +47,7 @@ function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
         input2={input2}
         setInput2={setInput2}
       ></Calculator>
-      {/*<hr className="swapper-separator" />*/}
-      {/*<div className="swapper-inner-container"></div>*/}
+
       <div className="swapper-options-container">
         <div className="swapper-option-container">
           <p className="swapper-option-label">Slippage Tolerance</p>
@@ -60,28 +68,29 @@ function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
           ></SwapOptionTabs>
         </div>
       </div>
-      {/*<hr className="swapper-separator" />*/}
+
       <div className="swapper-info-container">
         <div className="swapper-info-line">
           <p className="swapper-info-label">Rate</p>
-          <p>
+          <p className="swapper-info-value">
             1 {coinSymbol.toUpperCase()} = {currencySymbol}
-            {currencyRates[currencyName]}
+            {currencyRates[currencyName].toLocaleString("en-US")}
           </p>
         </div>
         <div className="swapper-info-line">
           <p className="swapper-info-label">Minimum Received</p>
-          <p>{findMinimumReceived()}</p>
+          <p className="swapper-info-value">{findMinimumReceived()}</p>
         </div>
         <div className="swapper-info-line">
           <p className="swapper-info-label">Price Impact</p>
-          <p>0.3%</p>
+          <p className="swapper-info-value">0.3%</p>
         </div>
       </div>
+
       <div className="swapper-btn-container">
-        <Button className="swapper-submit-btn" sx={ButtonStyles}>
+        <StyledButton className="swapper-submit-btn" sx={ButtonStyles}>
           Submit Swap
-        </Button>
+        </StyledButton>
       </div>
     </div>
   );

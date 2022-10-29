@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 
 //========================================================
 // CUSTOM STYLES
-const StyledBox = styled(Box)({ maxWidth: "30rem" });
+const StyledBox = styled(Box)({ maxWidth: "50rem" });
 
 const StyledTextField = styled(TextField)({
   "& .MuiOutlinedInput-input": {

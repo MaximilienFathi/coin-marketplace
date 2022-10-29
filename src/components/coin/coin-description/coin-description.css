@@ -1,12 +1,9 @@
 .coin-description-outer-container {
-  height: auto;
-  min-width: 100rem;
-  border-radius: 11px;
-  padding: 2.4rem;
-  background: #303e58;
   grid-column: 1;
   grid-row: 3;
 
+  border-radius: 11px;
+  padding: 2.4rem;
   background-color: rgba(184, 184, 184, 0.25);
   box-shadow: 0 0 0.5rem 0.01rem #b8b8b8;
 }

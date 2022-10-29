@@ -1,17 +1,17 @@
 .coin-charts-outer-container {
+  grid-column: 1;
+  grid-row: 2;
+
   /*height: fit-content;*/
   border-radius: 11px;
   padding: 2.4rem;
-  background: #303e58;
-
-  grid-column: 1;
-  grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-
   background-color: rgba(184, 184, 184, 0.25);
   box-shadow: 0 0 0.5rem 0.01rem #b8b8b8;
+
+  /* To have element stretched to fit remaining space */
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*flex: 1;*/
 }
 
 .coin-charts-inner-container {

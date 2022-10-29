@@ -56,7 +56,6 @@ function Calculator({
   // };
 
   return (
-    // <div className="calculator-outer-container">
     <div className="calculator-container">
       <div className="calculator-input-container">
         <div className="calculator-input-labels">
@@ -94,7 +93,6 @@ function Calculator({
         />
       </div>
     </div>
-    // </div>
   );
 }
 

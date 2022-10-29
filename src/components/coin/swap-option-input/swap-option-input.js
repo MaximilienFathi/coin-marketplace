@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 //========================================================
 // CUSTOM STYLES
-const StyledBox = styled(Box)({ maxWidth: "7rem", paddingLeft: "1.2rem" });
+const StyledBox = styled(Box)({ maxWidth: "9rem", paddingLeft: "1.2rem" });
 
 const StyledTextField = styled(TextField)({
   "& .MuiOutlinedInput-input": {
@@ -16,10 +16,10 @@ const StyledTextField = styled(TextField)({
     },
   },
   "& .MuiInputBase-root, .MuiInputBase-root:hover": {
-    backgroundColor: "#495e74",
+    backgroundColor: "rgba(73,94,116,0.7)",
     borderRadius: "11px",
     width: "100%",
-    padding: "1rem",
+    padding: "1rem 1.2rem",
     "& > fieldset": {
       // border: "2px solid #b84dc3",
       border: "none",
