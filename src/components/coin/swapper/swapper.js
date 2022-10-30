@@ -74,7 +74,8 @@ function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
           <p className="swapper-info-label">Rate</p>
           <p className="swapper-info-value">
             1 {coinSymbol.toUpperCase()} = {currencySymbol}
-            {currencyRates[currencyName].toLocaleString("en-US")}
+            {currencyRates[currencyName] &&
+              currencyRates[currencyName].toLocaleString("en-US")}
           </p>
         </div>
         <div className="swapper-info-line">

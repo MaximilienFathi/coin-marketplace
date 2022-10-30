@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header/header";
 import MarketInfo from "../components/coin/market-info/market-info";
+import CoinBalance from "../components/coin/coin-balance/coin-balance";
 import CoinCharts from "../components/coin/coin-charts/coin-charts";
-import Footer from "../components/others/footer/footer";
-import Calculator from "../components/coin/calculator/calculator";
 import Swapper from "../components/coin/swapper/swapper";
 import CoinDescription from "../components/coin/coin-description/coin-description";
 import ProjectLinks from "../components/coin/project-links/project-links";
+import Footer from "../components/others/footer/footer";
 import "./coin-page.css";
-import favoritesContext from "../contexts/favorites-context";
 
 function CoinPage() {
   const [coinData, setCoinData] = useState({});
@@ -163,6 +163,11 @@ function CoinPage() {
             currencyName={currencyName}
             currencySymbol={currencySymbol}
           ></MarketInfo>
+          <CoinBalance
+            coinSymbol={coinSymbol}
+            currencyName={currencyName}
+            currencySymbol={currencySymbol}
+          ></CoinBalance>
           <CoinCharts
             coinID={coinID}
             coinName={coinName}
