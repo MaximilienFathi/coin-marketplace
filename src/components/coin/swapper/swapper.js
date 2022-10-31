@@ -27,7 +27,13 @@ const ButtonStyles = {
 };
 //========================================================
 
-function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
+function Swapper({
+  scrollRef,
+  coinSymbol,
+  currencySymbol,
+  currencyName,
+  currencyRates,
+}) {
   const [warning, setWarning] = useState("");
   const [input2, setInput2] = useState("");
   const [slippage, setSlippage] = useState(0.1);
@@ -37,7 +43,7 @@ function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
   };
 
   return (
-    <div className="swapper-outer-container">
+    <div className="swapper-outer-container" ref={scrollRef}>
       <h2 className="swapper-heading">Crypto Swapper</h2>
 
       <Calculator
@@ -89,9 +95,7 @@ function Swapper({ coinSymbol, currencySymbol, currencyName, currencyRates }) {
       </div>
 
       <div className="swapper-btn-container">
-        <StyledButton className="swapper-submit-btn" sx={ButtonStyles}>
-          Submit Swap
-        </StyledButton>
+        <StyledButton sx={ButtonStyles}>Submit Swap</StyledButton>
       </div>
     </div>
   );

@@ -19,9 +19,55 @@
 .coin-balance-top-section {
   border: 2px solid rgba(255, 255, 255, 0.1);
   background-color: rgba(35, 37, 56, 0.1);
+  font-size: 1.4rem;
+  font-weight: 500;
+  width: 100%;
+  border-radius: 11px;
+  padding: 0.8rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.coin-balance-top-section span {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .coin-balance-inner-container {
-  width: 85%;
-  height: 60px;
+  width: 100%;
+  height: 80%;
+}
+
+.coin-balance-chart-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  letter-spacing: 0.75px;
+}
+
+.coin-balance-chart-text p:nth-child(1) {
+  font-size: 1.6rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.8rem;
+}
+
+.coin-balance-chart-text p:nth-child(2) {
+  font-size: 3rem;
+  font-weight: 500;
+  /*color: rgba(255, 255, 255, 0.6);*/
+}
+
+.coin-balance-chart-text p:nth-child(3) {
+  font-size: 1.8rem;
+  font-weight: 500;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.8rem;
+}
+
+.coin-balance-btn-container {
+  display: flex;
+  justify-content: center;
 }

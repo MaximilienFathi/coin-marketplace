@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import favoritesContext from "../contexts/favorites-context";
@@ -25,6 +25,8 @@ function CoinPage() {
 
   const location = useLocation();
   const { coinID, coinName, coinSymbol } = location.state;
+
+  const ref = useRef(null);
 
   //############################################################################
 
@@ -164,9 +166,12 @@ function CoinPage() {
             currencySymbol={currencySymbol}
           ></MarketInfo>
           <CoinBalance
+            scrollRef={ref}
             coinSymbol={coinSymbol}
             currencyName={currencyName}
             currencySymbol={currencySymbol}
+            currencyRate={currencyRates[currencyName]}
+            price_change_24h={priceChangesData.price_change_24h}
           ></CoinBalance>
           <CoinCharts
             coinID={coinID}
@@ -176,6 +181,7 @@ function CoinPage() {
             priceChangesData={priceChangesData}
           />
           <Swapper
+            ref={ref}
             coinSymbol={coinSymbol}
             currencyName={currencyName}
             currencySymbol={currencySymbol}
