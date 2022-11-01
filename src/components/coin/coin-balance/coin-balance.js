@@ -40,10 +40,13 @@ function CoinBalance({
   currencyRate,
   price_change_24h,
 }) {
-  const coinOwned = 10;
-  const coinBalance = coinOwned * currencyRate;
-  // to make sure total balance is always higher than coin balance
+  const coinOwned = currencyRate ? 10 : 0;
+  const coinBalance = currencyRate ? coinOwned * currencyRate : 0;
+  // to make sure total balance is always higher than coin balance, add 1000
   const totalBalance = coinBalance + 1000;
+  const balanceChange = price_change_24h
+    ? Math.abs(coinBalance * (price_change_24h / 100))
+    : 0;
 
   const data = {
     datasets: [
@@ -65,12 +68,10 @@ function CoinBalance({
     );
   };
 
-  const findColor = () => (price_change_24h >= 0 ? "green" : "red");
-
-  const findBalanceChange = () => {
-    return Math.abs(coinBalance * (price_change_24h / 100)).toLocaleString(
-      "US"
-    );
+  const findColor = () => {
+    if (price_change_24h === undefined) return "hide-display";
+    if (price_change_24h >= 0) return "green";
+    if (price_change_24h < 0) return "red";
   };
 
   const scrollToSwapper = () => {
@@ -135,7 +136,7 @@ function CoinBalance({
             <p className={findColor()}>
               {displayBalanceIcon()}
               {currencySymbol}
-              {findBalanceChange()}
+              {balanceChange.toLocaleString("US")}
             </p>
             <div className="coin-balance-btn-container">
               <StyledButton sx={ButtonStyles} onClick={scrollToSwapper}>

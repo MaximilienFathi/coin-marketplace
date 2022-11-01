@@ -67,6 +67,10 @@
   margin-bottom: 0.8rem;
 }
 
+.hide-display {
+  display: none !important;
+}
+
 .coin-balance-btn-container {
   display: flex;
   justify-content: center;

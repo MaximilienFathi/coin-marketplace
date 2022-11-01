@@ -26,7 +26,7 @@ function CoinPage() {
   const location = useLocation();
   const { coinID, coinName, coinSymbol } = location.state;
 
-  const ref = useRef(null);
+  const scrollRef = useRef(null);
 
   //############################################################################
 
@@ -166,7 +166,7 @@ function CoinPage() {
             currencySymbol={currencySymbol}
           ></MarketInfo>
           <CoinBalance
-            scrollRef={ref}
+            scrollRef={scrollRef}
             coinSymbol={coinSymbol}
             currencyName={currencyName}
             currencySymbol={currencySymbol}
@@ -181,7 +181,7 @@ function CoinPage() {
             priceChangesData={priceChangesData}
           />
           <Swapper
-            ref={ref}
+            ref={scrollRef}
             coinSymbol={coinSymbol}
             currencyName={currencyName}
             currencySymbol={currencySymbol}

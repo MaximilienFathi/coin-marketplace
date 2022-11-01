@@ -45,7 +45,7 @@ const InputPropsStyles = {
 };
 
 const InputAdornmentStyles = {
-  width: "6rem",
+  width: "fit-content",
   height: "1.5rem",
   padding: "1rem",
   marginRight: "1.2rem",
