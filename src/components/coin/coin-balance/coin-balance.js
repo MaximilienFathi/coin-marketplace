@@ -42,8 +42,8 @@ function CoinBalance({
 }) {
   const coinOwned = currencyRate ? 10 : 0;
   const coinBalance = currencyRate ? coinOwned * currencyRate : 0;
-  // to make sure total balance is always higher than coin balance, add 1000
-  const totalBalance = coinBalance + 1000;
+  // to make sure total balance is always higher than coin balance, add 5000
+  const totalBalance = coinBalance + 5000;
   const balanceChange = price_change_24h
     ? Math.abs(coinBalance * (price_change_24h / 100))
     : 0;
@@ -51,7 +51,7 @@ function CoinBalance({
   const data = {
     datasets: [
       {
-        data: [30, 70],
+        data: [coinBalance, totalBalance - coinBalance],
         backgroundColor: ["rgb(52,151,149)", "rgba(52,151,149,0.3)"],
         display: true,
         borderWidth: 2,

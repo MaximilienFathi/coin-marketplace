@@ -56,28 +56,17 @@ const InputAdornmentStyles = {
 };
 //========================================================
 
-function CalculatorInput({
-  currency1,
-  currency2,
-  input1,
-  input2,
-  inputOrder,
-  handleChange,
-}) {
+function CalculatorInput({ currency, input, handleChange }) {
   return (
     <StyledBox>
       <StyledTextField
         fullWidth
-        value={String(inputOrder === 1 ? input1 : input2)}
+        value={String(input)}
         onChange={handleChange}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start" sx={InputAdornmentStyles}>
-              {String(
-                inputOrder === 1
-                  ? currency1.toUpperCase()
-                  : currency2.toUpperCase()
-              )}
+              {String(currency.toUpperCase())}
             </InputAdornment>
           ),
           placeholder: "0",

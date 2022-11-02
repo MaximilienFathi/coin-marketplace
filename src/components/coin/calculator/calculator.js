@@ -30,10 +30,6 @@ function Calculator({
 }) {
   const [input1, setInput1] = useState("");
   // const [input2, setInput2] = useState("");
-  const [currency1, setCurrency1] = useState(coinSymbol);
-  const [currency2, setCurrency2] = useState(currencyName);
-
-  console.log(currency2);
 
   const handleInput1Change = (event) => {
     setInput1(event.target.value);
@@ -43,19 +39,11 @@ function Calculator({
   };
 
   const handleInput2Change = (event) => {
-    setInput1(event.target.value * currencyRates[currencyName]);
     setInput2(event.target.value);
+    if (event.target.value !== "")
+      setInput1(event.target.value / currencyRates[currencyName]);
+    if (event.target.value === "") setInput1("");
   };
-
-  // const handleClick = () => {
-  //   const temp1 = input1;
-  //   setInput1(input2);
-  //   setInput2(temp1);
-  //
-  //   const temp2 = currency1;
-  //   setCurrency1(currency2);
-  //   setCurrency2(temp2);
-  // };
 
   return (
     <div className="calculator-container">
@@ -67,17 +55,11 @@ function Calculator({
           </div>
         </div>
         <CalculatorInput
-          currency1={currency1}
-          currency2={currency2}
-          input1={input1}
-          input2={input2}
-          inputOrder={1}
+          currency={coinSymbol}
+          input={input1}
           handleChange={handleInput1Change}
         />
       </div>
-      {/*<button className="switchButton" onClick={handleClick}>*/}
-      {/*  <SwapVertIcon sx={IconStyles}></SwapVertIcon>*/}
-      {/*</button>*/}
       <div className="calculator-input-container">
         <div className="calculator-input-labels">
           <p>Receive</p>
@@ -86,11 +68,8 @@ function Calculator({
           </div>
         </div>
         <CalculatorInput
-          currency1={currency1}
-          currency2={currency2}
-          input1={input1}
-          input2={input2}
-          inputOrder={2}
+          currency={currencyName}
+          input={input2}
           handleChange={handleInput2Change}
         />
       </div>

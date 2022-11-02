@@ -23,10 +23,6 @@ function ProjectLinks({ coinData }) {
     return url.split("/")[0];
   };
 
-  const createSimpleContainer = (data) => {
-    return <div className="contract-address small-box">{data}</div>;
-  };
-
   const createLinkContainer = (url, name) => {
     const domain = extractDomain(url);
     return (
@@ -81,13 +77,6 @@ function ProjectLinks({ coinData }) {
           <span className="project-links-type">Source Code</span>
           <ul className="project-links-list">
             {coinData.code && createLinkContainer(coinData.code, "GitHub")}
-          </ul>
-        </div>
-        <div className="categorized-container">
-          <span className="project-links-type">Contract</span>
-          <ul className="project-links-list">
-            {coinData.contractAddress &&
-              createSimpleContainer(coinData.contractAddress)}
           </ul>
         </div>
       </div>
