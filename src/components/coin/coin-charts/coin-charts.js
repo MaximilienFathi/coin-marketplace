@@ -148,7 +148,7 @@ function CoinCharts({
     datasets: [
       {
         data: historicData.map((coin) => coin[1]),
-        label: `${currencyName.toUpperCase()}`,
+        label: ` ${currencyName.toUpperCase()}`,
         pointRadius: 0.5,
         tension: 0.7,
         fill: {

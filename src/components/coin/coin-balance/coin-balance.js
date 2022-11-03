@@ -49,6 +49,7 @@ function CoinBalance({
     : 0;
 
   const data = {
+    labels: [`${coinSymbol.toUpperCase()} Balance`, false],
     datasets: [
       {
         data: [coinBalance, totalBalance - coinBalance],
@@ -86,7 +87,9 @@ function CoinBalance({
       <div className="coin-balance-top-section">
         <p>
           <span>Total Balance:</span> {currencySymbol}
-          {totalBalance.toLocaleString("US")}
+          {totalBalance.toLocaleString("en-US", {
+            maximumFractionDigits: 8,
+          })}
         </p>
         <p>
           <span>{coinSymbol.toUpperCase()} owned:</span> {coinOwned}
@@ -101,7 +104,24 @@ function CoinBalance({
                 display: false,
               },
               tooltip: {
-                enabled: false,
+                // xAlign: "left",
+                // yAlign: "bottom",
+                enabled: true,
+                callbacks: {
+                  label: (context) => {
+                    const data = context.dataset.data;
+                    const label = context.label;
+                    const currentValue = context.raw;
+                    let total = 0;
+                    for (let i = 0; i < data.length; i++) {
+                      total += data[i];
+                    }
+                    const percentage = parseFloat(
+                      ((currentValue / total) * 100).toFixed(2)
+                    );
+                    return ` ${label}: ${percentage}%`;
+                  },
+                },
               },
             },
             rotation: -110,
@@ -116,27 +136,23 @@ function CoinBalance({
             responsive: true,
           }}
         />
-        <div
-          style={{
-            position: "absolute",
-            top: "70%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            textAlign: "center",
-          }}
-        >
+        <div className="coin-balance-chart-text-container">
           <div className="coin-balance-chart-text">
             <p>
               {coinSymbol.toUpperCase()} balance ({currencyName.toUpperCase()})
             </p>
             <p>
               {currencySymbol}
-              {coinBalance.toLocaleString("US")}
+              {coinBalance.toLocaleString("en-US", {
+                maximumFractionDigits: 8,
+              })}
             </p>
             <p className={findColor()}>
               {displayBalanceIcon()}
               {currencySymbol}
-              {balanceChange.toLocaleString("US")}
+              {balanceChange.toLocaleString("en-US", {
+                maximumFractionDigits: 8,
+              })}
             </p>
             <div className="coin-balance-btn-container">
               <StyledButton sx={ButtonStyles} onClick={scrollToSwapper}>
@@ -151,3 +167,7 @@ function CoinBalance({
 }
 
 export default CoinBalance;
+
+/*####################
+TO DO: DOUGHNUT DATA LABEL + CALCULATOR INPUT BALANCE
+*/

@@ -34,14 +34,18 @@ const Swapper = forwardRef(
     const [slippage, setSlippage] = useState(0.1);
 
     const findMinimumReceived = () => {
-      return input2 - (slippage / 100) * input2;
+      return (input2 - (slippage / 100) * input2).toLocaleString("en-US", {
+        maximumFractionDigits: 8,
+      });
     };
 
     const displayCurrencyRate = () => {
       return currencyRates[currencyName] ? (
         <p className="swapper-info-value">
           1 {coinSymbol.toUpperCase()} = {currencySymbol}
-          {currencyRates[currencyName].toLocaleString("en-US")}
+          {currencyRates[currencyName].toLocaleString("en-US", {
+            maximumFractionDigits: 8,
+          })}
         </p>
       ) : (
         "-"

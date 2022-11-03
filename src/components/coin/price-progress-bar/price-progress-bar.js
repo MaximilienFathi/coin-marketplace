@@ -5,7 +5,10 @@ function PriceProgressBar({ marketData, currencyName, currencySymbol }) {
   const currentPrice =
     marketData.current_price && marketData.current_price[currencyName];
   const lowPrice24h = marketData.low_24h && marketData.low_24h[currencyName];
-  const highPrice24h = marketData.high_24h && marketData.high_24h[currencyName];
+  let highPrice24h = marketData.high_24h && marketData.high_24h[currencyName];
+  // Following is added as in rare cases currentPrice is higher than
+  // highPrice24h (API not yet updated) making progress bar too long
+  highPrice24h = currentPrice > highPrice24h ? currentPrice : highPrice24h;
   const widthPercentage =
     (100 * (currentPrice - lowPrice24h)) / (highPrice24h - lowPrice24h);
 
@@ -24,12 +27,12 @@ function PriceProgressBar({ marketData, currencyName, currencySymbol }) {
       <div className="progress-bar-labels-container">
         <p className="progress-bar-label">
           {currencySymbol}
-          {marketData.low_24h && marketData.low_24h[currencyName]}
+          {lowPrice24h}
         </p>
         <p className="progress-bar-label">24H Range</p>
         <p className="progress-bar-label">
           {currencySymbol}
-          {marketData.high_24h && marketData.high_24h[currencyName]}
+          {highPrice24h}
         </p>
       </div>
     </div>
