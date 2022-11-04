@@ -6,6 +6,7 @@ import Footer from "../components/others/footer/footer";
 import Features from "../components/home/features/features";
 import QuickGuide from "../components/home/quick-guide/quick-guide";
 import CtaBanner from "../components/home/cta-banner/cta-banner";
+import ScrollButton from "../components/others/scroll-button";
 import "./page.css";
 
 function HomePage() {
@@ -20,6 +21,7 @@ function HomePage() {
         <CtaBanner />
       </div>
       <Footer />
+      <ScrollButton />
     </div>
   );
 }

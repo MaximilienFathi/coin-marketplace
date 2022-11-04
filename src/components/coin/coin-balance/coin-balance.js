@@ -48,19 +48,6 @@ function CoinBalance({
     ? Math.abs(coinBalance * (price_change_24h / 100))
     : 0;
 
-  const data = {
-    labels: [`${coinSymbol.toUpperCase()} Balance`, false],
-    datasets: [
-      {
-        data: [coinBalance, totalBalance - coinBalance],
-        backgroundColor: ["rgb(52,151,149)", "rgba(52,151,149,0.3)"],
-        display: true,
-        borderWidth: 2,
-        borderColor: "#64efdf",
-      },
-    ],
-  };
-
   const displayBalanceIcon = () => {
     return price_change_24h >= 0 ? (
       <NorthEastIcon></NorthEastIcon>
@@ -97,7 +84,18 @@ function CoinBalance({
       </div>
       <div className="coin-balance-inner-container">
         <Doughnut
-          data={data}
+          data={{
+            labels: [`${coinSymbol.toUpperCase()} Balance`, false],
+            datasets: [
+              {
+                data: [coinBalance, totalBalance - coinBalance],
+                backgroundColor: ["rgb(52,151,149)", "rgba(52,151,149,0.3)"],
+                display: true,
+                borderWidth: 2,
+                borderColor: "#64efdf",
+              },
+            ],
+          }}
           options={{
             plugins: {
               legend: {
@@ -119,6 +117,7 @@ function CoinBalance({
                     const percentage = parseFloat(
                       ((currentValue / total) * 100).toFixed(2)
                     );
+                    if (!label) return ` ${percentage}%`;
                     return ` ${label}: ${percentage}%`;
                   },
                 },
@@ -127,11 +126,11 @@ function CoinBalance({
             rotation: -110,
             circumference: 220,
             cutout: "85%",
-            // animation: {
-            //   duration: 1000,
-            //   animateRotate: true,
-            //   easing: "easeInOutCirc",
-            // },
+            animation: {
+              duration: 1000,
+              animateRotate: true,
+              easing: "easeInOutCirc",
+            },
             maintainAspectRatio: false,
             responsive: true,
           }}
@@ -167,7 +166,3 @@ function CoinBalance({
 }
 
 export default CoinBalance;
-
-/*####################
-TO DO: DOUGHNUT DATA LABEL + CALCULATOR INPUT BALANCE
-*/
