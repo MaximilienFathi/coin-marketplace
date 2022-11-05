@@ -18,15 +18,17 @@ function CoinPage() {
   const [currencyRates, setCurrencyRates] = useState({});
   const [priceChangesData, setPriceChangesData] = useState({});
   const [totalMarketCap, setTotalMarketCap] = useState({});
-
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
   const [favoritesChanged, setFavoritesChanged] = useState(false);
 
-  const location = useLocation();
-  const { coinID, coinName, coinSymbol } = location.state;
-
   const scrollRef = useRef(null);
+
+  // Data sent from App.js and table-data.js
+  const location = useLocation();
+  let coinID = null;
+  let coinName = null;
+  let coinSymbol = null;
 
   //############################################################################
 
@@ -60,13 +62,28 @@ function CoinPage() {
 
   async function fetchCoinData() {
     try {
+      console.log(location);
+      if (location.state) {
+        coinID = location.state.coinID;
+        coinName = location.state.coinName;
+        coinSymbol = location.state.coinSymbol;
+      }
+      if (!location.state) {
+        coinID = location.pathname.split("/coins/")[1];
+      }
+      console.log(coinID);
+      //##########################################################
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coinID}`
       );
       const market_data = response.data.market_data;
       setMarketData(market_data);
       console.log("result 2", response.data);
-
+      if (!location.state) {
+        coinName = response.data.name;
+        coinSymbol = response.data.symbol;
+      }
+      //##########################################################
       const temp1 = {};
       temp1.image = response.data.image.small;
       temp1.name = response.data.name;
