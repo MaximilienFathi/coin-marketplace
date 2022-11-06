@@ -1,25 +1,7 @@
 import React, { useState } from "react";
-import SwapVertIcon from "@mui/icons-material/SwapVert";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CalculatorInput from "../calculator-input/calculator-input";
 import "./calculator.css";
-
-//========================================================
-// CUSTOM STYLES
-// const IconStyles = {
-//   width: "2.4rem",
-//   height: "auto",
-//   // padding: "0.8rem",
-//   // borderRadius: "50%",
-//   // zIndex: 1,
-//   // position: "absolute",
-//   // left: "50%",
-//   // top: "50%",
-//   // transform: "translate(-50%, -50%)",
-//   // background: "linear-gradient(90deg, #b84dc3, #a620b4)",
-//   // boxShadow: "inset 0 0 2px #000",
-// };
-//========================================================
 
 function Calculator({
   coinSymbol,

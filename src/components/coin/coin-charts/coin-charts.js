@@ -46,7 +46,7 @@ function CoinCharts({
   // Fetch chart data for a specific coin
   useEffect(() => {
     fetchChartData("prices", 1);
-  }, [currencyName]);
+  }, [coinID, currencyName]);
 
   // Fetch chart data based on chosen data type (prices, market cap, volume)
   async function fetchChartData(newDataType, newTimeframe) {
@@ -54,11 +54,10 @@ function CoinCharts({
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coinID}/market_chart?vs_currency=${currencyName}&days=${newTimeframe}`
       );
-      console.log(newDataType, newTimeframe);
       setHistoricData(response.data[newDataType]);
       setDatatype(newDataType);
       setTimeframe(newTimeframe);
-      console.log("result 1", response);
+      console.log("coin_charts_stuff", response);
     } catch (err) {
       console.error(err);
     }
@@ -179,13 +178,6 @@ function CoinCharts({
             {coinName} {labels[datatype]} Chart ({currencyName.toUpperCase()})
           </p>
           <TimeframeTabs fetchChartData={fetchChartData} datatype={datatype} />
-          {/*<p className="coin-charts-price-value">*/}
-          {/*{currencySymbol}*/}
-          {/*{current_price}*/}
-          {/*</p>*/}
-          {/*<p className={`chart-area-price-change ${price_change_color}`}>*/}
-          {/*  {transformData(price_change, 0, "percentage")}%*/}
-          {/*</p>*/}
         </div>
         <Line data={data} plugins={plugins} options={options} />
       </div>

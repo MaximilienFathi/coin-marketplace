@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import favoritesContext from "../contexts/favorites-context";
@@ -26,10 +26,16 @@ function CoinPage() {
 
   // Data sent from App.js and table-data.js
   const location = useLocation();
+  // const [coinID, setCoinID] = useState(null);
+  // const [coinName, setCoinName] = useState(null);
+  // const [coinSymbol, setCoinSymbol] = useState(null);
   let coinID = null;
   let coinName = null;
   let coinSymbol = null;
-
+  if (location.state) ({ coinID, coinName, coinSymbol } = location.state);
+  if (!location.state) {
+    coinID = location.pathname.split("/coins/")[1];
+  }
   //############################################################################
 
   // Initialize all data that will be retrieved from localStorage
@@ -58,27 +64,16 @@ function CoinPage() {
   useEffect(() => {
     fetchCoinData();
     fetchTotalMarketCap();
-  }, [currencyName]);
+  }, [coinID, currencyName]);
 
   async function fetchCoinData() {
     try {
-      console.log(location);
-      if (location.state) {
-        coinID = location.state.coinID;
-        coinName = location.state.coinName;
-        coinSymbol = location.state.coinSymbol;
-      }
-      if (!location.state) {
-        coinID = location.pathname.split("/coins/")[1];
-      }
-      console.log(coinID);
-      //##########################################################
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coinID}`
       );
       const market_data = response.data.market_data;
       setMarketData(market_data);
-      console.log("result 2", response.data);
+      console.log("coin_data", response.data);
       if (!location.state) {
         coinName = response.data.name;
         coinSymbol = response.data.symbol;

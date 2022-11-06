@@ -79,13 +79,17 @@ function CoinBalance({
           })}
         </p>
         <p>
-          <span>{coinSymbol.toUpperCase()} owned:</span> {coinOwned}
+          <span>{coinSymbol && coinSymbol.toUpperCase()} owned:</span>{" "}
+          {coinOwned}
         </p>
       </div>
       <div className="coin-balance-inner-container">
         <Doughnut
           data={{
-            labels: [`${coinSymbol.toUpperCase()} Balance`, false],
+            labels: [
+              `${coinSymbol && coinSymbol.toUpperCase()} Balance`,
+              false,
+            ],
             datasets: [
               {
                 data: [coinBalance, totalBalance - coinBalance],
@@ -138,7 +142,8 @@ function CoinBalance({
         <div className="coin-balance-chart-text-container">
           <div className="coin-balance-chart-text">
             <p>
-              {coinSymbol.toUpperCase()} balance ({currencyName.toUpperCase()})
+              {coinSymbol && coinSymbol.toUpperCase()} balance (
+              {currencyName.toUpperCase()})
             </p>
             <p>
               {currencySymbol}
@@ -155,7 +160,7 @@ function CoinBalance({
             </p>
             <div className="coin-balance-btn-container">
               <StyledButton sx={ButtonStyles} onClick={scrollToSwapper}>
-                Swap {coinSymbol.toUpperCase()} coins
+                Swap {coinSymbol && coinSymbol.toUpperCase()} coins
               </StyledButton>
             </div>
           </div>

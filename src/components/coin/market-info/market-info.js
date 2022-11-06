@@ -15,7 +15,6 @@ function MarketInfo({
     JSON.parse(localStorage.getItem("favorites")).includes(coinID)
   );
   // Using coinData.id instead of coinID does not work
-
   const displayValue = (data) => {
     if (
       data === "circulating_supply" ||

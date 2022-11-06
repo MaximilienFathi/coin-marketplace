@@ -66,7 +66,7 @@ function CalculatorInput({ currency, input, handleChange }) {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start" sx={InputAdornmentStyles}>
-              {String(currency.toUpperCase())}
+              {String(currency && currency.toUpperCase())}
             </InputAdornment>
           ),
           placeholder: "0",

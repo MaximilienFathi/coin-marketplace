@@ -42,7 +42,7 @@ const Swapper = forwardRef(
     const displayCurrencyRate = () => {
       return currencyRates[currencyName] ? (
         <p className="swapper-info-value">
-          1 {coinSymbol.toUpperCase()} = {currencySymbol}
+          1 {coinSymbol && coinSymbol.toUpperCase()} = {currencySymbol}
           {currencyRates[currencyName].toLocaleString("en-US", {
             maximumFractionDigits: 8,
           })}
