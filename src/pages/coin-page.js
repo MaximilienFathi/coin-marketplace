@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useLocation, Navigate } from "react-router-dom";
 import axios from "axios";
 import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header/header";
@@ -26,16 +26,24 @@ function CoinPage() {
 
   // Data sent from App.js and table-data.js
   const location = useLocation();
-  // const [coinID, setCoinID] = useState(null);
-  // const [coinName, setCoinName] = useState(null);
-  // const [coinSymbol, setCoinSymbol] = useState(null);
   let coinID = null;
   let coinName = null;
   let coinSymbol = null;
+  // IMPORTANT BUG I HAD TO SOLVE:
+  // Need these ref values because changing value of global variables (not
+  // states) inside a useEffect does nothing (change is ignored outside
+  // useEffect). For first render, we will have null for coinNameRef and
+  // coinSymbolRef (tested it). For second render, we will have proper values. I
+  // could have made another API call inside coin-balance for coinSymbol for
+  // example, but more API calls is bad idea.
+  const coinNameRef = useRef(null);
+  const coinSymbolRef = useRef(null);
   if (location.state) ({ coinID, coinName, coinSymbol } = location.state);
   if (!location.state) {
     coinID = location.pathname.split("/coins/")[1];
   }
+
+  const [error, setError] = useState(false);
   //############################################################################
 
   // Initialize all data that will be retrieved from localStorage
@@ -64,19 +72,19 @@ function CoinPage() {
   useEffect(() => {
     fetchCoinData();
     fetchTotalMarketCap();
-  }, [coinID, currencyName]);
+  }, [coinID, coinNameRef.current, coinSymbolRef.current, currencyName]);
 
   async function fetchCoinData() {
     try {
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coinID}`
       );
+      console.log("coin_data", response.data);
       const market_data = response.data.market_data;
       setMarketData(market_data);
-      console.log("coin_data", response.data);
       if (!location.state) {
-        coinName = response.data.name;
-        coinSymbol = response.data.symbol;
+        coinNameRef.current = response.data.name;
+        coinSymbolRef.current = response.data.symbol;
       }
       //##########################################################
       const temp1 = {};
@@ -140,7 +148,17 @@ function CoinPage() {
 
       setCurrencyRates(market_data.current_price);
     } catch (err) {
-      console.error(err);
+      // history.push('/404');
+
+      // const { response } = err.response.data;
+      // if (response.statusText === 404) {
+      //   Navigate("/errorpage");
+
+      console.log(err.response.status);
+      if (err.response.status === 404) {
+        window.location.href = `/coin-not-found`;
+        return;
+      }
     }
   }
 
@@ -179,7 +197,7 @@ function CoinPage() {
           ></MarketInfo>
           <CoinBalance
             scrollRef={scrollRef}
-            coinSymbol={coinSymbol}
+            coinSymbol={coinSymbol ? coinSymbol : coinSymbolRef.current}
             currencyName={currencyName}
             currencySymbol={currencySymbol}
             currencyRate={currencyRates[currencyName]}
@@ -187,14 +205,14 @@ function CoinPage() {
           ></CoinBalance>
           <CoinCharts
             coinID={coinID}
-            coinName={coinName}
+            coinName={coinName ? coinName : coinNameRef.current}
             currencyName={currencyName}
             currencySymbol={currencySymbol}
             priceChangesData={priceChangesData}
           />
           <Swapper
             ref={scrollRef}
-            coinSymbol={coinSymbol}
+            coinSymbol={coinSymbol ? coinSymbol : coinSymbolRef.current}
             currencyName={currencyName}
             currencySymbol={currencySymbol}
             currencyRates={currencyRates}
@@ -209,3 +227,6 @@ function CoinPage() {
 }
 
 export default CoinPage;
+
+// MAYBE HAVE COINID BE CHECKED BEFORE ARRIVING AT COIN-PAGE TO PREVENT
+// EMPTY PAGE FROM SHOWING
