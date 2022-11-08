@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, Navigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header/header";
@@ -43,7 +43,7 @@ function CoinPage() {
     coinID = location.pathname.split("/coins/")[1];
   }
 
-  const [error, setError] = useState(false);
+  const navigate = useNavigate();
   //############################################################################
 
   // Initialize all data that will be retrieved from localStorage
@@ -149,16 +149,15 @@ function CoinPage() {
       setCurrencyRates(market_data.current_price);
     } catch (err) {
       // history.push('/404');
-
       // const { response } = err.response.data;
       // if (response.statusText === 404) {
       //   Navigate("/errorpage");
-
-      console.log(err.response.status);
-      if (err.response.status === 404) {
-        window.location.href = `/coin-not-found`;
-        return;
-      }
+      // console.log(err.response.status);
+      // if (err.response.status === 404) {
+      //   window.location.href = `/error-404`;
+      //   // navigate("/path", { replace: true });
+      //   return;
+      // }
     }
   }
 
