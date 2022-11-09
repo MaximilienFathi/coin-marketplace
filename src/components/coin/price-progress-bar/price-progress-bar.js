@@ -27,12 +27,18 @@ function PriceProgressBar({ marketData, currencyName, currencySymbol }) {
       <div className="progress-bar-labels-container">
         <p className="progress-bar-label">
           {currencySymbol}
-          {lowPrice24h}
+          {lowPrice24h &&
+            lowPrice24h.toLocaleString("en-US", {
+              maximumFractionDigits: 8,
+            })}
         </p>
         <p className="progress-bar-label">24H Range</p>
         <p className="progress-bar-label">
           {currencySymbol}
-          {highPrice24h}
+          {highPrice24h &&
+            highPrice24h.toLocaleString("en-US", {
+              maximumFractionDigits: 8,
+            })}
         </p>
       </div>
     </div>

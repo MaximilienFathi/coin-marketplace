@@ -1,14 +1,14 @@
 .error-container {
   display: flex;
-  /*justify-content: space-between;*/
+  justify-content: space-between;
   align-items: center;
-  gap: 20rem;
+  /*gap: 20rem;*/
 
   margin: 5rem auto;
   /*padding: 0 6.4rem;*/
   width: 75%;
   height: auto;
-  border: 3px solid red;
+  /*border: 3px solid red;*/
 }
 
 /********************************************************/
@@ -21,44 +21,23 @@
 }
 
 .error-heading {
-  font-size: 5rem;
+  font-size: 7.4rem;
   font-weight: 700;
   color: #fa58b6;
 }
 
 .error-subheading {
-  font-size: 3rem;
+  font-size: 5.2rem;
   font-weight: 600;
   /*color: rgba(255, 255, 255, 0.8);*/
   margin-bottom: 2.4rem;
 }
 
 .error-description {
-  font-size: 2rem;
+  font-size: 2.4rem;
   line-height: 1.6;
   /*color: rgba(255, 255, 255, 0.7);*/
   margin-bottom: 2.4rem;
-}
-
-.home-btn {
-  font-family: Rubik, sans-serif;
-  font-size: 2rem;
-  color: #fff;
-  width: fit-content;
-  border-radius: 11px;
-  border: none;
-  padding: 1.2rem;
-  /*box-shadow: inset 0 0 2px #000;*/
-  transition: all 0.3s;
-  background-color: #fa58b6;
-  border: 2px solid #fa58b6;
-  text-decoration: none;
-}
-
-.home-btn:hover {
-  background-color: #fb79c5;
-  border: 2px solid #fb79c5;
-  cursor: pointer;
 }
 
 /********************************************************/

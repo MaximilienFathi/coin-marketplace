@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useLoaderData } from "react-router-dom";
 import axios from "axios";
 import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header/header";
@@ -26,6 +26,8 @@ function CoinPage() {
 
   // Data sent from App.js and table-data.js
   const location = useLocation();
+  const loaderCoinData = useLoaderData();
+
   let coinID = null;
   let coinName = null;
   let coinSymbol = null;
@@ -42,8 +44,6 @@ function CoinPage() {
   if (!location.state) {
     coinID = location.pathname.split("/coins/")[1];
   }
-
-  const navigate = useNavigate();
   //############################################################################
 
   // Initialize all data that will be retrieved from localStorage
@@ -72,63 +72,61 @@ function CoinPage() {
   useEffect(() => {
     fetchCoinData();
     fetchTotalMarketCap();
-  }, [coinID, coinNameRef.current, coinSymbolRef.current, currencyName]);
+  }, []);
+  // deps: coinID, coinNameRef.current, coinSymbolRef.current, currencyName
+  // Commented above as more API calls seem to be made with those deps
 
   async function fetchCoinData() {
     try {
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${coinID}`
-      );
-      console.log("coin_data", response.data);
-      const market_data = response.data.market_data;
+      const market_data = loaderCoinData.data.market_data;
       setMarketData(market_data);
       if (!location.state) {
-        coinNameRef.current = response.data.name;
-        coinSymbolRef.current = response.data.symbol;
+        coinNameRef.current = loaderCoinData.data.name;
+        coinSymbolRef.current = loaderCoinData.data.symbol;
       }
       //##########################################################
       const temp1 = {};
-      temp1.image = response.data.image.small;
-      temp1.name = response.data.name;
-      temp1.symbol = response.data.symbol;
-      temp1.rank = response.data.market_cap_rank;
-      temp1.homepage = response.data.links.homepage;
-      temp1.explorers = response.data.links.blockchain_site;
+      temp1.image = loaderCoinData.data.image.small;
+      temp1.name = loaderCoinData.data.name;
+      temp1.symbol = loaderCoinData.data.symbol;
+      temp1.rank = loaderCoinData.data.market_cap_rank;
+      temp1.homepage = loaderCoinData.data.links.homepage;
+      temp1.explorers = loaderCoinData.data.links.blockchain_site;
       temp1.community = {};
       // Leave Discord for later since it can be problematic (see Ethereum)
       // temp1.community = addCommunityLink(
       //   temp1.community,
       //   "Discord",
       //   "",
-      //   response.data.links.chat_url
+      //   loaderCoinData.data.links.chat_url
       // );
       temp1.community = addCommunityLink(
         temp1.community,
         "Facebook",
         "https://facebook.com/",
-        response.data.links.facebook_username
+        loaderCoinData.data.links.facebook_username
       );
       temp1.community = addCommunityLink(
         temp1.community,
         "Reddit",
         "",
-        response.data.links.subreddit_url
+        loaderCoinData.data.links.subreddit_url
       );
       temp1.community = addCommunityLink(
         temp1.community,
         "Telegram",
         "https://t.me/",
-        response.data.links.telegram_channel_identifier
+        loaderCoinData.data.links.telegram_channel_identifier
       );
       temp1.community = addCommunityLink(
         temp1.community,
         "Twitter",
         "https://twitter.com/",
-        response.data.links.twitter_screen_name
+        loaderCoinData.data.links.twitter_screen_name
       );
-      temp1.code = response.data.links.repos_url.github[0];
-      temp1.contractAddress = response.data.contract_address;
-      temp1.description = response.data.description.en;
+      temp1.code = loaderCoinData.data.links.repos_url.github[0];
+      temp1.contractAddress = loaderCoinData.data.contract_address;
+      temp1.description = loaderCoinData.data.description.en;
       setCoinData(temp1);
 
       const temp2 = {};
@@ -148,16 +146,7 @@ function CoinPage() {
 
       setCurrencyRates(market_data.current_price);
     } catch (err) {
-      // history.push('/404');
-      // const { response } = err.response.data;
-      // if (response.statusText === 404) {
-      //   Navigate("/errorpage");
-      // console.log(err.response.status);
-      // if (err.response.status === 404) {
-      //   window.location.href = `/error-404`;
-      //   // navigate("/path", { replace: true });
-      //   return;
-      // }
+      console.error(err);
     }
   }
 

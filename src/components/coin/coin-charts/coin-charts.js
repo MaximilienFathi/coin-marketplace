@@ -57,7 +57,7 @@ function CoinCharts({
       setHistoricData(response.data[newDataType]);
       setDatatype(newDataType);
       setTimeframe(newTimeframe);
-      console.log("coin_charts_stuff", response);
+      // console.log("coin_charts_stuff", response);
     } catch (err) {
       console.error(err);
     }

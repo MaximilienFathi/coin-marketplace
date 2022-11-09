@@ -1,12 +1,5 @@
 import "./App.css";
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  createBrowserRouter,
-  RouterProvider,
-  json,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/home-page";
 import CoinsPage from "./pages/coins-page";
 import CoinPage from "./pages/coin-page";
@@ -16,6 +9,17 @@ import ErrorPage from "./pages/error-page";
 import axios from "axios";
 
 function App() {
+  const runCoinLoader = async ({ params }) => {
+    try {
+      const response = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${params.coinID}`
+      );
+      return response;
+    } catch (err) {
+      throw new Response("Not Found", { status: 404 });
+    }
+  };
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -32,21 +36,7 @@ function App() {
           path: "coins/:coinID",
           element: <CoinPage />,
           errorElement: <ErrorPage />,
-          loader: async ({ request, params }) => {
-            const response = await axios.get(
-              "https://api.coingecko.com/api/v3/coins/list"
-            );
-            if (
-              response.data.some(
-                (obj) => obj.id.toLowerCase() === params.coinID.toLowerCase()
-              )
-            )
-              console.log(response.status);
-            if (response.status === 404) {
-              throw new Response("Not Found", { status: 404 });
-            }
-            return response;
-          },
+          loader: (params) => runCoinLoader(params),
         },
         {
           path: "exchanges",
@@ -65,35 +55,6 @@ function App() {
   ]);
 
   return <RouterProvider router={router} />;
-  // const router = createBrowserRouter([
-  //   {
-  //     path: "coins/:coinID",
-  //     loader: ({ params }) => {
-  //       console.log(params.coinID);
-  //     },
-  //   },
-  // ]);
-  // return (
-  //   <BrowserRouter>
-  //     <Routes>
-  //       <Route path="/">
-  //         <Route index element={<HomePage />} />
-  //         <Route path="coins" element={<CoinsPage />} />
-  //         <Route
-  //           path="coins/:coinID"
-  //           element={<CoinPage />}
-  //           // action={({ params }) => {
-  //           //   console.log(params.coinID);
-  //           // }}
-  //           errorElement={<ErrorPage />}
-  //         />
-  //         <Route path="exchanges" element={<ExchangesPage />} />
-  //         <Route path="favorites" element={<FavoritesPage />} />
-  //         <Route path="*" element={<ErrorPage />} />
-  //       </Route>
-  //     </Routes>
-  //   </BrowserRouter>
-  // );
 }
 
 export default App;
