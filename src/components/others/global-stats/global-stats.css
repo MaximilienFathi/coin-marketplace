@@ -2,29 +2,6 @@
   padding: 4.8rem 10rem;
 }
 
-.global-stats-heading {
-  font-size: 5.2rem;
-  font-weight: 500;
-  /*line-height: 1.05;*/
-  letter-spacing: -0.5px;
-  margin-bottom: 3.2rem;
-  text-align: center;
-}
-
-.global-stats-heading span {
-  background: -webkit-linear-gradient(0deg, #e4bce9, #a620b4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.global-stats-description {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 2rem;
-  line-height: 1.6;
-  margin-bottom: 4.8rem;
-  text-align: center;
-}
-
 .global-stats-cards-container {
   display: flex;
   justify-content: center;

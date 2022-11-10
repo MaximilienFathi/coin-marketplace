@@ -3,6 +3,7 @@ import axios from "axios";
 import currencyContext from "../contexts/currency-context";
 import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header/header";
+import TopSection from "../components/others/top-section";
 import GlobalStats from "../components/others/global-stats/global-stats";
 import TableBox from "../components/coins/table-box";
 import Footer from "../components/others/footer/footer";
@@ -94,6 +95,19 @@ function CoinsPage() {
       >
         <div className="page-container">
           <Header />
+          <TopSection
+            heading={
+              <h1 className="global-stats-heading">
+                Top Crypto <span>Currencies</span> Ranked by{" "}
+                <span>Market Cap</span>
+              </h1>
+            }
+            description={
+              "Lorem ipsum dolor sit amet, consectetur adipisicing elit." +
+              " Asperiores aspernatur blanditiis eaque earum fugit incidunt" +
+              " nobis ipsum dolor sit amet adipisicing elit amet animi assumenda."
+            }
+          />
           <GlobalStats />
           <TableBox
             data={data}

@@ -3,6 +3,7 @@ import { useLocation, useLoaderData } from "react-router-dom";
 import axios from "axios";
 import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header/header";
+import TopSection from "../components/others/top-section";
 import MarketInfo from "../components/coin/market-info/market-info";
 import CoinBalance from "../components/coin/coin-balance/coin-balance";
 import CoinCharts from "../components/coin/coin-charts/coin-charts";
@@ -11,6 +12,7 @@ import CoinDescription from "../components/coin/coin-description/coin-descriptio
 import ProjectLinks from "../components/coin/project-links/project-links";
 import Footer from "../components/others/footer/footer";
 import "./coin-page.css";
+import GlobalStats from "../components/others/global-stats/global-stats";
 
 function CoinPage() {
   const [coinData, setCoinData] = useState({});
@@ -174,41 +176,58 @@ function CoinPage() {
     <favoritesContext.Provider value={[favoritesChanged, setFavoritesChanged]}>
       <div className="coin-page-container">
         <Header />
-        <div className="coin-page-content-wrap content-wrap">
-          <MarketInfo
-            coinData={coinData}
-            coinID={coinID}
-            marketData={marketData}
-            totalMarketCap={totalMarketCap}
-            currencyName={currencyName}
-            currencySymbol={currencySymbol}
-          ></MarketInfo>
-          <CoinBalance
-            scrollRef={scrollRef}
-            coinSymbol={coinSymbol ? coinSymbol : coinSymbolRef.current}
-            currencyName={currencyName}
-            currencySymbol={currencySymbol}
-            currencyRate={currencyRates[currencyName]}
-            price_change_24h={priceChangesData.price_change_24h}
-          ></CoinBalance>
-          <CoinCharts
-            coinID={coinID}
-            coinName={coinName ? coinName : coinNameRef.current}
-            currencyName={currencyName}
-            currencySymbol={currencySymbol}
-            priceChangesData={priceChangesData}
+        <div className="content-wrap">
+          <TopSection
+            heading={
+              <h1 className="global-stats-heading">
+                <span>{coinName}</span> Performance and Stats at a Glance
+              </h1>
+            }
+            description={
+              <p className="global-stats-description">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Asperiores aspernatur blanditiis eaque earum fugit incidunt
+                nobis ipsum dolor sit amet adipisicing elit amet animi
+                assumenda.
+              </p>
+            }
           />
-          <Swapper
-            ref={scrollRef}
-            coinSymbol={coinSymbol ? coinSymbol : coinSymbolRef.current}
-            currencyName={currencyName}
-            currencySymbol={currencySymbol}
-            currencyRates={currencyRates}
-          ></Swapper>
-          <CoinDescription coinData={coinData}></CoinDescription>
-          <ProjectLinks coinData={coinData}></ProjectLinks>
+          <div className="coin-page-content-wrap">
+            <MarketInfo
+              coinData={coinData}
+              coinID={coinID}
+              marketData={marketData}
+              totalMarketCap={totalMarketCap}
+              currencyName={currencyName}
+              currencySymbol={currencySymbol}
+            ></MarketInfo>
+            <CoinBalance
+              scrollRef={scrollRef}
+              coinSymbol={coinSymbol ? coinSymbol : coinSymbolRef.current}
+              currencyName={currencyName}
+              currencySymbol={currencySymbol}
+              currencyRate={currencyRates[currencyName]}
+              price_change_24h={priceChangesData.price_change_24h}
+            ></CoinBalance>
+            <CoinCharts
+              coinID={coinID}
+              coinName={coinName ? coinName : coinNameRef.current}
+              currencyName={currencyName}
+              currencySymbol={currencySymbol}
+              priceChangesData={priceChangesData}
+            />
+            <Swapper
+              ref={scrollRef}
+              coinSymbol={coinSymbol ? coinSymbol : coinSymbolRef.current}
+              currencyName={currencyName}
+              currencySymbol={currencySymbol}
+              currencyRates={currencyRates}
+            ></Swapper>
+            <CoinDescription coinData={coinData}></CoinDescription>
+            <ProjectLinks coinData={coinData}></ProjectLinks>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     </favoritesContext.Provider>
   );

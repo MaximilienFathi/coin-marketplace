@@ -5,7 +5,7 @@ import StatisticCard from "../statistic-card/statistic-card";
 import HandshakeTwoToneIcon from "@mui/icons-material/HandshakeTwoTone";
 import "./global-stats.css";
 
-function GlobalStats() {
+function GlobalStats({ heading, description }) {
   const [currencyName] = useContext(currencyContext);
   const [marketCap, setMarketCap] = useState(0);
   // const [marketCapChange, setMarketCapChange] = useState(0);
@@ -34,15 +34,6 @@ function GlobalStats() {
 
   return (
     <div className="global-stats-section">
-      <h1 className="global-stats-heading">
-        An easy way to <span>track</span> and <span>trade</span>{" "}
-        cryptocurrencies
-      </h1>
-      <p className="global-stats-description">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam
-        assumenda atque culpa cum delectus earum enim facere fugit impedit iure
-        iusto obcaecati, odio optio possimus praesentium rerum tempore velit!
-      </p>
       <div className="global-stats-cards-container">
         <StatisticCard
           label="Market Capitalization"

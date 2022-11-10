@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import currencyContext from "../contexts/currency-context";
 import Header from "../components/others/header/header";
+import TopSection from "../components/others/top-section";
 import GlobalStats from "../components/others/global-stats/global-stats";
 import TableBox from "../components/exchanges/table-box";
 import Footer from "../components/others/footer/footer";
@@ -121,6 +122,19 @@ function ExchangesPage() {
     >
       <div className="page-container">
         <Header />
+        <TopSection
+          heading={
+            <h1 className="global-stats-heading">
+              Top Crypto <span>Exchanges</span> Ranked by{" "}
+              <span>Trust Score</span>
+            </h1>
+          }
+          description={
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit." +
+            " Accusantium amet animi assumenda corporis culpa aspernatur" +
+            " blanditiis eaque earum blanditiis dignissimos necessitatibus."
+          }
+        />
         <GlobalStats />
         <TableBox
           data={data}

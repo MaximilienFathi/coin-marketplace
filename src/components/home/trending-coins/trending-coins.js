@@ -11,6 +11,9 @@ function TrendingCoins() {
 
   // Initialize all data that will be retrieved from localStorage
   useEffect(() => {
+    // Favorites data
+    localStorage.getItem("favorites") ||
+      localStorage.setItem("favorites", "[]");
     // Currency data
     if (localStorage.getItem("currency")) {
       setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);
