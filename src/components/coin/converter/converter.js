@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import CalculatorInput from "../calculator-input/calculator-input";
-import "./calculator.css";
+import ConverterInput from "../converter-input/converter-input";
+import "./converter.css";
 
-function Calculator({
+function Converter({
   coinSymbol,
   currencyName,
   currencyRates,
@@ -28,28 +28,28 @@ function Calculator({
   };
 
   return (
-    <div className="calculator-container">
-      <div className="calculator-input-container">
-        <div className="calculator-input-labels">
+    <div className="converter-container">
+      <div className="converter-input-container">
+        <div className="converter-input-labels">
           <p>Pay</p>
-          <div className="calculator-balance">
+          <div className="converter-balance">
             <AccountBalanceWalletIcon></AccountBalanceWalletIcon>Balance: 45.23
           </div>
         </div>
-        <CalculatorInput
+        <ConverterInput
           currency={coinSymbol}
           input={input1}
           handleChange={handleInput1Change}
         />
       </div>
-      <div className="calculator-input-container">
-        <div className="calculator-input-labels">
+      <div className="converter-input-container">
+        <div className="converter-input-labels">
           <p>Receive</p>
-          <div className="calculator-balance">
+          <div className="converter-balance">
             <AccountBalanceWalletIcon></AccountBalanceWalletIcon>Balance: 12.47
           </div>
         </div>
-        <CalculatorInput
+        <ConverterInput
           currency={currencyName}
           input={input2}
           handleChange={handleInput2Change}
@@ -59,4 +59,4 @@ function Calculator({
   );
 }
 
-export default Calculator;
+export default Converter;

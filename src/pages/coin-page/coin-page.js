@@ -1,18 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useLoaderData } from "react-router-dom";
 import axios from "axios";
-import favoritesContext from "../contexts/favorites-context";
-import Header from "../components/others/header/header";
-import TopSection from "../components/others/top-section";
-import MarketInfo from "../components/coin/market-info/market-info";
-import CoinBalance from "../components/coin/coin-balance/coin-balance";
-import CoinCharts from "../components/coin/coin-charts/coin-charts";
-import Swapper from "../components/coin/swapper/swapper";
-import CoinDescription from "../components/coin/coin-description/coin-description";
-import ProjectLinks from "../components/coin/project-links/project-links";
-import Footer from "../components/others/footer/footer";
+import favoritesContext from "../../contexts/favorites-context";
+import Header from "../../components/others/header/header";
+import TopSection from "../../components/others/top-section/top-section";
+import MarketInfo from "../../components/coin/market-info/market-info";
+import CoinBalance from "../../components/coin/coin-balance/coin-balance";
+import CoinCharts from "../../components/coin/coin-charts/coin-charts";
+import Swapper from "../../components/coin/swapper/swapper";
+import CoinDescription from "../../components/coin/coin-description/coin-description";
+import ProjectLinks from "../../components/coin/project-links/project-links";
+import Footer from "../../components/others/footer/footer";
 import "./coin-page.css";
-import GlobalStats from "../components/others/global-stats/global-stats";
+import GlobalStats from "../../components/others/global-stats/global-stats";
 
 function CoinPage() {
   const [coinData, setCoinData] = useState({});
@@ -44,7 +44,7 @@ function CoinPage() {
   const coinSymbolRef = useRef(null);
   if (location.state) ({ coinID, coinName, coinSymbol } = location.state);
   if (!location.state) {
-    coinID = location.pathname.split("/coins/")[1];
+    coinID = location.pathname.split("/coins-table/")[1];
   }
   //############################################################################
 
@@ -179,17 +179,15 @@ function CoinPage() {
         <div className="content-wrap">
           <TopSection
             heading={
-              <h1 className="global-stats-heading">
+              <h1 className="top-section-heading">
                 <span>{coinName}</span> Performance and Stats at a Glance
               </h1>
             }
             description={
-              <p className="global-stats-description">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Asperiores aspernatur blanditiis eaque earum fugit incidunt
-                nobis ipsum dolor sit amet adipisicing elit amet animi
-                assumenda.
-              </p>
+              "Lorem ipsum dolor sit amet, consectetur adipisicing elit." +
+              " Asperiores aspernatur blanditiis eaque earum fugit" +
+              " incidunt nobis ipsum dolor sit amet adipisicing elit amet" +
+              " animi assumenda."
             }
           />
           <div className="coin-page-content-wrap">

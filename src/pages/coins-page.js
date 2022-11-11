@@ -3,9 +3,9 @@ import axios from "axios";
 import currencyContext from "../contexts/currency-context";
 import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header/header";
-import TopSection from "../components/others/top-section";
+import TopSection from "../components/others/top-section/top-section";
 import GlobalStats from "../components/others/global-stats/global-stats";
-import TableBox from "../components/coins/table-box";
+import TableBox from "../components/coins-table/table-box";
 import Footer from "../components/others/footer/footer";
 import ScrollButton from "../components/others/scroll-button";
 import "./page.css";
@@ -15,7 +15,7 @@ function CoinsPage() {
   const [fullDataList, setFullDataList] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
-  // Included the following + context provider in coins-page.js too because
+  // Included the following + context provider in coins-table-page.js too because
   // otherwise favorite.js will complain since it cannot consume anything
   // without a provider first
   const [currencyName, setCurrencyName] = useState("usd");
@@ -44,7 +44,7 @@ function CoinsPage() {
     }
   }, [currencyName]);
 
-  // Retrieve total number of coins
+  // Retrieve total number of coins-table
   useEffect(() => {
     axios
       .get("https://api.coingecko.com/api/v3/global")
@@ -55,7 +55,7 @@ function CoinsPage() {
       .catch((err) => console.log(err));
   }, []); // findPageCount - if included, runs too many times (remove []?)
 
-  // Retrieve data of 100 coins on specific page
+  // Retrieve data of 100 coins-table on specific page
   useEffect(() => {
     axios
       .get(
@@ -69,7 +69,7 @@ function CoinsPage() {
       .catch((err) => console.error(err));
   }, [page, currencyName]); // This will run everytime page changes.
 
-  // Retrieve full list of coins (necessary for search mechanism)
+  // Retrieve full list of coins-table (necessary for search mechanism)
   useEffect(() => {
     async function fetchData() {
       try {
@@ -97,7 +97,7 @@ function CoinsPage() {
           <Header />
           <TopSection
             heading={
-              <h1 className="global-stats-heading">
+              <h1 className="top-section-heading">
                 Top Crypto <span>Currencies</span> Ranked by{" "}
                 <span>Market Cap</span>
               </h1>

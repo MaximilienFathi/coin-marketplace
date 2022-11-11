@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import currencyContext from "../contexts/currency-context";
 import Header from "../components/others/header/header";
-import TopSection from "../components/others/top-section";
+import TopSection from "../components/others/top-section/top-section";
 import GlobalStats from "../components/others/global-stats/global-stats";
-import TableBox from "../components/exchanges/table-box";
+import TableBox from "../components/exchanges-table/table-box";
 import Footer from "../components/others/footer/footer";
 import ScrollButton from "../components/others/scroll-button";
 import "./page.css";
@@ -74,7 +74,7 @@ function ExchangesPage() {
     }
   }
 
-  // Retrieve total number of exchanges
+  // Retrieve total number of exchanges-table
   useEffect(() => {
     async function findExchangeCount() {
       try {
@@ -87,7 +87,7 @@ function ExchangesPage() {
     findExchangeCount();
   }, []);
 
-  // Retrieve data of 100 exchanges on specific page
+  // Retrieve data of 100 exchanges-table on specific page
   useEffect(() => {
     axios
       .get(
@@ -101,7 +101,7 @@ function ExchangesPage() {
       .catch((err) => console.error(err));
   }, [page]); // This will run everytime page changes.
 
-  // Retrieve full list of exchanges (necessary for search mechanism)
+  // Retrieve full list of exchanges-table (necessary for search mechanism)
   useEffect(() => {
     async function fetchData() {
       try {
@@ -124,7 +124,7 @@ function ExchangesPage() {
         <Header />
         <TopSection
           heading={
-            <h1 className="global-stats-heading">
+            <h1 className="top-section-heading">
               Top Crypto <span>Exchanges</span> Ranked by{" "}
               <span>Trust Score</span>
             </h1>

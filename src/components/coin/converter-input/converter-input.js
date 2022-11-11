@@ -56,7 +56,7 @@ const InputAdornmentStyles = {
 };
 //========================================================
 
-function CalculatorInput({ currency, input, handleChange }) {
+function ConverterInput({ currency, input, handleChange }) {
   return (
     <StyledBox>
       <StyledTextField
@@ -78,4 +78,4 @@ function CalculatorInput({ currency, input, handleChange }) {
   );
 }
 
-export default CalculatorInput;
+export default ConverterInput;

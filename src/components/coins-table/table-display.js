@@ -38,12 +38,12 @@ function TableDisplay({
   useEffect(() => {
     let count = 0;
     // Ternary conditional needed to distinguish coinsPage from favoritesPage
-    // Favorites page only deals with favorites not the full list of coins
+    // Favorites page only deals with favorites not the full list of coins-table
     let filteredData = (fullDataList ? fullDataList : data).filter((coin) => {
       if (
         // ISSUE: The higher the counter limit, the sooner you will get
         // error 429. This is because everytime search changes, an api call
-        // for each of the 5 (current limit) coins will be made.
+        // for each of the 5 (current limit) coins-table will be made.
         // SOLUTION: Show the results inside a menu list under the search
         // box. This way, we do not have to make an API call everytime to
         // show all the data.

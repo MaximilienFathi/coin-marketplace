@@ -2,10 +2,10 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/home-page";
 import CoinsPage from "./pages/coins-page";
-import CoinPage from "./pages/coin-page";
+import CoinPage from "./pages/coin-page/coin-page";
 import FavoritesPage from "./pages/favorites-page";
 import ExchangesPage from "./pages/exchanges-page";
-import ErrorPage from "./pages/error-page";
+import ErrorPage from "./pages/error-page/error-page";
 import axios from "axios";
 
 function App() {

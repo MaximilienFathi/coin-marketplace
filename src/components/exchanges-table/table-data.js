@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import currencyContext from "../../contexts/currency-context";
 import TrustScore from "../others/trust-score/trust-score";
-import "../coins/table-data.css";
+import "../coins-table/table-data.css";
 
 function TableData({
   trust_score_rank,

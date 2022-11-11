@@ -31,7 +31,7 @@ function Hero() {
         {/*  <source srcSet="" type="" />*/}
         <img
           className="hero-img"
-          src={require("../../../pages/IMAGES/Crypto portfolio-amico.png")}
+          src={require("../../../IMAGES/Crypto portfolio-amico.png")}
           alt=""
         />
         {/*</picture>*/}

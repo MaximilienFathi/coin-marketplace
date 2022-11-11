@@ -3,9 +3,9 @@ import "./top-section.css";
 
 function TopSection({ heading, description }) {
   return (
-    <div>
+    <div className="top-section-container">
       {heading}
-      <p className="global-stats-description">{description}</p>
+      <p className="top-section-description">{description}</p>
     </div>
   );
 }

@@ -18,7 +18,7 @@ table {
 }
 
 /* Sticky header when background is blurred is terrible */
-/*.exchanges-table-head {*/
+/*.exchanges-table-table-head {*/
 /*  !*background-color: rgba(184, 184, 184, 0.2);*!*/
 /*  box-shadow: 0 3rem 2rem 2rem #b8b8b8;*/
 /*  position: sticky;*/

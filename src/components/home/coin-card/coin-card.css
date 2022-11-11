@@ -14,7 +14,7 @@
 
 .coin-card::before {
   content: "";
-  background-image: url(../../../../public/IMAGES/abstract-7186364_1280.png);
+  background-image: url(../../../IMAGES/abstract_7186364_1280.png);
   background-size: 700%;
   z-index: 1;
   border-radius: 11px;

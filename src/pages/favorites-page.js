@@ -3,9 +3,9 @@ import axios from "axios";
 import currencyContext from "../contexts/currency-context";
 import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header/header";
-import TopSection from "../components/others/top-section";
+import TopSection from "../components/others/top-section/top-section";
 import GlobalStats from "../components/others/global-stats/global-stats";
-import TableBox from "../components/coins/table-box";
+import TableBox from "../components/coins-table/table-box";
 import Footer from "../components/others/footer/footer";
 import ScrollButton from "../components/others/scroll-button";
 import "./page.css";
@@ -74,7 +74,7 @@ function FavoritesPage() {
     }
   }, [currencyName]);
 
-  // Retrieve data of favorite coins
+  // Retrieve data of favorite coins-table
   // When checking "favorites" page, show all favorites in order.
   useEffect(() => {
     async function consolidateData() {
@@ -102,7 +102,7 @@ function FavoritesPage() {
             <Header />
             <TopSection
               heading={
-                <h1 className="global-stats-heading">
+                <h1 className="top-section-heading">
                   Your <span>Favorite</span> Crypto <span>Currencies</span> All
                   In <span>One</span> Place
                 </h1>

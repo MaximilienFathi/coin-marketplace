@@ -2,7 +2,7 @@ import React, { useState, forwardRef } from "react";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material";
 import SwapOptionTabs from "../swap-option-tabs/swap-option-tabs";
-import Calculator from "../calculator/calculator";
+import Converter from "../converter/converter";
 import "./swapper.css";
 
 //========================================================
@@ -56,13 +56,13 @@ const Swapper = forwardRef(
       <div className="swapper-outer-container" ref={scrollRef}>
         <h2 className="swapper-heading">Crypto Swapper</h2>
 
-        <Calculator
+        <Converter
           coinSymbol={coinSymbol}
           currencyName={currencyName}
           currencyRates={currencyRates}
           input2={input2}
           setInput2={setInput2}
-        ></Calculator>
+        ></Converter>
 
         <div className="swapper-options-container">
           <div className="swapper-option-container">

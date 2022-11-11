@@ -14,7 +14,7 @@ function QuickGuide() {
           rightBorder="none"
           bottomBorder="5px solid #fb79c5"
           borderRadius="0px 0px 5px 0px"
-          picture={require("../IMAGES/Plain credit card-amico.png")}
+          picture={require("../../../IMAGES/Plain credit card-amico.png")}
           number="01"
           heading="Create a wallet"
           description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore illo itaque laboriosam minus nihil porro repellat, ipsum dolor sit amet, consectetur adipisicing elit."
@@ -25,7 +25,7 @@ function QuickGuide() {
           rightBorder="5px solid #fb79c5"
           bottomBorder="5px solid #fb79c5"
           borderRadius="0px 5px 0px 5px"
-          picture={require("../IMAGES/Bitcoin-cuate.png")}
+          picture={require("../../../IMAGES/Bitcoin-cuate.png")}
           number="02"
           heading="Send cryptos to your wallet"
           description={
@@ -40,7 +40,7 @@ function QuickGuide() {
           rightBorder="none"
           bottomBorder="5px solid #fb79c5"
           borderRadius="5px 0px 5px 0px"
-          picture={require("../IMAGES/Bitcoin P2P-amico.png")}
+          picture={require("../../../IMAGES/Bitcoin P2P-amico.png")}
           number="03"
           heading={"Connect wallet to coin marketplace"}
           description={
@@ -55,7 +55,7 @@ function QuickGuide() {
           rightBorder="5px solid #fb79c5"
           bottomBorder="none"
           borderRadius="0px 5px 0px 0px"
-          picture={require("../IMAGES/Bitcoin P2P-pana.png")}
+          picture={require("../../../IMAGES/Bitcoin P2P-pana.png")}
           number="04"
           heading={"Swap your cryptos for other cryptos"}
           description={

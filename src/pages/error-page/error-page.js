@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/others/header/header";
-import Footer from "../components/others/footer/footer";
-import "./page.css";
+import Header from "../../components/others/header/header";
+import Footer from "../../components/others/footer/footer";
+import "../page.css";
 import "./error-page.css";
 import { styled } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -59,7 +59,7 @@ function ErrorPage() {
           {/*    <source srcSet="" type="" />*/}
           <img
             className="error-img"
-            src={require("./IMAGES/404 error robot 2.png")}
+            src={require("../../IMAGES/404_error_robot.png")}
             alt="Error page image"
           />
           {/*  </picture>*/}

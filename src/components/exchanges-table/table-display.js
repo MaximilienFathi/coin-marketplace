@@ -1,7 +1,7 @@
 /*
 IMPORTANT
 Table will only display data that has 24h Volume greater than 0.
-BUT, when searching for an exchange, exchanges with 24h Volume = 0 may appear.
+BUT, when searching for an exchange, exchanges-table with 24h Volume = 0 may appear.
 This is because fullDataList (used by search) is more complete than all
 paginatedData put together. I am just relying on what the API is giving me
 though.
@@ -12,7 +12,7 @@ import axios from "axios";
 import currencyContext from "../../contexts/currency-context";
 import TableHeader from "../others/table-header/table-header";
 import TableData from "./table-data";
-import "../coins/table-display.css";
+import "../coins-table/table-display.css";
 
 function TableDisplay({
   search,

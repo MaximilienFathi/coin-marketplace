@@ -39,7 +39,7 @@ function TrendingCoins() {
     };
   };
 
-  // Update all coins all together by fetching new data
+  // Update all coins-table all together by fetching new data
   const updateAllCoinData = async function (slicedData) {
     return await Promise.all(
       slicedData.map(async (coin) => {
@@ -64,7 +64,7 @@ function TrendingCoins() {
     );
   };
 
-  // Fetch original data for first top 4 trending coins and update it
+  // Fetch original data for first top 4 trending coins-table and update it
   useEffect(() => {
     (async function fetchData() {
       try {
