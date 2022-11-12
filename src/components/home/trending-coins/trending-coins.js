@@ -93,6 +93,7 @@ function TrendingCoins() {
           return (
             <CoinCard
               key={data.id}
+              id={data.id}
               name={data.name}
               symbol={data.symbol}
               logo={data.small}

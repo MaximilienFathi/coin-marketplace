@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import currencyContext from "../../contexts/currency-context";
 import Favorite from "../others/favorite";
 import LineChart from "../others/line-chart";
-import axios from "axios";
 import "./table-data.css";
-import { Link } from "react-router-dom";
 
 function TableData({
   id,

@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import LineChart from "../../others/line-chart";
 import "./coin-card.css";
 
 function CoinCard({
+  id,
   name,
   symbol,
   logo,
@@ -26,37 +28,47 @@ function CoinCard({
   };
 
   return (
-    <div className="coin-card">
-      <div className="coin-card-text">
-        <p className="coin-card-name">{name}</p>
-        <div className="coin-card-data">
-          <div>
-            <img
-              className="coin-card-logo"
-              src={logo}
-              alt={`logo of ${name}`}
-            ></img>
+    <Link
+      to={`/coins/${id}`}
+      state={{
+        coinID: id,
+        coinName: name,
+        coinSymbol: symbol,
+      }}
+      className="header-nav-link"
+    >
+      <div className="coin-card">
+        <div className="coin-card-text">
+          <p className="coin-card-name">{name}</p>
+          <div className="coin-card-data">
             <div>
-              <p className="coin-card-symbol">
-                {symbol}/{currencyName.toUpperCase()}
-              </p>
-              <div className="coin-card-price-data">
-                <p className="coin-card-price">
-                  {currencySymbol}
-                  {current_price}
+              <img
+                className="coin-card-logo"
+                src={logo}
+                alt={`logo of ${name}`}
+              ></img>
+              <div>
+                <p className="coin-card-symbol">
+                  {symbol}/{currencyName.toUpperCase()}
                 </p>
-                <p className={`coin-card-change ${price_change_color}`}>
-                  {transformData(price_change, 0, "percentage")}%
-                </p>
+                <div className="coin-card-price-data">
+                  <p className="coin-card-price">
+                    {currencySymbol}
+                    {current_price}
+                  </p>
+                  <p className={`coin-card-change ${price_change_color}`}>
+                    {transformData(price_change, 0, "percentage")}%
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <div className="coin-card-chart">
+          <LineChart historicData={historicData}></LineChart>
+        </div>
       </div>
-      <div className="coin-card-chart">
-        <LineChart historicData={historicData}></LineChart>
-      </div>
-    </div>
+    </Link>
   );
 }
 
