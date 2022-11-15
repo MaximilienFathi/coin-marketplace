@@ -37,6 +37,7 @@ function Converter({
           </div>
         </div>
         <ConverterInput
+          dataTestId={"input1TestId"}
           currency={coinSymbol}
           input={input1}
           handleChange={handleInput1Change}
@@ -50,6 +51,7 @@ function Converter({
           </div>
         </div>
         <ConverterInput
+          dataTestId={"input2TestId"}
           currency={currencyName}
           input={input2}
           handleChange={handleInput2Change}
