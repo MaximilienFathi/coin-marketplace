@@ -61,10 +61,10 @@ function ConverterInput({ dataTestId, currency, input, handleChange }) {
     <StyledBox>
       <StyledTextField
         fullWidth
-        data-testid={dataTestId}
         value={String(input)}
         onChange={handleChange}
         InputProps={{
+          "data-testid": { dataTestId },
           startAdornment: (
             <InputAdornment position="start" sx={InputAdornmentStyles}>
               {String(currency && currency.toUpperCase())}
