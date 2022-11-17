@@ -63,8 +63,8 @@ function ConverterInput({ dataTestId, currency, input, handleChange }) {
         fullWidth
         value={String(input)}
         onChange={handleChange}
+        inputProps={{ "data-testid": dataTestId }}
         InputProps={{
-          "data-testid": { dataTestId },
           startAdornment: (
             <InputAdornment position="start" sx={InputAdornmentStyles}>
               {String(currency && currency.toUpperCase())}
