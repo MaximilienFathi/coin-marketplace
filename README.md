@@ -1,6 +1,38 @@
-# Getting Started with Create React App
+# Coin Marketplace - A React.js Solution
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Coin Marketplace is a website that keeps track of cryptocurrency and coin 
+exchange performance. It also simulates trading transactions from one 
+currency to another while still taking into consideration certain issues 
+specific to real cryptocurrency trading.
+
+## Table of contents
+
+- [Overview](#overview)
+    - [The challenge](#the-challenge)
+    - [Screenshot](#screenshot)
+    - [Links](#links)
+- [My process](#my-process)
+    - [Built with](#built-with)
+    - [What I learned](#what-i-learned)
+    - [Continued development](#continued-development)
+    - [Useful resources](#useful-resources)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
+
+## Overview
+
+### The challenge
+
+
+
+
+
+
+
+
+
+
+
 
 ## Available Scripts
 
