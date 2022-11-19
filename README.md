@@ -23,7 +23,61 @@ specific to real cryptocurrency trading.
 
 ### The challenge
 
+Users should be able to:
 
+- View cryptocurrency current statistics
+- View coin exchange current statistics
+- Set specific cryptocurrencies as favorites
+- Rank cryptocurrencies and coin exchanges by a specific metric
+- Search and find specific cryptocurrencies and coin exchanges
+- View current balance for specific cryptocurrency and recent amount change
+- View specific cryptocurrency past and current performance
+- Simulate a transaction from one currency to another with customizable settings
+- Have access to specific cryptocurrency website, social networks, source 
+  code, etc.
+
+### Screenshot
+
+### Links
+
+## My process
+
+### Built with
+
+- HTML5
+- CSS
+- JavaScript
+- [Axios](https://axios-http.com/) - JavaScript HTTP requests library
+- [React](https://reactjs.org/) - JavaScript UI library
+- [Material UI](https://mui.com/) - React component library
+- [react-chartjs-2](https://react-chartjs-2.js.org/) - React charting library
+- [React Router](https://v5.reactrouter.com/) - React routing library
+- testing library?
+- jest?
+
+### What I learned
+
+While working through this project, the major learnings involved:
+
+- The use of React as well as the more recent functional components and hooks
+- The gain in HTML, CSS, JavaScript knowledge while creating many 
+  React components from scratch
+- The handling of routing with React projects involving multiple pages
+- The use and customization of components from libraries like Material UI
+- The use of UI design styles like glassmorphism to create beautiful websites
+- The main blockchain technology and cryptocurrency-related concepts
+
+### Continued development
+
+Even though I have accomplished many of my initial objectives for this 
+project, there are still some new features I wish to include such as:
+
+- Some UI changes, particularly for the home page
+- More pages such as one dedicated to blog posts
+- A page for each coin exchange outlining their performance
+- A complete back-end mechanism with actual user accounts
+- A proper way of having real cryptocurrency transactions using Web3 
+  technologies
 
 
 
