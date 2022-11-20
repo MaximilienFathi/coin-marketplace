@@ -17,7 +17,6 @@ specific to real cryptocurrency trading.
     - [Continued development](#continued-development)
     - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -38,6 +37,10 @@ Users should be able to:
 
 ### Screenshot
 
+![Image of cryptocurencies table](/README_table_screenshot.PNG)  
+![Image of cryptocurency statistics and price data](/README_statistics_screenshot.PNG)  
+![Image of cryptocurencies performance chart and swapper](/README_chart&swapper_screenshot.PNG)
+
 ### Links
 
 ## My process
@@ -52,8 +55,8 @@ Users should be able to:
 - [Material UI](https://mui.com/) - React component library
 - [react-chartjs-2](https://react-chartjs-2.js.org/) - React charting library
 - [React Router](https://v5.reactrouter.com/) - React routing library
-- testing library?
-- jest?
+- [Jest](https://jestjs.io/) - JavaScript testing framework
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) - Complementary testing library for React
 
 ### What I learned
 
@@ -79,78 +82,22 @@ project, there are still some new features I wish to include such as:
 - A proper way of having real cryptocurrency transactions using Web3 
   technologies
 
+### Useful resources
 
+- [stackoverflow](http://stackoverflow.com/) - This proved insightful 
+  when I was stuck on specific coding issues.  
+- [coingecko](https://www.coingecko.com/) - This was very useful when it 
+  came to gathering API data for various cryptocurrencies and coin exchanges.
+- [dribbble](https://dribbble.com/) - This helped me discover great web 
+  design inspirations.
+- [maketintsandshades](https://maketintsandshades.com/) - This was a 
+  great tool for generating lighter and darker versions of specific colors.
+- [storyset](https://storyset.com/) - This provided me with a variety of 
+  great pictures to include in my project while still being similar in style 
+  as well as customizable (i.e. colors can be modified).
+- [favicon.io](https://favicon.io/) - This helped me quickly generate 
+  necessary files for the favicon and its different formats.
 
+## Author
 
-
-
-
-
-
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Maximilien Fathi

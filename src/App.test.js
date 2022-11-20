@@ -8,16 +8,17 @@ test("test", () => {
   expect(true).toBe(true);
 });
 
-test("Should render warning when input is too high", async () => {
-  // const user = userEvent.setup();
+test("Initial value of input boxes should an empty string", () => {
   render(<Converter />);
-  expect(await screen.findByTestId("input1TestId")).toBeInTheDocument();
   const element1 = screen.getByTestId("input1TestId");
-  // // const element2 = screen.getByTestId("input2TestId");
+  const element2 = screen.getByTestId("input2TestId");
+  expect(element1.value).toBe("");
+  expect(element2.value).toBe("");
+
+  // const user = userEvent.setup();
+  // expect(await element1.toBeInTheDocument());
   // fireEvent.change(element1, { target: { value: "3" } });
-  await userEvent.type(element1, "1");
-  // screen.debug(element1);
-  // expect(element1.value).toBe("1");
+  // await userEvent.type(element1, "1");
 
   // let element1 = screen.getByTestId("input1TestId").value;
   // const element2 = screen.getByTestId("input2TestId").value;
@@ -49,6 +50,7 @@ test("Should render warning when input is too high", async () => {
   // expect(screen.getByDisplayValue(converterInput1).toHaveValue(0));
 });
 
+//////////////////////////////////
 // // setup function
 // function setup(jsx) {
 //   return {
