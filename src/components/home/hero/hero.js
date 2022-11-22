@@ -10,9 +10,9 @@ function Hero() {
           cryptocurrencies
         </h1>
         <p className="hero-description">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam
-          assumenda atque culpa cum delectus earum enim facere fugit impedit
-          iure iusto obcaecati!
+          COIN marketplace provides you with the opportunity to jump start your
+          cryptocurrency portfolio while keeping you updated with the latest
+          market performance analytics.
         </p>
         <form className="hero-form" action="src/components/home/hero/hero#">
           <input
