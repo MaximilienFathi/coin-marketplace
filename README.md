@@ -1,6 +1,6 @@
-# Coin Marketplace - A React.js Solution
+# COIN marketplace - A React JS Solution
 
-Coin Marketplace is a website that keeps track of cryptocurrency and coin 
+COIN marketplace is a website that keeps track of cryptocurrency and coin 
 exchange performance. It also simulates trading transactions from one 
 currency to another while still taking into consideration certain issues 
 specific to real cryptocurrency trading.
@@ -9,8 +9,8 @@ specific to real cryptocurrency trading.
 
 - [Overview](#overview)
     - [The challenge](#the-challenge)
-    - [Screenshot](#screenshot)
-    - [Links](#links)
+    - [Screenshots](#screenshots)
+    - [Link](#link)
 - [My process](#my-process)
     - [Built with](#built-with)
     - [What I learned](#what-i-learned)
@@ -24,24 +24,27 @@ specific to real cryptocurrency trading.
 
 Users should be able to:
 
-- View cryptocurrency current statistics
-- View coin exchange current statistics
-- Set specific cryptocurrencies as favorites
-- Rank cryptocurrencies and coin exchanges by a specific metric
-- Search and find specific cryptocurrencies and coin exchanges
-- View current balance for specific cryptocurrency and recent amount change
-- View specific cryptocurrency past and current performance
-- Simulate a transaction from one currency to another with customizable settings
+- View cryptocurrency current statistics.
+- View coin exchange current statistics.
+- Set specific cryptocurrencies as favorites.
+- Rank cryptocurrencies and coin exchanges by a specific metric.
+- Search and find specific cryptocurrencies and coin exchanges.
+- View current balance for specific cryptocurrency and recent amount change.
+- View specific cryptocurrency past and current performance.
+- Simulate a transaction from one currency to another with customizable 
+  settings.
 - Have access to specific cryptocurrency website, social networks, source 
   code, etc.
 
-### Screenshot
+### Screenshots
 
 ![Image of cryptocurencies table](/README_table_screenshot.PNG)  
 ![Image of cryptocurency statistics and price data](/README_statistics_screenshot.PNG)  
 ![Image of cryptocurencies performance chart and swapper](/README_chart&swapper_screenshot.PNG)
 
-### Links
+### Link
+
+Live Site URL: [https://maximilienfathi.github.io/coin-marketplace/](https://maximilienfathi.github.io/coin-marketplace/)
 
 ## My process
 
@@ -62,25 +65,25 @@ Users should be able to:
 
 While working through this project, the major learnings involved:
 
-- The use of React as well as the more recent functional components and hooks
+- The use of React as well as the more recent functional components and hooks.
 - The gain in HTML, CSS, JavaScript knowledge while creating many 
-  React components from scratch
-- The handling of routing with React projects involving multiple pages
-- The use and customization of components from libraries like Material UI
-- The use of UI design styles like glassmorphism to create beautiful websites
-- The main blockchain technology and cryptocurrency-related concepts
+  React components from scratch.
+- The handling of routing with React projects involving multiple pages.
+- The use and customization of components from libraries like Material UI.
+- The use of UI design styles like glassmorphism to create beautiful websites.
+- The main blockchain technology and cryptocurrency-related concepts.
 
 ### Continued development
 
 Even though I have accomplished many of my initial objectives for this 
 project, there are still some new features I wish to include such as:
 
-- Some UI changes, particularly for the home page
-- More pages such as one dedicated to blog posts
-- A page for each coin exchange outlining their performance
-- A complete back-end mechanism with actual user accounts
+- Some UI changes, particularly for the home page.
+- More pages such as one dedicated to blog posts.
+- A page for each coin exchange outlining their performance.
+- A complete back-end mechanism with actual user accounts.
 - A proper way of having real cryptocurrency transactions using Web3 
-  technologies
+  technologies.
 
 ### Useful resources
 

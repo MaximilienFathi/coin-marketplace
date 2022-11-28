@@ -29,7 +29,7 @@ function CoinCard({
 
   return (
     <Link
-      to={`/coins/${id}`}
+      to={`${process.env.PUBLIC_URL}/coins/${id}`}
       state={{
         coinID: id,
         coinName: name,

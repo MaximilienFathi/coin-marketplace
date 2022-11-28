@@ -11,6 +11,7 @@ import axios from "axios";
 function App() {
   const runCoinLoader = async ({ params }) => {
     try {
+      console.log(process.env.PUBLIC_URL);
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${params.coinID}`
       );
@@ -22,32 +23,32 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: `${process.env.PUBLIC_URL}/`,
       children: [
         {
-          path: "/",
+          path: `${process.env.PUBLIC_URL}/`,
           element: <HomePage />,
         },
         {
-          path: "coins",
+          path: `${process.env.PUBLIC_URL}/coins`,
           element: <CoinsPage />,
         },
         {
-          path: "coins/:coinID",
+          path: `${process.env.PUBLIC_URL}/coins/:coinID`,
           element: <CoinPage />,
           errorElement: <ErrorPage />,
           loader: (params) => runCoinLoader(params),
         },
         {
-          path: "exchanges",
+          path: `${process.env.PUBLIC_URL}/exchanges`,
           element: <ExchangesPage />,
         },
         {
-          path: "favorites",
+          path: `${process.env.PUBLIC_URL}/favorites`,
           element: <FavoritesPage />,
         },
         {
-          path: "*",
+          path: `${process.env.PUBLIC_URL}/*`,
           element: <ErrorPage />,
         },
       ],

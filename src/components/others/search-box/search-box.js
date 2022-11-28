@@ -37,7 +37,11 @@ const StyledTab = styled(Tab)({
 //========================================================
 
 function SearchBox({ setSearch, setFavorites }) {
-  const tabs = ["/coins", "/exchanges", "/favorites"];
+  const tabs = [
+    `${process.env.PUBLIC_URL}/coins`,
+    `${process.env.PUBLIC_URL}/exchanges`,
+    `${process.env.PUBLIC_URL}/favorites`,
+  ];
   const [value, setValue] = useState(tabs.indexOf(window.location.pathname));
 
   const handleChange = (event) => {

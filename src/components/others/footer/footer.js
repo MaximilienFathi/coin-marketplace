@@ -7,8 +7,11 @@ function Footer() {
       <div className="footer-inner-container">
         <p className="copyright">
           Copyright &copy;{" "}
-          <span className="year">{new Date().getFullYear()}</span> by Maximilien
-          Fathi. All rights reserved.
+          <span className="year">{new Date().getFullYear()}</span> by{" "}
+          <a className="footer-link" href="https://github.com/MaximilienFathi">
+            Maximilien Fathi
+          </a>
+          . All rights reserved.
         </p>
         <p className="attributions">
           Powered by{" "}

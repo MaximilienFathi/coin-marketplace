@@ -18,18 +18,21 @@ const IconStyles = {
 function Header() {
   return (
     <nav className="header-nav">
-      <Link to="/" className="brand-logo">
+      <Link to={`${process.env.PUBLIC_URL}/`} className="brand-logo">
         <MemoryIcon sx={IconStyles}></MemoryIcon>
         <p>COIN marketplace</p>
       </Link>
       <ul className="header-nav-list">
         <li>
-          <Link to="/" className="header-nav-link">
+          <Link to={`${process.env.PUBLIC_URL}/`} className="header-nav-link">
             Home
           </Link>
         </li>
         <li>
-          <Link to="/coins" className="header-nav-link">
+          <Link
+            to={`${process.env.PUBLIC_URL}/coins`}
+            className="header-nav-link"
+          >
             Rankings
           </Link>
         </li>
