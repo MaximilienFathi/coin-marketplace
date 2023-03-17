@@ -11,7 +11,7 @@ import axios from "axios";
 function App() {
   const runCoinLoader = async ({ params }) => {
     try {
-      console.log(process.env.PUBLIC_URL);
+      console.log("PUBLIC_URL is", process.env.PUBLIC_URL);
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${params.coinID}`
       );

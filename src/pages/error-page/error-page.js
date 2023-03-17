@@ -48,7 +48,7 @@ function ErrorPage() {
             </p>
             <StyledHomeButton
               sx={HomeButtonStyles}
-              onClick={() => navigate("/")}
+              onClick={() => navigate(`${process.env.PUBLIC_URL}/`)}
             >
               Go Home
             </StyledHomeButton>
