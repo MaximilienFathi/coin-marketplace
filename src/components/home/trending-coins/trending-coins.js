@@ -3,11 +3,14 @@ import axios from "axios";
 import CoinCard from "../coin-card/coin-card";
 import "./trending-coins.css";
 
+import CircularProgress from "@mui/material/CircularProgress";
+
 function TrendingCoins() {
   const [trendingData, setTrendingData] = useState([]);
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
-  // const [loading, setLoading] = useState(false);
+
+  // const [loading, setLoading] = useState(true);
 
   // Initialize all data that will be retrieved from localStorage
   useEffect(() => {
@@ -47,9 +50,9 @@ function TrendingCoins() {
           const coin_response = await axios.get(
             `https://api.coingecko.com/api/v3/coins/${coin.item.id}`
           );
-          console.log(coin_response);
+          // Chart for last 24 hours of data
           const chart_response = await axios.get(
-            `https://api.coingecko.com/api/v3/coins/${coin.item.id}/market_chart?vs_currency=${currencyName}&days=1` // Must be last 24 hours data like API did
+            `https://api.coingecko.com/api/v3/coins/${coin.item.id}/market_chart?vs_currency=${currencyName}&days=1`
           );
           const updatedData = addCoinData(
             coin.item,
@@ -68,17 +71,21 @@ function TrendingCoins() {
   useEffect(() => {
     (async function fetchData() {
       try {
+        console.log("TEST TRENDING-PAGE");
         const response = await axios.get(
           "https://api.coingecko.com/api/v3/search/trending"
         );
+        console.log(response);
         const fullData = response.data.coins;
         const slicedData = fullData.slice(0, 4);
         const updatedData = await updateAllCoinData(slicedData);
         setTrendingData(updatedData);
-        console.log("result 2", updatedData);
       } catch (err) {
         console.error(err);
       }
+      // finally {
+      //   setLoading(false);
+      // }
     })();
   }, []);
 
@@ -88,6 +95,10 @@ function TrendingCoins() {
       <h2 className="trending-coins-heading">
         Most Searched Cryptocurrencies Today
       </h2>
+      {/*<div>*/}
+      {/*  {loading ? (*/}
+      {/*    <CircularProgress />*/}
+      {/*  ) : (*/}
       <div className="trending-coins-inner-container">
         {trendingData.map((data) => {
           return (
@@ -108,6 +119,8 @@ function TrendingCoins() {
           );
         })}
       </div>
+      {/*  )}*/}
+      {/*</div>*/}
     </div>
   );
 }

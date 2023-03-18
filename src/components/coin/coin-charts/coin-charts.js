@@ -10,6 +10,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+
 import CoinDataTabs from "../coin-data-tabs/coin-data-tabs";
 import TimeframeTabs from "../timeframe-tabs/timeframe-tabs";
 import PriceChanges from "../price-changes/price-changes";
@@ -24,46 +25,23 @@ ChartJS.register(
   Tooltip
 );
 
-function CoinCharts({
-  coinID,
-  coinName,
-  currencyName,
-  currencySymbol,
-  priceChangesData,
-}) {
+//############################################################################
+
+function CoinCharts({ coinID, coinName, currencyName, priceChangesData }) {
   const [historicData, setHistoricData] = useState([]);
   const [datatype, setDatatype] = useState("prices");
   const [timeframe, setTimeframe] = useState(1);
-  // const [loading, setLoading] = useState(false);
+
+  //############################################################################
+
+  console.log(coinID, coinName);
 
   const labels = {
     prices: "Prices",
     market_caps: "Market Caps",
     total_volumes: "Total Volumes",
   };
-  //****************************************************************************
-  //****************************************************************************
-  // Fetch chart data for a specific coin
-  useEffect(() => {
-    fetchChartData("prices", 1);
-  }, [coinID, currencyName]);
 
-  // Fetch chart data based on chosen data type (prices, market cap, volume)
-  async function fetchChartData(newDataType, newTimeframe) {
-    try {
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${coinID}/market_chart?vs_currency=${currencyName}&days=${newTimeframe}`
-      );
-      setHistoricData(response.data[newDataType]);
-      setDatatype(newDataType);
-      setTimeframe(newTimeframe);
-      // console.log("coin_charts_stuff", response);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-  //****************************************************************************
-  //****************************************************************************
   const options = {
     locale: "en-US",
     interaction: {
@@ -107,6 +85,7 @@ function CoinCharts({
     // maintainAspectRatio: false,
   };
   // https://stackoverflow.com/questions/72998998/how-to-make-vertical-line-when-hovering-cursor-chart-js
+
   const plugins = [
     {
       afterDraw: (chart) => {
@@ -127,6 +106,7 @@ function CoinCharts({
       },
     },
   ];
+
   const data = {
     labels: historicData.map((coin) => {
       let date = new Date(coin[0]);
@@ -167,8 +147,33 @@ function CoinCharts({
       },
     ],
   };
-  //****************************************************************************
-  //****************************************************************************
+
+  //############################################################################
+
+  // Fetch chart data for a specific coin
+  useEffect(() => {
+    fetchChartData("prices", 1);
+  }, [coinID, currencyName]);
+
+  // Fetch chart data based on chosen data type (prices, market cap, volume)
+  async function fetchChartData(newDataType, newTimeframe) {
+    try {
+      // Using if-else statement to prevent 404 error if coinID is undefined
+      if (coinID) {
+        const response = await axios.get(
+          `https://api.coingecko.com/api/v3/coins/${coinID}/market_chart?vs_currency=${currencyName}&days=${newTimeframe}`
+        );
+        setHistoricData(response.data[newDataType]);
+        setDatatype(newDataType);
+        setTimeframe(newTimeframe);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  //############################################################################
+
   return (
     <div className="coin-charts-outer-container">
       <CoinDataTabs fetchChartData={fetchChartData} timeframe={timeframe} />

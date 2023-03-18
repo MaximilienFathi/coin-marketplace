@@ -8,10 +8,13 @@ import ExchangesPage from "./pages/exchanges-page";
 import ErrorPage from "./pages/error-page/error-page";
 import axios from "axios";
 
+import axiosRetry from "axios-retry";
+axiosRetry(axios, { retries: 10 });
+
 function App() {
   const runCoinLoader = async ({ params }) => {
+    console.log("params are", params);
     try {
-      console.log("PUBLIC_URL is", process.env.PUBLIC_URL);
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${params.coinID}`
       );

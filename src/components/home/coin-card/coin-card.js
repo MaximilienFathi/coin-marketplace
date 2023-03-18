@@ -16,7 +16,7 @@ function CoinCard({
 }) {
   const price_change_color = price_change >= 0 ? "green" : "red";
 
-  // Contrary to table data, not transforming price as  it already fine
+  // Contrary to table data, not transforming price as it is already fine
   const transformData = function (data, fractionDigits, type) {
     if (type === "percentage") {
       fractionDigits = 2;

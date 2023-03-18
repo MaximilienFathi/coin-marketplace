@@ -1,18 +1,19 @@
 import React, { useState } from "react";
+
 import Favorite from "../../others/favorite";
 import PriceProgressBar from "../price-progress-bar/price-progress-bar";
 import "./market-info.css";
 
 function MarketInfo({
   coinData,
-  coinID,
+  // coinID,
   marketData,
   totalMarketCap,
   currencyName,
   currencySymbol,
 }) {
   const [favorite, setFavorite] = useState(
-    JSON.parse(localStorage.getItem("favorites")).includes(coinID)
+    JSON.parse(localStorage.getItem("favorites")).includes(coinData.id)
   );
   // Using coinData.id instead of coinID does not work
   const displayValue = (data) => {
@@ -72,7 +73,7 @@ function MarketInfo({
           <Favorite
             favorite={favorite}
             setFavorite={setFavorite}
-            id={coinID}
+            id={coinData.id}
           ></Favorite>
         </div>
         <div className="market-info-rank-container">
