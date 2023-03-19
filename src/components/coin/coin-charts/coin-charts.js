@@ -16,6 +16,10 @@ import TimeframeTabs from "../timeframe-tabs/timeframe-tabs";
 import PriceChanges from "../price-changes/price-changes";
 import "./coin-charts.css";
 
+import axiosRetry from "axios-retry";
+// axiosRetry(axios, { retries: 30 });
+axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -27,14 +31,54 @@ ChartJS.register(
 
 //############################################################################
 
-function CoinCharts({ coinID, coinName, currencyName, priceChangesData }) {
-  const [historicData, setHistoricData] = useState([]);
+export default function CoinCharts({
+  coinID,
+  coinName,
+  currencyName,
+  priceChangesData,
+}) {
+  const [allHistoricData, setAllHistoricData] = useState({});
+  const [specificHistoricData, setSpecificHistoricData] = useState([]);
   const [datatype, setDatatype] = useState("prices");
   const [timeframe, setTimeframe] = useState(1);
 
   //############################################################################
 
-  console.log(coinID, coinName);
+  // Fetch chart data for a specific coin
+  useEffect(() => {
+    fetchChartData("prices", 1);
+  }, [coinID, currencyName]);
+
+  //############################################################################
+
+  // Fetch chart data based on chosen data type (prices, market cap, volume)
+  async function fetchChartData(newDataType, newTimeframe) {
+    try {
+      // Using if-else statement to prevent 404 error if coinID is undefined
+      if (coinID) {
+        const response = await axios.get(
+          `https://api.coingecko.com/api/v3/coins/${coinID}/market_chart?vs_currency=${currencyName}&days=${newTimeframe}`
+        );
+        setAllHistoricData(response.data);
+        setSpecificHistoricData(response.data[datatype]);
+        setDatatype(newDataType);
+        setTimeframe(newTimeframe);
+        // await new Promise((resolve) => setTimeout(resolve, 5000));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // Update chart data when user clicks on a different data type button
+  // This method was added so that we don't use fetchChartData method
+  // therefore preventing us from making additional costly API calls
+  function updateChartData(newDataType) {
+    setSpecificHistoricData(allHistoricData[newDataType]);
+    setDatatype(newDataType);
+  }
+
+  //############################################################################
 
   const labels = {
     prices: "Prices",
@@ -108,7 +152,7 @@ function CoinCharts({ coinID, coinName, currencyName, priceChangesData }) {
   ];
 
   const data = {
-    labels: historicData.map((coin) => {
+    labels: specificHistoricData.map((coin) => {
       let date = new Date(coin[0]);
       let time =
         date.getHours() > 12
@@ -126,7 +170,7 @@ function CoinCharts({ coinID, coinName, currencyName, priceChangesData }) {
     }),
     datasets: [
       {
-        data: historicData.map((coin) => coin[1]),
+        data: specificHistoricData.map((coin) => coin[1]),
         label: ` ${currencyName.toUpperCase()}`,
         pointRadius: 0.5,
         tension: 0.7,
@@ -150,33 +194,9 @@ function CoinCharts({ coinID, coinName, currencyName, priceChangesData }) {
 
   //############################################################################
 
-  // Fetch chart data for a specific coin
-  useEffect(() => {
-    fetchChartData("prices", 1);
-  }, [coinID, currencyName]);
-
-  // Fetch chart data based on chosen data type (prices, market cap, volume)
-  async function fetchChartData(newDataType, newTimeframe) {
-    try {
-      // Using if-else statement to prevent 404 error if coinID is undefined
-      if (coinID) {
-        const response = await axios.get(
-          `https://api.coingecko.com/api/v3/coins/${coinID}/market_chart?vs_currency=${currencyName}&days=${newTimeframe}`
-        );
-        setHistoricData(response.data[newDataType]);
-        setDatatype(newDataType);
-        setTimeframe(newTimeframe);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  //############################################################################
-
   return (
     <div className="coin-charts-outer-container">
-      <CoinDataTabs fetchChartData={fetchChartData} timeframe={timeframe} />
+      <CoinDataTabs updateChartData={updateChartData} timeframe={timeframe} />
       <div className="coin-charts-inner-container">
         <div className="coin-charts-price-data">
           <p className="coin-charts-heading">
@@ -190,5 +210,3 @@ function CoinCharts({ coinID, coinName, currencyName, priceChangesData }) {
     </div>
   );
 }
-
-export default CoinCharts;

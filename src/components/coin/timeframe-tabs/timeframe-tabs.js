@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { styled, Tab, Tabs } from "@mui/material";
+
 import "./timeframe-tabs.css";
 
-//========================================================
+//############################################################################
+
 // CUSTOM STYLES
 const StyledTab = styled(Tab)({
   color: "rgba(255, 255, 255, 0.6)",
@@ -27,15 +29,28 @@ const StyledTab = styled(Tab)({
     // transition: "all 0.5s",
   },
 });
-//========================================================
 
-function TimeframeTabs({ fetchChartData, datatype }) {
+//############################################################################
+
+export default function TimeframeTabs({ fetchChartData, datatype }) {
   const [value, setValue] = useState("1");
+
+  // Keep track of labels and related value
+  const labelsArray = [
+    { label: "1D", value: "1" },
+    { label: "7D", value: "7" },
+    { label: "1M", value: "30" },
+    { label: "3M", value: "90" },
+    { label: "1Y", value: "365" },
+    { label: "All", value: "max" },
+  ];
 
   const handleClick = (newTimeframe) => {
     setValue(newTimeframe);
     fetchChartData(datatype, newTimeframe);
   };
+
+  //############################################################################
 
   return (
     <div className="timeframe-tabs-container">
@@ -46,16 +61,18 @@ function TimeframeTabs({ fetchChartData, datatype }) {
         }}
         sx={{ "&.MuiTabs-root": { minHeight: "fit-content" } }}
       >
-        <StyledTab label="1D" value="1" onClick={() => handleClick("1")} />
-        <StyledTab label="7D" value="7" onClick={() => handleClick("7")} />
-        <StyledTab label="1M" value="30" onClick={() => handleClick("30")} />
-        <StyledTab label="3M" value="90" onClick={() => handleClick("90")} />
-        <StyledTab label="1Y" value="365" onClick={() => handleClick("365")} />
-        <StyledTab label="All" value="max" onClick={() => handleClick("max")} />
+        {labelsArray.map(({ label, value }) => {
+          return (
+            <StyledTab
+              key={label}
+              label={label}
+              value={value}
+              onClick={() => handleClick(value)}
+            />
+          );
+        })}
       </Tabs>
       {/*<Outlet />*/}
     </div>
   );
 }
-
-export default TimeframeTabs;

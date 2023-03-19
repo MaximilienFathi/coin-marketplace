@@ -14,43 +14,30 @@ import ProjectLinks from "../../components/coin/project-links/project-links";
 import Footer from "../../components/others/footer/footer";
 import "./coin-page.css";
 
+import axiosRetry from "axios-retry";
+// axiosRetry(axios, { retries: 3 });
+axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
+
 //############################################################################
 
-function CoinPage() {
+export default function CoinPage() {
   const [coinData, setCoinData] = useState({});
   const [marketData, setMarketData] = useState({});
   const [currencyRates, setCurrencyRates] = useState({});
   const [priceChangesData, setPriceChangesData] = useState({});
   const [totalMarketCap, setTotalMarketCap] = useState({});
+
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
   const [favoritesChanged, setFavoritesChanged] = useState(false);
 
-  // Enables scrolling to swapper when clicking swap button
+  //############################################################################
+
+  // Enable scrolling to swapper when clicking swap button
   const scrollRef = useRef(null);
-  // Loaded data for specific coin when accessing its URL from App.js
+  // Store loaded data for specific coin when accessing its URL from App.js
   const loaderCoinData = useLoaderData();
 
-  // console.log("coinDATA", coinData);
-  // console.log("marketDATA", marketData);
-  // console.log("loaderCoinData", loaderCoinData);
-  // let coinID = null;
-  // let coinName = null;
-  // let coinSymbol = null;
-  // IMPORTANT BUG I HAD TO SOLVE:
-  // Need these ref values because changing value of global variables (not
-  // states) inside a useEffect does nothing (change is ignored outside
-  // useEffect). For first render, we will have null for coinNameRef and
-  // coinSymbolRef (tested it). For second render, we will have proper values. I
-  // could have made another API call inside coin-balance for coinSymbol for
-  // example, but more API calls is bad idea.
-  // const coinNameRef = useRef(null);
-  // const coinSymbolRef = useRef(null);
-  // console.log(location);
-  // if (location.state) ({ coinID, coinName, coinSymbol } = location.state);
-  // if (!location.state) {
-  // let coinID = location.pathname.split("/coin-marketplace/coins/")[1];
-  // }
   //############################################################################
 
   // Initialize all data that will be retrieved from localStorage
@@ -73,15 +60,15 @@ function CoinPage() {
     }
   }, [currencyName]);
 
-  //############################################################################
-
-  // Fetch data for a specific coin
+  // Fetch all relevant data for specific coin
   useEffect(() => {
     fetchMarketData();
     fetchCoinData();
     fetchPriceChanges();
     fetchTotalMarketCap();
   }, []);
+
+  //############################################################################
 
   function fetchMarketData() {
     const marketDataObject = loaderCoinData.data.market_data;
@@ -152,6 +139,7 @@ function CoinPage() {
       const response = await axios.get(
         "https://api.coingecko.com/api/v3/global"
       );
+      // await new Promise((resolve) => setTimeout(resolve, 5000));
       setTotalMarketCap(response.data.data.total_market_cap[currencyName]);
     } catch (err) {
       console.error(err);
@@ -222,5 +210,3 @@ function CoinPage() {
     </favoritesContext.Provider>
   );
 }
-
-export default CoinPage;

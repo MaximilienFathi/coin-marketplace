@@ -4,7 +4,9 @@ import Favorite from "../../others/favorite";
 import PriceProgressBar from "../price-progress-bar/price-progress-bar";
 import "./market-info.css";
 
-function MarketInfo({
+//############################################################################
+
+export default function MarketInfo({
   coinData,
   // coinID,
   marketData,
@@ -12,10 +14,14 @@ function MarketInfo({
   currencyName,
   currencySymbol,
 }) {
+  // TODO: Using coinData.id instead of coinID does not work? CHECK AGAIN!
   const [favorite, setFavorite] = useState(
     JSON.parse(localStorage.getItem("favorites")).includes(coinData.id)
   );
-  // Using coinData.id instead of coinID does not work
+
+  //############################################################################
+
+  // Return certain passed data rounded up to 8 decimal places
   const displayValue = (data) => {
     if (
       data === "circulating_supply" ||
@@ -32,6 +38,7 @@ function MarketInfo({
       : "-";
   };
 
+  // Return passed data (% change) rounded to 2 decimal places
   const displayPercentage = (data) => {
     const value = marketData[data] && marketData[data][currencyName];
     return value
@@ -42,10 +49,11 @@ function MarketInfo({
       : "";
   };
 
+  // Return a percentage showing how dominant a currency is in the market
   const findMarketDominance = () => {
-    const market_cap =
+    const marketCap =
       marketData["market_cap"] && marketData["market_cap"][currencyName];
-    const marketDominance = (market_cap / totalMarketCap) * 100;
+    const marketDominance = (marketCap / totalMarketCap) * 100;
     return marketDominance
       ? `${marketDominance.toLocaleString("en-US", {
           minimumFractionDigits: 2,
@@ -54,10 +62,13 @@ function MarketInfo({
       : "-";
   };
 
+  // Have values >= 0 be in green displays, values < 0 in red displays
   const findColor = (data) => {
     const value = marketData[data] && marketData[data][currencyName];
     return value >= 0 ? "green-box" : "red-box";
   };
+
+  //############################################################################
 
   return (
     <div className="market-info-outer-container">
@@ -80,7 +91,6 @@ function MarketInfo({
           <p className="market-info-rank small-box">
             {coinData.rank ? `Rank #${coinData.rank}` : `Unranked`}
           </p>
-          {/*<p className="market-info-type small-box">Coin</p>*/}
         </div>
         <div className="market-info-price-container">
           <p className="market-info-price-value">
@@ -100,7 +110,7 @@ function MarketInfo({
           currencySymbol={currencySymbol}
         ></PriceProgressBar>
       </div>
-      {/*##################################################################*/}
+
       <div className="market-info-grid">
         <div className="market-info-item">
           <p className="market-info-label">All Time High</p>
@@ -115,7 +125,7 @@ function MarketInfo({
             <p className="market-info-value">{displayValue("ath")}</p>
           </div>
         </div>
-        {/*##################################################################*/}
+
         <div className="market-info-item">
           <p className="market-info-label">All Time Low</p>
           <div className="market-info-value-container">
@@ -129,12 +139,12 @@ function MarketInfo({
             <p className="market-info-value">{displayValue("atl")}</p>
           </div>
         </div>
-        {/*##################################################################*/}
+
         <div className="market-info-item">
           <p className="market-info-label">Total Volume</p>
           <p className="market-info-value">{displayValue("total_volume")}</p>
         </div>
-        {/*##################################################################*/}
+
         <div className="market-info-item">
           <p className="market-info-label">Market Cap</p>
           <div className="market-info-value-container">
@@ -150,39 +160,36 @@ function MarketInfo({
             <p className="market-info-value">{displayValue("market_cap")}</p>
           </div>
         </div>
-        {/*##################################################################*/}
+
         <div className="market-info-item">
           <p className="market-info-label">Diluted Market Cap</p>
           <p className="market-info-value">
             {displayValue("fully_diluted_valuation")}
           </p>
         </div>
-        {/*##################################################################*/}
+
         <div className="market-info-item">
           <p className="market-info-label">Market Dominance</p>
           <p className="market-info-value">{findMarketDominance()}</p>
         </div>
-        {/*##################################################################*/}
+
         <div className="market-info-item">
           <p className="market-info-label">Circulating Supply</p>
           <p className="market-info-value">
             {displayValue("circulating_supply")}
           </p>
         </div>
-        {/*##################################################################*/}
+
         <div className="market-info-item">
           <p className="market-info-label">Total Supply</p>
           <p className="market-info-value">{displayValue("total_supply")}</p>
         </div>
-        {/*##################################################################*/}
+
         <div className="market-info-item">
           <p className="market-info-label">Max Supply</p>
           <p className="market-info-value">{displayValue("max_supply")}</p>
         </div>
-        {/*##################################################################*/}
       </div>
     </div>
   );
 }
-
-export default MarketInfo;
