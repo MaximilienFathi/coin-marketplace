@@ -1,8 +1,7 @@
 .swapper-outer-container {
   grid-column: 2;
   grid-row: 2;
-
-  /*height: fit-content;*/
+  height: auto; /* fit-content or calc(100% - 3.2rem) */
   border-radius: 11px;
   padding: 2.4rem;
   background-color: rgba(184, 184, 184, 0.25);
@@ -10,20 +9,11 @@
   display: flex;
   flex-direction: column;
   row-gap: 1.6rem;
-
-  /* To have element stretched to fit remaining space */
-  /*display: flex;*/
-  /*flex-direction: column;*/
-  /*flex: 1;*/
 }
 
 .swapper-heading {
   font-size: 2.4rem;
   margin-bottom: 0.8rem;
-
-  /*font-size: 2rem;*/
-  /*font-weight: 500;*/
-  /*color: rgba(255, 255, 255, 0.8);*/
 }
 
 .swapper-options-container {
@@ -53,7 +43,6 @@
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-
   background-color: rgba(35, 37, 56, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 11px;

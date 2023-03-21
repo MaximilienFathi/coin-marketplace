@@ -42,10 +42,10 @@ export default function CoinDataTabs({ updateChartData }) {
     { label: "Total Volume", value: "total_volumes" },
   ];
 
-  const handleClick = (newDatatype) => {
+  function handleClick(newDatatype) {
     setValue(newDatatype);
     updateChartData(newDatatype);
-  };
+  }
 
   //############################################################################
 

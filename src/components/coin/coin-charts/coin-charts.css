@@ -1,25 +1,17 @@
 .coin-charts-outer-container {
   grid-column: 1;
   grid-row: 2;
-
-  /*height: fit-content;*/
+  height: auto; /* fit-content or calc(100% - 3.2rem) */
   border-radius: 11px;
   padding: 2.4rem;
   background-color: rgba(184, 184, 184, 0.25);
   box-shadow: 0 0 0.5rem 0.01rem #b8b8b8;
-
-  /* To have element stretched to fit remaining space */
-  /*display: flex;*/
-  /*flex-direction: column;*/
-  /*flex: 1;*/
 }
 
 .coin-charts-inner-container {
-  /*width: 50%;*/
-  height: fit-content;
+  background: #394968;
   border-radius: 11px;
   padding: 3.2rem 1.6rem 1.6rem 1.6rem;
-  background: #394968;
   margin-bottom: 1.6rem;
 }
 
@@ -28,7 +20,6 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.6rem;
-  /*border: 3px solid red;*/
 }
 
 .coin-charts-heading {

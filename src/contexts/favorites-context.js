@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-const favoritesContext = createContext();
+const favoritesContext = createContext(null);
 
 export default favoritesContext;

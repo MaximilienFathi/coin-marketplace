@@ -8,21 +8,39 @@ import "./market-info.css";
 
 export default function MarketInfo({
   coinData,
-  // coinID,
   marketData,
   totalMarketCap,
   currencyName,
   currencySymbol,
 }) {
-  // TODO: Using coinData.id instead of coinID does not work? CHECK AGAIN!
+  // Show if coin is in localStorage favorites array or not (boolean value)
+  // TODO: LESSON LEARNT (UPDATE - IGNORED BECAUSE BUGS OUT FAVORITES SYSTEM)
+  // https://stackoverflow.com/questions/55621212/is-it-possible-to-react-usestate-in-react
+  // https://legacy.reactjs.org/docs/hooks-reference.html#lazy-initial-state
+  // TODO: LESSON LEARNT
+  // Had to add ?. because otherwise it was not null safe!
   const [favorite, setFavorite] = useState(
-    JSON.parse(localStorage.getItem("favorites")).includes(coinData.id)
+    // FIXME
+    // console.log(
+    //   "dsada",
+    //   coinData,
+    //   marketData,
+    //   totalMarketCap,
+    //   currencyName,
+    //   currencySymbol
+    // );
+    // FIXME
+    // console.log(
+    //   "gfg",
+    //   JSON.parse(localStorage.getItem("favorites"))?.includes(coinData.id)
+    // );
+    JSON.parse(localStorage.getItem("favorites"))?.includes(coinData.id)
   );
 
   //############################################################################
 
   // Return certain passed data rounded up to 8 decimal places
-  const displayValue = (data) => {
+  function displayValue(data) {
     if (
       data === "circulating_supply" ||
       data === "total_supply" ||
@@ -36,10 +54,10 @@ export default function MarketInfo({
           maximumFractionDigits: 8,
         })}`
       : "-";
-  };
+  }
 
   // Return passed data (% change) rounded to 2 decimal places
-  const displayPercentage = (data) => {
+  function displayPercentage(data) {
     const value = marketData[data] && marketData[data][currencyName];
     return value
       ? `${value.toLocaleString("en-US", {
@@ -47,10 +65,10 @@ export default function MarketInfo({
           maximumFractionDigits: 2,
         })}%`
       : "";
-  };
+  }
 
   // Return a percentage showing how dominant a currency is in the market
-  const findMarketDominance = () => {
+  function findMarketDominance() {
     const marketCap =
       marketData["market_cap"] && marketData["market_cap"][currencyName];
     const marketDominance = (marketCap / totalMarketCap) * 100;
@@ -60,13 +78,13 @@ export default function MarketInfo({
           maximumFractionDigits: 2,
         })}%`
       : "-";
-  };
+  }
 
   // Have values >= 0 be in green displays, values < 0 in red displays
-  const findColor = (data) => {
+  function findColor(data) {
     const value = marketData[data] && marketData[data][currencyName];
     return value >= 0 ? "green-box" : "red-box";
-  };
+  }
 
   //############################################################################
 
@@ -84,7 +102,7 @@ export default function MarketInfo({
           <Favorite
             favorite={favorite}
             setFavorite={setFavorite}
-            id={coinData.id}
+            coinID={coinData.id}
           ></Favorite>
         </div>
         <div className="market-info-rank-container">

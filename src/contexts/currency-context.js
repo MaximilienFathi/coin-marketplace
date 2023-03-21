@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-const currencyContext = createContext();
+const currencyContext = createContext(null);
 
 export default currencyContext;

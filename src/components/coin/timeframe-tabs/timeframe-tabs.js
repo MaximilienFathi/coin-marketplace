@@ -45,10 +45,10 @@ export default function TimeframeTabs({ fetchChartData, datatype }) {
     { label: "All", value: "max" },
   ];
 
-  const handleClick = (newTimeframe) => {
+  function handleClick(newTimeframe) {
     setValue(newTimeframe);
     fetchChartData(datatype, newTimeframe);
-  };
+  }
 
   //############################################################################
 

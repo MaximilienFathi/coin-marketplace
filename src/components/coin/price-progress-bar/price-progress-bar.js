@@ -1,7 +1,15 @@
 import React from "react";
+
 import "./price-progress-bar.css";
 
-function PriceProgressBar({ marketData, currencyName, currencySymbol }) {
+//############################################################################
+
+export default function PriceProgressBar({
+  marketData,
+  currencyName,
+  currencySymbol,
+}) {
+  // Set current price and lowest/highest price reached in last 24h
   const currentPrice =
     marketData.current_price && marketData.current_price[currencyName];
   const lowPrice24h = marketData.low_24h && marketData.low_24h[currencyName];
@@ -12,6 +20,7 @@ function PriceProgressBar({ marketData, currencyName, currencySymbol }) {
   const widthPercentage =
     (100 * (currentPrice - lowPrice24h)) / (highPrice24h - lowPrice24h);
 
+  // Set styles for price "front" bar
   const priceFrontBarStyles = {
     height: "100%",
     width: `${widthPercentage}%`,
@@ -19,30 +28,31 @@ function PriceProgressBar({ marketData, currencyName, currencySymbol }) {
     borderRadius: "50px",
   };
 
+  // Display low/high price label under progress bar
+  function displayPriceLabel(priceValue) {
+    return (
+      <p className="progress-bar-label">
+        {currencySymbol}
+        {priceValue &&
+          priceValue.toLocaleString("en-US", {
+            maximumFractionDigits: 8,
+          })}
+      </p>
+    );
+  }
+
+  //############################################################################
+
   return (
     <div className="price-progress-bar-container">
       <div className="price-back-bar">
         <div className="price-front-bar" style={priceFrontBarStyles}></div>
       </div>
       <div className="progress-bar-labels-container">
-        <p className="progress-bar-label">
-          {currencySymbol}
-          {lowPrice24h &&
-            lowPrice24h.toLocaleString("en-US", {
-              maximumFractionDigits: 8,
-            })}
-        </p>
+        {displayPriceLabel(lowPrice24h)}
         <p className="progress-bar-label">24H Range</p>
-        <p className="progress-bar-label">
-          {currencySymbol}
-          {highPrice24h &&
-            highPrice24h.toLocaleString("en-US", {
-              maximumFractionDigits: 8,
-            })}
-        </p>
+        {displayPriceLabel(highPrice24h)}
       </div>
     </div>
   );
 }
-
-export default PriceProgressBar;

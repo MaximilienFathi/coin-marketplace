@@ -10,15 +10,17 @@ import {
   Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import CoinDataTabs from "../coin-data-tabs/coin-data-tabs";
 import TimeframeTabs from "../timeframe-tabs/timeframe-tabs";
 import PriceChanges from "../price-changes/price-changes";
 import "./coin-charts.css";
 
-import axiosRetry from "axios-retry";
-// axiosRetry(axios, { retries: 30 });
-axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
+// import axiosRetry from "axios-retry";
+// // axiosRetry(axios, { retries: 30 });
+// axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
 
 ChartJS.register(
   CategoryScale,
@@ -42,6 +44,8 @@ export default function CoinCharts({
   const [datatype, setDatatype] = useState("prices");
   const [timeframe, setTimeframe] = useState(1);
 
+  const [loading, setLoading] = useState(false);
+
   //############################################################################
 
   // Fetch chart data for a specific coin
@@ -63,10 +67,14 @@ export default function CoinCharts({
         setSpecificHistoricData(response.data[datatype]);
         setDatatype(newDataType);
         setTimeframe(newTimeframe);
+        setLoading(false);
         // await new Promise((resolve) => setTimeout(resolve, 5000));
       }
     } catch (err) {
-      console.error(err);
+      // console.error(err);
+      console.log("TESTING");
+      fetchChartData(newDataType, newTimeframe);
+      setLoading(true);
     }
   }
 
@@ -204,7 +212,17 @@ export default function CoinCharts({
           </p>
           <TimeframeTabs fetchChartData={fetchChartData} datatype={datatype} />
         </div>
-        <Line data={data} plugins={plugins} options={options} />
+        {loading ? (
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <CircularProgress
+              style={{ color: "#b84dc3" }}
+              size={450}
+              thickness={1}
+            />
+          </Box>
+        ) : (
+          <Line data={data} plugins={plugins} options={options} />
+        )}
       </div>
       <PriceChanges priceChangesData={priceChangesData}></PriceChanges>
     </div>

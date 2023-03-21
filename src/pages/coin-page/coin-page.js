@@ -1,6 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import axios from "axios";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import favoritesContext from "../../contexts/favorites-context";
 import Header from "../../components/others/header/header";
@@ -13,23 +15,29 @@ import CoinDescription from "../../components/coin/coin-description/coin-descrip
 import ProjectLinks from "../../components/coin/project-links/project-links";
 import Footer from "../../components/others/footer/footer";
 import "./coin-page.css";
+import currencyContext from "../../contexts/currency-context";
 
-import axiosRetry from "axios-retry";
-// axiosRetry(axios, { retries: 3 });
-axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
+// import axiosRetry from "axios-retry";
+// // axiosRetry(axios, { retries: 3 });
+// axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
 
 //############################################################################
 
 export default function CoinPage() {
+  const [currencyName, setCurrencyName, currencySymbol, setCurrencySymbol] =
+    useContext(currencyContext);
+
   const [coinData, setCoinData] = useState({});
   const [marketData, setMarketData] = useState({});
   const [currencyRates, setCurrencyRates] = useState({});
   const [priceChangesData, setPriceChangesData] = useState({});
-  const [totalMarketCap, setTotalMarketCap] = useState({});
+  const [totalMarketCap, setTotalMarketCap] = useState(0);
 
-  const [currencyName, setCurrencyName] = useState("usd");
-  const [currencySymbol, setCurrencySymbol] = useState("$");
-  const [favoritesChanged, setFavoritesChanged] = useState(false);
+  // const [currencyName, setCurrencyName] = useState("usd");
+  // const [currencySymbol, setCurrencySymbol] = useState("$");
+  // const [favoritesChanged, setFavoritesChanged] = useState(false);
+
+  const [loading, setLoading] = useState(false);
 
   //############################################################################
 
@@ -65,7 +73,7 @@ export default function CoinPage() {
     fetchMarketData();
     fetchCoinData();
     fetchPriceChanges();
-    fetchTotalMarketCap();
+    // fetchTotalMarketCap();
   }, []);
 
   //############################################################################
@@ -134,79 +142,90 @@ export default function CoinPage() {
     setPriceChangesData(priceChangesObject);
   }
 
-  async function fetchTotalMarketCap() {
-    try {
-      const response = await axios.get(
-        "https://api.coingecko.com/api/v3/global"
-      );
-      // await new Promise((resolve) => setTimeout(resolve, 5000));
-      setTotalMarketCap(response.data.data.total_market_cap[currencyName]);
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  // async function fetchTotalMarketCap() {
+  //   try {
+  //     const response = await axios.get(
+  //       "https://api.coingecko.com/api/v3/global"
+  //     );
+  //     // await new Promise((resolve) => setTimeout(resolve, 5000));
+  //     setTotalMarketCap(response.data.data.total_market_cap[currencyName]);
+  //     setLoading(false);
+  //   } catch (err) {
+  //     // console.error(err);
+  //     console.log("TESTING");
+  //     fetchTotalMarketCap();
+  //     setLoading(true);
+  //   }
+  // }
 
-  const addCommunityLink = (communityLinks, siteName, domain, identifier) => {
+  function addCommunityLink(communityLinks, siteName, domain, identifier) {
     if (identifier) communityLinks[siteName] = domain + identifier;
     return communityLinks;
-  };
+  }
 
   //############################################################################
 
   return (
-    <favoritesContext.Provider value={[favoritesChanged, setFavoritesChanged]}>
-      <div className="coin-page-container">
-        <Header />
-        <div className="content-wrap">
-          <TopSection
-            heading={
-              <h1 className="top-section-heading">
-                <span>{coinData.name}</span> Performance and Stats at a Glance
-              </h1>
-            }
-            description={
-              "Lorem ipsum dolor sit amet, consectetur adipisicing elit." +
-              " Asperiores aspernatur blanditiis eaque earum fugit" +
-              " incidunt nobis ipsum dolor sit amet adipisicing elit amet" +
-              " animi assumenda."
-            }
-          />
-          <div className="coin-page-content-wrap">
+    // <favoritesContext.Provider value={[favoritesChanged, setFavoritesChanged]}>
+    <div className="coin-page-container">
+      <Header />
+      <div className="content-wrap">
+        <TopSection
+          heading={
+            <h1 className="top-section-heading">
+              <span>{coinData.name}</span> Performance and Stats at a Glance
+            </h1>
+          }
+          description={
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit." +
+            " Asperiores aspernatur blanditiis eaque earum fugit" +
+            " incidunt nobis ipsum dolor sit amet adipisicing elit amet" +
+            " animi assumenda."
+          }
+        />
+        <div className="coin-page-content-wrap">
+          {loading ? (
+            <CircularProgress
+              style={{ color: "#b84dc3" }}
+              size={100}
+              thickness={1}
+            />
+          ) : (
             <MarketInfo
               coinData={coinData}
-              // coinID={coinData.id}
               marketData={marketData}
               totalMarketCap={totalMarketCap}
               currencyName={currencyName}
               currencySymbol={currencySymbol}
             ></MarketInfo>
-            <CoinBalance
-              scrollRef={scrollRef}
-              coinSymbol={coinData.symbol}
-              currencyName={currencyName}
-              currencySymbol={currencySymbol}
-              currencyRate={currencyRates[currencyName]}
-              price_change_24h={priceChangesData.price_change_24h}
-            ></CoinBalance>
-            <CoinCharts
-              coinID={coinData.id}
-              coinName={coinData.name}
-              currencyName={currencyName}
-              priceChangesData={priceChangesData}
-            />
-            <Swapper
-              ref={scrollRef}
-              coinSymbol={coinData.symbol}
-              currencyName={currencyName}
-              currencySymbol={currencySymbol}
-              currencyRates={currencyRates}
-            ></Swapper>
-            <CoinDescription coinData={coinData}></CoinDescription>
-            <ProjectLinks coinData={coinData}></ProjectLinks>
-          </div>
-          <Footer />
+          )}
+          <CoinBalance
+            coinSymbol={coinData.symbol}
+            currencyRate={currencyRates[currencyName]}
+            price_change_24h={priceChangesData.price_change_24h}
+            currencyName={currencyName}
+            currencySymbol={currencySymbol}
+            scrollRef={scrollRef}
+          ></CoinBalance>
+          <CoinCharts
+            coinID={coinData.id}
+            coinName={coinData.name}
+            priceChangesData={priceChangesData}
+            currencyName={currencyName}
+          />
+          <Swapper
+            coinSymbol={coinData.symbol}
+            currencyRates={currencyRates}
+            currencyName={currencyName}
+            currencySymbol={currencySymbol}
+            ref={scrollRef}
+          ></Swapper>
+          <CoinDescription coinData={coinData}></CoinDescription>
+          <ProjectLinks coinData={coinData}></ProjectLinks>
         </div>
+        <Footer />
       </div>
-    </favoritesContext.Provider>
+    </div>
+    // </favoritesContext.Provider>
   );
 }

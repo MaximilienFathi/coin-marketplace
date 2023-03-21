@@ -4,9 +4,10 @@ import axios from "axios";
 import CoinCard from "../coin-card/coin-card";
 import "./trending-coins.css";
 
-import axiosRetry from "axios-retry";
-// axiosRetry(axios, { retries: 3 });
-axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
+import CircularProgress from "@mui/material/CircularProgress";
+// import axiosRetry from "axios-retry";
+// // axiosRetry(axios, { retries: 3 });
+// axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
 
 //############################################################################
 
@@ -15,6 +16,8 @@ export default function TrendingCoins() {
 
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
+
+  const [loading, setLoading] = useState(true);
 
   //############################################################################
 
@@ -55,7 +58,10 @@ export default function TrendingCoins() {
       const updatedData = await updateAllCoinData(slicedData);
       setTrendingData(updatedData);
     } catch (err) {
-      console.error(err);
+      // console.error(err);
+      fetchTrendingCoinData();
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -81,7 +87,9 @@ export default function TrendingCoins() {
           );
           return updatedData;
         } catch (err) {
-          console.error(err);
+          // console.error(err);
+          console.log("TESTING");
+          updateAllCoinData(slicedData);
         }
       })
     );
@@ -107,23 +115,29 @@ export default function TrendingCoins() {
       <h2 className="trending-coins-heading">
         Most Searched Cryptocurrencies Today
       </h2>
-      <div className="trending-coins-inner-container">
-        {trendingData.map((data) => {
-          return (
-            <CoinCard
-              key={data.id}
-              id={data.id}
-              name={data.name}
-              symbol={data.symbol}
-              logo={data.small}
-              current_price={data.current_price}
-              currencyName={currencyName}
-              currencySymbol={currencySymbol}
-              price_change={data.price_change_percentage_24h_in_currency}
-              historicData={data.historicData}
-            ></CoinCard>
-          );
-        })}
+      <div>
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <div className="trending-coins-inner-container">
+            {trendingData.map((data) => {
+              return (
+                <CoinCard
+                  key={data.id}
+                  id={data.id}
+                  name={data.name}
+                  symbol={data.symbol}
+                  logo={data.small}
+                  current_price={data.current_price}
+                  currencyName={currencyName}
+                  currencySymbol={currencySymbol}
+                  price_change={data.price_change_percentage_24h_in_currency}
+                  historicData={data.historicData}
+                ></CoinCard>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
