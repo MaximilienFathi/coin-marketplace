@@ -1,7 +1,8 @@
-import React, { useState, forwardRef } from "react";
+import React, { useState, forwardRef, useContext } from "react";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material";
 
+import currencyContext from "../../../contexts/currency-context";
 import Converter from "../converter/converter";
 import SwapOptionTabs from "../swap-option-tabs/swap-option-tabs";
 import "./swapper.css";
@@ -32,9 +33,10 @@ const ButtonStyles = {
 
 // forwardRef used because useRef hook used in parent component (coin-page.js)
 export default forwardRef(function Swapper(
-  { coinSymbol, currencySymbol, currencyName, currencyRates },
+  { coinSymbol, currencyRates },
   scrollRef
 ) {
+  const [currencyName, , currencySymbol] = useContext(currencyContext);
   const [warning, setWarning] = useState("");
   const [input2, setInput2] = useState("");
   const [slippage, setSlippage] = useState(0.1);

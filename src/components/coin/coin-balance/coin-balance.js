@@ -1,16 +1,18 @@
-import React from "react";
-import NorthEastIcon from "@mui/icons-material/NorthEast";
-import SouthEastIcon from "@mui/icons-material/SouthEast";
-import "./coin-balance.css";
-
-import { Doughnut } from "react-chartjs-2";
-import { Chart, ArcElement } from "chart.js";
+import React, { useContext } from "react";
 import { styled } from "@mui/material";
 import Button from "@mui/material/Button";
+import NorthEastIcon from "@mui/icons-material/NorthEast";
+import SouthEastIcon from "@mui/icons-material/SouthEast";
+import { Chart, ArcElement } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+
+import currencyContext from "../../../contexts/currency-context";
+import "./coin-balance.css";
 
 Chart.register(ArcElement);
 
-//========================================================
+//############################################################################
+
 // CUSTOM STYLES
 const StyledButton = styled(Button)({
   "&.MuiButtonBase-root:hover": {
@@ -30,44 +32,54 @@ const ButtonStyles = {
   background: "linear-gradient(90deg, #b84dc3, #a620b4)",
   boxShadow: "inset 0 0 2px #000",
 };
-//========================================================
 
-function CoinBalance({
+//############################################################################
+
+export default function CoinBalance({
   scrollRef,
   coinSymbol,
-  currencySymbol,
-  currencyName,
   currencyRate,
   price_change_24h,
 }) {
+  const [currencyName, , currencySymbol] = useContext(currencyContext);
+
+  // Setting default values since we have no user account profiles yet
+  // In this made up scenario, total balance is always higher than coin
+  // balance (by 5000) to add a bit more realism to it
   const coinOwned = currencyRate ? 10 : 0;
   const coinBalance = currencyRate ? coinOwned * currencyRate : 0;
-  // to make sure total balance is always higher than coin balance, add 5000
   const totalBalance = coinBalance + 5000;
   const balanceChange = price_change_24h
     ? Math.abs(coinBalance * (price_change_24h / 100))
     : 0;
 
-  const displayBalanceIcon = () => {
+  //############################################################################
+
+  // Display correct arrow icon based on whether change is positive or negative
+  function displayBalanceIcon() {
     return price_change_24h >= 0 ? (
       <NorthEastIcon></NorthEastIcon>
     ) : (
       <SouthEastIcon></SouthEastIcon>
     );
-  };
+  }
 
-  const findColor = () => {
+  // Display correct color based on whether change is positive or negative
+  function findColor() {
     if (price_change_24h === undefined) return "hide-display";
     if (price_change_24h >= 0) return "green";
     if (price_change_24h < 0) return "red";
-  };
+  }
 
-  const scrollToSwapper = () => {
+  // Enable scrolling from this component to swapper component
+  function scrollToSwapper() {
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
     }
     // scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }
+
+  //############################################################################
 
   return (
     <div className="coin-balance-outer-container">
@@ -169,5 +181,3 @@ function CoinBalance({
     </div>
   );
 }
-
-export default CoinBalance;

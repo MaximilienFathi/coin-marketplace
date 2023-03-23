@@ -59,7 +59,7 @@ export default function TrendingCoins() {
       setTrendingData(updatedData);
     } catch (err) {
       // console.error(err);
-      fetchTrendingCoinData();
+      // fetchTrendingCoinData();
     } finally {
       setLoading(false);
     }
@@ -89,7 +89,7 @@ export default function TrendingCoins() {
         } catch (err) {
           // console.error(err);
           console.log("TESTING");
-          updateAllCoinData(slicedData);
+          // updateAllCoinData(slicedData);
         }
       })
     );

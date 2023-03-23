@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
+import currencyContext from "../../../contexts/currency-context";
 import "./price-progress-bar.css";
 
 //############################################################################
 
-export default function PriceProgressBar({
-  marketData,
-  currencyName,
-  currencySymbol,
-}) {
+export default function PriceProgressBar({ marketData }) {
+  const [currencyName, , currencySymbol] = useContext(currencyContext);
+
   // Set current price and lowest/highest price reached in last 24h
   const currentPrice =
     marketData.current_price && marketData.current_price[currencyName];

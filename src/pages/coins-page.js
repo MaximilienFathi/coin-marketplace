@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import currencyContext from "../contexts/currency-context";
-import favoritesContext from "../contexts/favorites-context";
 import Header from "../components/others/header/header";
 import TopSection from "../components/others/top-section/top-section";
 import GlobalStats from "../components/others/global-stats/global-stats";
@@ -20,7 +19,6 @@ function CoinsPage() {
   // without a provider first
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
-  const [favoritesChanged, setFavoritesChanged] = useState(false);
 
   const pageSize = 100;
   const findPageCount = (coinsCount) =>
@@ -90,38 +88,34 @@ function CoinsPage() {
     <currencyContext.Provider
       value={[currencyName, setCurrencyName, currencySymbol, setCurrencySymbol]}
     >
-      <favoritesContext.Provider
-        value={[favoritesChanged, setFavoritesChanged]}
-      >
-        <div className="page-container">
-          <Header />
-          <TopSection
-            heading={
-              <h1 className="top-section-heading">
-                Top Crypto <span>Currencies</span> Ranked by{" "}
-                <span>Market Cap</span>
-              </h1>
-            }
-            description={
-              "Lorem ipsum dolor sit amet, consectetur adipisicing elit." +
-              " Asperiores aspernatur blanditiis eaque earum fugit incidunt" +
-              " nobis ipsum dolor sit amet adipisicing elit amet animi assumenda."
-            }
-          />
-          <GlobalStats />
-          <TableBox
-            data={data}
-            setData={setData}
-            fullDataList={fullDataList}
-            page={page}
-            setPage={setPage}
-            pageCount={pageCount}
-            setPageCount={setPageCount}
-          ></TableBox>
-          <Footer />
-          <ScrollButton />
-        </div>
-      </favoritesContext.Provider>
+      <div className="page-container">
+        <Header />
+        <TopSection
+          heading={
+            <h1 className="top-section-heading">
+              Top Crypto <span>Currencies</span> Ranked by{" "}
+              <span>Market Cap</span>
+            </h1>
+          }
+          description={
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit." +
+            " Asperiores aspernatur blanditiis eaque earum fugit incidunt" +
+            " nobis ipsum dolor sit amet adipisicing elit amet animi assumenda."
+          }
+        />
+        <GlobalStats />
+        <TableBox
+          data={data}
+          setData={setData}
+          fullDataList={fullDataList}
+          page={page}
+          setPage={setPage}
+          pageCount={pageCount}
+          setPageCount={setPageCount}
+        ></TableBox>
+        <Footer />
+        <ScrollButton />
+      </div>
     </currencyContext.Provider>
   );
 }

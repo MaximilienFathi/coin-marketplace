@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import {
   Chart as ChartJS,
@@ -13,6 +13,7 @@ import { Line } from "react-chartjs-2";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
+import currencyContext from "../../../contexts/currency-context";
 import CoinDataTabs from "../coin-data-tabs/coin-data-tabs";
 import TimeframeTabs from "../timeframe-tabs/timeframe-tabs";
 import PriceChanges from "../price-changes/price-changes";
@@ -33,12 +34,8 @@ ChartJS.register(
 
 //############################################################################
 
-export default function CoinCharts({
-  coinID,
-  coinName,
-  currencyName,
-  priceChangesData,
-}) {
+export default function CoinCharts({ coinID, coinName, priceChangesData }) {
+  const [currencyName] = useContext(currencyContext);
   const [allHistoricData, setAllHistoricData] = useState({});
   const [specificHistoricData, setSpecificHistoricData] = useState([]);
   const [datatype, setDatatype] = useState("prices");

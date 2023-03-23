@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import axios from "axios";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import favoritesContext from "../../contexts/favorites-context";
+import currencyContext from "../../contexts/currency-context";
 import Header from "../../components/others/header/header";
 import TopSection from "../../components/others/top-section/top-section";
 import MarketInfo from "../../components/coin/market-info/market-info";
@@ -15,11 +14,6 @@ import CoinDescription from "../../components/coin/coin-description/coin-descrip
 import ProjectLinks from "../../components/coin/project-links/project-links";
 import Footer from "../../components/others/footer/footer";
 import "./coin-page.css";
-import currencyContext from "../../contexts/currency-context";
-
-// import axiosRetry from "axios-retry";
-// // axiosRetry(axios, { retries: 3 });
-// axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
 
 //############################################################################
 
@@ -31,11 +25,6 @@ export default function CoinPage() {
   const [marketData, setMarketData] = useState({});
   const [currencyRates, setCurrencyRates] = useState({});
   const [priceChangesData, setPriceChangesData] = useState({});
-  const [totalMarketCap, setTotalMarketCap] = useState(0);
-
-  // const [currencyName, setCurrencyName] = useState("usd");
-  // const [currencySymbol, setCurrencySymbol] = useState("$");
-  // const [favoritesChanged, setFavoritesChanged] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -49,13 +38,26 @@ export default function CoinPage() {
   //############################################################################
 
   // Initialize all data that will be retrieved from localStorage
+  /* TODO: LESSON LEARNT
+   ===> https://legacy.reactjs.org/docs/hooks-effect.html
+   "The Effect Hook lets you perform side effects in function components."
+   "You tell React that your component needs to do something AFTER render.
+   React will remember the function you passed (we’ll refer to it as our
+   “EFFECT”), and call it later AFTER performing the DOM updates."
+   ===> https://codedamn.com/news/reactjs/useeffect-dependency
+   If deps array is [] => callback function is only called once the page renders
+   If deps array is [a, b] => Callback function gets triggered on 2
+   occasions. First, WHEN PAGE RENDERS and whenever a or b is updated.
+   IMPORTANT - THIS EXPLAINS WHY USEEFFECT() WOULD RUN MULTIPLE TIMES
+   BECAUSE IT HAD TO ACCOUNT FOR THE INITIAL PAGE RENDERING AS WELL!
+   */
   useEffect(() => {
-    // Reset scrollbar to top
+    // 1) Reset scrollbar to top
     window.scrollTo(0, 0);
-    // Favorites data
+    // 2) Favorites data
     localStorage.getItem("favorites") ||
       localStorage.setItem("favorites", "[]");
-    // Currency data
+    // 3) Currency data
     if (localStorage.getItem("currency")) {
       setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);
       setCurrencySymbol(JSON.parse(localStorage.getItem("currency"))["symbol"]);
@@ -70,20 +72,26 @@ export default function CoinPage() {
 
   // Fetch all relevant data for specific coin
   useEffect(() => {
+    // try {
     fetchMarketData();
     fetchCoinData();
     fetchPriceChanges();
-    // fetchTotalMarketCap();
+    // setLoading(false);
+    // } catch (err) {
+    //   setLoading(true);
+    // }
   }, []);
 
   //############################################################################
 
+  // Fetch coin specific market data
   function fetchMarketData() {
     const marketDataObject = loaderCoinData.data.market_data;
     setMarketData(marketDataObject);
     setCurrencyRates(marketDataObject.current_price);
   }
 
+  // Fetch coin specific NON market data
   function fetchCoinData() {
     const coinDataObject = {};
     coinDataObject.id = loaderCoinData.data.id;
@@ -124,6 +132,7 @@ export default function CoinPage() {
     setCoinData(coinDataObject);
   }
 
+  // Fetch coin specific price changes over time
   function fetchPriceChanges() {
     const marketDataObject = loaderCoinData.data.market_data;
     const priceChangesObject = {};
@@ -142,22 +151,7 @@ export default function CoinPage() {
     setPriceChangesData(priceChangesObject);
   }
 
-  // async function fetchTotalMarketCap() {
-  //   try {
-  //     const response = await axios.get(
-  //       "https://api.coingecko.com/api/v3/global"
-  //     );
-  //     // await new Promise((resolve) => setTimeout(resolve, 5000));
-  //     setTotalMarketCap(response.data.data.total_market_cap[currencyName]);
-  //     setLoading(false);
-  //   } catch (err) {
-  //     // console.error(err);
-  //     console.log("TESTING");
-  //     fetchTotalMarketCap();
-  //     setLoading(true);
-  //   }
-  // }
-
+  // Return URL for specific community in a specific social network
   function addCommunityLink(communityLinks, siteName, domain, identifier) {
     if (identifier) communityLinks[siteName] = domain + identifier;
     return communityLinks;
@@ -166,7 +160,6 @@ export default function CoinPage() {
   //############################################################################
 
   return (
-    // <favoritesContext.Provider value={[favoritesChanged, setFavoritesChanged]}>
     <div className="coin-page-container">
       <Header />
       <div className="content-wrap">
@@ -184,40 +177,32 @@ export default function CoinPage() {
           }
         />
         <div className="coin-page-content-wrap">
-          {loading ? (
-            <CircularProgress
-              style={{ color: "#b84dc3" }}
-              size={100}
-              thickness={1}
-            />
-          ) : (
-            <MarketInfo
-              coinData={coinData}
-              marketData={marketData}
-              totalMarketCap={totalMarketCap}
-              currencyName={currencyName}
-              currencySymbol={currencySymbol}
-            ></MarketInfo>
-          )}
+          {/*{loading ? (*/}
+          {/*  <CircularProgress*/}
+          {/*    style={{ color: "#b84dc3" }}*/}
+          {/*    size={100}*/}
+          {/*    thickness={1}*/}
+          {/*  />*/}
+          {/*) : (*/}
+          <MarketInfo coinData={coinData} marketData={marketData}></MarketInfo>
+          {/*)}*/}
+          {/*{coinData && marketData ? (*/}
+          {/*    <MarketInfo coinData={coinData} marketData={marketData} />*/}
+          {/*) : null}*/}
           <CoinBalance
             coinSymbol={coinData.symbol}
             currencyRate={currencyRates[currencyName]}
             price_change_24h={priceChangesData.price_change_24h}
-            currencyName={currencyName}
-            currencySymbol={currencySymbol}
             scrollRef={scrollRef}
           ></CoinBalance>
           <CoinCharts
             coinID={coinData.id}
             coinName={coinData.name}
             priceChangesData={priceChangesData}
-            currencyName={currencyName}
           />
           <Swapper
             coinSymbol={coinData.symbol}
             currencyRates={currencyRates}
-            currencyName={currencyName}
-            currencySymbol={currencySymbol}
             ref={scrollRef}
           ></Swapper>
           <CoinDescription coinData={coinData}></CoinDescription>
@@ -226,6 +211,5 @@ export default function CoinPage() {
         <Footer />
       </div>
     </div>
-    // </favoritesContext.Provider>
   );
 }

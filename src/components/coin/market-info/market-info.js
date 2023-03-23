@@ -1,41 +1,21 @@
-import React, { useState } from "react";
+/*
+TODO:
+Right now, any value that is null, undefined or even 0 will be hidden
+or shown as "-". Should that still be the case for 0??
+*/
+import React, { useContext } from "react";
 
+import currencyContext from "../../../contexts/currency-context";
+import marketCapContext from "../../../contexts/market-cap-context";
 import Favorite from "../../others/favorite";
 import PriceProgressBar from "../price-progress-bar/price-progress-bar";
 import "./market-info.css";
 
 //############################################################################
 
-export default function MarketInfo({
-  coinData,
-  marketData,
-  totalMarketCap,
-  currencyName,
-  currencySymbol,
-}) {
-  // Show if coin is in localStorage favorites array or not (boolean value)
-  // TODO: LESSON LEARNT (UPDATE - IGNORED BECAUSE BUGS OUT FAVORITES SYSTEM)
-  // https://stackoverflow.com/questions/55621212/is-it-possible-to-react-usestate-in-react
-  // https://legacy.reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  // TODO: LESSON LEARNT
-  // Had to add ?. because otherwise it was not null safe!
-  const [favorite, setFavorite] = useState(
-    // FIXME
-    // console.log(
-    //   "dsada",
-    //   coinData,
-    //   marketData,
-    //   totalMarketCap,
-    //   currencyName,
-    //   currencySymbol
-    // );
-    // FIXME
-    // console.log(
-    //   "gfg",
-    //   JSON.parse(localStorage.getItem("favorites"))?.includes(coinData.id)
-    // );
-    JSON.parse(localStorage.getItem("favorites"))?.includes(coinData.id)
-  );
+export default function MarketInfo({ coinData, marketData }) {
+  const [currencyName, , currencySymbol] = useContext(currencyContext);
+  const [totalMarketCap] = useContext(marketCapContext);
 
   //############################################################################
 
@@ -80,10 +60,11 @@ export default function MarketInfo({
       : "-";
   }
 
-  // Have values >= 0 be in green displays, values < 0 in red displays
+  // Have values > 0 be in green displays, values < 0 in red displays
   function findColor(data) {
     const value = marketData[data] && marketData[data][currencyName];
-    return value >= 0 ? "green-box" : "red-box";
+    if (!value) return "hide-display";
+    return value > 0 ? "green-box" : "red-box";
   }
 
   //############################################################################
@@ -99,11 +80,7 @@ export default function MarketInfo({
         <div className="market-info-name-container">
           <p className="market-info-name">{coinData.name}</p>
           <p className="market-info-symbol">({coinData.symbol})</p>
-          <Favorite
-            favorite={favorite}
-            setFavorite={setFavorite}
-            coinID={coinData.id}
-          ></Favorite>
+          {coinData.id && <Favorite coinID={coinData.id}></Favorite>}
         </div>
         <div className="market-info-rank-container">
           <p className="market-info-rank small-box">
@@ -122,11 +99,9 @@ export default function MarketInfo({
             {displayPercentage("price_change_percentage_24h_in_currency")}
           </p>
         </div>
-        <PriceProgressBar
-          marketData={marketData}
-          currencyName={currencyName}
-          currencySymbol={currencySymbol}
-        ></PriceProgressBar>
+        {marketData && (
+          <PriceProgressBar marketData={marketData}></PriceProgressBar>
+        )}
       </div>
 
       <div className="market-info-grid">

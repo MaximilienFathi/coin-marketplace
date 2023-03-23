@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import currencyContext from "../contexts/currency-context";
 import favoritesContext from "../contexts/favorites-context";
@@ -11,12 +11,12 @@ import ScrollButton from "../components/others/scroll-button";
 import "./page.css";
 
 function FavoritesPage() {
+  const [favoritesChanged] = useContext(favoritesContext);
   const [data, setData] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
-  const [favoritesChanged, setFavoritesChanged] = useState(false);
 
   const pageSize = 100;
   const findPageCount = (coinsCount) =>
@@ -94,38 +94,34 @@ function FavoritesPage() {
     <currencyContext.Provider
       value={[currencyName, setCurrencyName, currencySymbol, setCurrencySymbol]}
     >
-      <favoritesContext.Provider
-        value={[favoritesChanged, setFavoritesChanged]}
-      >
-        <div className="page-container">
-          <div className="content-wrap">
-            <Header />
-            <TopSection
-              heading={
-                <h1 className="top-section-heading">
-                  Your <span>Favorite</span> Crypto <span>Currencies</span> All
-                  In <span>One</span> Place
-                </h1>
-              }
-              description={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit." +
-                " Aliquid aspernatur blanditiis dignissimos necessitatibus quae ratione sapiente amet assumenda corporis culpa."
-              }
-            />
-            <GlobalStats />
-            <TableBox
-              data={data}
-              setData={setData}
-              page={page}
-              setPage={setPage}
-              pageCount={pageCount}
-              setPageCount={setPageCount}
-            ></TableBox>
-          </div>
-          <Footer />
-          <ScrollButton></ScrollButton>
+      <div className="page-container">
+        <div className="content-wrap">
+          <Header />
+          <TopSection
+            heading={
+              <h1 className="top-section-heading">
+                Your <span>Favorite</span> Crypto <span>Currencies</span> All In{" "}
+                <span>One</span> Place
+              </h1>
+            }
+            description={
+              "Lorem ipsum dolor sit amet, consectetur adipisicing elit." +
+              " Aliquid aspernatur blanditiis dignissimos necessitatibus quae ratione sapiente amet assumenda corporis culpa."
+            }
+          />
+          <GlobalStats />
+          <TableBox
+            data={data}
+            setData={setData}
+            page={page}
+            setPage={setPage}
+            pageCount={pageCount}
+            setPageCount={setPageCount}
+          ></TableBox>
         </div>
-      </favoritesContext.Provider>
+        <Footer />
+        <ScrollButton></ScrollButton>
+      </div>
     </currencyContext.Provider>
   );
 }
