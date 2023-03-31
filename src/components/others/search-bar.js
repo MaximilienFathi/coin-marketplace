@@ -4,7 +4,8 @@ import Box from "@mui/material/Box";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 
-//========================================================
+//############################################################################
+
 // CUSTOM STYLES
 const StyledBox = styled(Box)({ minWidth: "30rem" });
 
@@ -39,9 +40,10 @@ const InputPropsStyles = {
   fontWeight: 600,
   color: "inherit", // rgba(255, 255, 255, 0.8)
 };
-//========================================================
 
-function BasicTextFields({ handleChange }) {
+//############################################################################
+
+export default function BasicTextFields({ handleChange }) {
   return (
     <StyledBox>
       <StyledTextField
@@ -62,5 +64,3 @@ function BasicTextFields({ handleChange }) {
     </StyledBox>
   );
 }
-
-export default BasicTextFields;

@@ -60,7 +60,6 @@ export default function Favorite({ coinID }) {
   function handleClick() {
     favorite ? removeFavorite(coinID) : addFavorite(coinID);
     setFavorite(!favorite);
-    console.log("favorite:", favorite);
     /* TODO: LESSON LEARNT
      "State updates using this.setState or useState do not immediately
      mutate the state but create a pending state transition.

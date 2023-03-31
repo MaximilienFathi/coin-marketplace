@@ -6,7 +6,7 @@ or shown as "-". Should that still be the case for 0??
 import React, { useContext } from "react";
 
 import currencyContext from "../../../contexts/currency-context";
-import marketCapContext from "../../../contexts/market-cap-context";
+import globalMarketDataContext from "../../../contexts/global-market-data-context";
 import Favorite from "../../others/favorite";
 import PriceProgressBar from "../price-progress-bar/price-progress-bar";
 import "./market-info.css";
@@ -15,7 +15,7 @@ import "./market-info.css";
 
 export default function MarketInfo({ coinData, marketData }) {
   const [currencyName, , currencySymbol] = useContext(currencyContext);
-  const [totalMarketCap] = useContext(marketCapContext);
+  const [globalMarketData] = useContext(globalMarketDataContext);
 
   //############################################################################
 
@@ -49,9 +49,11 @@ export default function MarketInfo({ coinData, marketData }) {
 
   // Return a percentage showing how dominant a currency is in the market
   function findMarketDominance() {
-    const marketCap =
-      marketData["market_cap"] && marketData["market_cap"][currencyName];
-    const marketDominance = (marketCap / totalMarketCap) * 100;
+    const coinMarketCap = marketData?.["market_cap"]?.[currencyName];
+    const globalMarketCap =
+      globalMarketData?.["total_market_cap"]?.[currencyName];
+    const marketDominance = (coinMarketCap / globalMarketCap) * 100;
+    // console.log(coinMarketCap, globalMarketCap, marketDominance);
     return marketDominance
       ? `${marketDominance.toLocaleString("en-US", {
           minimumFractionDigits: 2,

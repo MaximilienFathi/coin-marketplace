@@ -9,7 +9,7 @@
   /*height: 60px; !* Height of the footer *!*/
 
   /*margin-top: 2.4rem;*/
-  height: 4rem;
+  height: fit-content;
   padding: 2.4rem 10rem;
 }
 

@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
+
 import currencyContext from "../../contexts/currency-context";
 import TrustScore from "../others/trust-score/trust-score";
 import "../coins-table/table-data.css";
 
-function TableData({
+//############################################################################
+
+export default function TableData({
   trust_score_rank,
   image,
   name,
@@ -15,7 +18,8 @@ function TableData({
 }) {
   const [, , currencySymbol] = useContext(currencyContext);
 
-  const transformData = function (data, fractionDigits = 2) {
+  // Display data with specific number of decimal places based on its length.
+  const transformData = function (data, fractionDigits) {
     const num = data.toString().split(".")[0];
 
     if (num.length >= 6) fractionDigits = 0;
@@ -25,6 +29,8 @@ function TableData({
       maximumFractionDigits: fractionDigits,
     });
   };
+
+  //############################################################################
 
   return (
     <tr className="exchanges-table-row">
@@ -42,18 +48,16 @@ function TableData({
       <TrustScore trust_score={trust_score}></TrustScore>
       <td className="exchange-volume-normalized">
         {currencySymbol}
-        {transformData(trade_volume_24h_normalized)}
+        {transformData(trade_volume_24h_normalized, 2)}
       </td>
       <td className="exchange-volume">
         {currencySymbol}
-        {transformData(trade_volume_24h)}
+        {transformData(trade_volume_24h, 2)}
       </td>
       <td className="exchange-year">
-        {year_established < Infinity ? year_established : "N/A"}
+        {year_established < Infinity ? year_established : "-"}
       </td>
-      <td className="exchange-country">{country !== "~" ? country : "N/A"}</td>
+      <td className="exchange-country">{country !== "~" ? country : "-"}</td>
     </tr>
   );
 }
-
-export default TableData;

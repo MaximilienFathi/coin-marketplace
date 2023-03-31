@@ -16,7 +16,7 @@ function Hero() {
         </p>
         <form className="hero-form" action="src/components/home/hero/hero#">
           <input
-            id="email"
+            id="hero-email"
             name="email"
             type="email"
             placeholder="Your email address"

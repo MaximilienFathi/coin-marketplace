@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
-import currencyContext from "../../../contexts/currency-context";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
 import SavingsIcon from "@mui/icons-material/Savings";
+
+import currencyContext from "../../../contexts/currency-context";
 import "./statistic-card.css";
 
-//========================================================
+//############################################################################
+
 // CUSTOM STYLES
 const IconStyles = {
   position: "absolute",
@@ -17,21 +19,25 @@ const IconStyles = {
   height: "auto",
   zIndex: 1,
 };
-//========================================================
 
-function StatisticCard({ label, value, type }) {
+//############################################################################
+
+export default function StatisticCard({ label, value, type }) {
   const [, , currencySymbol] = useContext(currencyContext);
 
-  const transformData = function (data, fractionDigits, type) {
+  // Display percentage data with 2 decimal places and the rest with none
+  const transformData = function (data, type) {
+    let fractionDigits = 0;
     if (type === "percentage") {
       fractionDigits = 2;
     }
-    return data.toLocaleString("en-US", {
+    return data?.toLocaleString("en-US", {
       minimumFractionDigits: fractionDigits,
       maximumFractionDigits: fractionDigits,
     });
   };
 
+  // Assign specific icon to card depending on represented data
   const getIcon = function (label) {
     switch (label) {
       case "Market Capitalization":
@@ -49,12 +55,14 @@ function StatisticCard({ label, value, type }) {
     }
   };
 
+  //############################################################################
+
   return (
     <div className="hero-stat-container">
       <div className="hero-stat-data">
         <p>
           {type === "monetary" ? currencySymbol : ""}
-          {transformData(value, 0, type)}
+          {transformData(value, type)}
           {type === "percentage" ? "%" : ""}
         </p>
       </div>
@@ -63,5 +71,3 @@ function StatisticCard({ label, value, type }) {
     </div>
   );
 }
-
-export default StatisticCard;

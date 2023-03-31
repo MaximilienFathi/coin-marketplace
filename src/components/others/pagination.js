@@ -1,9 +1,13 @@
-import * as React from "react";
+import React, { useContext } from "react";
+import { styled } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material";
 
-//========================================================
+import currentPageContext from "../../contexts/current-page-context";
+import pageCountContext from "../../contexts/page-count-context";
+
+//############################################################################
+
 // CUSTOM STYLES
 const StyledPagination = styled(Pagination)({
   "& .MuiPagination-ul": {
@@ -46,13 +50,20 @@ const StyledPagination = styled(Pagination)({
   },
 });
 
-//========================================================
+//############################################################################
 
-function PaginationRounded({ setPage, pageCount }) {
+export default function PaginationRounded() {
+  const [, setCurrentPage] = useContext(currentPageContext);
+  const [pageCount] = useContext(pageCountContext);
+
+  // Update currentPage state value upon changing page.
   const handleChange = (event, value) => {
-    setPage(value);
+    setCurrentPage(value);
     window.scroll(0, 0);
   };
+
+  //############################################################################
+
   return (
     <Stack spacing={2}>
       <StyledPagination
@@ -64,5 +75,3 @@ function PaginationRounded({ setPage, pageCount }) {
     </Stack>
   );
 }
-
-export default PaginationRounded;

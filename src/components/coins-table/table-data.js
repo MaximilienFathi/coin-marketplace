@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 import currencyContext from "../../contexts/currency-context";
 import Favorite from "../others/favorite";
-import LineChart from "../others/line-chart";
 import "./table-data.css";
 
-function TableData({
+//############################################################################
+
+export default function TableData({
   id,
   market_cap_rank,
   image,
@@ -19,22 +20,7 @@ function TableData({
   total_volume,
   market_cap,
 }) {
-  const [favorite, setFavorite] = useState(
-    JSON.parse(localStorage.getItem("favorites")).includes(id)
-  );
   const [, , currencySymbol] = useContext(currencyContext);
-  // const [historicData, setHistoricData] = useState([]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=7`
-  //     )
-  //     .then((res) => {
-  //       setHistoricData(res.data.prices);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [id]); // not sure if I must include id
 
   const price_change_1h_color =
     price_change_percentage_1h_in_currency >= 0 ? "green" : "red";
@@ -43,8 +29,8 @@ function TableData({
   const price_change_7d_color =
     price_change_percentage_7d_in_currency >= 0 ? "green" : "red";
 
-  const transformData = function (data, fractionDigits, type) {
-    // if (type) console.log(type, data);
+  // Display data with specific number of decimal places based on its type.
+  function transformData(data, fractionDigits, type) {
     const num1 = data.toString().split(".")[0];
     const num2 = data.toString().split(".")[1] || 0;
 
@@ -64,16 +50,14 @@ function TableData({
       minimumFractionDigits: fractionDigits,
       maximumFractionDigits: fractionDigits,
     });
-  };
+  }
+
+  //############################################################################
 
   return (
     <tr className="coins-table-row">
       <td>
-        <Favorite
-          favorite={favorite}
-          setFavorite={setFavorite}
-          id={id}
-        ></Favorite>
+        <Favorite coinID={id}></Favorite>
       </td>
       <td className="coin-rank">
         {market_cap_rank < Infinity ? market_cap_rank : "-"}
@@ -109,9 +93,6 @@ function TableData({
         {currencySymbol}
         {transformData(market_cap, 1, "market_cap")}
       </td>
-      {/*<LineChart historicData={historicData}></LineChart>*/}
     </tr>
   );
 }
-
-export default TableData;

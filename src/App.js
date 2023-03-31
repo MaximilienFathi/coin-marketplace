@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import axios from "axios";
 
+import coinsListContext from "./contexts/coins-list-context";
 import currencyContext from "./contexts/currency-context";
-import marketCapContext from "./contexts/market-cap-context";
+import exchangesListContext from "./contexts/exchanges-list-context";
+import globalMarketDataContext from "./contexts/global-market-data-context";
 import HomePage from "./pages/home-page";
 import CoinsPage from "./pages/coins-page";
 import CoinPage from "./pages/coin-page/coin-page";
@@ -21,13 +23,60 @@ import "./App.css";
 export default function App() {
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
-  const [totalMarketCap, setTotalMarketCap] = useState(0);
+  const [globalMarketData, setGlobalMarketData] = useState(null);
+  const [coinsList, setCoinsList] = useState(null);
+  const [exchangesList, setExchangesList] = useState(null);
   const [coinData, setCoinData] = useState(null);
   // const [loading, setLoading] = useState(false);
 
-  // API calls to be made when opening website to collect global data
-  // These were moved from other files (e.g. coin-page.js) to this one to
-  // reduce number of API calls made and prevent risks of error 429.
+  //############################################################################
+
+  /* TODO: LESSON LEARNT
+ ===> https://legacy.reactjs.org/docs/hooks-effect.html
+ "The Effect Hook lets you perform side effects in function components."
+ "You tell React that your component needs to do something AFTER render.
+ React will remember the function you passed (we’ll refer to it as our
+ “EFFECT”), and call it later AFTER performing the DOM updates."
+ ===> https://codedamn.com/news/reactjs/useeffect-dependency
+ If deps array is [] => callback function is only called once the page renders
+ If deps array is [a, b] => Callback function gets triggered on 2
+ occasions. First, WHEN PAGE RENDERS and whenever a or b is updated.
+ IMPORTANT - THIS EXPLAINS WHY USEEFFECT() WOULD RUN MULTIPLE TIMES
+ BECAUSE IT HAD TO ACCOUNT FOR THE INITIAL PAGE RENDERING AS WELL!
+ */
+
+  // Reset scrollbar to top when switching to another page.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Initialize favorites array in localStorage if it is absent.
+  useEffect(() => {
+    localStorage.getItem("favorites") ||
+      localStorage.setItem("favorites", "[]");
+  }, []);
+
+  // Initialize fiat currency name and symbol in localStorage if it is absent.
+  // Have the content of the localStorage be stored in states that will then
+  // be globally available via context providers so that we do not have to
+  // fetch that data directly from localStorage everytime we need it.
+  useEffect(() => {
+    if (localStorage.getItem("currency")) {
+      setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);
+      setCurrencySymbol(JSON.parse(localStorage.getItem("currency"))["symbol"]);
+    }
+    if (!localStorage.getItem("currency")) {
+      localStorage.setItem(
+        "currency",
+        JSON.stringify({ name: currencyName, symbol: currencySymbol })
+      );
+    }
+  }, [currencyName]); // FIXME: check if you need [] or [currencyName]
+
+  // Make API call to collect global data only if we don't have that data
+  // already stored in localStorage (i.e. when initially loading website).
+  // This was moved from coin-page.js to this one to reduce number of API
+  // calls made and prevent risks of error 429.
   // TODO: LESSON LEARNT
   /*
     "There's simply just no way of knowing from inside the app how exactly the
@@ -38,23 +87,37 @@ export default function App() {
     from being made.
   */
   useEffect(() => {
-    const storedTotalMarketCap = localStorage.getItem("totalMarketCap");
-    storedTotalMarketCap != null
-      ? setTotalMarketCap(Number(storedTotalMarketCap))
-      : fetchTotalMarketCap();
+    const data = JSON.parse(localStorage.getItem("globalMarketData"));
+    data != null ? setGlobalMarketData(data) : fetchGlobalMarketData();
   }, []);
 
-  // Fetch total market capitalization in chosen fiat currency
-  async function fetchTotalMarketCap() {
+  // Retrieve full list of coins (necessary for search mechanism)
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("coinsList"));
+    data != null ? setCoinsList(data) : fetchCoinsList();
+  }, []);
+
+  // Retrieve full list of exchanges (necessary for search mechanism)
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("exchangesList"));
+    data != null ? setExchangesList(data) : fetchExchangesList();
+  }, []);
+
+  //############################################################################
+
+  // Fetch global market data and update state and localStorage accordingly.
+  async function fetchGlobalMarketData() {
     try {
       const response = await axios.get(
         "https://api.coingecko.com/api/v3/global"
       );
       // await new Promise((resolve) => setTimeout(resolve, 5000));
-      const fetchedTotalMarketCap =
-        response.data.data.total_market_cap[currencyName];
-      setTotalMarketCap(fetchedTotalMarketCap);
-      localStorage.setItem("totalMarketCap", fetchedTotalMarketCap);
+      const fetchedGlobalMarketData = response.data.data;
+      setGlobalMarketData(fetchedGlobalMarketData);
+      localStorage.setItem(
+        "globalMarketData",
+        JSON.stringify(fetchedGlobalMarketData)
+      );
       // setLoading(false);
     } catch (err) {
       // console.error(err);
@@ -64,7 +127,38 @@ export default function App() {
     }
   }
 
-  // Fetch coin data first before coin page is displayed
+  // Fetch full list of coins available in the market.
+  async function fetchCoinsList() {
+    try {
+      const response = await axios.get(
+        "https://api.coingecko.com/api/v3/coins/list"
+      );
+      const fetchedCoinsList = response.data;
+      setCoinsList(fetchedCoinsList);
+      localStorage.setItem("coinsList", JSON.stringify(fetchedCoinsList));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // Fetch full list of coin exchanges available.
+  async function fetchExchangesList() {
+    try {
+      const response = await axios.get(
+        "https://api.coingecko.com/api/v3/exchanges/list"
+      );
+      const fetchedExchangesList = response.data;
+      setExchangesList(fetchedExchangesList);
+      localStorage.setItem(
+        "exchangesList",
+        JSON.stringify(fetchedExchangesList)
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // Fetch coin data first before coin page is displayed.
   async function runCoinLoader({ params }) {
     // FIXME:
     // 1 TOO MANY CALL WEIRDLY WHEN LOADING CALL PAGE
@@ -88,7 +182,7 @@ export default function App() {
     }
   }
 
-  // Control which specific page component to display depending on URL
+  // Control which specific page component to display depending on URL.
   const router = createBrowserRouter([
     {
       path: `${process.env.PUBLIC_URL}/`,
@@ -123,18 +217,24 @@ export default function App() {
     },
   ]);
 
-  // The strategy here is to store specific variables in localStorage when the
-  // website loads for the first time.
-  // Then, have them represented as contexts that can be accessed anywhere
-  // in the project.
-  // This is better than always fetching from localStorage.
+  //############################################################################
+
   return (
-    <currencyContext.Provider
-      value={[currencyName, setCurrencyName, currencySymbol, setCurrencySymbol]}
-    >
-      <marketCapContext.Provider value={[totalMarketCap, setTotalMarketCap]}>
-        <RouterProvider router={router} />
-      </marketCapContext.Provider>
-    </currencyContext.Provider>
+    <coinsListContext.Provider value={[coinsList]}>
+      <exchangesListContext.Provider value={[exchangesList]}>
+        <currencyContext.Provider
+          value={[
+            currencyName,
+            setCurrencyName,
+            currencySymbol,
+            setCurrencySymbol,
+          ]}
+        >
+          <globalMarketDataContext.Provider value={[globalMarketData]}>
+            <RouterProvider router={router} />
+          </globalMarketDataContext.Provider>
+        </currencyContext.Provider>
+      </exchangesListContext.Provider>
+    </coinsListContext.Provider>
   );
 }

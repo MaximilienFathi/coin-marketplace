@@ -1,34 +1,23 @@
 import React, { useState } from "react";
-import SearchBox from "../others/search-box/search-box";
-import TableDisplay from "./table-display";
-import Pagination from "../others/pagination";
-import "../coins-table/table-box.css"; // change location of that css file?
 
-function TableBox({
-  data,
-  setData,
-  fullDataList,
-  page,
-  setPage,
-  pageCount,
-  setPageCount,
-}) {
-  const [search, setSearch] = useState("");
+import TableSettings from "../others/table-settings/table-settings";
+import TableRows from "./table-rows";
+import Pagination from "../others/pagination";
+import "../coins-table/table-box.css";
+
+//############################################################################
+
+export default function TableBox() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  //############################################################################
 
   return (
     <div className="table-container">
-      <SearchBox setSearch={setSearch}></SearchBox>
-      <TableDisplay
-        search={search}
-        data={data}
-        setData={setData}
-        fullDataList={fullDataList}
-        page={page}
-        setPageCount={setPageCount}
-      ></TableDisplay>
-      <Pagination setPage={setPage} pageCount={pageCount}></Pagination>
+      <TableSettings setSearchQuery={setSearchQuery}></TableSettings>
+      <TableRows searchQuery={searchQuery}></TableRows>
+      <Pagination></Pagination>
+      {/* removed setPage={setPage} pageCount={pageCount}*/}
     </div>
   );
 }
-
-export default TableBox;

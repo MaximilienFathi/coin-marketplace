@@ -2,31 +2,38 @@ import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+
 import "./table-header.css";
 
+//############################################################################
+
+// CUSTOM STYLES
 const StyledArrowDropDrownIcon = styled(ArrowDropDownIcon)({
   color: "#b8b8b8",
 });
+
 const StyledArrowDropUpIcon = styled(ArrowDropUpIcon)({ color: "#b8b8b8" });
 
-function TableHeader({
-  data,
-  setData,
+//############################################################################
+
+export default function TableHeader({
   headerKey,
   headerName,
+  data,
+  setData,
   sortedData,
   setSortedData,
 }) {
   const [ascendingSort, setAscendingSort] = useState(true);
 
-  // Make sure to reset position of THIS sort arrow if another header is clicked
+  // Reset position of THIS sort arrow icon if another header is clicked.
   // This will run everytime sortedData changes.
   useEffect(() => {
     sortedData === headerKey ? setAscendingSort(false) : setAscendingSort(true);
   }, [sortedData]);
 
-  // Not very pretty but best solution I could find
-  const compareBy = (key) => {
+  // Compare values to each other to enable sorting mechanism
+  function compareBy(key) {
     if (!ascendingSort && key !== "name")
       return function (a, b) {
         // console.log(a[key], b[key], a[key] > b[key]);
@@ -57,14 +64,17 @@ function TableHeader({
         return 0;
       };
     }
-  };
+  }
 
-  const sortBy = (key) => {
+  // Sort data in ascending or descending order
+  function sortBy(key) {
     const arrayCopy = [...data];
     arrayCopy.sort(compareBy(key));
     setData(arrayCopy);
     setAscendingSort(!ascendingSort);
-  };
+  }
+
+  //############################################################################
 
   return (
     <th>
@@ -92,5 +102,3 @@ function TableHeader({
     </th>
   );
 }
-
-export default TableHeader;

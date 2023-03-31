@@ -56,7 +56,7 @@ function ScrollButton() {
   };
 
   return (
-    <StyledIconButton onClick={scrollToTop}>
+    <StyledIconButton onClick={scrollToTop} title={"Back To Top"}>
       {/*BUG: Fade only works on arrow not IconButton*/}
       {/*<Fade in={true} timeout={1000}>*/}
       <StyledKeyboardArrowUpIcon />

@@ -18,8 +18,7 @@ import "./coin-page.css";
 //############################################################################
 
 export default function CoinPage() {
-  const [currencyName, setCurrencyName, currencySymbol, setCurrencySymbol] =
-    useContext(currencyContext);
+  const [currencyName] = useContext(currencyContext);
 
   const [coinData, setCoinData] = useState({});
   const [marketData, setMarketData] = useState({});
@@ -36,39 +35,6 @@ export default function CoinPage() {
   const loaderCoinData = useLoaderData();
 
   //############################################################################
-
-  // Initialize all data that will be retrieved from localStorage
-  /* TODO: LESSON LEARNT
-   ===> https://legacy.reactjs.org/docs/hooks-effect.html
-   "The Effect Hook lets you perform side effects in function components."
-   "You tell React that your component needs to do something AFTER render.
-   React will remember the function you passed (we’ll refer to it as our
-   “EFFECT”), and call it later AFTER performing the DOM updates."
-   ===> https://codedamn.com/news/reactjs/useeffect-dependency
-   If deps array is [] => callback function is only called once the page renders
-   If deps array is [a, b] => Callback function gets triggered on 2
-   occasions. First, WHEN PAGE RENDERS and whenever a or b is updated.
-   IMPORTANT - THIS EXPLAINS WHY USEEFFECT() WOULD RUN MULTIPLE TIMES
-   BECAUSE IT HAD TO ACCOUNT FOR THE INITIAL PAGE RENDERING AS WELL!
-   */
-  useEffect(() => {
-    // 1) Reset scrollbar to top
-    window.scrollTo(0, 0);
-    // 2) Favorites data
-    localStorage.getItem("favorites") ||
-      localStorage.setItem("favorites", "[]");
-    // 3) Currency data
-    if (localStorage.getItem("currency")) {
-      setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);
-      setCurrencySymbol(JSON.parse(localStorage.getItem("currency"))["symbol"]);
-    }
-    if (!localStorage.getItem("currency")) {
-      localStorage.setItem(
-        "currency",
-        JSON.stringify({ name: currencyName, symbol: currencySymbol })
-      );
-    }
-  }, [currencyName]);
 
   // Fetch all relevant data for specific coin
   useEffect(() => {

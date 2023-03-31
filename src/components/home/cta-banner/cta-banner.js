@@ -14,7 +14,7 @@ function CtaBanner() {
             action="src/components/home/hero/hero#"
           >
             <input
-              id="email"
+              id="cta-banner-email"
               name="email"
               type="email"
               placeholder="Your email address"
