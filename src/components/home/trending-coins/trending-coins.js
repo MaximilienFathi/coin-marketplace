@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 
+import currencyContext from "../../../contexts/currency-context";
 import CoinCard from "../coin-card/coin-card";
 import "./trending-coins.css";
 
@@ -12,48 +13,30 @@ import CircularProgress from "@mui/material/CircularProgress";
 //############################################################################
 
 export default function TrendingCoins() {
+  const [currencyName, setCurrencyName, currencySymbol, setCurrencySymbol] =
+    useContext(currencyContext);
+
   const [trendingData, setTrendingData] = useState([]);
-
-  const [currencyName, setCurrencyName] = useState("usd");
-  const [currencySymbol, setCurrencySymbol] = useState("$");
-
   const [loading, setLoading] = useState(true);
 
   //############################################################################
 
-  // Initialize all data that will be retrieved from localStorage
+  // Create fully updated data object for each trendy coin.
   useEffect(() => {
-    // Favorites data
-    localStorage.getItem("favorites") ||
-      localStorage.setItem("favorites", "[]");
-    // Currency data
-    if (localStorage.getItem("currency")) {
-      setCurrencyName(JSON.parse(localStorage.getItem("currency"))["name"]);
-      setCurrencySymbol(JSON.parse(localStorage.getItem("currency"))["symbol"]);
-    }
-    if (!localStorage.getItem("currency")) {
-      localStorage.setItem(
-        "currency",
-        JSON.stringify({ name: currencyName, symbol: currencySymbol })
-      );
-    }
-  }, [currencyName]);
-
-  // Create fully updated data object for each trendy coin
-  useEffect(() => {
-    fetchTrendingCoinData();
+    fetchTrendingCoinData().then(() =>
+      console.log("Trending coin data has been fetched!")
+    );
   }, []);
 
-  //############################################################################
-
-  // Get top 4 trending coins
+  // Fetch data for top 4 trending coins.
+  // (I ALREADY PUT THAT PART IN APP.JS)
   async function fetchTrendingCoinData() {
     try {
       const response = await axios.get(
         "https://api.coingecko.com/api/v3/search/trending"
       );
       // await new Promise((resolve) => setTimeout(resolve, 5000));
-      const fullData = response.data.coins;
+      const fullData = response.data["coins"];
       const slicedData = fullData.slice(0, 4);
       const updatedData = await updateAllCoinData(slicedData);
       setTrendingData(updatedData);

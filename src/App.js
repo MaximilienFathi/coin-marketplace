@@ -6,6 +6,7 @@ import coinsListContext from "./contexts/coins-list-context";
 import currencyContext from "./contexts/currency-context";
 import exchangesListContext from "./contexts/exchanges-list-context";
 import globalMarketDataContext from "./contexts/global-market-data-context";
+import trendingCoinsListContext from "./contexts/trending-coins-list-context";
 import HomePage from "./pages/home-page";
 import CoinsPage from "./pages/coins-page";
 import CoinPage from "./pages/coin-page/coin-page";
@@ -24,6 +25,7 @@ export default function App() {
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
   const [globalMarketData, setGlobalMarketData] = useState(null);
+  const [trendingCoinsList, setTrendingCoinsList] = useState(null);
   const [coinsList, setCoinsList] = useState(null);
   const [exchangesList, setExchangesList] = useState(null);
   const [coinData, setCoinData] = useState(null);
@@ -91,6 +93,12 @@ export default function App() {
     data != null ? setGlobalMarketData(data) : fetchGlobalMarketData();
   }, []);
 
+  // Retrieve full list of TRENDING coins (necessary for search mechanism)
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("trendingCoinsList"));
+    data != null ? setTrendingCoinsList(data) : fetchTrendingCoinsList();
+  }, []);
+
   // Retrieve full list of coins (necessary for search mechanism)
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("coinsList"));
@@ -127,6 +135,29 @@ export default function App() {
     }
   }
 
+  // Fetch list of trending coins (most searched in last 24 hours).
+  async function fetchTrendingCoinsList() {
+    try {
+      const response = await axios.get(
+        "https://api.coingecko.com/api/v3/search/trending"
+      );
+      const fetchedTrendingCoinsList = response.data["coins"].map((coin) => {
+        return coin["item"];
+      });
+      const updatedTrendingCoinsList = addTypePropertyToList(
+        fetchedTrendingCoinsList,
+        "Trending Coins 🔥"
+      );
+      setTrendingCoinsList(updatedTrendingCoinsList);
+      localStorage.setItem(
+        "trendingCoinsList",
+        JSON.stringify(updatedTrendingCoinsList)
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   // Fetch full list of coins available in the market.
   async function fetchCoinsList() {
     try {
@@ -134,8 +165,9 @@ export default function App() {
         "https://api.coingecko.com/api/v3/coins/list"
       );
       const fetchedCoinsList = response.data;
-      setCoinsList(fetchedCoinsList);
-      localStorage.setItem("coinsList", JSON.stringify(fetchedCoinsList));
+      const updatedCoinsList = addTypePropertyToList(fetchedCoinsList, "Coins");
+      setCoinsList(updatedCoinsList);
+      localStorage.setItem("coinsList", JSON.stringify(updatedCoinsList));
     } catch (err) {
       console.error(err);
     }
@@ -148,14 +180,26 @@ export default function App() {
         "https://api.coingecko.com/api/v3/exchanges/list"
       );
       const fetchedExchangesList = response.data;
-      setExchangesList(fetchedExchangesList);
+      const updatedExchangesList = addTypePropertyToList(
+        fetchedExchangesList,
+        "Exchanges"
+      );
+      setExchangesList(updatedExchangesList);
       localStorage.setItem(
         "exchangesList",
-        JSON.stringify(fetchedExchangesList)
+        JSON.stringify(updatedExchangesList)
       );
     } catch (err) {
       console.error(err);
     }
+  }
+
+  // Add property to objects inside list to clarify if they are coins or
+  // exchanges. Return new version of list.
+  function addTypePropertyToList(list, type) {
+    return list.map((listItem) => {
+      return { ...listItem, type: type };
+    });
   }
 
   // Fetch coin data first before coin page is displayed.
@@ -164,7 +208,6 @@ export default function App() {
     // 1 TOO MANY CALL WEIRDLY WHEN LOADING CALL PAGE
     try {
       if (coinData == null) {
-        console.log("it is null");
         const response = await axios.get(
           `https://api.coingecko.com/api/v3/coins/${params.coinID}`
         );
@@ -231,7 +274,9 @@ export default function App() {
           ]}
         >
           <globalMarketDataContext.Provider value={[globalMarketData]}>
-            <RouterProvider router={router} />
+            <trendingCoinsListContext.Provider value={[trendingCoinsList]}>
+              <RouterProvider router={router} />
+            </trendingCoinsListContext.Provider>
           </globalMarketDataContext.Provider>
         </currencyContext.Provider>
       </exchangesListContext.Provider>

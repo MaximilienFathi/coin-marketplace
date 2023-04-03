@@ -1,3 +1,8 @@
+/*
+TODO:
+1) REMOVE EMPTY PAGES - ALSO MANY RANKS SKIPPED
+*/
+
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 

@@ -51,7 +51,7 @@ const StyledMenuItem = styled(MenuItem)({
 
 //############################################################################
 
-export default function BasicSelect() {
+export default function Dropdown() {
   const [currencyName, setCurrencyName, , setCurrencySymbol] =
     useContext(currencyContext);
 
@@ -97,7 +97,7 @@ export default function BasicSelect() {
           MenuProps={{
             PaperProps: {
               sx: {
-                border: "1px solid #b84dc3",
+                border: "2px solid #b84dc3",
                 borderRadius: "11px",
                 "& .MuiMenu-list": {
                   backgroundColor: "#240c4c",

@@ -19,6 +19,7 @@ const StyledButton = styled(Button)({
 const ButtonStyles = {
   width: "80%",
   padding: "0.8rem",
+  fontFamily: "inherit",
   fontSize: "1.8rem",
   fontWeight: "500",
   borderRadius: "11px",

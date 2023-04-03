@@ -58,6 +58,8 @@ export default function FavoritesPage() {
   }
 
   // Make API calls to fetch data for all favorite coins.
+  // Preferred making API calls to storing coin objects from coin-page and
+  // then using them. This way, data in favorites page is always up-to-date.
   async function fetchFavoriteData(favorites) {
     return await Promise.all(
       favorites.map(async (coinID) => {

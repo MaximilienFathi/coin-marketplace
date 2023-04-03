@@ -39,16 +39,20 @@ const StyledTab = styled(Tab)({
 
 //############################################################################
 
-export default function TableSettings({ setSearchQuery }) {
+export default function TableSettings() {
   const tabs = [
     `${process.env.PUBLIC_URL}/coins`,
     `${process.env.PUBLIC_URL}/exchanges`,
     `${process.env.PUBLIC_URL}/favorites`,
   ];
 
-  const [tabIndex, setTabIndex] = useState(
-    tabs.indexOf(window.location.pathname)
-  );
+  // Prevent error if user adds a slash at the end of the URL.
+  const [tabIndex, setTabIndex] = useState(() => {
+    let pathname = window.location.pathname;
+    if (pathname.endsWith("/"))
+      pathname = pathname.substring(0, pathname.length - 1);
+    return tabs.indexOf(pathname);
+  });
 
   // Keep track of tab labels and related data.
   const labelsArray = [
@@ -57,10 +61,12 @@ export default function TableSettings({ setSearchQuery }) {
     { label: "FAVORITES", component: Link, to: tabs.at(2) },
   ];
 
-  // Update searchQuery and tabIndex states upon changing table settings.
-  function handleChange(event) {
-    setSearchQuery(event.target.value);
-    setTabIndex(tabs.indexOf(window.location.pathname));
+  // Update tabIndex state upon clicking on another table settings tab.
+  function handleChange() {
+    let pathname = window.location.pathname;
+    if (pathname.endsWith("/"))
+      pathname = pathname.substring(0, pathname.length - 1);
+    setTabIndex(tabs.indexOf(pathname));
   }
 
   //############################################################################
@@ -73,7 +79,7 @@ export default function TableSettings({ setSearchQuery }) {
           TabIndicatorProps={{
             style: { display: "none" },
           }}
-          onChange={(event) => handleChange}
+          onChange={handleChange}
           // aria-label="icon label tabs example"
         >
           {labelsArray.map(({ label, component, to }) => {
@@ -93,7 +99,7 @@ export default function TableSettings({ setSearchQuery }) {
       {/*<div className="centre-table-settings"></div>*/}
       <div className="right-table-settings">
         <Dropdown />
-        <SearchBar handleChange={handleChange}></SearchBar>
+        <SearchBar />
       </div>
       {/*<Outlet />*/}
     </div>
