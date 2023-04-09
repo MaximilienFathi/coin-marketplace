@@ -1,13 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/material";
+import Button from "@mui/material/Button";
+
 import Header from "../../components/others/header/header";
 import Footer from "../../components/others/footer/footer";
 import "../page.css";
 import "./error-page.css";
-import { styled } from "@mui/material";
-import Button from "@mui/material/Button";
 
-//========================================================
+//############################################################################
+
 // CUSTOM STYLES
 const StyledHomeButton = styled(Button)({
   "&.MuiButtonBase-root:hover": {
@@ -29,10 +31,17 @@ const HomeButtonStyles = {
   boxShadow: "inset 0 0 2px #000",
   transition: "all 0.3s",
 };
-//========================================================
 
-function ErrorPage() {
+//############################################################################
+
+export default function ErrorPage() {
   const navigate = useNavigate();
+
+  // Reset scrollbar to top when page is loaded.
+  window.scrollTo(0, 0);
+
+  //############################################################################
+
   return (
     <div className="page-container">
       <div className="content-wrap">
@@ -53,7 +62,7 @@ function ErrorPage() {
               Go Home
             </StyledHomeButton>
           </div>
-          {/*<div className="global-stats-img-box">*/}
+          {/*<div className="">*/}
           {/*  <picture>*/}
           {/*    <source srcSet="" type="" />*/}
           {/*    <source srcSet="" type="" />*/}
@@ -70,5 +79,3 @@ function ErrorPage() {
     </div>
   );
 }
-
-export default ErrorPage;

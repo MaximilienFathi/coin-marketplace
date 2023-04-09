@@ -10,6 +10,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -18,10 +19,6 @@ import CoinDataTabs from "../coin-data-tabs/coin-data-tabs";
 import TimeframeTabs from "../timeframe-tabs/timeframe-tabs";
 import PriceChanges from "../price-changes/price-changes";
 import "./coin-charts.css";
-
-// import axiosRetry from "axios-retry";
-// // axiosRetry(axios, { retries: 30 });
-// axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
 
 ChartJS.register(
   CategoryScale,
@@ -40,44 +37,49 @@ export default function CoinCharts({ coinID, coinName, priceChangesData }) {
   const [specificHistoricData, setSpecificHistoricData] = useState([]);
   const [datatype, setDatatype] = useState("prices");
   const [timeframe, setTimeframe] = useState(1);
-
   const [loading, setLoading] = useState(false);
 
   //############################################################################
 
-  // Fetch chart data for a specific coin
+  // Fetch chart data for a specific coin.
   useEffect(() => {
-    fetchChartData("prices", 1);
+    coinID && fetchChartData("prices", 1).then();
   }, [coinID, currencyName]);
 
   //############################################################################
 
-  // Fetch chart data based on chosen data type (prices, market cap, volume)
+  // Fetch chart data based on chosen data type (prices, market cap, volume).
   async function fetchChartData(newDataType, newTimeframe) {
     try {
-      // Using if-else statement to prevent 404 error if coinID is undefined
-      if (coinID) {
-        const response = await axios.get(
-          `https://api.coingecko.com/api/v3/coins/${coinID}/market_chart?vs_currency=${currencyName}&days=${newTimeframe}`
-        );
-        setAllHistoricData(response.data);
-        setSpecificHistoricData(response.data[datatype]);
-        setDatatype(newDataType);
-        setTimeframe(newTimeframe);
+      console.log("Sending request for fetchChartData");
+      const response = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${coinID}/market_chart?vs_currency=${currencyName}&days=${newTimeframe}`
+      );
+      setAllHistoricData(response.data);
+      setSpecificHistoricData(response.data[datatype]);
+      setDatatype(newDataType);
+      setTimeframe(newTimeframe);
+      if (response) {
         setLoading(false);
-        // await new Promise((resolve) => setTimeout(resolve, 5000));
       }
+      return response;
     } catch (err) {
-      // console.error(err);
-      console.log("TESTING");
-      fetchChartData(newDataType, newTimeframe);
-      setLoading(true);
+      if (err.response.status === 404) {
+        console.log("ERROR 404 FOUND");
+        setLoading(false);
+        throw new Response("Not Found", { status: 404 });
+      } else {
+        console.log("NETWORK ERROR FOUND");
+        setLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 10000));
+        return await fetchChartData(newDataType, newTimeframe);
+      }
     }
   }
 
-  // Update chart data when user clicks on a different data type button
+  // Update chart data when user clicks on a different data type button.
   // This method was added so that we don't use fetchChartData method
-  // therefore preventing us from making additional costly API calls
+  // therefore preventing us from making additional costly API calls.
   function updateChartData(newDataType) {
     setSpecificHistoricData(allHistoricData[newDataType]);
     setDatatype(newDataType);
@@ -210,12 +212,26 @@ export default function CoinCharts({ coinID, coinName, priceChangesData }) {
           <TimeframeTabs fetchChartData={fetchChartData} datatype={datatype} />
         </div>
         {loading ? (
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "1.6rem",
+            }}
+          >
             <CircularProgress
               style={{ color: "#b84dc3" }}
               size={450}
               thickness={1}
             />
+            <Typography
+              variant="caption"
+              component="div"
+              color="#dc7be7"
+              fontSize="2rem"
+            >{`Network Error - Data Will Load Soon!`}</Typography>
           </Box>
         ) : (
           <Line data={data} plugins={plugins} options={options} />

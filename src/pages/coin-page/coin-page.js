@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
 
 import currencyContext from "../../contexts/currency-context";
 import Header from "../../components/others/header/header";
@@ -25,8 +23,6 @@ export default function CoinPage() {
   const [currencyRates, setCurrencyRates] = useState({});
   const [priceChangesData, setPriceChangesData] = useState({});
 
-  const [loading, setLoading] = useState(false);
-
   //############################################################################
 
   // Enable scrolling to swapper when clicking swap button
@@ -36,23 +32,21 @@ export default function CoinPage() {
 
   //############################################################################
 
+  // Reset scrollbar to top when page is loaded.
+  window.scrollTo(0, 0);
+
   // Fetch all relevant data for specific coin
   useEffect(() => {
-    // try {
     fetchMarketData();
     fetchCoinData();
     fetchPriceChanges();
-    // setLoading(false);
-    // } catch (err) {
-    //   setLoading(true);
-    // }
   }, []);
 
   //############################################################################
 
   // Fetch coin specific market data
   function fetchMarketData() {
-    const marketDataObject = loaderCoinData.data.market_data;
+    const marketDataObject = loaderCoinData.data["market_data"];
     setMarketData(marketDataObject);
     setCurrencyRates(marketDataObject.current_price);
   }
@@ -100,7 +94,7 @@ export default function CoinPage() {
 
   // Fetch coin specific price changes over time
   function fetchPriceChanges() {
-    const marketDataObject = loaderCoinData.data.market_data;
+    const marketDataObject = loaderCoinData.data["market_data"];
     const priceChangesObject = {};
     priceChangesObject.price_change_1h =
       marketDataObject.price_change_percentage_1h_in_currency[currencyName];
@@ -143,15 +137,7 @@ export default function CoinPage() {
           }
         />
         <div className="coin-page-content-wrap">
-          {/*{loading ? (*/}
-          {/*  <CircularProgress*/}
-          {/*    style={{ color: "#b84dc3" }}*/}
-          {/*    size={100}*/}
-          {/*    thickness={1}*/}
-          {/*  />*/}
-          {/*) : (*/}
           <MarketInfo coinData={coinData} marketData={marketData}></MarketInfo>
-          {/*)}*/}
           {/*{coinData && marketData ? (*/}
           {/*    <MarketInfo coinData={coinData} marketData={marketData} />*/}
           {/*) : null}*/}

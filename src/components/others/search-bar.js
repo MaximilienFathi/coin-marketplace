@@ -104,9 +104,9 @@ const GroupItems = styled("ul")({
 //############################################################################
 
 export default function SearchBar() {
-  const [trendingCoinsList] = useContext(trendingCoinsListContext);
   const [coinsList] = useContext(coinsListContext);
   const [exchangesList] = useContext(exchangesListContext);
+  const [trendingCoinsList] = useContext(trendingCoinsListContext);
 
   const [options, setOptions] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");

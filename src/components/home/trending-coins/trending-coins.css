@@ -21,11 +21,11 @@
 }
 
 .trending-coins-inner-container {
-  max-width: 130rem;
-  margin: 0 auto;
+  /*max-width: 140rem;*/
+  /*margin: 0 auto;*/
   padding: 4.8rem;
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  border-radius: 11px;
+  justify-content: center;
+  column-gap: 2.4rem;
 }

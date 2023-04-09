@@ -1,5 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import currencyContext from "../contexts/currency-context";
 import currentPageContext from "../contexts/current-page-context";
@@ -23,10 +26,14 @@ export default function CoinsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   const [paginatedData, setPaginatedData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const pageSize = 100;
 
   //############################################################################
+
+  // Reset scrollbar to top when page is loaded.
+  window.scrollTo(0, 0);
 
   // Calculate number of pages needed to represent all coins in table.
   useEffect(() => {
@@ -36,9 +43,7 @@ export default function CoinsPage() {
 
   // Retrieve data of next 100 coins everytime we switch page.
   useEffect(() => {
-    fetchPaginatedData().then(() =>
-      console.log("Paginated data has been fetched!")
-    );
+    fetchPaginatedData().then();
   }, [currentPage, currencyName]);
 
   //############################################################################
@@ -46,14 +51,28 @@ export default function CoinsPage() {
   // Make API call to fetch data for 100 coins on specific page.
   async function fetchPaginatedData() {
     try {
+      console.log("Sending request for fetchPaginatedData (coins)");
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currencyName}&order=market_cap_desc&per_page=${pageSize}&page=${currentPage}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
       );
       const coinsArray = response.data.map((coin) => updateData(coin));
       // console.log("coinsArray is", coinsArray);
       setPaginatedData(coinsArray);
+      if (response) {
+        setLoading(false);
+      }
+      return response;
     } catch (err) {
-      console.error(err);
+      if (err.response.status === 404) {
+        console.log("ERROR 404 FOUND");
+        setLoading(false);
+        throw new Response("Not Found", { status: 404 });
+      } else {
+        console.log("NETWORK ERROR FOUND");
+        setLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 10000));
+        return await fetchPaginatedData();
+      }
     }
   }
 
@@ -97,7 +116,31 @@ export default function CoinsPage() {
               }
             />
             <GlobalStats />
-            <TableBox />
+            {loading ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "1.6rem",
+                }}
+              >
+                <CircularProgress
+                  style={{ color: "#b84dc3" }}
+                  size={450}
+                  thickness={1}
+                />
+                <Typography
+                  variant="caption"
+                  component="div"
+                  color="#dc7be7"
+                  fontSize="2.4rem"
+                >{`Network Error - Data Will Load Soon!`}</Typography>
+              </Box>
+            ) : (
+              <TableBox />
+            )}
             <Footer />
             <ScrollButton />
           </div>

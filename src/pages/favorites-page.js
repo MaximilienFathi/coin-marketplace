@@ -1,5 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import currencyContext from "../contexts/currency-context";
 import currentPageContext from "../contexts/current-page-context";
@@ -21,10 +24,14 @@ export default function FavoritesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   const [paginatedData, setPaginatedData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const pageSize = 100;
 
   //############################################################################
+
+  // Reset scrollbar to top when page is loaded.
+  window.scrollTo(0, 0);
 
   // Fetch and update data for all favorite coins.
   useEffect(() => {
@@ -41,7 +48,7 @@ export default function FavoritesPage() {
     if (allFavorites) {
       const coinsCount = allFavorites.length;
       const currentPageFavorites = getCurrentPageFavorites(allFavorites);
-      let response = await fetchFavoriteData(currentPageFavorites);
+      let response = await fetchAllFavoritesData(currentPageFavorites);
       response = response.sort((a, b) =>
         a.market_cap_rank > b.market_cap_rank ? 1 : -1
       );
@@ -60,17 +67,40 @@ export default function FavoritesPage() {
   // Make API calls to fetch data for all favorite coins.
   // Preferred making API calls to storing coin objects from coin-page and
   // then using them. This way, data in favorites page is always up-to-date.
-  async function fetchFavoriteData(favorites) {
+  /* TODO:
+     Currently, with what we have designed, if we have 100 favorites, it
+     will throw error 429 and show loading instead of table. After about
+     1 minute, data for about 20 coins will have been fetched but
+     loading will still show instead of whole table! Table will show when
+     data for 100 coins will have been fetched even though we have already
+     found data for a number of coins by this time.
+     Goal would be to show data in table as the data is being fetched not at
+     the end all together.
+    */
+  async function fetchAllFavoritesData(favorites) {
     return await Promise.all(
-      favorites.map(async (coinID) => {
+      favorites.map(async function fetchFavoriteData(coinID) {
         try {
+          console.log(`Sending request for fetchFavoriteData (${coinID})`);
           const response = await axios.get(
             `https://api.coingecko.com/api/v3/coins/${coinID}`
           );
+          if (response) {
+            setLoading(false);
+          }
           const updatedData = updateData(response.data);
           return updatedData;
         } catch (err) {
-          console.error(err);
+          if (err.response.status === 404) {
+            console.log("ERROR 404 FOUND");
+            setLoading(false);
+            throw new Response("Not Found", { status: 404 });
+          } else {
+            console.log("NETWORK ERROR FOUND");
+            setLoading(true);
+            await new Promise((resolve) => setTimeout(resolve, 10000));
+            return await fetchFavoriteData(coinID);
+          }
         }
       })
     );
@@ -121,7 +151,31 @@ export default function FavoritesPage() {
               }
             />
             <GlobalStats />
-            <TableBox />
+            {loading ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "1.6rem",
+                }}
+              >
+                <CircularProgress
+                  style={{ color: "#b84dc3" }}
+                  size={450}
+                  thickness={1}
+                />
+                <Typography
+                  variant="caption"
+                  component="div"
+                  color="#dc7be7"
+                  fontSize="2.4rem"
+                >{`Network Error - Data Will Load Soon!`}</Typography>
+              </Box>
+            ) : (
+              <TableBox />
+            )}
           </div>
           <Footer />
           <ScrollButton />

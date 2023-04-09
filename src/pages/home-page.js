@@ -13,12 +13,15 @@ import "./page.css";
 //############################################################################
 
 export default function HomePage() {
+  // Reset scrollbar to top when page is loaded.
+  window.scrollTo(0, 0);
+
   return (
     <div className="page-container">
       <div className="content-wrap">
         <Header />
         <Hero />
-        {/*<TrendingCoins />*/}
+        <TrendingCoins />
         <Features />
         <QuickGuide />
         <CtaBanner />

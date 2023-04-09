@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import axios from "axios";
+import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import coinsListContext from "./contexts/coins-list-context";
 import currencyContext from "./contexts/currency-context";
@@ -15,10 +18,6 @@ import ExchangesPage from "./pages/exchanges-page";
 import ErrorPage from "./pages/error-page/error-page";
 import "./App.css";
 
-// import axiosRetry from "axios-retry";
-// // axiosRetry(axios, { retries: 3 });
-// axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
-
 //############################################################################
 
 export default function App() {
@@ -28,30 +27,71 @@ export default function App() {
   const [trendingCoinsList, setTrendingCoinsList] = useState(null);
   const [coinsList, setCoinsList] = useState(null);
   const [exchangesList, setExchangesList] = useState(null);
-  const [coinData, setCoinData] = useState(null);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // Control which specific page component to display depending on URL.
+  // TODO: LESSON LEARNT (annoying bug fixed)
+  // Transformed the following from regular variable to state and used arrow
+  // function. Doing so prevented the loader function to be run everytime
+  // a state was modified in the useEffect functions.
+  const [router, setRouter] = useState(() =>
+    createBrowserRouter([
+      {
+        path: `${process.env.PUBLIC_URL}/`,
+        children: [
+          {
+            path: `${process.env.PUBLIC_URL}/`,
+            element: <HomePage />,
+          },
+          {
+            path: `${process.env.PUBLIC_URL}/coins`,
+            element: <CoinsPage />,
+          },
+          {
+            path: `${process.env.PUBLIC_URL}/coins/:coinID`,
+            element: <CoinPage />,
+            errorElement: <ErrorPage />,
+            loader: async (params) => {
+              return await runCoinLoader(params);
+            },
+          },
+          {
+            path: `${process.env.PUBLIC_URL}/exchanges`,
+            element: <ExchangesPage />,
+          },
+          {
+            path: `${process.env.PUBLIC_URL}/favorites`,
+            element: <FavoritesPage />,
+          },
+          {
+            path: `${process.env.PUBLIC_URL}/*`,
+            element: <ErrorPage />,
+          },
+        ],
+      },
+    ])
+  );
 
   //############################################################################
 
+  // // Reset scrollbar to top when switching to another page.
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
+
   /* TODO: LESSON LEARNT
- ===> https://legacy.reactjs.org/docs/hooks-effect.html
- "The Effect Hook lets you perform side effects in function components."
- "You tell React that your component needs to do something AFTER render.
- React will remember the function you passed (we’ll refer to it as our
- “EFFECT”), and call it later AFTER performing the DOM updates."
- ===> https://codedamn.com/news/reactjs/useeffect-dependency
- If deps array is [] => callback function is only called once the page renders
- If deps array is [a, b] => Callback function gets triggered on 2
- occasions. First, WHEN PAGE RENDERS and whenever a or b is updated.
- IMPORTANT - THIS EXPLAINS WHY USEEFFECT() WOULD RUN MULTIPLE TIMES
- BECAUSE IT HAD TO ACCOUNT FOR THE INITIAL PAGE RENDERING AS WELL!
- */
-
-  // Reset scrollbar to top when switching to another page.
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
+   ===> https://legacy.reactjs.org/docs/hooks-effect.html
+   "The Effect Hook lets you perform side effects in function components."
+   "You tell React that your component needs to do something AFTER render.
+   React will remember the function you passed (we’ll refer to it as our
+   “EFFECT”), and call it later AFTER performing the DOM updates."
+   ===> https://codedamn.com/news/reactjs/useeffect-dependency
+   If deps array is [] => callback function is only called once the page renders
+   If deps array is [a, b] => Callback function gets triggered on 2
+   occasions. First, WHEN PAGE RENDERS and whenever a or b is updated.
+   IMPORTANT - THIS EXPLAINS WHY USEEFFECT() WOULD RUN MULTIPLE TIMES
+   BECAUSE IT HAD TO ACCOUNT FOR THE INITIAL PAGE RENDERING AS WELL!
+   */
   // Initialize favorites array in localStorage if it is absent.
   useEffect(() => {
     localStorage.getItem("favorites") ||
@@ -81,13 +121,13 @@ export default function App() {
   // calls made and prevent risks of error 429.
   // TODO: LESSON LEARNT
   /*
-    "There's simply just no way of knowing from inside the app how exactly the
-    URL changed in the address bar. When a user does this the browser completely
-    reloads the page, so the entire React app is mounted fresh."
-    Following conditional was therefore included since manually searching
-    for specific coin page using URL address bar would not prevent API call
-    from being made.
-  */
+      "There's simply just no way of knowing from inside the app how exactly the
+      URL changed in the address bar. When a user does this the browser completely
+      reloads the page, so the entire React app is mounted fresh."
+      Following conditional was therefore included since manually searching
+      for specific coin page using URL address bar would not prevent API call
+      from being made.
+    */
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("globalMarketData"));
     data != null ? setGlobalMarketData(data) : fetchGlobalMarketData();
@@ -116,28 +156,40 @@ export default function App() {
   // Fetch global market data and update state and localStorage accordingly.
   async function fetchGlobalMarketData() {
     try {
+      console.log("Sending request for fetchGlobalMarketData");
       const response = await axios.get(
         "https://api.coingecko.com/api/v3/global"
       );
-      // await new Promise((resolve) => setTimeout(resolve, 5000));
       const fetchedGlobalMarketData = response.data.data;
       setGlobalMarketData(fetchedGlobalMarketData);
       localStorage.setItem(
         "globalMarketData",
         JSON.stringify(fetchedGlobalMarketData)
       );
-      // setLoading(false);
+      if (response) {
+        setLoading(false);
+      }
+      return response;
     } catch (err) {
-      // console.error(err);
-      console.log("TESTING");
-      // fetchTotalMarketCap();
-      // setLoading(true);
+      if (err.response.status === 404) {
+        console.log("ERROR 404 FOUND");
+        setLoading(false);
+        throw new Response("Not Found", { status: 404 });
+      } else {
+        console.log("NETWORK ERROR FOUND");
+        setLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 10000));
+        // Must use return statement else returned value after error 429 is
+        // over will be "undefined". Remember, this is recursive!
+        return await fetchGlobalMarketData();
+      }
     }
   }
 
   // Fetch list of trending coins (most searched in last 24 hours).
   async function fetchTrendingCoinsList() {
     try {
+      console.log("Sending request for fetchTrendingCoinsList");
       const response = await axios.get(
         "https://api.coingecko.com/api/v3/search/trending"
       );
@@ -153,14 +205,28 @@ export default function App() {
         "trendingCoinsList",
         JSON.stringify(updatedTrendingCoinsList)
       );
+      if (response) {
+        setLoading(false);
+      }
+      return response;
     } catch (err) {
-      console.error(err);
+      if (err.response.status === 404) {
+        console.log("ERROR 404 FOUND");
+        setLoading(false);
+        throw new Response("Not Found", { status: 404 });
+      } else {
+        console.log("NETWORK ERROR FOUND");
+        setLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 10000));
+        return await fetchTrendingCoinsList();
+      }
     }
   }
 
   // Fetch full list of coins available in the market.
   async function fetchCoinsList() {
     try {
+      console.log("Sending request for fetchCoinsList");
       const response = await axios.get(
         "https://api.coingecko.com/api/v3/coins/list"
       );
@@ -168,14 +234,28 @@ export default function App() {
       const updatedCoinsList = addTypePropertyToList(fetchedCoinsList, "Coins");
       setCoinsList(updatedCoinsList);
       localStorage.setItem("coinsList", JSON.stringify(updatedCoinsList));
+      if (response) {
+        setLoading(false);
+      }
+      return response;
     } catch (err) {
-      console.error(err);
+      if (err.response.status === 404) {
+        console.log("ERROR 404 FOUND");
+        setLoading(false);
+        throw new Response("Not Found", { status: 404 });
+      } else {
+        console.log("NETWORK ERROR FOUND");
+        setLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 10000));
+        return await fetchCoinsList();
+      }
     }
   }
 
   // Fetch full list of coin exchanges available.
   async function fetchExchangesList() {
     try {
+      console.log("Sending request for fetchExchangesList");
       const response = await axios.get(
         "https://api.coingecko.com/api/v3/exchanges/list"
       );
@@ -189,8 +269,21 @@ export default function App() {
         "exchangesList",
         JSON.stringify(updatedExchangesList)
       );
+      if (response) {
+        setLoading(false);
+      }
+      return response;
     } catch (err) {
-      console.error(err);
+      if (err.response.status === 404) {
+        console.log("ERROR 404 FOUND");
+        setLoading(false);
+        throw new Response("Not Found", { status: 404 });
+      } else {
+        console.log("NETWORK ERROR FOUND");
+        setLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 10000));
+        return await fetchExchangesList();
+      }
     }
   }
 
@@ -203,83 +296,165 @@ export default function App() {
   }
 
   // Fetch coin data first before coin page is displayed.
+  // Retry API call in case of network errors.
   async function runCoinLoader({ params }) {
-    // FIXME:
-    // 1 TOO MANY CALL WEIRDLY WHEN LOADING CALL PAGE
     try {
-      if (coinData == null) {
-        const response = await axios.get(
-          `https://api.coingecko.com/api/v3/coins/${params.coinID}`
-        );
-        setCoinData(response);
-        return response;
+      console.log("Sending request for runCoinLoader");
+      const response = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${params.coinID}`
+      );
+      if (response) {
+        setLoading(false);
       }
-      console.log(coinData);
-      return coinData;
+      return response;
     } catch (err) {
-      console.log(err);
-      console.log("COIN ID ERROR IN APP.JS");
-      throw new Response("Not Found", { status: 404 });
-    } finally {
-      // await new Promise((resolve) => setTimeout(resolve, 5000));
+      if (err.response.status === 404) {
+        console.log("ERROR 404 FOUND");
+        setLoading(false);
+        throw new Response("Not Found", { status: 404 });
+      } else {
+        console.log("NETWORK ERROR FOUND");
+        setLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 10000));
+        // Must use return statement else returned value after error 429 is
+        // over will be "undefined". Remember, this is recursive!
+        return await runCoinLoader({ params });
+      }
     }
   }
 
-  // Control which specific page component to display depending on URL.
-  const router = createBrowserRouter([
-    {
-      path: `${process.env.PUBLIC_URL}/`,
-      children: [
-        {
-          path: `${process.env.PUBLIC_URL}/`,
-          element: <HomePage />,
-        },
-        {
-          path: `${process.env.PUBLIC_URL}/coins`,
-          element: <CoinsPage />,
-        },
-        {
-          path: `${process.env.PUBLIC_URL}/coins/:coinID`,
-          element: <CoinPage />,
-          errorElement: <ErrorPage />,
-          loader: (params) => runCoinLoader(params),
-        },
-        {
-          path: `${process.env.PUBLIC_URL}/exchanges`,
-          element: <ExchangesPage />,
-        },
-        {
-          path: `${process.env.PUBLIC_URL}/favorites`,
-          element: <FavoritesPage />,
-        },
-        {
-          path: `${process.env.PUBLIC_URL}/*`,
-          element: <ErrorPage />,
-        },
-      ],
-    },
-  ]);
+  /*
+  const operation = retry.operation({
+    retries: 10,
+    factor: 3,
+    minTimeout: 1 * 1000,
+    maxTimeout: 60 * 1000,
+    randomize: true,
+  });
+
+  // Attempt to make an API call.
+  // Retry according to operation settings set above in case of network errors.
+  // Solution to annoying bug:
+  // https://stackoverflow.com/questions/66476583/how-to-await-a-callback-function-call-in-node-js
+  async function runApiCallAttempt(goal, currentAttempt, url, resolve, reject) {
+    try {
+      console.log(`Sending request: ${currentAttempt} attempt for ${goal}`);
+      const response = await axios.get(url);
+      resolve(response);
+      setLoading(false);
+      return response;
+    } catch (err) {
+      // if (operation.retry(err)) {
+      //   throw err;
+      // }
+      setLoading(true);
+      if (err.response.status === 404) {
+        console.log("REACHED runApiCallAttempt ERROR");
+        setLoading(false);
+        throw new Response("Not Found", { status: 404 });
+        // reject(err);
+      }
+      // else if (operation.retry(err)) {
+      //   console.log("FORBIDDEN");
+      //   return;
+      // }
+    }
+  }
+
+  async function runCoinLoader({ params }) {
+    try {
+      return new Promise(async (resolve, reject) => {
+        try {
+          const url = `https://api.coingecko.com/api/v3/coins/${params.coinID}`;
+          // operation.attempt(async (currentAttempt) => {
+          //   try {
+          const test = await runApiCallAttempt(
+            "runCoinLoader()",
+            // currentAttempt,
+            10,
+            url,
+            resolve,
+            reject
+          );
+          console.log(test);
+          // throw new Response("Not Found", { status: 404 });
+        } catch (err) {
+          console.log("OTHER ERROR 1 IS", err);
+          if (err.status === 404) {
+            console.log("REACHED runCoinLoader 1 ERROR");
+            throw new Response("Not Found", { status: 404 });
+          }
+        }
+        //   });
+        // } catch (err) {
+        //   console.log("OTHER ERROR 2 IS", err.status);
+        //   if (err.status === 404) {
+        //     console.log("REACHED runCoinLoader 2 ERROR");
+        //     throw new Response("Not Found", { status: 404 });
+        //   }
+        // }
+      });
+    } catch (err) {
+      console.log("OTHER ERROR 3 IS", err.status);
+      if (err.status === 404) {
+        console.log("REACHED runCoinLoader 3 ERROR");
+        throw new Response("Not Found", { status: 404 });
+      }
+    }
+  }
+  */
 
   //############################################################################
 
   return (
-    <coinsListContext.Provider value={[coinsList]}>
-      <exchangesListContext.Provider value={[exchangesList]}>
-        <currencyContext.Provider
-          value={[
-            currencyName,
-            setCurrencyName,
-            currencySymbol,
-            setCurrencySymbol,
-          ]}
+    <div className="coin-page-container">
+      {loading ? (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "2.4rem",
+            position: "fixed",
+            left: 0,
+            top: 0,
+            width: "100%",
+            height: "100vh",
+          }}
         >
-          <globalMarketDataContext.Provider value={[globalMarketData]}>
-            <trendingCoinsListContext.Provider value={[trendingCoinsList]}>
-              <RouterProvider router={router} />
-            </trendingCoinsListContext.Provider>
-          </globalMarketDataContext.Provider>
-        </currencyContext.Provider>
-      </exchangesListContext.Provider>
-    </coinsListContext.Provider>
+          <CircularProgress
+            style={{ color: "#b84dc3" }}
+            size={450}
+            thickness={1}
+          />
+          <Typography
+            variant="caption"
+            component="div"
+            color="#dc7be7"
+            fontSize="3rem"
+          >{`Network Error - Data Will Load Soon!`}</Typography>
+        </Box>
+      ) : (
+        <coinsListContext.Provider value={[coinsList]}>
+          <exchangesListContext.Provider value={[exchangesList]}>
+            <currencyContext.Provider
+              value={[
+                currencyName,
+                setCurrencyName,
+                currencySymbol,
+                setCurrencySymbol,
+              ]}
+            >
+              <globalMarketDataContext.Provider value={[globalMarketData]}>
+                <trendingCoinsListContext.Provider value={[trendingCoinsList]}>
+                  <RouterProvider router={router} />
+                </trendingCoinsListContext.Provider>
+              </globalMarketDataContext.Provider>
+            </currencyContext.Provider>
+          </exchangesListContext.Provider>
+        </coinsListContext.Provider>
+      )}
+    </div>
   );
 }
