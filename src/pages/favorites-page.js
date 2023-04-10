@@ -67,16 +67,6 @@ export default function FavoritesPage() {
   // Make API calls to fetch data for all favorite coins.
   // Preferred making API calls to storing coin objects from coin-page and
   // then using them. This way, data in favorites page is always up-to-date.
-  /* TODO:
-     Currently, with what we have designed, if we have 100 favorites, it
-     will throw error 429 and show loading instead of table. After about
-     1 minute, data for about 20 coins will have been fetched but
-     loading will still show instead of whole table! Table will show when
-     data for 100 coins will have been fetched even though we have already
-     found data for a number of coins by this time.
-     Goal would be to show data in table as the data is being fetched not at
-     the end all together.
-    */
   async function fetchAllFavoritesData(favorites) {
     return await Promise.all(
       favorites.map(async function fetchFavoriteData(coinID) {

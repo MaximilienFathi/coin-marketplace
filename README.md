@@ -66,11 +66,11 @@ Live Site URL: [https://maximilienfathi.github.io/coin-marketplace/](https://max
 While working through this project, the major learnings involved:
 
 - The use of React as well as the more recent functional components and hooks.
-- The gain in HTML, CSS, JavaScript knowledge while creating many 
-  React components from scratch.
-- The handling of routing with React projects involving multiple pages.
+- The gain in HTML, CSS, JavaScript knowledge while creating many React components from scratch.
+- The proper use of APIs using asynchronous code and the handling of potential related network errors such as error 429.
+- The implementation of routing in React projects that involve multiple pages.
 - The use and customization of components from libraries like Material UI.
-- The use of UI design styles like glassmorphism to create beautiful websites.
+- The application of UI design styles like glassmorphism to create beautiful websites.
 - The main blockchain technology and cryptocurrency-related concepts.
 
 ### Continued development

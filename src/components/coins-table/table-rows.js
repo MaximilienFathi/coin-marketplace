@@ -14,7 +14,7 @@ export default function TableRows({ searchQuery }) {
 
   const [searchResults, setSearchResults] = useState([]);
   const [sortedData, setSortedData] = useState("");
-  // TODO: REVIEW WHAT SORTEDATA WAS FOR
+  // "sortedData" state represents the header whose set of data is sorted.
 
   const dataHeaders = {
     favorite: "",

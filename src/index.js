@@ -8,8 +8,8 @@ import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // TODO: ACTIVATE STRICTMODE AGAIN AT THE END
-  // <React.StrictMode>
-  <App />
-  // </React.StrictMode>
+  // TODO: DEACTIVATE STRICTMODE DURING PRODUCTION
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );

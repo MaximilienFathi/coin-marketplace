@@ -1,13 +1,3 @@
-/*
-TODO:
-1)
-REMOVE EMPTY PAGES - ALSO MANY RANKS SKIPPED IN PAGE 6-7 (BOTH REMOVED)
-2)
- trust_score_rank property missing for some? Alternative solution:
- const findExchangeRank = (data, exchange) =>
- (currentPage - 1) * pageSize + data.indexOf(exchange) + 1;
-*/
-
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Typography } from "@mui/material";

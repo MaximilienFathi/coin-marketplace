@@ -30,10 +30,11 @@ export default function App() {
   const [loading, setLoading] = useState(false);
 
   // Control which specific page component to display depending on URL.
-  // TODO: LESSON LEARNT (annoying bug fixed)
-  // Transformed the following from regular variable to state and used arrow
-  // function. Doing so prevented the loader function to be run everytime
-  // a state was modified in the useEffect functions.
+  /* TODO: LESSON LEARNT (annoying bug fixed)
+     Transformed the following from regular variable to state and used arrow
+     function. Doing so prevented the loader function to be run everytime
+     a state was modified in the useEffect functions.
+   */
   const [router, setRouter] = useState(() =>
     createBrowserRouter([
       {
@@ -80,17 +81,18 @@ export default function App() {
   // }, []);
 
   /* TODO: LESSON LEARNT
-   ===> https://legacy.reactjs.org/docs/hooks-effect.html
-   "The Effect Hook lets you perform side effects in function components."
-   "You tell React that your component needs to do something AFTER render.
-   React will remember the function you passed (we’ll refer to it as our
-   “EFFECT”), and call it later AFTER performing the DOM updates."
-   ===> https://codedamn.com/news/reactjs/useeffect-dependency
-   If deps array is [] => callback function is only called once the page renders
-   If deps array is [a, b] => Callback function gets triggered on 2
-   occasions. First, WHEN PAGE RENDERS and whenever a or b is updated.
-   IMPORTANT - THIS EXPLAINS WHY USEEFFECT() WOULD RUN MULTIPLE TIMES
-   BECAUSE IT HAD TO ACCOUNT FOR THE INITIAL PAGE RENDERING AS WELL!
+     ===> https://legacy.reactjs.org/docs/hooks-effect.html
+     "The Effect Hook lets you perform side effects in function components."
+     "You tell React that your component needs to do something AFTER render.
+     React will remember the function you passed (we’ll refer to it as our
+     “EFFECT”), and call it later AFTER performing the DOM updates."
+     ===> https://codedamn.com/news/reactjs/useeffect-dependency
+     If deps array is [] => callback function is only called once the page
+     renders.
+     If deps array is [a, b] => Callback function gets triggered on 2
+     occasions. First, WHEN PAGE RENDERS and whenever a or b is updated.
+     IMPORTANT - THIS EXPLAINS WHY USEEFFECT() WOULD RUN MULTIPLE TIMES
+     BECAUSE IT HAD TO ACCOUNT FOR THE INITIAL PAGE RENDERING AS WELL!
    */
   // Initialize favorites array in localStorage if it is absent.
   useEffect(() => {
@@ -113,20 +115,19 @@ export default function App() {
         JSON.stringify({ name: currencyName, symbol: currencySymbol })
       );
     }
-  }, [currencyName]); // FIXME: check if you need [] or [currencyName]
+  }, []);
 
   // Make API call to collect global data only if we don't have that data
   // already stored in localStorage (i.e. when initially loading website).
   // This was moved from coin-page.js to this one to reduce number of API
   // calls made and prevent risks of error 429.
-  // TODO: LESSON LEARNT
-  /*
-      "There's simply just no way of knowing from inside the app how exactly the
-      URL changed in the address bar. When a user does this the browser completely
-      reloads the page, so the entire React app is mounted fresh."
-      Following conditional was therefore included since manually searching
-      for specific coin page using URL address bar would not prevent API call
-      from being made.
+  /* TODO: LESSON LEARNT
+     "There's simply just no way of knowing from inside the app how exactly the
+     URL changed in the address bar. When a user does this the browser completely
+     reloads the page, so the entire React app is mounted fresh."
+     Following conditional was therefore included since manually searching
+     for specific coin page using URL address bar would not prevent API call
+     from being made.
     */
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("globalMarketData"));
@@ -322,87 +323,6 @@ export default function App() {
       }
     }
   }
-
-  /*
-  const operation = retry.operation({
-    retries: 10,
-    factor: 3,
-    minTimeout: 1 * 1000,
-    maxTimeout: 60 * 1000,
-    randomize: true,
-  });
-
-  // Attempt to make an API call.
-  // Retry according to operation settings set above in case of network errors.
-  // Solution to annoying bug:
-  // https://stackoverflow.com/questions/66476583/how-to-await-a-callback-function-call-in-node-js
-  async function runApiCallAttempt(goal, currentAttempt, url, resolve, reject) {
-    try {
-      console.log(`Sending request: ${currentAttempt} attempt for ${goal}`);
-      const response = await axios.get(url);
-      resolve(response);
-      setLoading(false);
-      return response;
-    } catch (err) {
-      // if (operation.retry(err)) {
-      //   throw err;
-      // }
-      setLoading(true);
-      if (err.response.status === 404) {
-        console.log("REACHED runApiCallAttempt ERROR");
-        setLoading(false);
-        throw new Response("Not Found", { status: 404 });
-        // reject(err);
-      }
-      // else if (operation.retry(err)) {
-      //   console.log("FORBIDDEN");
-      //   return;
-      // }
-    }
-  }
-
-  async function runCoinLoader({ params }) {
-    try {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const url = `https://api.coingecko.com/api/v3/coins/${params.coinID}`;
-          // operation.attempt(async (currentAttempt) => {
-          //   try {
-          const test = await runApiCallAttempt(
-            "runCoinLoader()",
-            // currentAttempt,
-            10,
-            url,
-            resolve,
-            reject
-          );
-          console.log(test);
-          // throw new Response("Not Found", { status: 404 });
-        } catch (err) {
-          console.log("OTHER ERROR 1 IS", err);
-          if (err.status === 404) {
-            console.log("REACHED runCoinLoader 1 ERROR");
-            throw new Response("Not Found", { status: 404 });
-          }
-        }
-        //   });
-        // } catch (err) {
-        //   console.log("OTHER ERROR 2 IS", err.status);
-        //   if (err.status === 404) {
-        //     console.log("REACHED runCoinLoader 2 ERROR");
-        //     throw new Response("Not Found", { status: 404 });
-        //   }
-        // }
-      });
-    } catch (err) {
-      console.log("OTHER ERROR 3 IS", err.status);
-      if (err.status === 404) {
-        console.log("REACHED runCoinLoader 3 ERROR");
-        throw new Response("Not Found", { status: 404 });
-      }
-    }
-  }
-  */
 
   //############################################################################
 

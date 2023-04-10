@@ -1,26 +1,3 @@
-/*
-USE CASES
----------
-CLICKING WHEN SEARCH BAR IS:
-1) EMPTY => GIVES TRENDING COINS   // "Trending Today flame emoji"
-2) NON-EMPTY => GIVES RESULTS
-                    - SEPARATED IN 2 GROUPS: COINS & EXCHANGES (DONE)
-                    - ORDERED USING RANKS (CANNOT HAVE THAT WITHOUT MANY API CALLS)
-
-DATA DISPLAY FORMAT:
-                    - LOGO (CANNOT HAVE THAT WITHOUT MANY API CALLS)
-                    - NAME
-                    - SYMBOL (OPTIONAL)
-                    - RANK (CANNOT HAVE THAT WITHOUT MANY API CALLS)
-
-TODO (WRITE ON PAPER)
-------------------------
-- CASE-INSENSITIVITY WORKS FOR EVERY PART OF THE URL APART FOLLOWING URL:
-  http://localhost:3000/coin-marketplace/
-- HAVE LOGOS AND RANKS SHOW + ORDER BY RANKING
-- WHEN POPPER APPEARS, MERGE IT WITH TEXTFIELD + MAKE IT ALWAYS APPEAR AT BOTTOM
-*/
-
 import React, { useContext, useEffect, useState } from "react";
 import { InputAdornment, Paper, styled } from "@mui/material";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
