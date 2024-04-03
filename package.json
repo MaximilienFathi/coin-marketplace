@@ -1,7 +1,7 @@
 {
   "name": "coin-marketplace",
   "version": "0.1.0",
-  "homepage": "https://maximilienfathi.github.io/coin-marketplace",
+  "homepage": "https://ma-fath.github.io/coin-marketplace",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.0",
