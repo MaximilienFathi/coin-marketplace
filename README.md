@@ -1,5 +1,11 @@
 # COIN marketplace - A React JS Solution
 
+**Important Update Regarding CoinGecko API Rate Limits**
+
+**Due to recent changes by CoinGecko, the number of free API calls per minute has been drastically reduced to 5-15. This may cause error 429 (Too Many Requests) to occur more** **frequently. While data is still retrievable, there may be a short delay of a few minutes before any data appears on-screen. I am currently working on a solution to address this** **issue.**
+
+---
+
 COIN marketplace is a website that keeps track of cryptocurrency and coin 
 exchange performance. It also simulates trading transactions from one 
 currency to another while still taking into consideration certain issues 
