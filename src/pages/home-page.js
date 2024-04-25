@@ -21,7 +21,7 @@ export default function HomePage() {
       <div className="content-wrap">
         <Header />
         <Hero />
-        {/* <TrendingCoins /> */}
+        <TrendingCoins />
         <Features />
         <QuickGuide />
         <CtaBanner />

@@ -27,6 +27,7 @@ export default function FavoritesPage() {
   const [loading, setLoading] = useState(false);
 
   const pageSize = 100;
+  const API_KEY = process.env.REACT_APP_API_KEY;
 
   //############################################################################
 
@@ -73,7 +74,7 @@ export default function FavoritesPage() {
         try {
           console.log(`Sending request for fetchFavoriteData (${coinID})`);
           const response = await axios.get(
-            `https://api.coingecko.com/api/v3/coins/${coinID}`
+            `https://api.coingecko.com/api/v3/coins/${coinID}?x_cg_demo_api_key=${API_KEY}`
           );
           if (response) {
             setLoading(false);

@@ -39,6 +39,8 @@ function CoinCharts({ coinID, coinName, priceChangesData }) {
   const [timeframe, setTimeframe] = useState(1);
   const [loading, setLoading] = useState(false);
 
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   //############################################################################
 
   // Fetch chart data for a specific coin.
@@ -53,7 +55,7 @@ function CoinCharts({ coinID, coinName, priceChangesData }) {
     try {
       console.log("Sending request for fetchChartData");
       const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${coinID}/market_chart?vs_currency=${currencyName}&days=${newTimeframe}`
+        `https://api.coingecko.com/api/v3/coins/${coinID}/market_chart?vs_currency=${currencyName}&days=${newTimeframe}?x_cg_demo_api_key=${API_KEY}`
       );
       setAllHistoricData(response.data);
       setSpecificHistoricData(response.data[datatype]);

@@ -24,6 +24,7 @@ export default function ExchangesPage() {
   const [loading, setLoading] = useState(false);
 
   const pageSize = 100;
+  const API_KEY = process.env.REACT_APP_API_KEY;
 
   //############################################################################
 
@@ -42,7 +43,7 @@ export default function ExchangesPage() {
     try {
       console.log("Sending request for fetchPaginatedData (exchanges)");
       const response = await axios.get(
-        `https://api.coingecko.com/api/v3/exchanges?per_page=${pageSize}&page=${currentPage}`
+        `https://api.coingecko.com/api/v3/exchanges?per_page=${pageSize}&page=${currentPage}?x_cg_demo_api_key=${API_KEY}`
       );
       const exchangesArray = response.data.map((exchange) =>
         updateData(exchange)

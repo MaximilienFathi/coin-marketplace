@@ -34,6 +34,8 @@ function TableRows({ searchQuery }) {
     country: "Country",
   };
 
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   //############################################################################
 
   // Reset position of sort arrows when changing page.
@@ -59,7 +61,7 @@ function TableRows({ searchQuery }) {
     try {
       console.log("Sending request for fetchBtcExchangeRates");
       const response = await axios.get(
-        "https://api.coingecko.com/api/v3/exchange_rates"
+        `https://api.coingecko.com/api/v3/exchange_rates?x_cg_demo_api_key=${API_KEY}`
       );
       setExchangeRates(response["data"]["rates"]);
       setBtcRate(response["data"]["rates"][currencyName]["value"]);

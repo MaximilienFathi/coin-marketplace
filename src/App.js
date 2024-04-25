@@ -73,6 +73,8 @@ export default function App() {
     ])
   );
 
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   //############################################################################
 
   /* TODO: LESSON LEARNT
@@ -155,7 +157,7 @@ export default function App() {
     try {
       console.log("Sending request for fetchGlobalMarketData");
       const response = await axios.get(
-        "https://api.coingecko.com/api/v3/global"
+        `https://api.coingecko.com/api/v3/global?x_cg_demo_api_key=${API_KEY}`
       );
       const fetchedGlobalMarketData = response.data.data;
       setGlobalMarketData(fetchedGlobalMarketData);
@@ -188,7 +190,7 @@ export default function App() {
     try {
       console.log("Sending request for fetchTrendingCoinsList");
       const response = await axios.get(
-        "https://api.coingecko.com/api/v3/search/trending"
+        `https://api.coingecko.com/api/v3/search/trending?x_cg_demo_api_key=${API_KEY}`
       );
       const fetchedTrendingCoinsList = response.data["coins"].map((coin) => {
         return coin["item"];
@@ -225,7 +227,7 @@ export default function App() {
     try {
       console.log("Sending request for fetchCoinsList");
       const response = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/list"
+        `https://api.coingecko.com/api/v3/coins/list?x_cg_demo_api_key=${API_KEY}`
       );
       const fetchedCoinsList = response.data;
       const updatedCoinsList = addTypePropertyToList(fetchedCoinsList, "Coins");
@@ -254,7 +256,7 @@ export default function App() {
     try {
       console.log("Sending request for fetchExchangesList");
       const response = await axios.get(
-        "https://api.coingecko.com/api/v3/exchanges/list"
+        `https://api.coingecko.com/api/v3/exchanges/list?x_cg_demo_api_key=${API_KEY}`
       );
       const fetchedExchangesList = response.data;
       const updatedExchangesList = addTypePropertyToList(
@@ -298,7 +300,7 @@ export default function App() {
     try {
       console.log("Sending request for runCoinLoader");
       const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${params.coinID}`
+        `https://api.coingecko.com/api/v3/coins/${params.coinID}?x_cg_demo_api_key=${API_KEY}`
       );
       if (response) {
         setLoading(false);

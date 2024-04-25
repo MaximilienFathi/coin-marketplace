@@ -19,6 +19,7 @@ function TrendingCoins() {
   const [loading, setLoading] = useState(false);
 
   const chartHistoricLength = 1;
+  const API_KEY = process.env.REACT_APP_API_KEY;
 
   //############################################################################
 
@@ -38,14 +39,14 @@ function TrendingCoins() {
             `Sending request for fetchTrendingCoinData (${coin.id}) (1/2)`
           );
           const coin_response = await axios.get(
-            `https://api.coingecko.com/api/v3/coins/${coin.id}`
+            `https://api.coingecko.com/api/v3/coins/${coin.id}?x_cg_demo_api_key=${API_KEY}`
           );
           // Get last 24h of data for each coin chart
           console.log(
             `Sending request for fetchTrendingCoinData (${coin.id}) (2/2)`
           );
           const chart_response = await axios.get(
-            `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart?vs_currency=${currencyName}&days=${chartHistoricLength}`
+            `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart?vs_currency=${currencyName}&days=${chartHistoricLength}?x_cg_demo_api_key=${API_KEY}`
           );
           if (coin_response && chart_response) {
             setLoading(false);

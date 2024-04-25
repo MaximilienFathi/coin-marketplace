@@ -29,6 +29,7 @@ export default function CoinsPage() {
   const [loading, setLoading] = useState(false);
 
   const pageSize = 100;
+  const API_KEY = process.env.REACT_APP_API_KEY;
 
   //############################################################################
 
@@ -53,7 +54,7 @@ export default function CoinsPage() {
     try {
       console.log("Sending request for fetchPaginatedData (coins)");
       const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currencyName}&order=market_cap_desc&per_page=${pageSize}&page=${currentPage}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currencyName}&order=market_cap_desc&per_page=${pageSize}&page=${currentPage}&sparkline=false&price_change_percentage=1h%2C24h%2C7d?x_cg_demo_api_key=${API_KEY}`
       );
       const coinsArray = response.data.map((coin) => updateData(coin));
       setPaginatedData(coinsArray);
