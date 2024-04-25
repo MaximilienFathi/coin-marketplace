@@ -1,5 +1,8 @@
 import React from "react";
+
 import "./guide-step.css";
+
+//############################################################################
 
 function GuideStep({
   picture,
@@ -8,7 +11,6 @@ function GuideStep({
   leftBorder,
   rightBorder,
   bottomBorder,
-  borderRadius,
   heading,
   description,
 }) {
@@ -19,7 +21,6 @@ function GuideStep({
         borderLeft: leftBorder,
         borderRight: rightBorder,
         borderBottom: bottomBorder,
-        // borderRadius: borderRadius,
       }}
     >
       <div className="quick-guide-step-text" style={{ order: order }}>
@@ -31,7 +32,7 @@ function GuideStep({
         <img
           className="guide-step-picture"
           src={picture}
-          alt={`picture for ${heading} step`}
+          alt={`${heading} step in home page guide`}
         ></img>
       </div>
     </div>

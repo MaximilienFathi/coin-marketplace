@@ -11,7 +11,6 @@ function Converter({
   setInput2,
 }) {
   const [input1, setInput1] = useState("");
-  // const [input2, setInput2] = useState("");
 
   const handleInput1Change = (event) => {
     setInput1(event.target.value);

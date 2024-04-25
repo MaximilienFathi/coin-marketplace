@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /*border: 3px solid red;*/
 }
 
 .price_change_box {
@@ -12,7 +11,6 @@
   padding: 1.2rem;
   border-radius: 11px;
   background: #394968;
-  /*border: 3px solid green;*/
   display: flex;
   justify-content: center;
   gap: 1.2rem;

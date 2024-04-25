@@ -7,7 +7,7 @@ import "./table-data.css";
 
 //############################################################################
 
-export default function TableData({
+function TableData({
   id,
   market_cap_rank,
   image,
@@ -96,3 +96,5 @@ export default function TableData({
     </tr>
   );
 }
+
+export default TableData;

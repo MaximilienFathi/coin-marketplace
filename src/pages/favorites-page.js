@@ -125,8 +125,6 @@ export default function FavoritesPage() {
           value={[paginatedData, setPaginatedData]}
         >
           <div className="page-container">
-            {/*<div className="content-wrap">*/}
-            {/* content-wrap NEEDED?*/}
             <Header />
             <TopSection
               heading={
@@ -169,7 +167,6 @@ export default function FavoritesPage() {
           </div>
           <Footer />
           <ScrollButton />
-          {/*</div>*/}
         </paginatedDataContext.Provider>
       </pageCountContext.Provider>
     </currentPageContext.Provider>

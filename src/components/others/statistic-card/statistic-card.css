@@ -4,19 +4,16 @@
   flex-direction: column;
   gap: 1.6rem;
   align-items: flex-start;
-  /*border: 1px solid rgba(255, 255, 255, 0.3);*/
   box-shadow: 0 0 0.5rem 0.2rem #b8b8b8;
   border-radius: 11px;
   padding: 1.6rem;
   position: relative;
-
-  /*overflow: hidden;*/
 }
 
 /* (was tricky) Necessary in order to have the image inserted before */
 .hero-stat-container::before {
   content: "";
-  background-image: url(../../../IMAGES/abstract_7186364_1280.png);
+  background-image: url(../../../images/abstract_7186364_1280.png);
   background-size: 700%;
   z-index: 1;
   border-radius: 11px;
@@ -30,7 +27,6 @@
 
 .hero-stat-container:hover::before {
   filter: brightness(70%);
-  /*border: 1px solid rgba(255, 255, 255, 0.3);*/
   box-shadow: 0 0 0.5rem 0.2rem #ffffff, 0 0 0.5rem 1rem #b84dc3;
   transition: all 0.4s;
 }

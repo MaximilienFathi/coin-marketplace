@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import LineChart from "../../others/line-chart";
 import "./coin-card.css";
+
+//############################################################################
 
 function CoinCard({
   id,
@@ -16,7 +19,6 @@ function CoinCard({
 }) {
   const price_change_color = price_change >= 0 ? "green" : "red";
 
-  // Contrary to table data, not transforming price as it is already fine
   const transformData = function (data, fractionDigits, type) {
     if (type === "percentage") {
       fractionDigits = 2;

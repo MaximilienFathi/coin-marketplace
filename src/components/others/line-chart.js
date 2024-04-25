@@ -11,6 +11,8 @@ import { Line } from "react-chartjs-2";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler);
 
+//############################################################################
+
 function LineChart({ historicData }) {
   const labels = new Array(historicData.length);
   const options = {
@@ -34,12 +36,10 @@ function LineChart({ historicData }) {
         pointRadius: 0,
         tension: 0.7,
         fill: {
-          target: "origin", // 3. Set the fill options
-          // above: "rgba(75, 192, 192, 0.25)",
+          target: "origin",
         },
         borderColor: ["rgb(75, 192, 192)"],
         borderWidth: 2,
-        // borderColor: gradient2, // Add custom color border (Line)
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 40, 0, 80);

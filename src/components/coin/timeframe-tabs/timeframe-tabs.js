@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { styled, Tab, Tabs } from "@mui/material";
 
-import "./timeframe-tabs.css";
-
 //############################################################################
 
 // CUSTOM STYLES
@@ -26,7 +24,6 @@ const StyledTab = styled(Tab)({
     color: "inherit",
     backgroundColor: "rgba(255,255,255,0.1)",
     borderRadius: 11,
-    // transition: "all 0.5s",
   },
 });
 
@@ -72,7 +69,6 @@ export default function TimeframeTabs({ fetchChartData, datatype }) {
           );
         })}
       </Tabs>
-      {/*<Outlet />*/}
     </div>
   );
 }

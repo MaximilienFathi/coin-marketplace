@@ -56,7 +56,6 @@ export default function CoinsPage() {
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currencyName}&order=market_cap_desc&per_page=${pageSize}&page=${currentPage}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
       );
       const coinsArray = response.data.map((coin) => updateData(coin));
-      // console.log("coinsArray is", coinsArray);
       setPaginatedData(coinsArray);
       if (response) {
         setLoading(false);

@@ -1,18 +1,7 @@
-/*
-TODO:
-Keep centre-search-container in case we have more ideas! If we do, move tabs
-in centre and label each of the 3 containers with a label and an icon
-*/
-
 .table-settings-container {
   display: flex;
   justify-content: space-between;
-  /*gap: 1.2rem;*/
   align-items: center;
-  /*background-color: green;*/
-
-  /*display: grid;*/
-  /*grid-template-columns: repeat(3, 1fr);*/
 }
 
 .centre-table-settings,
@@ -23,15 +12,9 @@ in centre and label each of the 3 containers with a label and an icon
   border-top-left-radius: 11px;
   border-top-right-radius: 11px;
   padding: 1rem 1.5rem;
-  /*border: 1px solid rgba(255, 255, 255, 0.18);*/
-  /*background-color: rgba(255, 255, 255, 0.2);*/
-  /*box-shadow: 0 0 0.5rem 0.01rem #b8b8b8;*/
-
-  /*background-color: #1a1a40;*/
   display: flex;
   align-items: center;
   justify-content: center;
-  /*flex-basis: 33%;*/
 }
 
 .centre-table-settings {
@@ -40,45 +23,6 @@ in centre and label each of the 3 containers with a label and an icon
 }
 
 .right-table-settings {
-  /*height: fit-content !important;*/
-  /*min-height: 100%;*/
-  /*background-color: green;*/
   display: flex;
   gap: 2.4rem;
-  /*align-items: center;*/
 }
-
-/*.table-nav {*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*}*/
-
-/*.table-nav-list {*/
-/*  !*font-size: 1.6rem;*!*/
-/*  list-style: none;*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*  gap: 1.6rem;*/
-/*}*/
-
-/*.table-nav-link:link,*/
-/*.table-nav-link:visited {*/
-/*  color: rgba(255, 255, 255, 0.8);*/
-/*  font-size: 1.6rem;*/
-/*  font-weight: 600;*/
-/*  !*font-weight: 400;*!*/
-/*  text-decoration: none;*/
-/*  !*padding: 0rem;*!*/
-/*  border: 2px solid #fa58b6;*/
-/*  border-radius: 11px;*/
-/*  background-color: rgba(255, 255, 255, 0.1);*/
-
-/*  !*color: inherit;*!*/
-/*  transition: all 0.3s;*/
-/*}*/
-
-/*.table-nav-link:hover,*/
-/*.table-nav-link:active {*/
-/*  !* Change color *!*/
-/*  color: rgba(255, 255, 255, 0.8);*/
-/*}*/

@@ -7,7 +7,7 @@ import "./global-stats.css";
 
 //############################################################################
 
-export default function GlobalStats() {
+function GlobalStats() {
   const [currencyName] = useContext(currencyContext);
   const [globalMarketData] = useContext(globalMarketDataContext);
 
@@ -54,3 +54,5 @@ export default function GlobalStats() {
     </div>
   );
 }
+
+export default GlobalStats;

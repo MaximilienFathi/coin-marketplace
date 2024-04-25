@@ -14,7 +14,6 @@
 .guide-step-picture {
   width: 70%;
   height: auto;
-  /*margin-bottom: 1.2rem;*/
 }
 
 .quick-guide-step-text {
@@ -37,9 +36,6 @@
 }
 
 .quick-guide-step-description {
-  /*font-size: 1.8rem;*/
-  /*line-height: 1.8;*/
-
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.8rem;
   line-height: 1.6;

@@ -1,11 +1,4 @@
 .hero-container {
-  /*max-width: 130rem;*/
-  /*margin: 0 auto;*/
-  /*padding: 4.8rem 10rem;*/
-  /*display: grid;*/
-  /*grid-template-columns: 1fr 1fr;*/
-  /*gap: 9.6rem;*/
-
   /* Must include max-width else content spreads too much and looks ugly*/
   max-width: 130rem;
   margin: 0 auto;
@@ -17,13 +10,11 @@
 .hero-text-container {
   text-align: left;
   padding-top: 4.8rem;
-  /*width: 120rem;*/
 }
 
 .hero-heading {
   font-size: 5.2rem;
   font-weight: 500;
-  /*line-height: 1.05;*/
   letter-spacing: -0.5px;
   margin-bottom: 3.2rem;
 }
@@ -68,8 +59,6 @@
   height: fit-content;
   border-radius: 11px;
   padding: 1.2rem;
-  /*background: linear-gradient(90deg, #b84dc3, #a620b4);*/
-  /*box-shadow: inset 0 0 2px #000;*/
   border: 2px solid #fa58b6;
   transition: all 0.3s;
 }
@@ -80,15 +69,12 @@
 }
 
 .hero-img-container {
-  /*justify-self: center;*/
   width: 120rem;
   display: flex;
   justify-content: center;
 }
 
 .hero-img {
-  /*transform: scale(1.2);*/
-  /*animation: bounce 1s infinite alternate;*/
   width: 80%;
   height: auto;
 }

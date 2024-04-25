@@ -14,7 +14,6 @@ const StyledBox = styled(Box)({ minWidth: "10rem" });
 
 const StyledSelect = styled(Select)({
   "& .MuiInputBase-input": {
-    // htmlFontSize: 10,
     zIndex: 1,
     color: "#fff",
     fontFamily: ["Rubik", "sans-serif"],
@@ -23,12 +22,12 @@ const StyledSelect = styled(Select)({
     height: 24,
     paddingBottom: 12,
     paddingTop: 12,
-    lineHeight: 1.5, // Not ideal solution to annoying bug
+    lineHeight: 1.5,
   },
   "& .MuiSvgIcon-root": {
     zIndex: 1,
     fontSize: "3rem",
-    color: "rgba(255, 255, 255, 0.8)", // color of other arrows: #b8b8b8
+    color: "rgba(255, 255, 255, 0.8)",
   },
   "& .MuiOutlinedInput-notchedOutline": {
     border: "none",
@@ -39,7 +38,6 @@ const StyledSelect = styled(Select)({
   "&:hover .MuiOutlinedInput-notchedOutline": {
     background: "linear-gradient(90deg, #c671cf, #b84dc3)",
   },
-  // "&.Mui-focused .MuiOutlinedInput-notchedOutline": notchedOutlineStyles,
 });
 
 const StyledMenuItem = styled(MenuItem)({
@@ -51,7 +49,7 @@ const StyledMenuItem = styled(MenuItem)({
 
 //############################################################################
 
-export default function Dropdown() {
+function Dropdown() {
   const [currencyName, setCurrencyName, , setCurrencySymbol] =
     useContext(currencyContext);
 
@@ -71,6 +69,7 @@ export default function Dropdown() {
         setCurrencySymbol(chosenCurrencySymbol);
         break;
       case "usd":
+      default:
         chosenCurrencySymbol = "$";
         setCurrencySymbol(chosenCurrencySymbol);
         break;
@@ -90,10 +89,8 @@ export default function Dropdown() {
     <StyledBox>
       <FormControl fullWidth>
         <StyledSelect
-          // size="small"
           value={currencyName}
           onChange={handleChange}
-          // focused
           MenuProps={{
             PaperProps: {
               sx: {
@@ -105,7 +102,6 @@ export default function Dropdown() {
                 "& .MuiMenuItem-root:hover": {
                   backgroundColor: "rgba(255,255,255,0.1)",
                 },
-                // BUG where initially selected item color is blue
                 "& .MuiMenuItem-root.Mui-selected": {
                   backgroundColor: "#a620b4",
                 },
@@ -124,3 +120,5 @@ export default function Dropdown() {
     </StyledBox>
   );
 }
+
+export default Dropdown;

@@ -26,13 +26,12 @@ const StyledTab = styled(Tab)({
     color: "inherit",
     backgroundColor: "rgba(255,255,255,0.1)",
     borderRadius: 11,
-    // transition: "all 0.5s",
   },
 });
 
 //############################################################################
 
-export default function CoinDataTabs({ updateChartData }) {
+function CoinDataTabs({ updateChartData }) {
   const [value, setValue] = useState("prices");
 
   // Keep track of labels and related value
@@ -69,7 +68,8 @@ export default function CoinDataTabs({ updateChartData }) {
           );
         })}
       </Tabs>
-      {/*<Outlet />*/}
     </div>
   );
 }
+
+export default CoinDataTabs;

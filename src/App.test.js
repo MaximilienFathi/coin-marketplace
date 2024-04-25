@@ -51,6 +51,7 @@ test("Initial value of input boxes should an empty string", () => {
 });
 
 //////////////////////////////////
+
 // // setup function
 // function setup(jsx) {
 //   return {

@@ -1,10 +1,13 @@
 import React from "react";
-import "./project-links.css";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import RedditIcon from "@mui/icons-material/Reddit";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
+
+import "./project-links.css";
+
+//############################################################################
 
 function ProjectLinks({ coinData }) {
   const addNetworkLogo = (name) => {
@@ -50,6 +53,8 @@ function ProjectLinks({ coinData }) {
       })
     );
   };
+
+  //############################################################################
 
   return (
     <div className="project-links-outer-container">

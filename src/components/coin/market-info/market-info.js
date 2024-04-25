@@ -1,8 +1,3 @@
-/*
-TODO:
-Right now, any value that is null, undefined or even 0 will be hidden
-or shown as "-". Should that still be the case for 0??
-*/
 import React, { useContext } from "react";
 
 import currencyContext from "../../../contexts/currency-context";
@@ -13,7 +8,7 @@ import "./market-info.css";
 
 //############################################################################
 
-export default function MarketInfo({ coinData, marketData }) {
+function MarketInfo({ coinData, marketData }) {
   const [currencyName, , currencySymbol] = useContext(currencyContext);
   const [globalMarketData] = useContext(globalMarketDataContext);
 
@@ -53,7 +48,6 @@ export default function MarketInfo({ coinData, marketData }) {
     const globalMarketCap =
       globalMarketData?.["total_market_cap"]?.[currencyName];
     const marketDominance = (coinMarketCap / globalMarketCap) * 100;
-    // console.log(coinMarketCap, globalMarketCap, marketDominance);
     return marketDominance
       ? `${marketDominance.toLocaleString("en-US", {
           minimumFractionDigits: 2,
@@ -188,3 +182,5 @@ export default function MarketInfo({ coinData, marketData }) {
     </div>
   );
 }
+
+export default MarketInfo;

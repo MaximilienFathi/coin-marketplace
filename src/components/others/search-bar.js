@@ -21,13 +21,10 @@ const StyledTextField = styled(TextField)({
     },
   },
   "& .MuiInputBase-root.Mui-focused": {
-    // borderBottomRightRadius: "0px",
-    // borderBottomLeftRadius: "0px",
     "& > fieldset": {
       transition: "all 0.5s",
       boxShadow: "0 0 0.5rem 0.2rem #b84dc3",
       border: "2px solid #b84dc3",
-      // borderBottom: "none",
     },
   },
   "& .MuiInputBase-input": { height: 24, paddingBottom: 12, paddingTop: 12 },
@@ -40,15 +37,13 @@ const StyledSearchIcon = styled(SearchIcon)({
 });
 
 const InputPropsStyles = {
-  // htmlFontSize: 10,
   fontFamily: "inherit",
   fontSize: "1.6rem",
   fontWeight: 600,
-  color: "inherit", // rgba(255, 255, 255, 0.8)
+  color: "inherit",
 };
 
 const GroupHeader = styled("div")({
-  // position: "sticky",
   padding: "1.2rem 1.6rem",
   fontFamily: ["Rubik", "sans-serif"],
   fontSize: "1.4rem",
@@ -61,9 +56,6 @@ const GroupItems = styled("ul")({
   fontSize: "1.6rem",
   fontWeight: 600,
   color: "#fff",
-  // "& .MuiAutocomplete-inputRoot": {
-  //   flexWrap: "nowrap !important",
-  // },
   "& .MuiAutocomplete-option": {
     padding: "0.8rem 3.2rem",
   },
@@ -80,7 +72,7 @@ const GroupItems = styled("ul")({
 
 //############################################################################
 
-export default function SearchBar() {
+function SearchBar() {
   const [coinsList] = useContext(coinsListContext);
   const [exchangesList] = useContext(exchangesListContext);
   const [trendingCoinsList] = useContext(trendingCoinsListContext);
@@ -134,18 +126,12 @@ export default function SearchBar() {
         options={options}
         groupBy={(listItem) => listItem["type"]}
         getOptionLabel={(listItem) => listItem["name"] || ""}
-        // PopperComponent={(props) => (
-        //   <Popper open anchorEl={null} placement="top" />
-        // )}
         PaperComponent={({ children }) => (
           <Paper
             style={{
               border: "2px solid #b84dc3",
               borderRadius: "11px",
               backgroundColor: "#240c4c",
-              // borderTop: "none",
-              // borderTopRightRadius: "0px",
-              // borderTopLeftRadius: "0px",
             }}
           >
             {children}
@@ -180,3 +166,5 @@ export default function SearchBar() {
     )
   );
 }
+
+export default SearchBar;

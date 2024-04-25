@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { styled, Tab, Tabs } from "@mui/material";
+
 import SwapOptionInput from "../swap-option-input/swap-option-input";
 
-//========================================================
+//############################################################################
+
 // CUSTOM STYLES
 const StyledTab = styled(Tab)({
   color: "rgba(255, 255, 255, 0.6)",
@@ -24,10 +26,10 @@ const StyledTab = styled(Tab)({
     color: "inherit",
     backgroundColor: "rgba(255,255,255,0.1)",
     borderRadius: 11,
-    // transition: "all 0.5s",
   },
 });
-//========================================================
+
+//############################################################################
 
 function SwapOptionTabs({ unit, values, setSlippage, setWarning }) {
   const [option, setOption] = useState(values[0]);

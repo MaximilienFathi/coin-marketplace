@@ -5,10 +5,7 @@
 
   display: grid;
   grid-template-columns: 2.5fr 1fr;
-  grid-template-rows: repeat(3, auto); /* min-content */
-  /*grid-template-columns: repeat(2, min-content);*/
-  /*grid-auto-flow: column;*/
+  grid-template-rows: repeat(3, auto);
   column-gap: 3.2rem;
   row-gap: 3.2rem;
-  /*height: fit-content;*/
 }

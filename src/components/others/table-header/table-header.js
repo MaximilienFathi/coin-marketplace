@@ -16,7 +16,7 @@ const StyledArrowDropUpIcon = styled(ArrowDropUpIcon)({ color: "#b8b8b8" });
 
 //############################################################################
 
-export default function TableHeader({
+function TableHeader({
   headerKey,
   headerName,
   data,
@@ -36,7 +36,6 @@ export default function TableHeader({
   function compareBy(key) {
     if (!ascendingSort && key !== "name")
       return function (a, b) {
-        // console.log(a[key], b[key], a[key] > b[key]);
         if (a[key] < b[key]) return -1;
         if (a[key] > b[key]) return 1;
         return 0;
@@ -102,3 +101,5 @@ export default function TableHeader({
     </th>
   );
 }
+
+export default TableHeader;

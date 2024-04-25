@@ -7,13 +7,7 @@
 
 .price-back-bar {
   height: 30%;
-  /*border: 1px solid #b8b8b8;*/
   background-color: rgba(184, 184, 184, 0.25);
-  /*background: linear-gradient(*/
-  /*  90deg,*/
-  /*  rgba(22, 37, 107, 0.5),*/
-  /*  rgba(0, 124, 128, 0.5)*/
-  /*);*/
   border-radius: 50px;
   margin: 0 0 1.2rem 2.4rem;
 }

@@ -2,16 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /*gap: 20rem;*/
 
   margin: 5rem auto;
-  /*padding: 0 6.4rem;*/
   width: 75%;
   height: auto;
-  /*border: 3px solid red;*/
 }
 
-/********************************************************/
+/*############################################################################*/
 
 .error-text {
   display: flex;
@@ -29,23 +26,19 @@
 .error-subheading {
   font-size: 5.2rem;
   font-weight: 600;
-  /*color: rgba(255, 255, 255, 0.8);*/
   margin-bottom: 2.4rem;
 }
 
 .error-description {
   font-size: 2.4rem;
   line-height: 1.6;
-  /*color: rgba(255, 255, 255, 0.7);*/
   margin-bottom: 2.4rem;
 }
 
-/********************************************************/
+/*############################################################################*/
 
 .error-img {
   width: 50%;
   height: auto;
-  /*transform: scale(1.45);*/
   z-index: -1;
-  /*border: 2px solid red;*/
 }

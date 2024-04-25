@@ -1,23 +1,23 @@
-import * as React from "react";
-import { useContext } from "react";
-import currencyContext from "../../contexts/currency-context";
+import React, { useContext } from "react";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { styled } from "@mui/material";
 
+import currencyContext from "../../contexts/currency-context";
+
 function SwapperDropdown() {
   const [currencyName, setCurrencyName, , setCurrencySymbol] =
     useContext(currencyContext);
 
-  //========================================================
+  //############################################################################
+
   // CUSTOM STYLES
   const StyledBox = styled(Box)({ minWidth: "10rem" });
 
   const StyledSelect = styled(Select)({
     "& .MuiInputBase-input": {
-      // // htmlFontSize: 10,
       zIndex: 1,
       color: "#fff",
       fontFamily: ["Rubik", "sans-serif"],
@@ -26,12 +26,12 @@ function SwapperDropdown() {
       height: 24,
       paddingBottom: 12,
       paddingTop: 12,
-      lineHeight: 1.5, // Not ideal solution to annoying bug
+      lineHeight: 1.5,
     },
     "& .MuiSvgIcon-root": {
       zIndex: 1,
       fontSize: "3rem",
-      color: "rgba(255, 255, 255, 0.8)", // color of other arrows: #b8b8b8
+      color: "rgba(255, 255, 255, 0.8)",
     },
     "& .MuiOutlinedInput-notchedOutline": {
       border: "none",
@@ -42,7 +42,6 @@ function SwapperDropdown() {
     "&:hover .MuiOutlinedInput-notchedOutline": {
       background: "linear-gradient(90deg, #c671cf, #b84dc3)",
     },
-    // "&.Mui-focused .MuiOutlinedInput-notchedOutline": notchedOutlineStyles,
   });
 
   const StyledMenuItem = styled(MenuItem)({
@@ -51,7 +50,8 @@ function SwapperDropdown() {
     fontSize: "1.6rem",
     fontWeight: 600,
   });
-  //========================================================
+
+  //############################################################################
 
   const handleChange = (event) => {
     const chosenCurrencyName = event.target.value;
@@ -67,6 +67,7 @@ function SwapperDropdown() {
         setCurrencySymbol(chosenCurrencySymbol);
         break;
       case "usd":
+      default:
         chosenCurrencySymbol = "$";
         setCurrencySymbol(chosenCurrencySymbol);
         break;
@@ -84,10 +85,8 @@ function SwapperDropdown() {
     <StyledBox>
       <FormControl fullWidth>
         <StyledSelect
-          // size="small"
           value={currencyName}
           onChange={handleChange}
-          // focused
           MenuProps={{
             PaperProps: {
               sx: {
@@ -99,7 +98,6 @@ function SwapperDropdown() {
                 "& .MuiMenuItem-root:hover": {
                   backgroundColor: "rgba(255,255,255,0.1)",
                 },
-                // BUG where initially selected item color is blue
                 "& .MuiMenuItem-root.Mui-selected": {
                   backgroundColor: "#a620b4",
                 },

@@ -11,7 +11,7 @@ import "./trending-coins.css";
 
 //############################################################################
 
-export default function TrendingCoins() {
+function TrendingCoins() {
   const [currencyName, , currencySymbol] = useContext(currencyContext);
   const [trendingCoinsList] = useContext(trendingCoinsListContext);
 
@@ -135,3 +135,5 @@ export default function TrendingCoins() {
     </div>
   );
 }
+
+export default TrendingCoins;

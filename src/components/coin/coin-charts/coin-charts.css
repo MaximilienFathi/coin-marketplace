@@ -1,7 +1,7 @@
 .coin-charts-outer-container {
   grid-column: 1;
   grid-row: 2;
-  height: auto; /* fit-content or calc(100% - 3.2rem) */
+  height: auto;
   border-radius: 11px;
   padding: 2.4rem;
   background-color: rgba(184, 184, 184, 0.25);
@@ -26,12 +26,4 @@
   font-size: 2rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.8);
-  /*color: inherit;*/
 }
-
-/*.timeframe-buttons-group button {*/
-/*  border: none;*/
-/*  background: none;*/
-/*  font-size: 1.2rem;*/
-/*  color: rgba(255, 255, 255, 0.7);*/
-/*}*/

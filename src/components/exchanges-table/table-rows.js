@@ -13,7 +13,7 @@ import "../coins-table/table-rows.css";
 
 //############################################################################
 
-export default function TableRows({ searchQuery }) {
+function TableRows({ searchQuery }) {
   const [currencyName, , ,] = useContext(currencyContext);
   const [currentPage] = useContext(currentPageContext);
   const [paginatedData, setPaginatedData] = useContext(paginatedDataContext);
@@ -154,3 +154,5 @@ export default function TableRows({ searchQuery }) {
     </>
   );
 }
+
+export default TableRows;

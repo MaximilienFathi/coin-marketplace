@@ -6,22 +6,22 @@
 
 ---
 
-COIN marketplace is a website that keeps track of cryptocurrency and coin 
-exchange performance. It also simulates trading transactions from one 
-currency to another while still taking into consideration certain issues 
+COIN marketplace is a website that keeps track of cryptocurrency and coin
+exchange performance. It also simulates trading transactions from one
+currency to another while still taking into consideration certain issues
 specific to real cryptocurrency trading.
 
 ## Table of contents
 
 - [Overview](#overview)
-    - [The challenge](#the-challenge)
-    - [Screenshots](#screenshots)
-    - [Link](#link)
+  - [The challenge](#the-challenge)
+  - [Screenshots](#screenshots)
+  - [Link](#link)
 - [My process](#my-process)
-    - [Built with](#built-with)
-    - [What I learned](#what-i-learned)
-    - [Continued development](#continued-development)
-    - [Useful resources](#useful-resources)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
 - [Author](#author)
 
 ## Overview
@@ -37,16 +37,16 @@ Users should be able to:
 - Search and find specific cryptocurrencies and coin exchanges.
 - View current balance for specific cryptocurrency and recent amount change.
 - View specific cryptocurrency past and current performance.
-- Simulate a transaction from one currency to another with customizable 
+- Simulate a transaction from one currency to another with customizable
   settings.
-- Have access to specific cryptocurrency website, social networks, source 
+- Have access to specific cryptocurrency website, social networks, source
   code, etc.
 
 ### Screenshots
 
-![Image of cryptocurencies table](/README_table_screenshot.PNG)  
-![Image of cryptocurency statistics and price data](/README_statistics_screenshot.PNG)  
-![Image of cryptocurencies performance chart and swapper](/README_chart&swapper_screenshot.PNG)
+![Image of cryptocurencies table](/src/images/README_table_screenshot.PNG)  
+![Image of cryptocurency statistics and price data](/src/images/README_statistics_screenshot.PNG)  
+![Image of cryptocurencies performance chart and swapper](/src/images/README_chart&swapper_screenshot.PNG)
 
 ### Link
 
@@ -81,30 +81,30 @@ While working through this project, the major learnings involved:
 
 ### Continued development
 
-Even though I have accomplished many of my initial objectives for this 
+Even though I have accomplished many of my initial objectives for this
 project, there are still some new features I wish to include such as:
 
 - Some UI changes, particularly for the home page.
 - More pages such as one dedicated to blog posts.
 - A page for each coin exchange outlining their performance.
 - A complete back-end mechanism with actual user accounts.
-- A proper way of having real cryptocurrency transactions using Web3 
+- A proper way of having real cryptocurrency transactions using Web3
   technologies.
 
 ### Useful resources
 
-- [stackoverflow](http://stackoverflow.com/) - This proved insightful 
-  when I was stuck on specific coding issues.  
-- [coingecko](https://www.coingecko.com/) - This was very useful when it 
+- [stackoverflow](http://stackoverflow.com/) - This proved insightful
+  when I was stuck on specific coding issues.
+- [coingecko](https://www.coingecko.com/) - This was very useful when it
   came to gathering API data for various cryptocurrencies and coin exchanges.
-- [dribbble](https://dribbble.com/) - This helped me discover great web 
+- [dribbble](https://dribbble.com/) - This helped me discover great web
   design inspirations.
-- [maketintsandshades](https://maketintsandshades.com/) - This was a 
+- [maketintsandshades](https://maketintsandshades.com/) - This was a
   great tool for generating lighter and darker versions of specific colors.
-- [storyset](https://storyset.com/) - This provided me with a variety of 
-  great pictures to include in my project while still being similar in style 
+- [storyset](https://storyset.com/) - This provided me with a variety of
+  great pictures to include in my project while still being similar in style
   as well as customizable (i.e. colors can be modified).
-- [favicon.io](https://favicon.io/) - This helped me quickly generate 
+- [favicon.io](https://favicon.io/) - This helped me quickly generate
   necessary files for the favicon and its different formats.
 
 ## Author

@@ -31,7 +31,7 @@ ChartJS.register(
 
 //############################################################################
 
-export default function CoinCharts({ coinID, coinName, priceChangesData }) {
+function CoinCharts({ coinID, coinName, priceChangesData }) {
   const [currencyName] = useContext(currencyContext);
   const [allHistoricData, setAllHistoricData] = useState({});
   const [specificHistoricData, setSpecificHistoricData] = useState([]);
@@ -115,28 +115,19 @@ export default function CoinCharts({ coinID, coinName, priceChangesData }) {
         ticks: {
           padding: 10,
           color: "rgba(255,255,255,0.4)",
-          // callback: function (value, index, ticks) {
-          //   return new Intl.NumberFormat("en-US", {
-          //     style: "currency",
-          //     currency: "usd",
-          //   }).format(value);
-          // },
         },
         grid: {
           drawBorder: false,
           borderDash: [3, 3],
-          // borderDashOffset: 2,
           drawTicks: false,
           color: "rgba(255,255,255,0.2)",
         },
       },
     },
-    // layout: { padding: { left: 100, bottom: 50 } },
     responsive: true,
-    // maintainAspectRatio: false,
   };
-  // https://stackoverflow.com/questions/72998998/how-to-make-vertical-line-when-hovering-cursor-chart-js
 
+  // https://stackoverflow.com/questions/72998998/how-to-make-vertical-line-when-hovering-cursor-chart-js
   const plugins = [
     {
       afterDraw: (chart) => {
@@ -182,12 +173,10 @@ export default function CoinCharts({ coinID, coinName, priceChangesData }) {
         pointRadius: 0.5,
         tension: 0.7,
         fill: {
-          target: "origin", // 3. Set the fill options
-          // above: "rgba(75, 192, 192, 0.25)",
+          target: "origin",
         },
         borderColor: ["#64efdf"],
         borderWidth: 3,
-        // borderColor: gradient2, // Add custom color border (Line)
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 130, 0, 330);
@@ -241,3 +230,5 @@ export default function CoinCharts({ coinID, coinName, priceChangesData }) {
     </div>
   );
 }
+
+export default CoinCharts;

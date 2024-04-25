@@ -138,9 +138,6 @@ export default function CoinPage() {
         />
         <div className="coin-page-content-wrap">
           <MarketInfo coinData={coinData} marketData={marketData}></MarketInfo>
-          {/*{coinData && marketData ? (*/}
-          {/*    <MarketInfo coinData={coinData} marketData={marketData} />*/}
-          {/*) : null}*/}
           <CoinBalance
             coinSymbol={coinData.symbol}
             currencyRate={currencyRates[currencyName]}

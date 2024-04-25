@@ -1,47 +1,22 @@
 table {
-  /*background: rgba(255, 255, 255, 0.25);*/
-  /*box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);*/
-  /*border: 1px solid rgba(230, 230, 230, 0.18);*/
-  /*background-color: rgba(255, 255, 255, 0.2);*/
-
-  /*backdrop-filter: blur(4px);*/
-  /*-webkit-backdrop-filter: blur(4px);*/
-
   background-color: rgba(184, 184, 184, 0.2);
   box-shadow: 0 0 0.5rem 0.01rem #b8b8b8;
   border-spacing: 0;
   border-bottom-left-radius: 11px;
   border-bottom-right-radius: 11px;
-  /*padding: 2.4rem;*/
   padding: 0 2.4rem;
-  /*padding: 2.4rem 2.4rem 0rem 2.4rem;*/
 }
-
-/* Sticky header when background is blurred is terrible */
-/*.exchanges-table-table-head {*/
-/*  !*background-color: rgba(184, 184, 184, 0.2);*!*/
-/*  box-shadow: 0 3rem 2rem 2rem #b8b8b8;*/
-/*  position: sticky;*/
-/*  top: 0px;*/
-/*  z-index: 1;*/
-/*}*/
 
 th,
 td {
   height: 7rem;
   font-size: 1.5rem;
-  /*border: 1px solid grey;*/
 }
-
-/*th {*/
-/*  color: #b8b8b8;*/
-/*}*/
 
 td {
   border-top: 1px solid #8f8f8f;
 }
 
-/* Ranks and names should be displayed differently from other stats */
 .coins-table-row th:not(:nth-child(2)),
 .coins-table-row th:not(:nth-child(3)),
 .coins-table-row td:not(:nth-child(2)),
@@ -51,7 +26,6 @@ td {
 .exchanges-table-row td:not(:nth-child(2)),
 .exchanges-table-row td:not(:nth-child(3)) {
   text-align: right;
-  /*padding-left: 0rem;*/
   padding-right: 2rem;
 }
 

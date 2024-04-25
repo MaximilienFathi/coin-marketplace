@@ -12,7 +12,6 @@
   display: grid;
   grid-template-columns: repeat(2, min-content) auto;
   grid-template-rows: repeat(2, min-content);
-
   margin-bottom: 3.2rem;
   column-gap: 0.8rem;
   row-gap: 0.8rem;
@@ -27,9 +26,6 @@
 .market-info-rank-container {
   grid-column: 2;
   grid-row: 2;
-  /*display: flex;*/
-  /*align-items: center;*/
-  /*gap: 1.2rem;*/
 }
 
 .market-info-rank {
@@ -38,12 +34,6 @@
   color: rgba(255, 255, 255);
   width: fit-content;
 }
-
-/*.market-info-type {*/
-/*  background: #495e74;*/
-/*  font-size: 1.4rem;*/
-/*  color: rgba(255, 255, 255, 0.8);*/
-/*}*/
 
 .small-box {
   font-weight: 400;
@@ -62,10 +52,8 @@
 .market-info-name {
   font-size: 3rem;
   font-weight: 500;
-
   white-space: nowrap;
   overflow: hidden;
-  /*text-overflow: ellipsis;*/
 }
 
 .market-info-symbol {
@@ -83,7 +71,6 @@
   justify-content: flex-end;
   gap: 1.2rem;
   font-weight: 500;
-  /*padding-top: 0.8rem;*/
 }
 
 .market-info-price-value {

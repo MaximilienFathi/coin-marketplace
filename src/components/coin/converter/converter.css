@@ -7,10 +7,7 @@
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 11px;
   padding: 1.8rem 1.4rem;
-
-  /*border: 3px solid rgba(255, 255, 255, 0.3);*/
   background-color: rgba(35, 37, 56, 0.1);
-  /*padding: 1.4rem 0;*/
 }
 
 .converter-input-labels {
@@ -28,31 +25,4 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  /*color: #fc9bd3;*/
 }
-
-/*.switchButton {*/
-/*  !*z-index: 1;*!*/
-/*  !*position: absolute;*!*/
-/*  !*left: 50%;*!*/
-/*  !*top: 50%;*!*/
-/*  !*transform: translate(-50%, -50%);*!*/
-
-/*  width: 4rem;*/
-/*  height: 4rem;*/
-/*  padding: 0.8rem;*/
-/*  border-radius: 50%;*/
-/*  background: linear-gradient(90deg, #b84dc3, #a620b4);*/
-/*  box-shadow: inset 0 0 2px #000;*/
-/*  border: none;*/
-/*  color: rgb(255, 255, 255);*/
-/*}*/
-
-/*.switchButton:hover {*/
-/*  background: linear-gradient(90deg, #c671cf, #b84dc3);*/
-/*  cursor: pointer;*/
-/*}*/
-
-/*.switchButton:active {*/
-/*  !*background: linear-gradient(90deg, #b84dc3, #a620b4);*!*/
-/*}*/

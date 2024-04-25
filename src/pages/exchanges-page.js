@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import currentPageContext from "../contexts/current-page-context";
-import globalMarketDataContext from "../contexts/global-market-data-context";
 import pageCountContext from "../contexts/page-count-context";
 import paginatedDataContext from "../contexts/paginated-data-context";
 import Header from "../components/others/header/header";
@@ -19,8 +18,6 @@ import "./page.css";
 //############################################################################
 
 export default function ExchangesPage() {
-  const [globalMarketData] = useContext(globalMarketDataContext);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(5);
   const [paginatedData, setPaginatedData] = useState([]);
@@ -32,12 +29,6 @@ export default function ExchangesPage() {
 
   // Reset scrollbar to top when page is loaded.
   window.scrollTo(0, 0);
-
-  // Calculate number of pages needed to represent all exchanges in table
-  // useEffect(() => {
-  //   const exchangesNumber = globalMarketData?.["markets"];
-  //   exchangesNumber && setPageCount(Math.ceil(exchangesNumber / pageSize));
-  // }, [globalMarketData]);
 
   // Retrieve data of next 100 exchanges everytime we switch page
   useEffect(() => {
@@ -56,7 +47,6 @@ export default function ExchangesPage() {
       const exchangesArray = response.data.map((exchange) =>
         updateData(exchange)
       );
-      // console.log("exchangesArray is", coinsArray);
       setPaginatedData(exchangesArray);
       if (response) {
         setLoading(false);

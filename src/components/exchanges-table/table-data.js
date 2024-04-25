@@ -6,7 +6,7 @@ import "../coins-table/table-data.css";
 
 //############################################################################
 
-export default function TableData({
+function TableData({
   trust_score_rank,
   image,
   name,
@@ -61,3 +61,5 @@ export default function TableData({
     </tr>
   );
 }
+
+export default TableData;

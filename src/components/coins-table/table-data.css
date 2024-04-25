@@ -6,17 +6,9 @@
   gap: 1.2rem;
 }
 
-/* including .exchange-logo makes some logos huge for some reason */
 .coin-logo {
   height: 60%;
 }
-
-/*.coin-logo,*/
-/*.exchange-logo {*/
-/*  height: 4rem;*/
-/*  width: 4rem;*/
-/*  !*height: 60%;*!*/
-/*}*/
 
 .coin-name,
 .exchange-name {

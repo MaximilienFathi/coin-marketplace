@@ -8,7 +8,7 @@
 
 .coin-card::before {
   content: "";
-  background-image: url(../../../IMAGES/abstract_7186364_1280.png);
+  background-image: url(../../../images/abstract_7186364_1280.png);
   background-size: 700%;
   z-index: 1;
   border-radius: 11px;
@@ -21,13 +21,11 @@
 }
 
 .coin-card:hover::before {
-  /*border: 1px solid rgba(255, 255, 255, 0.3);*/
   box-shadow: 0 0 0.5rem 0.2rem #ffffff, 0 0 0.5rem 1rem #b84dc3;
   transition: all 0.4s;
 }
 
 .coin-card:hover {
-  /* having the following in previous css rule creates brightness bug for price changes */
   filter: brightness(200%);
 }
 
@@ -55,8 +53,6 @@
 
 .coin-card-name {
   grid-column: 1/-1;
-  /*grid-row: 1;*/
-  /*color: rgba(255, 255, 255, 0.7);*/
   font-size: 1.6rem;
   font-weight: 500;
   margin-bottom: 1.6rem;
@@ -65,7 +61,6 @@
 .coin-card-data {
   display: flex;
   align-items: center;
-  /*justify-content: space-between;*/
 }
 
 .coin-card-data div:nth-child(1) {

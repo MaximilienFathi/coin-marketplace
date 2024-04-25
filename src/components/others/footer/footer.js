@@ -1,5 +1,8 @@
 import React from "react";
+
 import "./footer.css";
+
+//############################################################################
 
 function Footer() {
   return (
@@ -8,7 +11,7 @@ function Footer() {
         <p className="copyright">
           Copyright &copy;{" "}
           <span className="year">{new Date().getFullYear()}</span> by{" "}
-          <a className="footer-link" href="https://github.com/MaximilienFathi">
+          <a className="footer-link" href="https://github.com/ma-fath">
             Maximilien Fathi
           </a>
           . All rights reserved.

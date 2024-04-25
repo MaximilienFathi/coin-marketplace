@@ -10,16 +10,13 @@ import "./table-settings.css";
 
 // CUSTOM STYLES
 const StyledTab = styled(Tab)({
-  // color: "rgba(255, 255, 255, 0.4)",
   color: "inherit",
   fontFamily: "inherit",
   fontSize: "1.6rem",
   fontWeight: 600,
   width: "14rem",
   "&.Mui-selected": {
-    // color: "rgba(255, 255, 255, 0.8)",
     color: "inherit",
-    // backgroundColor: "#a361ab",
     background: "linear-gradient(90deg, #b84dc3, #a620b4)",
     boxShadow: "inset 0 0 2px #000",
     borderRadius: 11,
@@ -28,18 +25,15 @@ const StyledTab = styled(Tab)({
     background: "linear-gradient(90deg, #c671cf, #b84dc3)",
   },
   "&:hover": {
-    // color: "rgba(255, 255, 255, 0.8)",
     color: "inherit",
     backgroundColor: "rgba(255,255,255,0.1)",
-    // boxShadow: "inset 0 0 3px #000",
     borderRadius: 11,
-    // transition: "all 0.5s",
   },
 });
 
 //############################################################################
 
-export default function TableSettings() {
+function TableSettings() {
   const tabs = [
     `${process.env.PUBLIC_URL}/coins`,
     `${process.env.PUBLIC_URL}/exchanges`,
@@ -80,28 +74,25 @@ export default function TableSettings() {
             style: { display: "none" },
           }}
           onChange={handleChange}
-          // aria-label="icon label tabs example"
         >
           {labelsArray.map(({ label, component, to }) => {
             return (
               <StyledTab
                 key={label}
-                // icon={<PhoneIcon />}
                 label={label}
                 component={component}
                 to={to}
               />
             );
           })}
-          />
         </Tabs>
       </div>
-      {/*<div className="centre-table-settings"></div>*/}
       <div className="right-table-settings">
         <Dropdown />
         <SearchBar />
       </div>
-      {/*<Outlet />*/}
     </div>
   );
 }
+
+export default TableSettings;

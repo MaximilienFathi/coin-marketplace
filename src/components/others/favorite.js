@@ -26,7 +26,7 @@ const StyledStarBorderIcon = styled(StarBorderIcon)({
 
 //############################################################################
 
-export default function Favorite({ coinID }) {
+function Favorite({ coinID }) {
   // Show if coin is in localStorage favorites array or not (boolean value)
   /*
    TODO: LESSON LEARNT
@@ -85,3 +85,5 @@ export default function Favorite({ coinID }) {
     </>
   );
 }
+
+export default Favorite;

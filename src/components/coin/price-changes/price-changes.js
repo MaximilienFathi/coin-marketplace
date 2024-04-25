@@ -4,7 +4,7 @@ import "./price-changes.css";
 
 //############################################################################
 
-export default function PriceChanges({ priceChangesData }) {
+function PriceChanges({ priceChangesData }) {
   // Keep track of labels and related data tag
   const labelsArray = [
     { label: "1H", data: "price_change_1h" },
@@ -44,3 +44,5 @@ export default function PriceChanges({ priceChangesData }) {
     </div>
   );
 }
+
+export default PriceChanges;

@@ -22,7 +22,7 @@ const IconStyles = {
 
 //############################################################################
 
-export default function StatisticCard({ label, value, type }) {
+function StatisticCard({ label, value, type }) {
   const [, , currencySymbol] = useContext(currencyContext);
 
   // Display percentage data with 2 decimal places and the rest with none
@@ -42,16 +42,13 @@ export default function StatisticCard({ label, value, type }) {
     switch (label) {
       case "Market Capitalization":
         return <TrendingUpIcon sx={IconStyles}></TrendingUpIcon>;
-        break;
       case "24h Trading Volume":
         return <HandshakeIcon sx={IconStyles}></HandshakeIcon>;
-        break;
       case "Bitcoin Market Cap Dominance":
         return <CurrencyBitcoinIcon sx={IconStyles}></CurrencyBitcoinIcon>;
-        break;
       case "Number of Coins":
+      default:
         return <SavingsIcon sx={IconStyles}></SavingsIcon>;
-        break;
     }
   };
 
@@ -71,3 +68,5 @@ export default function StatisticCard({ label, value, type }) {
     </div>
   );
 }
+
+export default StatisticCard;

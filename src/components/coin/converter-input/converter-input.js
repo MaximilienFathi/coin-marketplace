@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
 //========================================================
+
 // CUSTOM STYLES
 const StyledBox = styled(Box)({ maxWidth: "50rem" });
 
@@ -23,8 +24,6 @@ const StyledTextField = styled(TextField)({
   },
   "& .MuiInputBase-root.Mui-focused": {
     "& > fieldset": {
-      // transition: "all 0.3s",
-      // boxShadow: "0 0 0.5rem 0.2rem #b84dc3",
       border: "2px solid #b84dc3",
     },
   },
@@ -32,7 +31,7 @@ const StyledTextField = styled(TextField)({
     fontFamily: "inherit",
     fontSize: "1.8rem",
     fontWeight: 500,
-    color: "rgb(255, 255, 255)", // rgba(255, 255, 255, 0.8)
+    color: "rgb(255, 255, 255)",
   },
   "& .MuiInputBase-input": { height: 26, paddingBottom: 13, paddingTop: 13 },
 });
@@ -41,7 +40,7 @@ const InputPropsStyles = {
   fontFamily: "inherit",
   fontSize: "1.8rem",
   fontWeight: 600,
-  color: "inherit", // rgba(255, 255, 255, 0.8)
+  color: "inherit",
 };
 
 const InputAdornmentStyles = {
@@ -50,10 +49,10 @@ const InputAdornmentStyles = {
   padding: "1rem",
   marginRight: "1.2rem",
   borderRadius: "11px",
-  // background: "linear-gradient(90deg, #b84dc3, #a620b4)",
   boxShadow: "inset 0 0 2px #000",
   justifyContent: "center",
 };
+
 //========================================================
 
 function ConverterInput({ dataTestId, currency, input, handleChange }) {

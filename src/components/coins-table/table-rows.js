@@ -8,7 +8,7 @@ import "./table-rows.css";
 
 //############################################################################
 
-export default function TableRows({ searchQuery }) {
+function TableRows({ searchQuery }) {
   const [currentPage] = useContext(currentPageContext);
   const [paginatedData, setPaginatedData] = useContext(paginatedDataContext);
 
@@ -86,3 +86,5 @@ export default function TableRows({ searchQuery }) {
     </table>
   );
 }
+
+export default TableRows;

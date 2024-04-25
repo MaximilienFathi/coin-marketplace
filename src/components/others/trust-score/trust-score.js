@@ -4,7 +4,7 @@ import "./trust-score.css";
 
 //############################################################################
 
-export default function TrustScore({ trust_score }) {
+function TrustScore({ trust_score }) {
   return (
     <td className="exchange-trust-score">
       <div className="trust-score-bar-group">
@@ -16,3 +16,5 @@ export default function TrustScore({ trust_score }) {
     </td>
   );
 }
+
+export default TrustScore;

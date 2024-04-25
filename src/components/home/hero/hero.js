@@ -1,5 +1,8 @@
 import React from "react";
+
 import "./hero.css";
+
+//############################################################################
 
 function Hero() {
   return (
@@ -31,7 +34,7 @@ function Hero() {
         {/*  <source srcSet="" type="" />*/}
         <img
           className="hero-img"
-          src={require("../../../IMAGES/Crypto portfolio-amico.png")}
+          src={require("../../../images/Crypto portfolio-amico.png")}
           alt=""
         />
         {/*</picture>*/}
@@ -41,7 +44,3 @@ function Hero() {
 }
 
 export default Hero;
-
-/*
-<a href="https://storyset.com/data">Data illustrations by Storyset</a>
- */

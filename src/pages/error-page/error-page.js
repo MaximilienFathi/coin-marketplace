@@ -68,8 +68,8 @@ export default function ErrorPage() {
           {/*    <source srcSet="" type="" />*/}
           <img
             className="error-img"
-            src={require("../../IMAGES/404_error_robot.png")}
-            alt="Error page image"
+            src={require("../../images/404_error_robot.png")}
+            alt="Error page"
           />
           {/*  </picture>*/}
           {/*</div>*/}

@@ -7,7 +7,7 @@ import "../coins-table/table-box.css";
 
 //############################################################################
 
-export default function TableBox() {
+function TableBox() {
   return (
     <div className="table-container">
       <TableSettings />
@@ -16,3 +16,5 @@ export default function TableBox() {
     </div>
   );
 }
+
+export default TableBox;

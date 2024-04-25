@@ -36,7 +36,7 @@ const ButtonStyles = {
 
 //############################################################################
 
-export default function CoinBalance({
+function CoinBalance({
   scrollRef,
   coinSymbol,
   currencyRate,
@@ -77,7 +77,6 @@ export default function CoinBalance({
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
     }
-    // scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }
 
   //############################################################################
@@ -119,8 +118,6 @@ export default function CoinBalance({
                 display: false,
               },
               tooltip: {
-                // xAlign: "left",
-                // yAlign: "bottom",
                 enabled: true,
                 callbacks: {
                   label: (context) => {
@@ -182,3 +179,5 @@ export default function CoinBalance({
     </div>
   );
 }
+
+export default CoinBalance;

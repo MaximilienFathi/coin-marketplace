@@ -75,11 +75,6 @@ export default function App() {
 
   //############################################################################
 
-  // // Reset scrollbar to top when switching to another page.
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
-
   /* TODO: LESSON LEARNT
      ===> https://legacy.reactjs.org/docs/hooks-effect.html
      "The Effect Hook lets you perform side effects in function components."
@@ -94,6 +89,7 @@ export default function App() {
      IMPORTANT - THIS EXPLAINS WHY USEEFFECT() WOULD RUN MULTIPLE TIMES
      BECAUSE IT HAD TO ACCOUNT FOR THE INITIAL PAGE RENDERING AS WELL!
    */
+
   // Initialize favorites array in localStorage if it is absent.
   useEffect(() => {
     localStorage.getItem("favorites") ||

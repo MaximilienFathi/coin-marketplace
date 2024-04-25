@@ -1,6 +1,5 @@
 .table-header-start,
 .table-header-end {
-  /*display: inline-block;*/
   display: flex;
   align-items: center;
 }
@@ -12,11 +11,6 @@
 .table-header-end {
   justify-content: flex-end;
 }
-
-/*.table-header:nth-child(2),*/
-/*.table-header:nth-child(3) {*/
-/*  justify-content: flex-start;*/
-/*}*/
 
 .table-header-start:hover,
 .table-header-end:hover {

@@ -1,6 +1,9 @@
 import React from "react";
 import FeatureCard from "../feature-card/feature-card";
+
 import "./features.css";
+
+//############################################################################
 
 function Features() {
   return (
@@ -11,12 +14,12 @@ function Features() {
       </h2>
       <div className="features-inner-container">
         <FeatureCard
-          picture={require("../../../IMAGES/Time machine-amico.png")}
+          picture={require("../../../images/Time machine-amico.png")}
           title="Crypto Tracking"
           text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore illo itaque laboriosam minus nihil porro repellat."
         ></FeatureCard>
         <FeatureCard
-          picture={require("../../../IMAGES/Dark analytics-bro.png")}
+          picture={require("../../../images/Dark analytics-bro.png")}
           title={"Crypto Analysis"}
           text={
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi" +
@@ -24,7 +27,7 @@ function Features() {
           }
         ></FeatureCard>
         <FeatureCard
-          picture={require("../../../IMAGES/Bitcoin-amico.png")}
+          picture={require("../../../images/Bitcoin-amico.png")}
           title={"Crypto Trading"}
           text={
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit." +
