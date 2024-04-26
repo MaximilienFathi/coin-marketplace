@@ -21,6 +21,8 @@ import "./App.css";
 //############################################################################
 
 export default function App() {
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   const [currencyName, setCurrencyName] = useState("usd");
   const [currencySymbol, setCurrencySymbol] = useState("$");
   const [globalMarketData, setGlobalMarketData] = useState(null);
@@ -72,8 +74,6 @@ export default function App() {
       },
     ])
   );
-
-  const API_KEY = process.env.REACT_APP_API_KEY;
 
   //############################################################################
 

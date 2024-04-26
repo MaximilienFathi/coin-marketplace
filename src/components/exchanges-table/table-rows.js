@@ -14,6 +14,8 @@ import "../coins-table/table-rows.css";
 //############################################################################
 
 function TableRows({ searchQuery }) {
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   const [currencyName, , ,] = useContext(currencyContext);
   const [currentPage] = useContext(currentPageContext);
   const [paginatedData, setPaginatedData] = useContext(paginatedDataContext);
@@ -33,8 +35,6 @@ function TableRows({ searchQuery }) {
     year_established: "Year Established",
     country: "Country",
   };
-
-  const API_KEY = process.env.REACT_APP_API_KEY;
 
   //############################################################################
 

@@ -18,13 +18,14 @@ import "./page.css";
 //############################################################################
 
 export default function ExchangesPage() {
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(5);
   const [paginatedData, setPaginatedData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const pageSize = 100;
-  const API_KEY = process.env.REACT_APP_API_KEY;
 
   //############################################################################
 

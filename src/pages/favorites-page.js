@@ -19,6 +19,8 @@ import "./page.css";
 //############################################################################
 
 export default function FavoritesPage() {
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   const [currencyName] = useContext(currencyContext);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +29,6 @@ export default function FavoritesPage() {
   const [loading, setLoading] = useState(false);
 
   const pageSize = 100;
-  const API_KEY = process.env.REACT_APP_API_KEY;
 
   //############################################################################
 

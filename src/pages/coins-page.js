@@ -20,6 +20,8 @@ import "./page.css";
 //############################################################################
 
 export default function CoinsPage() {
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   const [currencyName] = useContext(currencyContext);
   const [globalMarketData] = useContext(globalMarketDataContext);
 
@@ -29,7 +31,6 @@ export default function CoinsPage() {
   const [loading, setLoading] = useState(false);
 
   const pageSize = 100;
-  const API_KEY = process.env.REACT_APP_API_KEY;
 
   //############################################################################
 

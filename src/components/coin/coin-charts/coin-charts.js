@@ -32,14 +32,14 @@ ChartJS.register(
 //############################################################################
 
 function CoinCharts({ coinID, coinName, priceChangesData }) {
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   const [currencyName] = useContext(currencyContext);
   const [allHistoricData, setAllHistoricData] = useState({});
   const [specificHistoricData, setSpecificHistoricData] = useState([]);
   const [datatype, setDatatype] = useState("prices");
   const [timeframe, setTimeframe] = useState(1);
   const [loading, setLoading] = useState(false);
-
-  const API_KEY = process.env.REACT_APP_API_KEY;
 
   //############################################################################
 

@@ -12,6 +12,8 @@ import "./trending-coins.css";
 //############################################################################
 
 function TrendingCoins() {
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   const [currencyName, , currencySymbol] = useContext(currencyContext);
   const [trendingCoinsList] = useContext(trendingCoinsListContext);
 
@@ -19,7 +21,6 @@ function TrendingCoins() {
   const [loading, setLoading] = useState(false);
 
   const chartHistoricLength = 1;
-  const API_KEY = process.env.REACT_APP_API_KEY;
 
   //############################################################################
 
