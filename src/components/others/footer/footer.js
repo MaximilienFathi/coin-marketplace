@@ -11,7 +11,7 @@ function Footer() {
         <p className="copyright">
           Copyright &copy;{" "}
           <span className="year">{new Date().getFullYear()}</span> by{" "}
-          <a className="footer-link" href="https://github.com/ma-fath">
+          <a className="footer-link" href="ma-fath-coin-marketplace.vercel.app">
             Maximilien Fathi
           </a>
           . All rights reserved.

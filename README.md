@@ -44,7 +44,7 @@ Users should be able to:
 
 ### Link
 
-Live Site URL: [https://ma-fath.github.io/coin-marketplace/](https://ma-fath.github.io/coin-marketplace/)
+Live Site URL: [ma-fath-coin-marketplace.vercel.app](ma-fath-coin-marketplace.vercel.app)
 
 ## My process
 
