@@ -12,7 +12,14 @@
   font-size: 1.4rem;
 }
 
-.footer-link {
+a:link,
+a:visited {
   text-decoration: none;
   color: #fc9bd3;
+  transition: all 0.3s;
+}
+
+a:hover,
+a:active {
+  color: #fa58b6;
 }

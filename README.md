@@ -1,9 +1,6 @@
-# COIN marketplace - A React JS Solution
+# COIN marketplace - A Gateway to the Future of Finance
 
-COIN marketplace is a website that keeps track of cryptocurrency and coin
-exchange performance. It also simulates trading transactions from one
-currency to another while still taking into consideration certain issues
-specific to real cryptocurrency trading.
+Level up your crypto game today! COIN Marketplace is a web application built with React and designed to empower you in the crypto world. It offers real-time and historical data tracking for informed decision-making, alongside a safe trading simulator that incorporates real-world complexities like price fluctuations and slippage tolerance. Explore the market, practice strategies, and gain confidence before venturing into live trading.
 
 ## Table of contents
 
@@ -22,19 +19,16 @@ specific to real cryptocurrency trading.
 
 ### The challenge
 
-Users should be able to:
+COIN Marketplace should aim to meet the following objectives:
 
-- View cryptocurrency current statistics.
-- View coin exchange current statistics.
-- Set specific cryptocurrencies as favorites.
-- Rank cryptocurrencies and coin exchanges by a specific metric.
-- Search and find specific cryptocurrencies and coin exchanges.
-- View current balance for specific cryptocurrency and recent amount change.
-- View specific cryptocurrency past and current performance.
-- Simulate a transaction from one currency to another with customizable
-  settings.
-- Have access to specific cryptocurrency website, social networks, source
-  code, etc.
+- **Track Crypto & Exchanges:** View real-time statistics and historical performance data for cryptocurrencies and coin exchanges.
+- **Personalized Watchlist:** Create a custom favorites list to keep track of your preferred cryptocurrencies.
+- **Data-Driven Decisions:** Rank cryptocurrencies and exchanges by various metrics to make informed investment choices.
+- **Search & Discovery:** Easily find specific cryptocurrencies and exchanges using a powerful search function.
+- **Portfolio Insights:** Track the current balance and recent changes for your cryptocurrency holdings.
+- **Comprehensive Performance Analysis:** Delve deep into a cryptocurrency's historical and current performance to understand market trends.
+- **Safe Simulated Trading:** Practice trading strategies and experience the complexities of cryptocurrency markets in a risk-free simulation environment.
+- **Navigate the Crypto Landscape:** Access links to a cryptocurrency's official website, social media channels, and source code, all within the platform.
 
 ### Screenshots
 
@@ -55,6 +49,7 @@ Live Site URL: [https://ma-fath-coin-marketplace.vercel.app/](https://ma-fath-co
 - JavaScript
 - [Axios](https://axios-http.com/) - JavaScript HTTP requests library
 - [React](https://reactjs.org/) - JavaScript UI library
+- [Create React App](https://create-react-app.dev/) - React development environment generator
 - [Material UI](https://mui.com/) - React component library
 - [react-chartjs-2](https://react-chartjs-2.js.org/) - React charting library
 - [React Router](https://v5.reactrouter.com/) - React routing library
@@ -66,12 +61,12 @@ Live Site URL: [https://ma-fath-coin-marketplace.vercel.app/](https://ma-fath-co
 While working through this project, the major learnings involved:
 
 - The use of React as well as the more recent functional components and hooks.
-- The gain in HTML, CSS, JavaScript knowledge while creating many React components from scratch.
-- The proper use of APIs using asynchronous code and the handling of potential related network errors such as error 429.
+- The proper use of APIs using asynchronous code.
+- The handling of potential related network errors such as error 429 ("Too Many Requests").
 - The implementation of routing in React projects that involve multiple pages.
 - The use and customization of components from libraries like Material UI.
 - The application of UI design styles like glassmorphism to create beautiful websites.
-- The main blockchain technology and cryptocurrency-related concepts.
+- The main concepts related to blockchain technology and cryptocurrencies.
 
 ### Continued development
 
@@ -85,20 +80,20 @@ project, there are still some new features I wish to include such as:
 - A proper way of having real cryptocurrency transactions using Web3
   technologies.
 
-### Useful resources
+### Useful additional resources
 
-- [stackoverflow](http://stackoverflow.com/) - This proved insightful
+- [Stack Overflow](http://stackoverflow.com/) - This proved insightful
   when I was stuck on specific coding issues.
-- [coingecko](https://www.coingecko.com/) - This was very useful when it
+- [CoinGecko](https://www.coingecko.com/) - This was very useful when it
   came to gathering API data for various cryptocurrencies and coin exchanges.
-- [dribbble](https://dribbble.com/) - This helped me discover great web
+- [Dribbble](https://dribbble.com/) - This helped me discover great web
   design inspirations.
-- [maketintsandshades](https://maketintsandshades.com/) - This was a
+- [Tint & Shade Generator](https://maketintsandshades.com/) - This was a
   great tool for generating lighter and darker versions of specific colors.
-- [storyset](https://storyset.com/) - This provided me with a variety of
+- [Storyset](https://storyset.com/) - This provided me with a variety of
   great pictures to include in my project while still being similar in style
-  as well as customizable (i.e. colors can be modified).
-- [favicon.io](https://favicon.io/) - This helped me quickly generate
+  as well as customizable.
+- [Favicon.io](https://favicon.io/) - This helped me quickly generate
   necessary files for the favicon and its different formats.
 
 ## Author
