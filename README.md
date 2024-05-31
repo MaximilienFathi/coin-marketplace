@@ -12,7 +12,7 @@ Level up your crypto game today! COIN Marketplace is a web application built wit
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
+  - [Useful additional resources](#useful-additional-resources)
 - [Author](#author)
 
 ## Overview
